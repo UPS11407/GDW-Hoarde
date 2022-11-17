@@ -1,8 +1,8 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-//YOU CAN GET RID OF THIS SCRIPT WHENEVER NECESSARY, THIS IS JUST A TESTER!!!!
-public class Player : MonoBehaviour
+
+public class PlayerMovement : MonoBehaviour
 { 
     //player's speed
     public float moveSpeed = 10f;
@@ -72,9 +72,14 @@ public class Player : MonoBehaviour
         //controls our angle using quaternions
         Quaternion angleRotation = Quaternion.Euler(rotationVar * Time.fixedDeltaTime);
 
-        _rb.MovePosition(this.transform.position + this.transform.forward * vertInput * Time.fixedDeltaTime);
+        _rb.velocity = transform.forward * vertInput;
 
         _rb.MoveRotation(_rb.rotation * angleRotation);
+
+        if (vertInput == 0)
+        {
+            _rb.velocity = Vector3.zero;
+        }
     }
 
     bool IsGrounded()
