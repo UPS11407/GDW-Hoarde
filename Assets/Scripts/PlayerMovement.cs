@@ -72,13 +72,15 @@ public class PlayerMovement : MonoBehaviour
         //controls our angle using quaternions
         Quaternion angleRotation = Quaternion.Euler(rotationVar * Time.fixedDeltaTime);
 
-        _rb.velocity = transform.forward * vertInput;
-
         _rb.MoveRotation(_rb.rotation * angleRotation);
-
+        
         if (vertInput == 0)
         {
-            _rb.velocity = Vector3.zero;
+            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+        }
+        else
+        {
+            _rb.velocity = new Vector3(transform.forward.x, _rb.velocity.y / vertInput, transform.forward.z) * vertInput;
         }
     }
 
