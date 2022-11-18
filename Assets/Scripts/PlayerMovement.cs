@@ -26,7 +26,7 @@ public class PlayerMovement : MonoBehaviour
     private Rigidbody _rb;
 
 
-    float quickFOV = 90.0f;
+    float quickFOV = 75.0f;
 
     // Start is called before the first frame update
     void Start()
@@ -42,7 +42,7 @@ public class PlayerMovement : MonoBehaviour
         //if shift is pressed, fov change and change speed
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveSpeed = 20f;
+            moveSpeed = 15f;
             Camera.main.fieldOfView = quickFOV;
         }
         else
