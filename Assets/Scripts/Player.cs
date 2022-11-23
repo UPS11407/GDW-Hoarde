@@ -1,15 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class Player : MonoBehaviour
 {
     public float maxHP;
+    public Image hpImage;
     float currentHP;
 
     void Start()
     {
         currentHP = maxHP;
+        UpdateHealthDisplay();
     }
 
     private void Update()
@@ -34,6 +37,7 @@ public class Player : MonoBehaviour
     public void TakeDamage(float dmg)
     {
         currentHP -= dmg;
+        UpdateHealthDisplay();
     }
 
     /// <summary>
@@ -47,5 +51,12 @@ public class Player : MonoBehaviour
         {
             currentHP = maxHP;
         }
+
+        UpdateHealthDisplay();
+    }
+
+    void UpdateHealthDisplay()
+    {
+        hpImage.fillAmount = currentHP / maxHP;
     }
 }
