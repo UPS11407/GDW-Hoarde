@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Gun : MonoBehaviour
 {
@@ -28,6 +29,9 @@ public class Gun : MonoBehaviour
     float shakeMagnitude;
 
     [SerializeField] GameObject bulletPrefab;
+
+    public TextMeshProUGUI currentAmmoDisplay;
+    public TextMeshProUGUI maxAmmoDisplay;
 
 
     float shootTime;
@@ -85,7 +89,7 @@ public class Gun : MonoBehaviour
         fire.canceled += ctx => fireButtonPressed = false;
         reload = playerContr.Player.Reload;
         reload.Enable();
-        reload.performed += ctx => Reload();
+        reload.performed += ctx => StartCoroutine(Reload());
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
         swapMod.started += ctx => SwapMods();
@@ -145,6 +149,10 @@ public class Gun : MonoBehaviour
         shakeDuration = shootDelay * 0.25f;
         currentAmmo = maxAmmo;
         shootTime = Time.time + modDelay;
+
+        UpdateDisplay();
+
+        //Debug.Log("Ammo " + maxAmmo);
     }
 
     public void Fire()
@@ -168,7 +176,12 @@ public class Gun : MonoBehaviour
                 bullet.transform.Rotate(new Vector3(90, 0, 0));
                 Destroy(bullet, 5.0f);
             }
-            StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+
+            //uncomment when tuned
+
+            //StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+
+            UpdateDisplay();
 
         } else
         {
@@ -177,12 +190,32 @@ public class Gun : MonoBehaviour
 
     }
 
+    void UpdateDisplay()
+    {
+        currentAmmoDisplay.text = currentAmmo.ToString();
+        maxAmmoDisplay.text = maxAmmo.ToString();
+    }
+
+    /*
     public void Reload()
     {
         //audioSource.PlayOneShot(reloadSound, 1.0f);
         shootTime = Time.time + reloadDelay;
         
         currentAmmo = maxAmmo;
+
+        UpdateDisplay();
+    }
+    */
+    IEnumerator Reload()
+    {
+        canShoot = false;
+        yield return new WaitForSeconds(reloadDelay);
+
+        canShoot = true;
+        currentAmmo = maxAmmo;
+
+        UpdateDisplay();
     }
 
     public void UseAmmo(int ammo)

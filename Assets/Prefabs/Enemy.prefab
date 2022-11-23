@@ -14,10 +14,10 @@ GameObject:
   - component: {fileID: 2169045710317889879}
   - component: {fileID: 2169045710317889876}
   - component: {fileID: 2169045710317889874}
-  - component: {fileID: 2169045710317889875}
+  - component: {fileID: 5816435562336223706}
   m_Layer: 3
   m_Name: Enemy
-  m_TagString: Untagged
+  m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -139,7 +139,7 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 0
---- !u!114 &2169045710317889875
+--- !u!114 &5816435562336223706
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -148,10 +148,12 @@ MonoBehaviour:
   m_GameObject: {fileID: 2169045710317889877}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 378360fa38bebb2448db27fb46304738, type: 3}
+  m_Script: {fileID: 11500000, guid: 0e8a5f8fa94b9094cbff09ecccfac49d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   _maxHP: 4
   _speed: 2
   _damage: 1
   _attackRange: 2
+  healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
+  healDropChance: 20

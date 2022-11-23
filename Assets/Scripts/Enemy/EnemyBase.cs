@@ -11,9 +11,16 @@ public class EnemyBase : MonoBehaviour
     public float _speed = 2.0f;
     public float _damage = 1.0f;
     public float _attackRange = 2.0f;
-    internal float currentHP;
+    public GameObject healPickupPrefab;
 
-    GameObject player;
+    [Tooltip("% chance to drop a heal pickup")]
+    [Range(0, 100)]
+    public int healDropChance;
+    float currentHP;
+
+    int dropVal;
+
+    internal GameObject player;
 
     Rigidbody rigid;
     NavMeshAgent agent;
@@ -28,7 +35,7 @@ public class EnemyBase : MonoBehaviour
         currentHP = _maxHP;
     }
 
-    private void Update()
+    public void EnemyUpdate()
     {
         CheckIfDead();
         ChasePlayer();
@@ -38,8 +45,20 @@ public class EnemyBase : MonoBehaviour
     {
         if(currentHP <= 0)
         {
+            dropVal = Random.Range(0, 100);
+
+            if(dropVal < healDropChance)
+            {
+                DropPickup();
+            }
+
             Destroy(gameObject);
         }
+    }
+
+    void DropPickup()
+    {
+        Instantiate(healPickupPrefab, transform.position, Quaternion.Euler(0, 0, 0));
     }
 
     /// <summary>
