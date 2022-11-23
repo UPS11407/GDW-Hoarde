@@ -1,9 +1,18 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class Gun : MonoBehaviour
 {
+    InputAction fire;
+    InputAction reload;
+    InputAction swapMod;
+    public PlayerInputs playerContr;
+    bool fireButtonPressed = false;
+    bool canShoot = true;
+
+    [SerializeField] GameObject weaponModCanvas;
     [SerializeField] GunStatScriptableObjects gunStats;
     [SerializeField] WeaponModScriptableObject barrelMod;
     [SerializeField] WeaponModScriptableObject gripMod;
@@ -12,9 +21,9 @@ public class Gun : MonoBehaviour
 
 
 
-    public Transform parentTransform;
+    Transform parentTransform;
 
-    //[SerializeField] CameraShake cameraShake;
+    [SerializeField] CameraShake cameraShake;
     float shakeDuration;
     float shakeMagnitude;
 
@@ -22,39 +31,83 @@ public class Gun : MonoBehaviour
 
 
     float shootTime;
-    [SerializeField] float shootDelay;
-    [SerializeField] float reloadDelay;
+    float shootDelay;
+    float reloadDelay;
+    float modDelay;
 
-    [SerializeField] int currentAmmo;
-    [SerializeField] int maxAmmo;
+    int currentAmmo;
+    int maxAmmo;
 
-    [SerializeField] float damage;
-    [SerializeField] float bulletVelocity;
-    [SerializeField] int bulletsPerShot;
-    [SerializeField] float spread;
+    float damage;
+    float bulletVelocity;
+    int bulletsPerShot;
+    float spread;
 
-    [SerializeField] float recoil;
+    float recoil;
 
-    [SerializeField] bool isExplosive;
+    bool isExplosive;
+    float explosionSize;
 
+
+    //[SerializeField] WeaponModScriptableObject singleFire;
+    //[SerializeField] WeaponModScriptableObject fullAutoFire;
     // Start is called before the first frame update
     void Start()
     {
         parentTransform = GetComponentInParent<Transform>();
         UpdateWeaponStats();
+        
     }
 
     private void Update()
     {
-        if (Input.GetMouseButton(0))
+        if (fireButtonPressed == true)
         {
             Fire();
+            if(gripMod.fireMode == WeaponModScriptableObject.FireMode.single)
+            {
+                fireButtonPressed = false;
+            }
         }
+    }
+
+    private void Awake()
+    {
+        playerContr = new PlayerInputs();
+
+    }
+
+    private void OnEnable()
+    {
+        fire = playerContr.Player.Fire;
+        fire.Enable();
+        fire.started += ctx => fireButtonPressed = true;
+        fire.canceled += ctx => fireButtonPressed = false;
+        reload = playerContr.Player.Reload;
+        reload.Enable();
+        reload.performed += ctx => Reload();
+        swapMod = playerContr.Player.SwapMod;
+        swapMod.Enable();
+        swapMod.started += ctx => SwapMods();
+
+    }
+
+    public void SwapMods()
+    {
+        canShoot = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        weaponModCanvas.SetActive(true);
+
     }
 
     public void UpdateWeaponStats()
     {
         maxAmmo = gunStats.magazineSize + barrelMod.magazineSizeModifier + gripMod.magazineSizeModifier + ammoMod.magazineSizeModifier + magMod.magazineSizeModifier;
+        if (maxAmmo <= 0)
+        {
+            maxAmmo = 1;
+        }
 
         shootDelay = gunStats.fireDelay + barrelMod.fireDelayModifier + gripMod.fireDelayModifier + ammoMod.fireDelayModifier + magMod.fireDelayModifier;
 
@@ -65,37 +118,58 @@ public class Gun : MonoBehaviour
         bulletsPerShot = gunStats.bulletsPerShot + barrelMod.additionalBulletsPerShot + gripMod.additionalBulletsPerShot + ammoMod.additionalBulletsPerShot + magMod.additionalBulletsPerShot;
 
         spread = gunStats.spread + barrelMod.spreadModifier + gripMod.spreadModifier + ammoMod.spreadModifier + magMod.spreadModifier;
+        if (spread < 0)
+        {
+            spread = 0;
+        }
 
         recoil = gunStats.recoil + barrelMod.recoilModifier + gripMod.recoilModifier + ammoMod.recoilModifier + magMod.recoilModifier;
 
         damage = gunStats.damage + (gunStats.damage * barrelMod.damageModifier) + (gunStats.damage * gripMod.damageModifier) + (gunStats.damage * ammoMod.damageModifier) + (gunStats.damage * magMod.damageModifier);
 
-        shakeDuration = shootDelay * 0.25f;
+        explosionSize = barrelMod.explosionSizeIncrease + magMod.explosionSizeIncrease + ammoMod.explosionSizeIncrease + gripMod.explosionSizeIncrease;
+
+        if (barrelMod.enablesExplosionImpact || magMod.enablesExplosionImpact || ammoMod.enablesExplosionImpact || gripMod.enablesExplosionImpact)
+        {
+            isExplosive = true;
+        } else
+        {
+            isExplosive = false;
+        }
+
+        canShoot = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         shakeMagnitude = damage * bulletsPerShot * 0.5f;
-        Reload();
+        shakeDuration = shootDelay * 0.25f;
+        currentAmmo = maxAmmo;
+        shootTime = Time.time + modDelay;
     }
 
     public void Fire()
     {
-        if (currentAmmo > 0 && Time.time > shootDelay + shootTime)
+        if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
             //Play Shoot Sound
             shootTime = Time.time;
             UseAmmo(currentAmmo);
-            //StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+            
 
-            for(int i = 0; i<= bulletsPerShot; i++)
+            for(int i = 0; i< bulletsPerShot; i++)
             {
-                GameObject bullet = Instantiate(bulletPrefab, transform.position + transform.forward * 1, transform.rotation);
+                GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + transform.forward * 1, transform.rotation);
+                bullet.GetComponent<Bullet>().damage = this.damage;
+                bullet.GetComponent<Bullet>().isExplosive = this.isExplosive;
+                bullet.GetComponent<Bullet>().explosionRange = this.explosionSize;
                 bullet.transform.Rotate(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletVelocity;
-                bullet.GetComponent<Bullet>().damage = damage;
                 bullet.transform.rotation = gameObject.transform.rotation;
                 bullet.transform.Rotate(new Vector3(90, 0, 0));
                 Destroy(bullet, 5.0f);
             }
-            
-            
+            StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
+
         } else
         {
             //Play Empty Sound
@@ -107,12 +181,7 @@ public class Gun : MonoBehaviour
     {
         //audioSource.PlayOneShot(reloadSound, 1.0f);
         shootTime = Time.time + reloadDelay;
-        /*
-        foreach (GameObject ammo in bullets)
-        {
-            ammo.gameObject.SetActive(true);
-        }
-        */
+        
         currentAmmo = maxAmmo;
     }
 
@@ -120,6 +189,36 @@ public class Gun : MonoBehaviour
     {
         //bullets[ammo].gameObject.SetActive(false);
         currentAmmo--;
+    }
+
+    public void changeBarrel(WeaponModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            barrelMod = mod;
+        }
+        
+    }
+    public void changeMag(WeaponModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            magMod = mod;
+        }
+    }
+    public void changeAmmo(WeaponModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            ammoMod = mod;
+        }
+    }
+    public void changeGrip(WeaponModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            gripMod = mod;
+        }
     }
 
 }

@@ -12,9 +12,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464fdbddf7328834a93c075f8a47ef36, type: 3}
   m_Name: ShotgunBarrel
   m_EditorClassIdentifier: 
+  fireMode: 0
   spreadModifier: 2.5
   damageModifier: -0.8
-  fireDelayModifier: 0.75
+  fireDelayModifier: 0.5
   bulletVelocityModifier: -25
   additionalBulletsPerShot: 5
   dashDamageModifier: 0
