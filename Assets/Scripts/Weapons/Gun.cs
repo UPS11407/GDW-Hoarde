@@ -9,7 +9,7 @@ public class Gun : MonoBehaviour
     InputAction fire;
     InputAction reload;
     InputAction swapMod;
-    public PlayerInputs playerContr;
+    public PlayerInput playerContr;
     bool fireButtonPressed = false;
     bool canShoot = true;
 
@@ -77,7 +77,7 @@ public class Gun : MonoBehaviour
 
     private void Awake()
     {
-        playerContr = new PlayerInputs();
+        playerContr = new PlayerInput();
 
     }
 

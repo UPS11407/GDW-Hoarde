@@ -12,7 +12,7 @@ public class Player : MonoBehaviour
     public float maxHealCharge = 4.0f;
     public float interactRange;
 
-    PlayerInputs playerInputs;
+    PlayerInput playerInputs;
     InputAction heal;
     InputAction interact;
     float healCharge;
@@ -20,7 +20,7 @@ public class Player : MonoBehaviour
 
     private void Awake()
     {
-        playerInputs = new PlayerInputs();
+        playerInputs = new PlayerInput();
     }
 
     private void OnEnable()
