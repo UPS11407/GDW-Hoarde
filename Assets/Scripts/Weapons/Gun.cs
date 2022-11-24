@@ -92,17 +92,24 @@ public class Gun : MonoBehaviour
         reload.performed += ctx => StartCoroutine(Reload());
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
-        swapMod.started += ctx => SwapMods();
-
+        swapMod.started += ctx => OpenMenu();
     }
 
-    public void SwapMods()
+    public void OpenMenu()
     {
         canShoot = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         weaponModCanvas.SetActive(true);
 
+    }
+
+    public void CloseMenu()
+    {
+        canShoot = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        weaponModCanvas.SetActive(false);
     }
 
     public void UpdateWeaponStats()
