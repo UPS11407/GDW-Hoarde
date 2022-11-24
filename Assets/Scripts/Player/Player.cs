@@ -54,22 +54,6 @@ public class Player : MonoBehaviour
     }
 
     /// <summary>
-    /// Interact with closest object the player is looking at within the interact range.
-    /// </summary>
-    void InteractWithObject()
-    {
-        RaycastHit rayhit;
-
-        Physics.Raycast(origin: Camera.main.transform.position, direction: Camera.main.transform.forward, out rayhit, maxDistance: interactRange, layerMask: 1 << 8);
-        //Debug.DrawRay(start: Camera.main.transform.position, dir: Camera.main.transform.forward * 10, Color.red, 60);
-
-        if(rayhit.collider != null)
-        {
-            rayhit.collider.gameObject.GetComponent<IInteractible>().Interact();
-        }
-    }
-
-    /// <summary>
     /// Adds val to the current heal charge bar. Does not exceed max charge
     /// </summary>
     public void AddHealCharge(float val)
@@ -136,5 +120,21 @@ public class Player : MonoBehaviour
     {
         hpImage.fillAmount = currentHP / maxHP;
         healChargeBar.fillAmount = healCharge / maxHealCharge;
+    }
+
+    /// <summary>
+    /// Interact with closest object the player is looking at within the interact range.
+    /// </summary>
+    void InteractWithObject()
+    {
+        RaycastHit rayhit;
+
+        Physics.Raycast(origin: Camera.main.transform.position, direction: Camera.main.transform.forward, out rayhit, maxDistance: interactRange, layerMask: 1 << 8);
+        //Debug.DrawRay(start: Camera.main.transform.position, dir: Camera.main.transform.forward * 10, Color.red, 60);
+
+        if (rayhit.collider != null)
+        {
+            rayhit.collider.gameObject.GetComponent<IInteractible>().Interact();
+        }
     }
 }

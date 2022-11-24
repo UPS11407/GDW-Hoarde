@@ -55,8 +55,6 @@ public class PlayerControls : MonoBehaviour
         {
             speed = originalSpeed;
         }
-        
-        CheckIfInteractible();
     }
 
     private void FixedUpdate()
@@ -88,7 +86,7 @@ public class PlayerControls : MonoBehaviour
         //swapMod.performed += SwapMod;   <-- do swap mod method here
         //reload.performed += Reload;     <-- do reload method here
 
-        interact.performed += Interact;
+        //interact.performed += ctx => InteractWithObject();
 
         move.Enable();
         fire.Enable();
@@ -105,43 +103,6 @@ public class PlayerControls : MonoBehaviour
         move.Disable();
         interact.Disable();
     }
-    
 
-    
-
-    private void Interact(InputAction.CallbackContext context)
-    {
-        RaycastHit hit;
-        if(Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, interactibleLayer))
-        {
-            Debug.Log(hit.transform.name);
-            var interactible = hit.transform.gameObject.GetComponent<IInteractible>();
-            if (interactible == null) {
-                Debug.Log("noninteractible");
-                return;
-            }
-            
-            interactible.Interact();
-
-
-        }
-    }
-
-    void CheckIfInteractible()
-    {
-        RaycastHit hit;
-        if (interactText != null)
-        {
-            if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, interactibleLayer))
-            {
-                interactText.SetActive(true);
-            }
-            else
-            {
-                interactText.SetActive(false);
-            }
-        }
-        
-    }
     
 }

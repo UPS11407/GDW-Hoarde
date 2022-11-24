@@ -178,7 +178,7 @@ MonoBehaviour:
   camera: {fileID: 2223594039623079523}
   interactibleLayer:
     serializedVersion: 2
-    m_Bits: 8
+    m_Bits: 256
   interactRange: 1.5
   interactText: {fileID: 0}
 --- !u!54 &2223594039566063760
