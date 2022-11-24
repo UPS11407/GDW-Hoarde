@@ -1,5 +1,5 @@
 {
-    "name": "PlayerInputs",
+    "name": "PlayerInput",
     "maps": [
         {
             "name": "Player",
@@ -63,6 +63,24 @@
                     "name": "Heal",
                     "type": "Button",
                     "id": "b6471b25-cab7-45e9-9979-925f410aaa97",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Sprint",
+                    "type": "Button",
+                    "id": "88ef37e9-93c3-48b7-8b4b-e35083ac68c7",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Jump",
+                    "type": "Button",
+                    "id": "408d2a2e-b0a6-47cf-8d4d-d9afefb5ef3b",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -188,6 +206,28 @@
                     "processors": "",
                     "groups": "",
                     "action": "Heal",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "67aee7d7-3d2d-4ab3-a72a-e6e62a055b90",
+                    "path": "<Keyboard>/leftShift",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Sprint",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7ee6c540-7d27-4e5b-8de6-e8a15c6a223d",
+                    "path": "<Keyboard>/space",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Jump",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }

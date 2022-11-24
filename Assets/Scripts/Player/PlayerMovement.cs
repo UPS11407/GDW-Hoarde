@@ -1,6 +1,7 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class PlayerMovement : MonoBehaviour
 { 
@@ -25,6 +26,16 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider _col;
     private Rigidbody _rb;
 
+    public PlayerInput playerControls;
+
+    InputAction move;
+    InputAction fire;
+    InputAction interact;
+    InputAction look;
+    InputAction reload;
+    InputAction swapMod;
+    InputAction heal;
+    InputAction sprint;
 
     float quickFOV = 75.0f;
 
@@ -36,9 +47,46 @@ public class PlayerMovement : MonoBehaviour
         Time.timeScale = 1.0f;
     }
 
+    private void Awake()
+    {
+        playerControls = new PlayerInput();
+    }
+
+    private void OnEnable()
+    {
+        move = playerControls.Player.Move;
+        fire = playerControls.Player.Fire;
+        interact = playerControls.Player.Interact;
+        look = playerControls.Player.Look;
+        reload = playerControls.Player.Reload;
+        swapMod = playerControls.Player.SwapMod;
+        heal = playerControls.Player.Heal;
+        sprint = playerControls.Player.Sprint;
+
+
+        //fire.performed += Fire;         <-- do firing method here
+        //interact.performed += Interact; <-- do interact method here
+        //heal.performed += Heal;         <-- do healing method here
+        //swapMod.performed += SwapMod;   <-- do swap mod method here
+        //reload.performed += Reload;     <-- do reload method here
+
+
+        move.Enable();
+        fire.Enable();
+        interact.Enable();
+        look.Enable();
+        reload.Enable();
+        swapMod.Enable();
+        heal.Enable();
+        sprint.Enable();
+
+    }
+
     // Update is called once per frame
     void Update()
     {
+        Vector2 moveDir = move.ReadValue<Vector2>();
+
         //if shift is pressed, fov change and change speed
         if (Input.GetKey(KeyCode.LeftShift))
         {
