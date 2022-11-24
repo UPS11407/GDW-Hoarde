@@ -8,11 +8,15 @@ public class PlayerControls : MonoBehaviour
     public Rigidbody reggy;
     public float speed;
     Vector2 movementDir = Vector2.zero;
-    private InputAction move;
-    private InputAction interact;
-    private InputAction fire;
-    private InputAction reload;
-    public PlayerInputs playerContr;
+    InputAction move;
+    InputAction fire;
+    InputAction interact;
+    InputAction look;
+    InputAction reload;
+    InputAction swapMod;
+    InputAction heal;
+    InputAction sprint;
+    public PlayerInput playerContr;
 
 
     [SerializeField] AudioSource walkAudioSource;
@@ -25,9 +29,6 @@ public class PlayerControls : MonoBehaviour
     [SerializeField] LayerMask interactibleLayer;
     [SerializeField] float interactRange;
     [SerializeField] GameObject interactText;
-
-    
-
     
 
 
@@ -35,7 +36,7 @@ public class PlayerControls : MonoBehaviour
     void Awake()
     {
         originalSpeed = speed;
-        playerContr = new PlayerInputs();
+        playerContr = new PlayerInput();
         
         reggy = GetComponent<Rigidbody>();
     }
@@ -72,18 +73,32 @@ public class PlayerControls : MonoBehaviour
     private void OnEnable()
     {
         move = playerContr.Player.Move;
-        move.Enable();
-        interact = playerContr.Player.Interact;
-        interact.Enable();
-        interact.performed += Interact;
-        /* 
         fire = playerContr.Player.Fire;
-        fire.Enable();
-        fire.performed += Fire;
+        interact = playerContr.Player.Interact;
+        look = playerContr.Player.Look;
         reload = playerContr.Player.Reload;
+        swapMod = playerContr.Player.SwapMod;
+        heal = playerContr.Player.Heal;
+        sprint = playerContr.Player.Sprint;
+
+
+        //fire.performed += Fire;         <-- do firing method here
+
+        //heal.performed += Heal;         <-- do healing method here
+        //swapMod.performed += SwapMod;   <-- do swap mod method here
+        //reload.performed += Reload;     <-- do reload method here
+
+        interact.performed += Interact;
+
+        move.Enable();
+        fire.Enable();
+        interact.Enable();
+        look.Enable();
         reload.Enable();
-        reload.performed += Reload; 
-        */
+        swapMod.Enable();
+        heal.Enable();
+        sprint.Enable();
+
     }
     private void OnDisable()
     {
