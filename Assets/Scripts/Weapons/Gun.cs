@@ -9,18 +9,29 @@ public class Gun : MonoBehaviour
     InputAction fire;
     InputAction reload;
     InputAction swapMod;
+    InputAction swapWeapon;
     public PlayerInput playerContr;
     bool fireButtonPressed = false;
     bool canShoot = true;
 
     [SerializeField] GameObject weaponModCanvas;
+
+    public GunStatScriptableObjects pistolStats;
+    public GunStatScriptableObjects rifleStats;
+
     [SerializeField] GunStatScriptableObjects gunStats;
     [SerializeField] WeaponModScriptableObject barrelMod;
     [SerializeField] WeaponModScriptableObject gripMod;
     [SerializeField] WeaponModScriptableObject magMod;
     [SerializeField] WeaponModScriptableObject ammoMod;
 
+    public enum CurrentWeapon
+    {
+        pistol = 0,
+        rifle = 1
+    };
 
+    public CurrentWeapon currentWeapon;
 
     Transform parentTransform;
 
@@ -93,6 +104,24 @@ public class Gun : MonoBehaviour
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
         swapMod.started += ctx => OpenMenu();
+
+        swapWeapon = playerContr.Player.SwapWeapon;
+        swapWeapon.Enable();
+        swapWeapon.performed += ctx => SwapWeapon();
+    }
+
+    void SwapWeapon()
+    {
+        if(currentWeapon == CurrentWeapon.pistol)
+        {
+            currentWeapon = CurrentWeapon.rifle;
+            gunStats = rifleStats;
+        }
+        else
+        {
+            currentWeapon = CurrentWeapon.pistol;
+            gunStats = pistolStats;
+        }
     }
 
     public void OpenMenu()

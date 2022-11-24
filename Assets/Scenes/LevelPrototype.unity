@@ -8752,11 +8752,14 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   weaponModCanvas: {fileID: 550569253}
+  pistolStats: {fileID: 11400000, guid: 9b153a9d97511014ebe99403ffd875a4, type: 2}
+  rifleStats: {fileID: 11400000, guid: b6b6dd88a23255644ba1a304b376b98b, type: 2}
   gunStats: {fileID: 11400000, guid: 9b153a9d97511014ebe99403ffd875a4, type: 2}
   barrelMod: {fileID: 11400000, guid: 04ea1a05f062b28459a5339d71ebc875, type: 2}
   gripMod: {fileID: 11400000, guid: 0dce517640311314eb6d489f4f21042c, type: 2}
   magMod: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
   ammoMod: {fileID: 11400000, guid: 14e47fb06084eef4aa0012b44d4cbe30, type: 2}
+  currentWeapon: 0
   cameraShake: {fileID: 475529210}
   bulletPrefab: {fileID: 5665540293792364214, guid: 8977a2d121961a943b163eb9a24a9d69, type: 3}
   currentAmmoDisplay: {fileID: 272430197}
