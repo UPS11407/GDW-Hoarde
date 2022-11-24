@@ -4018,6 +4018,16 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 683713238763128516, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
   m_PrefabInstance: {fileID: 2144176430}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &160778766 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 860e46229a6a828489033b51a97854a4, type: 3}
+  m_PrefabInstance: {fileID: 1138233080}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &250663718 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 919132149155446097, guid: 13eb2ebc66ca886499583cbc94d2d238, type: 3}
+  m_PrefabInstance: {fileID: 1055948839}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &272430195
 GameObject:
   m_ObjectHideFlags: 0
@@ -8767,6 +8777,8 @@ MonoBehaviour:
   currentWeapon: 0
   cameraShake: {fileID: 475529210}
   bulletPrefab: {fileID: 5665540293792364214, guid: 8977a2d121961a943b163eb9a24a9d69, type: 3}
+  pistol: {fileID: 160778766}
+  rifle: {fileID: 250663718}
   currentAmmoDisplay: {fileID: 272430197}
   maxAmmoDisplay: {fileID: 592402395}
 --- !u!1001 &550569251

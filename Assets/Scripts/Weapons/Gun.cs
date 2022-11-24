@@ -41,6 +41,9 @@ public class Gun : MonoBehaviour
 
     [SerializeField] GameObject bulletPrefab;
 
+    public GameObject pistol;
+    public GameObject rifle;
+    
     public TextMeshProUGUI currentAmmoDisplay;
     public TextMeshProUGUI maxAmmoDisplay;
 
@@ -116,12 +119,17 @@ public class Gun : MonoBehaviour
         {
             currentWeapon = CurrentWeapon.rifle;
             gunStats = rifleStats;
+            rifle.SetActive(true);
+            pistol.SetActive(false);
         }
         else
         {
             currentWeapon = CurrentWeapon.pistol;
             gunStats = pistolStats;
+            rifle.SetActive(false);
+            pistol.SetActive(true);
         }
+        UpdateWeaponStats();
     }
 
     public void OpenMenu()
