@@ -17,8 +17,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField] GameObject weaponModCanvas;
 
-    public GunStatScriptableObjects pistolStats;
-    public GunStatScriptableObjects rifleStats;
+    //public GunStatScriptableObjects pistolStats;
+    //public GunStatScriptableObjects rifleStats;
 
     [SerializeField] GunStatScriptableObjects gunStats;
     [SerializeField] WeaponModScriptableObject barrelMod;
@@ -42,9 +42,11 @@ public class Gun : MonoBehaviour
 
     [SerializeField] GameObject bulletPrefab;
 
-    public GameObject pistol;
-    public GameObject rifle;
-    
+    //public GameObject pistol;
+    //public GameObject rifle;
+
+    [SerializeField] GameObject otherGun;
+
     public TextMeshProUGUI currentAmmoDisplay;
     public TextMeshProUGUI maxAmmoDisplay;
 
@@ -108,30 +110,30 @@ public class Gun : MonoBehaviour
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
         swapMod.started += ctx => OpenMenu();
-
+        
         swapWeapon = playerContr.Player.SwapWeapon;
         swapWeapon.Enable();
         swapWeapon.performed += ctx => SwapWeapon();
+        
+
+    }
+    private void OnDisable()
+    {
+        fire.Disable();
+        reload.Disable();
+        swapMod.Disable();
+        swapWeapon.Disable();
     }
 
     void SwapWeapon()
     {
-        if(currentWeapon == CurrentWeapon.pistol)
-        {
-            currentWeapon = CurrentWeapon.rifle;
-            gunStats = rifleStats;
-            rifle.SetActive(true);
-            pistol.SetActive(false);
-        }
-        else
-        {
-            currentWeapon = CurrentWeapon.pistol;
-            gunStats = pistolStats;
-            rifle.SetActive(false);
-            pistol.SetActive(true);
-        }
-        UpdateWeaponStats();
+        Debug.Log("Swithc");
+        otherGun.active = true;
+        otherGun.GetComponent<Gun>().enabled = true;
+        gameObject.active = false;
+        gameObject.GetComponent<Gun>().enabled = false;
     }
+    
 
     public void OpenMenu()
     {
