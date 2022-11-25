@@ -127,10 +127,11 @@ public class Gun : MonoBehaviour
 
     void SwapWeapon()
     {
-      //  Debug.Log("Switch");
-        otherGun.active = true;
+        //  Debug.Log("Switch");
+        otherGun.SetActive(true);
         otherGun.GetComponent<Gun>().enabled = true;
-        gameObject.active = false;
+        otherGun.GetComponent<Gun>().UpdateDisplay();
+        gameObject.SetActive(false);
         gameObject.GetComponent<Gun>().enabled = false;
     }
     
@@ -238,7 +239,7 @@ public class Gun : MonoBehaviour
 
     }
 
-    void UpdateDisplay()
+    public void UpdateDisplay()
     {
         currentAmmoDisplay.text = currentAmmo.ToString();
         maxAmmoDisplay.text = maxAmmo.ToString();
