@@ -60,13 +60,10 @@ public class PlayerControls : MonoBehaviour
     private void FixedUpdate()
     {
         reggy.velocity = transform.right * movementDir.x * speed + transform.forward * movementDir.y * speed;
-        if (reggy.velocity != new Vector3(0, 0, 0))
-        {
-            walkAudioSource.mute = false;
-        } else
-        {
-            walkAudioSource.mute = true;
-        }
+
+        if (reggy.velocity != new Vector3(0, 0, 0)) walkAudioSource.mute = false;
+        else walkAudioSource.mute = true;
+        
     }
     private void OnEnable()
     {
