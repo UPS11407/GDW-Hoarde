@@ -283,17 +283,6 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                     ""action"": ""SwapWeapon"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
-                },
-                {
-                    ""name"": """",
-                    ""id"": ""62cf366f-9bb9-4c63-a09c-bc3cdf4095c3"",
-                    ""path"": ""<Keyboard>/u"",
-                    ""interactions"": """",
-                    ""processors"": """",
-                    ""groups"": """",
-                    ""action"": ""SwapWeapon"",
-                    ""isComposite"": false,
-                    ""isPartOfComposite"": false
                 }
             ]
         }

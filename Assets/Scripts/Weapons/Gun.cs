@@ -127,7 +127,7 @@ public class Gun : MonoBehaviour
 
     void SwapWeapon()
     {
-        Debug.Log("Swithc");
+      //  Debug.Log("Switch");
         otherGun.active = true;
         otherGun.GetComponent<Gun>().enabled = true;
         gameObject.active = false;
