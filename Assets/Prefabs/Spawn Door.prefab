@@ -42,7 +42,6 @@ GameObject:
   - component: {fileID: 683713238763128516}
   - component: {fileID: 683713238763128523}
   - component: {fileID: 683713238763128522}
-  - component: {fileID: 683713238763128521}
   m_Layer: 0
   m_Name: Spawn Door
   m_TagString: Untagged
@@ -116,24 +115,3 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
---- !u!114 &683713238763128521
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 683713238763128520}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 2ec2f8ffdf6f7b4448a9567143880f96, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  enemyPrefabs:
-  - {fileID: 2169045710317889877, guid: 163900aff6a7f43419f37624b72c14fb, type: 3}
-  spawnDelay: 1
-  spawnRange: 100
-  maxEnemies: 10
-  enemySpeed: 2
-  enemyCollection: {fileID: 0}
-  spawnLocation: {fileID: 683713237626138437}
-  player: {fileID: 0}

@@ -13,6 +13,7 @@ public class Gun : MonoBehaviour
     public PlayerInput playerContr;
     bool fireButtonPressed = false;
     bool canShoot = true;
+    bool canReload = true;
 
     [SerializeField] GameObject weaponModCanvas;
 
@@ -147,6 +148,7 @@ public class Gun : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
         weaponModCanvas.SetActive(false);
+        UpdateWeaponStats();
     }
 
     public void UpdateWeaponStats()
@@ -254,9 +256,11 @@ public class Gun : MonoBehaviour
     IEnumerator Reload()
     {
         canShoot = false;
+        canReload = false;
         yield return new WaitForSeconds(reloadDelay);
 
         canShoot = true;
+        canReload = true;
         currentAmmo = maxAmmo;
 
         UpdateDisplay();

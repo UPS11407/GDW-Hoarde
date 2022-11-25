@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour
     public float _speed = 2.0f;
     public float _damage = 1.0f;
     public float _attackRange = 2.0f;
+    public float chaseRange;
     public GameObject healPickupPrefab;
 
     [Tooltip("% chance to drop a heal pickup")]
@@ -38,7 +39,17 @@ public class EnemyBase : MonoBehaviour
     public void EnemyUpdate()
     {
         CheckIfDead();
-        ChasePlayer();
+        //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
+        if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange) ChasePlayer();
+    }
+
+    float NavMeshRemainingDistance(Vector3[] points)
+    {
+        if (points.Length < 2) return 0;
+        float distance = 0;
+        for (int i = 0; i < points.Length - 1; i++)
+            distance += Vector3.Distance(points[i], points[i + 1]);
+        return distance;
     }
 
     public void CheckIfDead()
@@ -51,7 +62,7 @@ public class EnemyBase : MonoBehaviour
             {
                 DropPickup();
             }
-
+            agent.isStopped = true;
             Destroy(gameObject);
         }
     }
@@ -86,6 +97,7 @@ public class EnemyBase : MonoBehaviour
 
         if(agent.destination != player.transform.position)
         {
+            agent.ResetPath();  
             agent.SetDestination(player.transform.position);
         }
     }
