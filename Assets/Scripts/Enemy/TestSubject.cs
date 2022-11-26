@@ -19,10 +19,12 @@ public class TestSubject : EnemyBase
     IEnumerator AttackPlayer()
     {
         attacking = true;
+        animator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.6f);
         attacking = false;
+        animator.SetBool("isAttacking", false);
 
-        if(GetPlayerDistance() <= _attackRange + 0.5f)
+        if (GetPlayerDistance() <= _attackRange + 0.5f)
         {
             player.GetComponent<Player>().TakeDamage(_damage);
         }

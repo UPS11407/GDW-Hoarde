@@ -22,6 +22,7 @@ public class EnemyBase : MonoBehaviour
     int dropVal;
 
     internal GameObject player;
+    internal Animator animator;
 
     Rigidbody rigid;
     NavMeshAgent agent;
@@ -31,6 +32,7 @@ public class EnemyBase : MonoBehaviour
         player = GameObject.Find("Player");
         rigid = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
+        animator = GetComponent<Animator>();
         agent.speed = _speed;
 
         currentHP = _maxHP;
@@ -88,10 +90,12 @@ public class EnemyBase : MonoBehaviour
     {
         if(GetPlayerDistance() <= _attackRange)
         {
+            animator.SetBool("isWalking", false);
             agent.isStopped = true;
         }
         else
         {
+            animator.SetBool("isWalking", true);
             agent.isStopped = false;
         }
 
