@@ -7,20 +7,16 @@ public class PlayerMovement : MonoBehaviour
 { 
     //player's speed
     public float moveSpeed = 10f;
-    //player's rotation speed
-    public float rotateSpeed = 75f;
+    //player's sensitivity
+    public float mouseSensitivity = 75f;
 
     //variable for jump force
     public float jumpForce = 5f;
     // check the distance b/w player and environment/ground
-    public float distanceToGround = 0.1f;
+    public float distanceToGround = 0.001f;
 
     // we want to set the layer in the inspector
     public LayerMask groundMask;
-
-    //private float variables for input
-    private float vertInput;
-    private float horInput;
 
     //collider and rigidbody variables
     private CapsuleCollider _col;
@@ -36,8 +32,11 @@ public class PlayerMovement : MonoBehaviour
     InputAction swapMod;
     InputAction heal;
     InputAction sprint;
+    InputAction jump;
+    InputAction crouch;
 
     float quickFOV = 75.0f;
+    bool jumping;
 
     // Start is called before the first frame update
     void Start()
@@ -45,6 +44,7 @@ public class PlayerMovement : MonoBehaviour
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
         Time.timeScale = 1.0f;
+
     }
 
     private void Awake()
@@ -62,7 +62,10 @@ public class PlayerMovement : MonoBehaviour
         swapMod = playerControls.Player.SwapMod;
         heal = playerControls.Player.Heal;
         sprint = playerControls.Player.Sprint;
+        jump = playerControls.Player.Jump;
+        crouch = playerControls.Player.Crouch;
 
+        sprint.performed += Sprint;
 
         //fire.performed += Fire;         <-- do firing method here
         //interact.performed += Interact; <-- do interact method here
@@ -79,15 +82,29 @@ public class PlayerMovement : MonoBehaviour
         swapMod.Enable();
         heal.Enable();
         sprint.Enable();
+        jump.Enable();
+        crouch.Enable();
+    }
 
+    private void OnDisable()
+    {
+        move.Disable();
+        fire.Disable();
+        interact.Disable();
+        look.Disable();
+        reload.Disable();
+        swapMod.Disable();
+        heal.Disable();
+        sprint.Disable();
+        jump.Disable();
+        crouch.Disable();
     }
 
     // Update is called once per frame
     void Update()
     {
-        Vector2 moveDir = move.ReadValue<Vector2>();
+        DoLook(mouseSensitivity);
 
-        //if shift is pressed, fov change and change speed
         if (Input.GetKey(KeyCode.LeftShift))
         {
             moveSpeed = 15f;
@@ -99,37 +116,20 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 10f;
         }
 
-        //W & S keys 
-        vertInput = Input.GetAxis("Vertical") * moveSpeed;
+        
 
-
-        //A & D keys
-        horInput = Input.GetAxis("Horizontal") * rotateSpeed;
-
-        //if space key is down
-        if (IsGrounded() && Input.GetKeyDown(KeyCode.Space))
+        if (!jumping && jump.inProgress && IsGrounded())
         {
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
-
+            StartCoroutine(WaitForJump());
         }
+
+        Debug.Log(jumping);
     }
 
     private void FixedUpdate()
     {
-        Vector3 rotationVar = Vector3.up * horInput;
-        //controls our angle using quaternions
-        Quaternion angleRotation = Quaternion.Euler(rotationVar * Time.fixedDeltaTime);
-
-        _rb.MoveRotation(_rb.rotation * angleRotation);
-        
-        if (vertInput == 0)
-        {
-            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
-        }
-        else
-        {
-            _rb.velocity = new Vector3(transform.forward.x, _rb.velocity.y / vertInput, transform.forward.z) * vertInput;
-        }
+        DoWalk();
     }
 
     bool IsGrounded()
@@ -140,5 +140,44 @@ public class PlayerMovement : MonoBehaviour
         bool grounded = Physics.CheckCapsule(_col.bounds.center, capsuleBottom,
             distanceToGround, groundMask, QueryTriggerInteraction.Ignore);
         return grounded;
+    }
+
+    void DoLook(float sensitivity)
+    {
+        Vector2 lookDir = look.ReadValue<Vector2>();
+        Vector3 rotationVar = new Vector3(-lookDir.y, lookDir.x, 0);
+        transform.eulerAngles += rotationVar * Time.deltaTime * (sensitivity / 3);
+    }
+
+    void DoWalk()
+    {
+        Vector2 moveDir = move.ReadValue<Vector2>();
+        Vector3 moveX = moveDir.y * new Vector3(transform.forward.x, 0, transform.forward.z).normalized * moveSpeed;
+        Vector3 moveZ = moveDir.x * new Vector3(transform.right.x, 0, transform.right.z).normalized * moveSpeed;
+
+        if (moveDir == Vector2.zero)
+        {
+            _rb.velocity = new Vector3(0, _rb.velocity.y, 0);
+        }
+        else
+        {
+            _rb.velocity = moveX + moveZ + new Vector3(0, _rb.velocity.y, 0);
+        }
+
+        
+    }
+
+    void Sprint(InputAction.CallbackContext context)
+    {
+        
+    }
+
+    IEnumerator WaitForJump()
+    {
+        jumping = true;
+
+        yield return new WaitForSeconds(0.05f);
+
+        jumping = false;
     }
 }
