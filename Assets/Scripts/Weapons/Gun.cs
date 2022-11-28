@@ -39,6 +39,7 @@ public class Gun : MonoBehaviour
     [SerializeField] CameraShake cameraShake;
     float shakeDuration;
     float shakeMagnitude;
+    [SerializeField] CameraRecoil cameraRecoil;
 
     [SerializeField] GameObject bulletPrefab;
 
@@ -229,7 +230,10 @@ public class Gun : MonoBehaviour
                 Destroy(bullet, 5.0f);
             }
 
+
+            cameraRecoil.Recoil(-2f, 2f, 0.35f);
             StartCoroutine(muzzleFlash(0.05f));
+
 
             //uncomment when tuned
 
