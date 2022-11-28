@@ -124,7 +124,7 @@ public class PlayerMovement : MonoBehaviour
             StartCoroutine(WaitForJump());
         }
 
-        Debug.Log(jumping);
+        //Debug.Log(jumping);
     }
 
     private void FixedUpdate()
