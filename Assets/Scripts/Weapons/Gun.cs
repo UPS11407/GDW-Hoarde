@@ -69,6 +69,9 @@ public class Gun : MonoBehaviour
     bool isExplosive;
     float explosionSize;
 
+    [SerializeField] Light muzzleLight;
+    float muzzleLightTime;
+    float muzzleLightDuration = 0.1f;
 
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
@@ -226,6 +229,8 @@ public class Gun : MonoBehaviour
                 Destroy(bullet, 5.0f);
             }
 
+            StartCoroutine(muzzleFlash(0.05f));
+
             //uncomment when tuned
 
             //StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
@@ -238,7 +243,13 @@ public class Gun : MonoBehaviour
         }
 
     }
-
+    IEnumerator muzzleFlash(float duration)
+    {
+        muzzleLight.enabled = true;
+        muzzleLight.intensity = damage * bulletsPerShot;
+        yield return new WaitForSeconds(duration);
+        muzzleLight.enabled = false;
+    }
     public void UpdateDisplay()
     {
         currentAmmoDisplay.text = currentAmmo.ToString();
