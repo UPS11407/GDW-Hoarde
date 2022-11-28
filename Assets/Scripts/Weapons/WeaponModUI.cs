@@ -40,7 +40,7 @@ public class WeaponModUI : MonoBehaviour
     public Ammo ammo;
     public Magazines magazines;
 
-    private void Awake()
+    private void OnEnable()
     {
         GrandSetup();
     }
