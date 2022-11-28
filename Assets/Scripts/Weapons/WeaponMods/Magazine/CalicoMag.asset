@@ -24,4 +24,4 @@ MonoBehaviour:
   magazineSizeModifier: -100
   enablesExplosionImpact: 0
   explosionSizeIncrease: 4
-  recoilModifier: 0
+  recoilModifier: 5

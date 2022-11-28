@@ -15,7 +15,7 @@ MonoBehaviour:
   fireMode: 3
   spreadModifier: 1
   damageModifier: 0
-  fireDelayModifier: -0.15
+  fireDelayModifier: -0.05
   bulletVelocityModifier: 0
   additionalBulletsPerShot: 0
   dashDamageModifier: 0
@@ -24,4 +24,4 @@ MonoBehaviour:
   magazineSizeModifier: 0
   enablesExplosionImpact: 0
   explosionSizeIncrease: 0
-  recoilModifier: 0
+  recoilModifier: -0.8

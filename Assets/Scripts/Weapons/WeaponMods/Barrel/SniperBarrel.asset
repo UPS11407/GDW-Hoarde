@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 464fdbddf7328834a93c075f8a47ef36, type: 3}
   m_Name: SniperBarrel
   m_EditorClassIdentifier: 
+  fireMode: 0
   spreadModifier: 0
   damageModifier: 1
   fireDelayModifier: 1
@@ -23,4 +24,4 @@ MonoBehaviour:
   magazineSizeModifier: 0
   enablesExplosionImpact: 0
   explosionSizeIncrease: 0
-  recoilModifier: 0
+  recoilModifier: 5

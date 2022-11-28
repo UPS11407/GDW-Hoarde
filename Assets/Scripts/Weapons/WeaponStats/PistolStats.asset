@@ -14,9 +14,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   spread: 0
   damage: 1
-  fireDelay: 0.2
+  fireDelay: 0.4
   bulletVelocity: 400
   bulletsPerShot: 1
   reloadDelay: 3
   magazineSize: 10
-  recoil: 1
+  recoil: 8
