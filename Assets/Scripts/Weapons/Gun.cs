@@ -231,7 +231,7 @@ public class Gun : MonoBehaviour
             }
 
 
-            cameraRecoil.Recoil(-2f, 2f, 0.35f);
+            cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
             StartCoroutine(muzzleFlash(0.05f));
 
 
