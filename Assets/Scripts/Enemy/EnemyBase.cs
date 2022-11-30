@@ -42,7 +42,14 @@ public class EnemyBase : MonoBehaviour
     {
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
-        if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange) ChasePlayer();
+        if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
+        {
+            ChasePlayer();
+        }
+        else
+        {
+            Destroy(gameObject);
+        }
     }
 
     /// <summary>
@@ -67,7 +74,7 @@ public class EnemyBase : MonoBehaviour
             {
                 DropPickup();
             }
-            agent.isStopped = true;
+            agent.enabled = false;
             Destroy(gameObject);
         }
     }

@@ -49,7 +49,9 @@ public class Player : MonoBehaviour
     {
         if(currentHP <= 0)
         {
-            //Die
+            Cursor.lockState = CursorLockMode.None;
+            Cursor.visible = true;
+            SceneControl.ChangeScene("Death");
         }
     }
 
