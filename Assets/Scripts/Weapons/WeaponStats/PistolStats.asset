@@ -13,9 +13,9 @@ MonoBehaviour:
   m_Name: PistolStats
   m_EditorClassIdentifier: 
   spread: 0
-  damage: 1
+  damage: 2
   fireDelay: 0.4
-  bulletVelocity: 400
+  bulletVelocity: 200
   bulletsPerShot: 1
   reloadDelay: 3
   magazineSize: 10

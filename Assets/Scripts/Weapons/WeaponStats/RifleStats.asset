@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: RifleStats
   m_EditorClassIdentifier: 
   spread: 0
-  damage: 1
+  damage: 3
   fireDelay: 0.2
   bulletVelocity: 200
   bulletsPerShot: 1

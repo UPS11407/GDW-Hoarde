@@ -14,7 +14,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   fireMode: 0
   spreadModifier: 2.5
-  damageModifier: -0.8
+  damageModifier: -0.7
   fireDelayModifier: 0.5
   bulletVelocityModifier: -25
   additionalBulletsPerShot: 5

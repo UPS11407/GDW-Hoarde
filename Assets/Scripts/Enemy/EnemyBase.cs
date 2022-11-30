@@ -111,6 +111,9 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage(float val)
     {
+        Debug.Log("HP BEFORE:" + currentHP);
         currentHP -= val;
+
+        Debug.Log("HP After:" + currentHP);
     }
 }

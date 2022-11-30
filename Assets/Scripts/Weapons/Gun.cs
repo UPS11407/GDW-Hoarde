@@ -225,7 +225,7 @@ public class Gun : MonoBehaviour
 
             for(int i = 0; i< bulletsPerShot; i++)
             {
-                GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.position + transform.forward * 1, transform.rotation);
+                GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.parent.position + transform.parent.forward * 1, transform.parent.rotation);
                 bullet.GetComponent<Bullet>().damage = this.damage;
                 bullet.GetComponent<Bullet>().isExplosive = this.isExplosive;
                 bullet.GetComponent<Bullet>().explosionRange = this.explosionSize;
