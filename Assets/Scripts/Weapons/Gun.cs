@@ -36,6 +36,9 @@ public class Gun : MonoBehaviour
 
     private AudioSource audioSource;
     [SerializeField] AudioClip fireSound;
+    [SerializeField] AudioClip reloadSound;
+    [SerializeField] AudioClip emptySound;
+
 
 
     Transform parentTransform;
@@ -247,9 +250,10 @@ public class Gun : MonoBehaviour
 
             UpdateDisplay();
 
-        } else
+        } else if (currentAmmo == 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
-            //Play Empty Sound
+            shootTime = Time.time;
+            audioSource.PlayOneShot(emptySound);
         }
 
     }
@@ -281,7 +285,10 @@ public class Gun : MonoBehaviour
     {
         canShoot = false;
         canReload = false;
+        
         yield return new WaitForSeconds(reloadDelay);
+        audioSource.PlayOneShot(reloadSound);
+        audioSource.pitch = 0.94f;
 
         canShoot = true;
         canReload = true;
