@@ -22,6 +22,8 @@ public class PlayerMovement : MonoBehaviour
     private CapsuleCollider _col;
     private Rigidbody _rb;
 
+    public Transform cameraParent;
+
     public PlayerInput playerControls;
 
     AudioSource audioSource;
@@ -155,14 +157,26 @@ public class PlayerMovement : MonoBehaviour
     {
         Vector2 lookDir = look.ReadValue<Vector2>();
         Vector3 rotationVar = new Vector3(-lookDir.y, lookDir.x, 0);
-        transform.eulerAngles += rotationVar * Time.deltaTime * (sensitivity / 3);
+        Vector3 currentRotation = rotationVar * Time.deltaTime * (sensitivity / 3);
+
+        if ((cameraParent.eulerAngles + currentRotation).x <= 80 && (cameraParent.eulerAngles + currentRotation).x >= -1)
+        {
+            cameraParent.eulerAngles += currentRotation;
+        }
+        else if ((cameraParent.eulerAngles + currentRotation).x <= 361 && (cameraParent.eulerAngles + currentRotation).x >= 290)
+        {
+            cameraParent.eulerAngles += currentRotation;
+        }
+        else return;
+
+
     }
 
     void DoWalk()
     {
         Vector2 moveDir = move.ReadValue<Vector2>();
-        Vector3 moveX = moveDir.y * new Vector3(transform.forward.x, 0, transform.forward.z).normalized * moveSpeed;
-        Vector3 moveZ = moveDir.x * new Vector3(transform.right.x, 0, transform.right.z).normalized * moveSpeed;
+        Vector3 moveX = moveDir.y * new Vector3(cameraParent.forward.x, 0, cameraParent.forward.z).normalized * moveSpeed;
+        Vector3 moveZ = moveDir.x * new Vector3(cameraParent.right.x, 0, cameraParent.right.z).normalized * moveSpeed;
 
         if (moveDir == Vector2.zero)
         {
