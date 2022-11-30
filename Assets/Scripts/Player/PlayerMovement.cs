@@ -24,6 +24,8 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerInput playerControls;
 
+    AudioSource audioSource;
+
     InputAction move;
     InputAction fire;
     InputAction interact;
@@ -43,6 +45,7 @@ public class PlayerMovement : MonoBehaviour
     {
         _rb = GetComponent<Rigidbody>();
         _col = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1.0f;
 
     }
@@ -109,13 +112,19 @@ public class PlayerMovement : MonoBehaviour
         {
             moveSpeed = 15f;
             Camera.main.fieldOfView = quickFOV;
+            audioSource.pitch = 1.0f;
         }
         else
         {
             Camera.main.fieldOfView = 60.0f;
             moveSpeed = 10f;
+            audioSource.pitch = 0.66f;
         }
-
+        if (_rb.velocity.magnitude >= 9)
+        {
+            audioSource.mute = false;
+        }
+        else audioSource.mute = true;
         
 
         if (!jumping && jump.inProgress && IsGrounded())

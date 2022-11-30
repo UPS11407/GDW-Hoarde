@@ -34,8 +34,12 @@ public class Gun : MonoBehaviour
 
     public CurrentWeapon currentWeapon;
 
-    Transform parentTransform;
+    private AudioSource audioSource;
+    [SerializeField] AudioClip fireSound;
 
+
+    Transform parentTransform;
+    
     [SerializeField] CameraShake cameraShake;
     float shakeDuration;
     float shakeMagnitude;
@@ -80,6 +84,7 @@ public class Gun : MonoBehaviour
     void Start()
     {
         parentTransform = GetComponentInParent<Transform>();
+        audioSource = GetComponent<AudioSource>();
         UpdateWeaponStats();
         
     }
@@ -99,6 +104,7 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         playerContr = new PlayerInput();
+
 
     }
 
@@ -230,7 +236,7 @@ public class Gun : MonoBehaviour
                 Destroy(bullet, 5.0f);
             }
 
-
+            audioSource.PlayOneShot(fireSound);
             cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
             StartCoroutine(muzzleFlash(0.05f));
 

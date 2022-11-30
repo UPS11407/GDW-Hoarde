@@ -19,4 +19,4 @@ MonoBehaviour:
   bulletsPerShot: 1
   reloadDelay: 3
   magazineSize: 20
-  recoil: 1
+  recoil: 4
