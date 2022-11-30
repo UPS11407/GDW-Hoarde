@@ -11421,6 +11421,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155279841941523, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: b1a55bd02d5c27c42bfa7c5755cbe8be, type: 3}
     - target: {fileID: 1254155279841941612, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11521,6 +11525,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155280186648212, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: c5d34db66eab54342a40ee60497df087, type: 3}
     - target: {fileID: 1254155280186648213, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11589,6 +11597,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155280910535554, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 0f20fbe37f0392c42a0e99e46c1f6430, type: 3}
     - target: {fileID: 1254155280910535555, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -11745,6 +11757,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281206349316, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: cdb8632247e389e40b2b989748a47607, type: 3}
     - target: {fileID: 1254155281206349317, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11769,6 +11785,10 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281324733971, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 921ecdd3216e7b146987b4061a5715bf, type: 3}
     - target: {fileID: 1254155281324734060, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11777,6 +11797,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: changeGrip
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281354527541, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 26ebcd34ed9d39445946f4084d7bfa5a, type: 3}
     - target: {fileID: 1254155281354527542, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -11797,6 +11821,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: f7447f09e8ebeca47af1fb7f356076eb, type: 2}
+    - target: {fileID: 1254155281391178831, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: a8c44ab4ab61083458910187c042063e, type: 3}
     - target: {fileID: 1254155281446395237, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -11897,6 +11925,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281589149795, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: d3403a4c5cb2e514cad6297c0e5e3707, type: 3}
     - target: {fileID: 1254155281589149820, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -68597,6 +68629,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 809864634}
     m_Modifications:
+    - target: {fileID: 1254155279841941523, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: b1a55bd02d5c27c42bfa7c5755cbe8be, type: 3}
     - target: {fileID: 1254155279841941612, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -68697,6 +68733,10 @@ PrefabInstance:
       propertyPath: m_IsActive
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155280186648212, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: c5d34db66eab54342a40ee60497df087, type: 3}
     - target: {fileID: 1254155280186648213, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -68765,6 +68805,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155280910535554, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 0f20fbe37f0392c42a0e99e46c1f6430, type: 3}
     - target: {fileID: 1254155280910535555, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -68921,6 +68965,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[1].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: 
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281206349316, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: cdb8632247e389e40b2b989748a47607, type: 3}
     - target: {fileID: 1254155281206349317, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -68945,6 +68993,10 @@ PrefabInstance:
       propertyPath: m_Interactable
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281324733971, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 921ecdd3216e7b146987b4061a5715bf, type: 3}
     - target: {fileID: 1254155281324734060, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -68953,6 +69005,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_MethodName
       value: changeGrip
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281354527541, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: 26ebcd34ed9d39445946f4084d7bfa5a, type: 3}
     - target: {fileID: 1254155281354527542, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
@@ -68973,6 +69029,10 @@ PrefabInstance:
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgument
       value: 
       objectReference: {fileID: 11400000, guid: f7447f09e8ebeca47af1fb7f356076eb, type: 2}
+    - target: {fileID: 1254155281391178831, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: a8c44ab4ab61083458910187c042063e, type: 3}
     - target: {fileID: 1254155281446395237, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
@@ -69073,6 +69133,10 @@ PrefabInstance:
       propertyPath: m_Color.r
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 1254155281589149795, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
+      propertyPath: m_Texture
+      value: 
+      objectReference: {fileID: 2800000, guid: d3403a4c5cb2e514cad6297c0e5e3707, type: 3}
     - target: {fileID: 1254155281589149820, guid: e621c70da929c5745b1f24d1b3e33045, type: 3}
       propertyPath: m_OnClick.m_PersistentCalls.m_Calls.Array.size
       value: 1
