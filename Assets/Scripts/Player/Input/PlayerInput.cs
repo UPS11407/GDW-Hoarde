@@ -318,7 +318,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""efb64b70-445b-459d-abaf-bd1b8767ef5e"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": ""Hold"",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -362,7 +362,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""104f0ec8-bc9f-4605-9095-7c359b470cb3"",
-                    ""path"": ""<XInputController>/buttonWest"",
+                    ""path"": ""<Gamepad>/buttonWest"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -428,7 +428,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""fbb8f1c4-413a-4312-adac-32d784f1a8e8"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/leftStickPress"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -450,7 +450,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""17eeb4b2-983f-4a9f-b9fa-14038715a0d1"",
-                    ""path"": ""<XInputController>/buttonSouth"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -483,8 +483,8 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""155e98cc-745f-4c7f-aec3-07985cfddff6"",
-                    ""path"": ""<XInputController>/buttonNorth"",
-                    ""interactions"": ""Press"",
+                    ""path"": ""<Gamepad>/buttonNorth"",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""SwapWeapon"",
@@ -505,7 +505,7 @@ public partial class @PlayerInput : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""8d4f3914-eb38-49be-a1f2-d5dbd994c932"",
-                    ""path"": ""<XInputController>/buttonEast"",
+                    ""path"": ""<Gamepad>/buttonEast"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
