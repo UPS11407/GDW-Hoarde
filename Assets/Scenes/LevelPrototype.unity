@@ -59058,7 +59058,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemyPrefabs:
   - {fileID: 2169045710317889877, guid: 163900aff6a7f43419f37624b72c14fb, type: 3}
-  maxEnemies: 10
+  maxEnemies: 18
   spawnDelay: 0.2
   enemySpeed: 2
   enemyCollection: {fileID: 415057818}
