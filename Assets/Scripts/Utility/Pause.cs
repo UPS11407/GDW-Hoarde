@@ -22,12 +22,24 @@ public class Pause : MonoBehaviour
     {
         pause = playerInputs.Player.Pause;
         pause.Enable();
-        pause.performed += ctx => OpenMenu();
+        pause.performed += ctx => RunPause();
     }
 
     private void OnDisable()
     {
         pause.Disable();
+    }
+
+    void RunPause()
+    {
+        if(menu.activeInHierarchy == true)
+        {
+            CloseMenu();
+        }
+        else
+        {
+            OpenMenu();
+        }
     }
 
     void OpenMenu()
