@@ -15,7 +15,7 @@ MonoBehaviour:
   spread: 0
   damage: 2
   fireDelay: 0.4
-  bulletVelocity: 150
+  bulletVelocity: 50
   bulletsPerShot: 1
   reloadDelay: 3
   magazineSize: 10
