@@ -246,6 +246,7 @@ GameObject:
   - component: {fileID: 1083259230935377402}
   - component: {fileID: 3283073506861258839}
   - component: {fileID: 6490860711103842759}
+  - component: {fileID: 8351062395927008112}
   m_Layer: 8
   m_Name: Chest 1
   m_TagString: Untagged
@@ -330,6 +331,22 @@ Animation:
   m_PlayAutomatically: 0
   m_AnimatePhysics: 0
   m_CullingType: 0
+--- !u!54 &8351062395927008112
+Rigidbody:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 352215518950024255}
+  serializedVersion: 2
+  m_Mass: 1000000
+  m_Drag: 0
+  m_AngularDrag: 0.05
+  m_UseGravity: 1
+  m_IsKinematic: 0
+  m_Interpolate: 0
+  m_Constraints: 122
+  m_CollisionDetection: 0
 --- !u!1 &591375289508803072
 GameObject:
   m_ObjectHideFlags: 0
