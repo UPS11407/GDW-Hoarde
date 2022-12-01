@@ -243,7 +243,7 @@ public class Gun : MonoBehaviour
                 bullet.transform.Rotate(Random.Range(-spread, spread), Random.Range(-spread, spread), Random.Range(-spread, spread));
                 bullet.GetComponent<Rigidbody>().velocity = bullet.transform.forward * bulletVelocity;
                 bullet.transform.rotation = gameObject.transform.rotation;
-                bullet.transform.Rotate(new Vector3(90, 0, 0));
+                bullet.transform.Rotate(new Vector3(0, 0, 0));
                 Destroy(bullet, 5.0f);
             }
 

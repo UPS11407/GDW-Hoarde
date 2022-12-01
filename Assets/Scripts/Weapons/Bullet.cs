@@ -7,7 +7,7 @@ public class Bullet : MonoBehaviour
     public float damage;
     public float explosionRange;
     public bool isExplosive;
-
+    [SerializeField] GameObject fireEffect;
     private void OnCollisionEnter(Collision collision)
     {
         if(collision.transform.tag == "Enemy")
@@ -24,6 +24,10 @@ public class Bullet : MonoBehaviour
                     enemy.GetComponent<EnemyBase>().TakeDamage(damage);
                 }
             }
+            GameObject boom = (GameObject)Instantiate(fireEffect, transform.position, transform.rotation);
+            Destroy(boom, 2.5f);
+
+
         }
 
         Destroy(gameObject);
