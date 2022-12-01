@@ -15,6 +15,7 @@ public class Player : MonoBehaviour
     PlayerInput playerInputs;
     InputAction heal;
     InputAction interact;
+    public AudioSource audioPlayer;
     float healCharge;
     float currentHP;
 
@@ -83,7 +84,10 @@ public class Player : MonoBehaviour
     /// </summary>
     public void TakeDamage(float dmg)
     {
+        //audioClip;
+        //audioPlayer.Stop();
         currentHP -= dmg;
+        audioPlayer.Play();
         UpdateHealthDisplay();
     }
 
