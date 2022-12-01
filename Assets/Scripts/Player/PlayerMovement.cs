@@ -122,7 +122,7 @@ public class PlayerMovement : MonoBehaviour
             moveSpeed = 10f;
             audioSource.pitch = 0.66f;
         }
-        if (_rb.velocity.magnitude >= 9)
+        if (_rb.velocity.magnitude >= 9 && IsGrounded())
         {
             audioSource.mute = false;
         }
