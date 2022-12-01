@@ -5180,6 +5180,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
 --- !u!4 &202375675 stripped
@@ -5708,6 +5712,10 @@ PrefabInstance:
     - target: {fileID: 683713238763128520, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
       propertyPath: m_Name
       value: Spawn Door (1)
+      objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -13377,6 +13385,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (8)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
@@ -13435,6 +13447,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
@@ -13492,6 +13508,10 @@ PrefabInstance:
     - target: {fileID: 683713238763128520, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
       propertyPath: m_Name
       value: Spawn Door (6)
+      objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -13887,6 +13907,10 @@ PrefabInstance:
     - target: {fileID: 683713238763128520, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
       propertyPath: m_Name
       value: Spawn Door
+      objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -48923,6 +48947,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (2)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
 --- !u!4 &1315711852 stripped
@@ -57062,6 +57090,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (7)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
@@ -58716,6 +58748,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (3)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
 --- !u!4 &1522609428 stripped
@@ -59350,6 +59386,10 @@ PrefabInstance:
     - target: {fileID: 683713238763128520, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
       propertyPath: m_Name
       value: Spawn Door (5)
+      objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
@@ -68273,6 +68313,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
@@ -76398,6 +76442,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
 --- !u!4 &2134939765 stripped
@@ -76460,6 +76508,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: Spawn Door (4)
       objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
 --- !u!4 &2140271555 stripped
@@ -76521,6 +76573,10 @@ PrefabInstance:
     - target: {fileID: 683713238763128520, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
       propertyPath: m_Name
       value: Spawn Door (3)
+      objectReference: {fileID: 0}
+    - target: {fileID: 683713238763128522, guid: f20dc07fbaf3fa24abe71be8eea22f99, type: 3}
+      propertyPath: m_Enabled
+      value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents:
     - {fileID: 0}
