@@ -62,7 +62,7 @@ public class Gun : MonoBehaviour
     float shootTime;
     float shootDelay;
     float reloadDelay;
-    float modDelay;
+    float modDelay;// = 4.0f;
 
     int currentAmmo;
     int maxAmmo;
@@ -89,7 +89,8 @@ public class Gun : MonoBehaviour
         parentTransform = GetComponentInParent<Transform>();
         audioSource = GetComponent<AudioSource>();
         UpdateWeaponStats();
-        
+        currentAmmo = maxAmmo;
+        UpdateDisplay();
     }
 
     private void Update()
@@ -107,8 +108,6 @@ public class Gun : MonoBehaviour
     private void Awake()
     {
         playerContr = new PlayerInput();
-
-
     }
 
     private void OnEnable()
@@ -217,7 +216,7 @@ public class Gun : MonoBehaviour
 
         shakeMagnitude = damage * bulletsPerShot * 0.5f;
         shakeDuration = shootDelay * 0.25f;
-        currentAmmo = maxAmmo;
+        //currentAmmo = maxAmmo;
         shootTime = Time.time + modDelay;
 
         UpdateDisplay();

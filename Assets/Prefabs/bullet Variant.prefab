@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: bullet Variant
       objectReference: {fileID: 0}
+    - target: {fileID: 919132149155446097, guid: cfcfb9a2c6fae9a45a261b3a2b31eac9, type: 3}
+      propertyPath: m_Layer
+      value: 7
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cfcfb9a2c6fae9a45a261b3a2b31eac9, type: 3}
 --- !u!1 &8793544572930826566 stripped
