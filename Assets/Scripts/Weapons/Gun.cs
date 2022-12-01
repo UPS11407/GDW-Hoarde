@@ -119,7 +119,7 @@ public class Gun : MonoBehaviour
         fire.canceled += ctx => fireButtonPressed = false;
         reload = playerContr.Player.Reload;
         reload.Enable();
-        reload.performed += ctx => StartCoroutine(Reload());
+        reload.performed += ctx => RunReload();
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
         swapMod.started += ctx => OpenMenu();
@@ -136,6 +136,14 @@ public class Gun : MonoBehaviour
         reload.Disable();
         swapMod.Disable();
         swapWeapon.Disable();
+    }
+
+    void RunReload()
+    {
+        if (canReload)
+        {
+            StartCoroutine(Reload());
+        }
     }
 
     void SwapWeapon()
@@ -285,11 +293,11 @@ public class Gun : MonoBehaviour
     {
         canShoot = false;
         canReload = false;
-        
-        yield return new WaitForSeconds(reloadDelay);
+
         audioSource.PlayOneShot(reloadSound);
         audioSource.pitch = 0.94f;
-
+        yield return new WaitForSeconds(reloadDelay);
+        
         canShoot = true;
         canReload = true;
         currentAmmo = maxAmmo;
