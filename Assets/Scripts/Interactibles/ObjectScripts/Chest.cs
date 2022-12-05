@@ -8,6 +8,7 @@ public class Chest : MonoBehaviour, IInteractible
     GameObject player;
     bool canInteract = true;
     Animator animator;
+    public GameObject menuText;
 
     public void Interact()
     {
@@ -60,13 +61,22 @@ public class Chest : MonoBehaviour, IInteractible
             }
 
             Debug.Log("YOU GOT LIGMA");
-
-            Destroy(gameObject, 5);
+            
+            Destroy(gameObject, 6);
+            StartCoroutine(ModMenuText());
         }
+    }
+    
+    IEnumerator ModMenuText()
+    {
+        menuText.SetActive(true);
+        yield return new WaitForSeconds(5.9f);
+        menuText.SetActive(false);
     }
 
     private void Awake()
     {
+        //menuText = GameObject.Find("ChestText");
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
     }

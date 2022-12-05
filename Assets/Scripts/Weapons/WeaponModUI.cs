@@ -39,9 +39,11 @@ public class WeaponModUI : MonoBehaviour
     public Grips grips;
     public Ammo ammo;
     public Magazines magazines;
+    public GameObject menuText;
 
     private void OnEnable()
     {
+        menuText.SetActive(false);
         GrandSetup();
     }
 

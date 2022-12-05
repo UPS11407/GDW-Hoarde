@@ -11,6 +11,7 @@ public class Player : MonoBehaviour
     public Image healChargeBar;
     public float maxHealCharge = 4.0f;
     public float interactRange;
+    public GameObject healText;
 
     PlayerInput playerInputs;
     InputAction heal;
@@ -48,6 +49,15 @@ public class Player : MonoBehaviour
 
     private void Update()
     {
+        if(healCharge == maxHealCharge)
+        {
+            healText.SetActive(true);
+        }
+        else
+        {
+            healText.SetActive(false);
+        }
+
         if(currentHP <= 0)
         {
             Cursor.lockState = CursorLockMode.None;
