@@ -6,14 +6,14 @@ using UnityEngine.InputSystem;
 public class PlayerMovement : MonoBehaviour
 { 
     //player's speed
-    public float moveSpeed = 10f;
+    public float moveSpeed = 6f;
     //player's sensitivity
     public float mouseSensitivity = 75f;
 
     //variable for jump force
     public float jumpForce = 5f;
     // check the distance b/w player and environment/ground
-    public float distanceToGround = 0.001f;
+    private float distanceToGround = 0.001f;
 
     // we want to set the layer in the inspector
     public LayerMask groundMask;
@@ -112,17 +112,17 @@ public class PlayerMovement : MonoBehaviour
 
         if (Input.GetKey(KeyCode.LeftShift))
         {
-            moveSpeed = 15f;
+            moveSpeed = 9f;
             Camera.main.fieldOfView = quickFOV;
             audioSource.pitch = 1.0f;
         }
         else
         {
             Camera.main.fieldOfView = 60.0f;
-            moveSpeed = 10f;
+            moveSpeed = 6f;
             audioSource.pitch = 0.66f;
         }
-        if (_rb.velocity.magnitude >= 9 && IsGrounded())
+        if (_rb.velocity.magnitude >= 5.5 && IsGrounded())
         {
             audioSource.mute = false;
         }
