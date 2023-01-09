@@ -143,7 +143,7 @@ public class PlayerMovement : MonoBehaviour
         DoWalk();
     }
 
-    bool IsGrounded()
+    public bool IsGrounded()
     {
         Vector3 capsuleBottom = new Vector3(_col.bounds.center.x,
             _col.bounds.min.y, _col.bounds.max.z);
