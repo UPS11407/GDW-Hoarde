@@ -15,11 +15,13 @@ public class DoorController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
+        if(other.tag.Equals("Enemy") || other.tag.Equals("Player"))
         doorAnim.SetBool("isOpening", true);
     }
 
     private void OnTriggerExit(Collider other)
     {
-        doorAnim.SetBool("isOpening", false);
+        if (other.tag.Equals("Enemy") || other.tag.Equals("Player"))
+            doorAnim.SetBool("isOpening", false);
     }
 }
