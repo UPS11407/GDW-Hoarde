@@ -6,4 +6,4 @@ Trello/Planner: https://trello.com/invite/b/7Xf5ASdL/ATTI789cda3810159fbbbe0fb83
 
 Members in Computer Graphics:
 Alexander Phillips: A multi-faceted dev that has worked on various programming, design but mainly art contributions to the game.
-Ethan Zafra:
+Ethan Zafra: Mainly a programmer that works on the game's gameplay scripts. In the previous semester, I've tried working on lighting to improve the level's visual appearance.
