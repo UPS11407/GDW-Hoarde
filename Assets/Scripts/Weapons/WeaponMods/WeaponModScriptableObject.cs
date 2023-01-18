@@ -19,6 +19,7 @@ public class WeaponModScriptableObject : ScriptableObject
     public float reloadDelayModifier = 0.0f; //+
     public int magazineSizeModifier = 0; //+
     public bool enablesExplosionImpact = false; //bool
+    public bool becomeProjectile = false;
     public float explosionSizeIncrease = 0.0f; //+
     public float recoilModifier = 0.0f;
     

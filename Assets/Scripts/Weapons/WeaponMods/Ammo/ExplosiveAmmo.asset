@@ -23,5 +23,6 @@ MonoBehaviour:
   reloadDelayModifier: 0
   magazineSizeModifier: 0
   enablesExplosionImpact: 1
+  becomeProjectile: 1
   explosionSizeIncrease: 3.5
   recoilModifier: 1

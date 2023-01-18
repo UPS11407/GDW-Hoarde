@@ -42,7 +42,9 @@ public class Gun : MonoBehaviour
 
 
     Transform parentTransform;
-    
+
+    [SerializeField] Camera playerCamera;
+
     [SerializeField] CameraShake cameraShake;
     float shakeDuration;
     float shakeMagnitude;
@@ -74,12 +76,17 @@ public class Gun : MonoBehaviour
 
     float recoil;
 
+    bool isProjectile;
+
     bool isExplosive;
     float explosionSize;
 
     [SerializeField] Light muzzleLight;
     float muzzleLightTime;
     float muzzleLightDuration = 0.1f;
+
+    [SerializeField] TrailRenderer bulletTracer;
+    [SerializeField] GameObject tracerStart;
 
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
@@ -210,6 +217,14 @@ public class Gun : MonoBehaviour
             isExplosive = false;
         }
 
+        if (ammoMod.becomeProjectile)
+        {
+            isProjectile = true;
+        } else
+        {
+            isProjectile = false;
+        }
+
         canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -232,9 +247,10 @@ public class Gun : MonoBehaviour
             shootTime = Time.time;
             UseAmmo(currentAmmo);
             
-
-            for(int i = 0; i< bulletsPerShot; i++)
+            
+            for (int i = 0; i < bulletsPerShot; i++)
             {
+                if (isProjectile) { 
                 GameObject bullet = (GameObject)Instantiate(bulletPrefab, transform.parent.position + transform.parent.forward * 1, transform.parent.rotation);
                 bullet.GetComponent<Bullet>().damage = this.damage;
                 bullet.GetComponent<Bullet>().isExplosive = this.isExplosive;
@@ -244,7 +260,37 @@ public class Gun : MonoBehaviour
                 bullet.transform.rotation = gameObject.transform.rotation;
                 bullet.transform.Rotate(new Vector3(0, 0, 0));
                 Destroy(bullet, 5.0f);
+                }
+                else
+                {
+                        
+                    RaycastHit hit;
+                    Vector3 bulletDir = playerCamera.transform.forward;
+                    bulletDir.Normalize();
+                    bulletDir += new Vector3(Random.Range(-spread, spread) / 15, Random.Range(-spread, spread) / 15, Random.Range(-spread, spread) / 15);
+
+                    if (Physics.Raycast(playerCamera.transform.position, bulletDir, out hit, float.MaxValue))
+                    {
+                        Debug.Log(hit.transform);
+                        Debug.Log(spread);
+                        //Instantiate(debugObject, hit.point, transform.rotation);
+                        if (hit.transform.tag == "Enemy")
+                        {
+
+                            hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
+                            
+
+                        }
+                        TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
+                        tracer.startWidth = (float)(damage * 0.1);
+                        StartCoroutine(SpawnTrail(tracer, hit));
+
+                    }
+                }
+                    
             }
+            
+            
 
             audioSource.PlayOneShot(fireSound);
             cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
@@ -270,6 +316,22 @@ public class Gun : MonoBehaviour
         muzzleLight.intensity = damage * bulletsPerShot;
         yield return new WaitForSeconds(duration);
         muzzleLight.enabled = false;
+    }
+
+    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    {
+        float time = 0;
+        Vector3 startPos = trail.transform.position;
+        while (time <= 1)
+        {
+            trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
+            time += Time.deltaTime / trail.time;
+
+            yield return null;
+        }
+        trail.transform.position = hit.point;
+
+        Destroy(trail.gameObject, trail.time);
     }
     public void UpdateDisplay()
     {
