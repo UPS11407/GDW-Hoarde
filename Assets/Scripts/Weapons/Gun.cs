@@ -267,7 +267,7 @@ public class Gun : MonoBehaviour
                     RaycastHit hit;
                     Vector3 bulletDir = playerCamera.transform.forward;
                     bulletDir.Normalize();
-                    bulletDir += new Vector3(Random.Range(-spread, spread) / 15, Random.Range(-spread, spread) / 15, Random.Range(-spread, spread) / 15);
+                    bulletDir += new Vector3(Random.Range(-spread, spread) / 25, Random.Range(-spread, spread) / 25, Random.Range(-spread, spread) / 25);
 
                     if (Physics.Raycast(playerCamera.transform.position, bulletDir, out hit, float.MaxValue))
                     {
