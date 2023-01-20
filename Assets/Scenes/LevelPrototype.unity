@@ -55357,6 +55357,7 @@ MonoBehaviour:
     serializedVersion: 2
     m_Bits: 64
   cameraParent: {fileID: 1094528840}
+  enableLook: 1
 --- !u!54 &1460383302
 Rigidbody:
   m_ObjectHideFlags: 0
