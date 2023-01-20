@@ -26,6 +26,8 @@ public class PlayerMovement : MonoBehaviour
 
     public PlayerInput playerControls;
 
+    public bool enableLook = true;
+
     AudioSource audioSource;
 
     InputAction move;
@@ -108,7 +110,7 @@ public class PlayerMovement : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        DoLook(mouseSensitivity);
+        if (enableLook) DoLook(mouseSensitivity);
 
         if (Input.GetKey(KeyCode.LeftShift))
         {

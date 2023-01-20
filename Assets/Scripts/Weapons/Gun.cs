@@ -14,6 +14,7 @@ public class Gun : MonoBehaviour
     bool fireButtonPressed = false;
     bool canShoot = true;
     bool canReload = true;
+    PlayerMovement playerMovement;
 
     [SerializeField] GameObject weaponModCanvas;
 
@@ -95,9 +96,11 @@ public class Gun : MonoBehaviour
     {
         parentTransform = GetComponentInParent<Transform>();
         audioSource = GetComponent<AudioSource>();
+        playerMovement = GetComponentInParent<PlayerMovement>();
         UpdateWeaponStats();
         currentAmmo = maxAmmo;
         UpdateDisplay();
+
     }
 
     private void Update()
@@ -165,15 +168,16 @@ public class Gun : MonoBehaviour
 
     public void OpenMenu()
     {
+        playerMovement.enableLook = false;
         canShoot = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         weaponModCanvas.SetActive(true);
-
     }
 
     public void CloseMenu()
     {
+        playerMovement.enableLook = true;
         canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
