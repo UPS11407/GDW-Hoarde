@@ -12,6 +12,8 @@ public class GunStatScriptableObjects : ScriptableObject
     public float reloadDelay = 3.0f;
     public int magazineSize = 10;
     public float recoil = 1.0f;
+    
+
 
 
     
