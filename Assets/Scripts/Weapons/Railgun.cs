@@ -76,7 +76,7 @@ public class Railgun : MonoBehaviour
 
     float recoil;
 
-
+    bool initialChargeDone = false;
     bool isExplosive;
     float explosionSize;
 
@@ -105,24 +105,28 @@ public class Railgun : MonoBehaviour
     {
         if (fireButtonPressed == true)
         {
-            if (chargeTime < 100 && currentAmmo > 0)
+            if (currentAmmo > 0)
             {
                 chargeTime += railGunMod.chargeUpTimeRate * Time.deltaTime;
-            } else if (chargeTime > 100)
+            } else if (chargeTime > 100 && (railGunMod.fireMode == RailgunModScriptableObject.FireMode.single || initialChargeDone == true))
             {
                 chargeTime = 100;
             }
-            
 
-            
+            if(railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= railGunMod.initialMaxCharge)
+            {
+                Fire();
+                initialChargeDone = true;
+            }
+
 
             //Fire();
 
-            if (railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= 100)
+
+            if (railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= 100 && initialChargeDone == true)
             {
                 
                 Fire();
-                muzzleLight.enabled = false;
                 
             }
 
@@ -130,7 +134,6 @@ public class Railgun : MonoBehaviour
         {
             
             Fire();
-            muzzleLight.enabled = false;
         }
         
         if(chargeTime > 0)

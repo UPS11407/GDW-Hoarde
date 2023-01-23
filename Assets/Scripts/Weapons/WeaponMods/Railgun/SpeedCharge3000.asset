@@ -10,16 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 3cbdb15eb26b9594b86daf3aa356bcdd, type: 3}
-  m_Name: Overcharge
+  m_Name: SpeedCharge3000
   m_EditorClassIdentifier: 
   fireMode: 2
-  spreadModifier: 0.5
+  spreadModifier: 0.75
   fireDelayModifier: 0
   additionalBulletsPerShot: 0
   reloadDelayModifier: 0
-  magazineSizeModifier: 0
+  magazineSizeModifier: 20
   enablesExplosionImpact: 0
   explosionSizeIncrease: 0
   recoilModifier: -5
-  chargeUpTimeRate: 200
+  chargeUpTimeRate: 750
+  initialMaxCharge: 1000
   chargeUpModifier: 0.75

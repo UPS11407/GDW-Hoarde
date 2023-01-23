@@ -19,6 +19,7 @@ public class RailgunModScriptableObject : ScriptableObject
     public float recoilModifier = 0.0f;
 
     public float chargeUpTimeRate = 50.0f; //per second. Max charge is 100
+    public float initialMaxCharge = 500.0f; // For Full auto only
     public float chargeUpModifier = 0.0f; // 1 = 100%
 
 
