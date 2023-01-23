@@ -84,8 +84,8 @@ public class Railgun : MonoBehaviour
     float muzzleLightTime;
     float muzzleLightDuration = 0.1f;
 
-    [SerializeField] TrailRenderer bulletTracer;
-    [SerializeField] GameObject tracerStart;
+    [SerializeField] LineRenderer railLine;
+    [SerializeField] GameObject lineStart;
 
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
@@ -135,11 +135,11 @@ public class Railgun : MonoBehaviour
         
         if(chargeTime > 0)
         {
-            //muzzleLight.enabled = true;
-            //muzzleLight.intensity = 1 * (chargeTime / 100);
-            //muzzleLight.color = Color.Lerp(new Color(0,128,255,1), new Color(255,22,0,1), (chargeTime / 100));
-            Debug.Log($"FOV: {Mathf.Lerp(60, 45, chargeTime / 100)}");
-            Camera.main.fieldOfView = Mathf.Lerp(90, 60, chargeTime / 100);
+            muzzleLight.enabled = true;
+            muzzleLight.intensity = 1 * (chargeTime / 100);
+            muzzleLight.color = Color.Lerp(new Color(0,128,255,1), new Color(255,22,0,1), (chargeTime / 100));
+            //Debug.Log($"FOV: {Mathf.Lerp(60, 45, chargeTime / 100)}");
+            //Camera.main.fieldOfView = Mathf.Lerp(90, 60, chargeTime / 100);
 
         }
         
@@ -298,9 +298,9 @@ public class Railgun : MonoBehaviour
 
                     }
                     chargeTime = 0;
-                    TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
-                    tracer.startWidth = (float)(damage * 0.1);
-                    StartCoroutine(SpawnTrail(tracer, hit));
+                    LineRenderer line = Instantiate(railLine, lineStart.transform.position, Quaternion.identity, gameObject.transform);
+                    line.startWidth = (float)(damage * 0.05);
+                    StartCoroutine(SpawnLine(line, hit));
 
                 }
                 
@@ -336,20 +336,23 @@ public class Railgun : MonoBehaviour
         muzzleLight.enabled = false;
     }
 
-    IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
+    IEnumerator SpawnLine(LineRenderer line, RaycastHit hit)
     {
         float time = 0;
-        Vector3 startPos = trail.transform.position;
+        line.SetPosition(0, line.transform.position);
+        line.SetPosition(1, hit.point);
+
+        
         while (time <= 1)
         {
-            trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
-            time += Time.deltaTime / trail.time;
+            
+            time += Time.deltaTime;
 
             yield return null;
         }
-        trail.transform.position = hit.point;
+        
 
-        Destroy(trail.gameObject, trail.time);
+        Destroy(line.gameObject);
     }
     public void UpdateDisplay()
     {

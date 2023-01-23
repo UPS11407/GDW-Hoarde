@@ -12,8 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbdb15eb26b9594b86daf3aa356bcdd, type: 3}
   m_Name: Overcharge
   m_EditorClassIdentifier: 
-  fireMode: 1
-  spreadModifier: 1.5
+  fireMode: 2
+  spreadModifier: 0.5
   fireDelayModifier: 0
   additionalBulletsPerShot: 0
   reloadDelayModifier: 0
