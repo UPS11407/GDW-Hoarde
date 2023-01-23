@@ -31,15 +31,9 @@ public class PlayerMovement : MonoBehaviour
     AudioSource audioSource;
 
     InputAction move;
-    InputAction fire;
-    InputAction interact;
-    InputAction look;
-    InputAction reload;
-    InputAction swapMod;
-    InputAction heal;
-    InputAction sprint;
     InputAction jump;
-    InputAction crouch;
+    InputAction look;
+
 
     float quickFOV = 75.0f;
     bool jumping;
@@ -51,7 +45,6 @@ public class PlayerMovement : MonoBehaviour
         _col = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1.0f;
-
     }
 
     private void Awake()
@@ -61,50 +54,16 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
-        move = playerControls.Player.Move;
-        fire = playerControls.Player.Fire;
-        interact = playerControls.Player.Interact;
-        look = playerControls.Player.Look;
-        reload = playerControls.Player.Reload;
-        swapMod = playerControls.Player.SwapMod;
-        heal = playerControls.Player.Heal;
-        sprint = playerControls.Player.Sprint;
-        jump = playerControls.Player.Jump;
-        crouch = playerControls.Player.Crouch;
-
-        sprint.performed += Sprint;
-
-        //fire.performed += Fire;         <-- do firing method here
-        //interact.performed += Interact; <-- do interact method here
-        //heal.performed += Heal;         <-- do healing method here
-        //swapMod.performed += SwapMod;   <-- do swap mod method here
-        //reload.performed += Reload;     <-- do reload method here
-
-
         move.Enable();
-        fire.Enable();
-        interact.Enable();
-        look.Enable();
-        reload.Enable();
-        swapMod.Enable();
-        heal.Enable();
-        sprint.Enable();
         jump.Enable();
-        crouch.Enable();
+        look.Enable();
     }
 
     private void OnDisable()
     {
         move.Disable();
-        fire.Disable();
-        interact.Disable();
-        look.Disable();
-        reload.Disable();
-        swapMod.Disable();
-        heal.Disable();
-        sprint.Disable();
         jump.Disable();
-        crouch.Disable();
+        look.Disable();
     }
 
     // Update is called once per frame
@@ -188,11 +147,9 @@ public class PlayerMovement : MonoBehaviour
         {
             _rb.velocity = moveX + moveZ + new Vector3(0, _rb.velocity.y, 0);
         }
-
-        
     }
 
-    void Sprint(InputAction.CallbackContext context)
+    public void Sprint(InputAction.CallbackContext context)
     {
         
     }

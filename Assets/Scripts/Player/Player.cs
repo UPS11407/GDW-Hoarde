@@ -13,33 +13,9 @@ public class Player : MonoBehaviour
     public float interactRange;
     public GameObject healText;
 
-    PlayerInput playerInputs;
-    InputAction heal;
-    InputAction interact;
     public AudioSource audioPlayer;
     float healCharge;
     float currentHP;
-
-    private void Awake()
-    {
-        playerInputs = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-        heal = playerInputs.Player.Heal;
-        heal.Enable();
-        heal.performed += ctx => HealHP(maxHP * 0.3f, true);
-        interact = playerInputs.Player.Interact;
-        interact.Enable();
-        interact.performed += ctx => InteractWithObject();
-    }
-
-    private void OnDisable()
-    {
-        heal.Disable();
-        interact.Disable();
-    }
 
     void Start()
     {
@@ -141,7 +117,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Interact with closest object the player is looking at within the interact range.
     /// </summary>
-    void InteractWithObject()
+    public void InteractWithObject()
     {
         RaycastHit rayhit;
 

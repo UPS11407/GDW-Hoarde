@@ -13,8 +13,12 @@ public class PlayerControls : MonoBehaviour
     InputAction swapMod;
     InputAction heal;
     InputAction sprint;
-    public PlayerInput playerContr;
-    
+    InputAction crouch;
+
+    public PlayerMovement playerMovement { get; }
+    public PlayerInput playerContr { get; }
+    public Player player { get; }
+
 
     private void OnEnable()
     {
@@ -26,15 +30,11 @@ public class PlayerControls : MonoBehaviour
         swapMod = playerContr.Player.SwapMod;
         heal = playerContr.Player.Heal;
         sprint = playerContr.Player.Sprint;
+        crouch = playerContr.Player.Crouch;
 
-
-        //fire.performed += Fire;         <-- do firing method here
-
-        //heal.performed += Heal;         <-- do healing method here
-        //swapMod.performed += SwapMod;   <-- do swap mod method here
-        //reload.performed += Reload;     <-- do reload method here
-
-        //interact.performed += ctx => InteractWithObject();
+        interact.performed += ctx => player.InteractWithObject();
+        heal.performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
+        sprint.performed += playerMovement.Sprint;
 
         move.Enable();
         fire.Enable();
@@ -44,12 +44,20 @@ public class PlayerControls : MonoBehaviour
         swapMod.Enable();
         heal.Enable();
         sprint.Enable();
+        crouch.Enable();
 
     }
     private void OnDisable()
     {
         move.Disable();
+        fire.Disable();
         interact.Disable();
+        look.Disable();
+        reload.Disable();
+        swapMod.Disable();
+        heal.Disable();
+        sprint.Disable();
+        crouch.Disable();
     }
 
     
