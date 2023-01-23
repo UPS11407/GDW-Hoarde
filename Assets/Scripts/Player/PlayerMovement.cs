@@ -149,7 +149,7 @@ public class PlayerMovement : MonoBehaviour
         }
     }
 
-    public void Sprint(InputAction.CallbackContext context)
+    public void Sprint(InputAction.CallbackContext context, bool keyDown)
     {
         
     }
