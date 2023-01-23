@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
-public class Pause : MonoBehaviour
+public class PauseMenu : MonoBehaviour
 {
     public GameObject menu;
     public GameObject rifle;

@@ -27,28 +27,14 @@ public class Gun : MonoBehaviour
     [SerializeField] WeaponModScriptableObject magMod;
     [SerializeField] WeaponModScriptableObject ammoMod;
 
-    public enum CurrentWeapon
-    {
-        pistol = 0,
-        rifle = 1
-    };
-
-    public CurrentWeapon currentWeapon;
-
     private AudioSource audioSource;
     [SerializeField] AudioClip fireSound;
     [SerializeField] AudioClip reloadSound;
     [SerializeField] AudioClip emptySound;
 
-
-
-    Transform parentTransform;
-
     [SerializeField] Camera playerCamera;
 
     [SerializeField] CameraShake cameraShake;
-    float shakeDuration;
-    float shakeMagnitude;
     [SerializeField] CameraRecoil cameraRecoil;
 
     [SerializeField] GameObject bulletPrefab;
@@ -94,7 +80,6 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
-        parentTransform = GetComponentInParent<Transform>();
         audioSource = GetComponent<AudioSource>();
         playerMovement = GetComponentInParent<PlayerMovement>();
         UpdateWeaponStats();
@@ -126,9 +111,11 @@ public class Gun : MonoBehaviour
         fire.Enable();
         fire.started += ctx => fireButtonPressed = true;
         fire.canceled += ctx => fireButtonPressed = false;
+
         reload = playerContr.Player.Reload;
         reload.Enable();
         reload.performed += ctx => RunReload();
+
         swapMod = playerContr.Player.SwapMod;
         swapMod.Enable();
         swapMod.started += ctx => OpenMenu();
@@ -136,8 +123,6 @@ public class Gun : MonoBehaviour
         swapWeapon = playerContr.Player.SwapWeapon;
         swapWeapon.Enable();
         swapWeapon.performed += ctx => SwapWeapon();
-        
-
     }
     private void OnDisable()
     {
@@ -233,8 +218,6 @@ public class Gun : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        shakeMagnitude = damage * bulletsPerShot * 0.5f;
-        shakeDuration = shootDelay * 0.25f;
         //currentAmmo = maxAmmo;
         shootTime = Time.time + modDelay;
 
