@@ -130,10 +130,14 @@ public class Railgun : MonoBehaviour
                 
             }
 
-        } else if (fireButtonPressed == false && chargeTime > 0)
+        } else if (fireButtonPressed == false)
         {
+            initialChargeDone = false;
+            if (chargeTime > 0)
+            {
+                Fire();
+            }
             
-            Fire();
         }
         
         if(chargeTime > 0)
@@ -147,6 +151,8 @@ public class Railgun : MonoBehaviour
         }
         
     }
+
+    
 
     private void Awake()
     {
