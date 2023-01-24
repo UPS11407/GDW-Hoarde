@@ -6,12 +6,12 @@ using UnityEngine.InputSystem;
 public class PauseMenu : MonoBehaviour
 {
     public GameObject menu;
-    public GameObject rifle;
-    public GameObject pistol;
     public GameObject player;
+    public WeaponManager weaponManager;
 
     PlayerInput playerInputs;
     InputAction pause;
+    ControlsMenu controlsMenu;
 
     private void Awake()
     {
@@ -42,14 +42,16 @@ public class PauseMenu : MonoBehaviour
         }
     }
 
-    void OpenMenu()
+    public void OpenMenu()
     {
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         menu.SetActive(true);
         Time.timeScale = 0;
-        rifle.GetComponent<Gun>().enabled = false;
-        pistol.GetComponent<Gun>().enabled = false;
+        foreach(Gun guns in weaponManager.guns)
+        {
+            guns.enabled = false;
+        }
         player.GetComponent<PlayerMovement>().enabled = false;
     }
 
@@ -59,8 +61,17 @@ public class PauseMenu : MonoBehaviour
         Cursor.visible = false;
         menu.SetActive(false);
         Time.timeScale = 1.0f;
-        rifle.GetComponent<Gun>().enabled = true;
-        pistol.GetComponent<Gun>().enabled = true;
+        foreach (Gun guns in weaponManager.guns)
+        {
+            guns.enabled = true;
+        }
         player.GetComponent<PlayerMovement>().enabled = true;
+    }
+
+    public void OpenControlsMenu()
+    {
+        CloseMenu();
+
+        controlsMenu.OpenMenu();
     }
 }

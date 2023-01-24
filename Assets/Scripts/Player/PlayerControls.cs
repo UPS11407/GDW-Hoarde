@@ -12,10 +12,10 @@ public class PlayerControls : MonoBehaviour
     InputAction crouch;
     InputAction swapWeapon;
 
-    public PlayerMovement playerMovement;
-    public PlayerInput playerContr;
-    public Player player;
-    public WeaponManager weaponManager;
+    PlayerMovement playerMovement;
+    PlayerInput playerContr;
+    Player player;
+    WeaponManager weaponManager;
 
     private void Start()
     {
