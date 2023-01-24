@@ -111,18 +111,6 @@ public class Gun : MonoBehaviour
         fire.Enable();
         fire.started += ctx => fireButtonPressed = true;
         fire.canceled += ctx => fireButtonPressed = false;
-
-        reload = playerContr.Player.Reload;
-        reload.Enable();
-        reload.performed += ctx => RunReload();
-
-        swapMod = playerContr.Player.SwapMod;
-        swapMod.Enable();
-        swapMod.started += ctx => OpenMenu();
-        
-        swapWeapon = playerContr.Player.SwapWeapon;
-        swapWeapon.Enable();
-        swapWeapon.performed += ctx => SwapWeapon();
     }
     private void OnDisable()
     {
@@ -132,7 +120,7 @@ public class Gun : MonoBehaviour
         swapWeapon.Disable();
     }
 
-    void RunReload()
+    public void RunReload()
     {
         if (canReload)
         {
@@ -140,16 +128,17 @@ public class Gun : MonoBehaviour
         }
     }
 
-    void SwapWeapon()
+    public void ToggleSelf(bool toggle)
     {
-        //  Debug.Log("Switch");
-        otherGun.SetActive(true);
-        otherGun.GetComponent<Gun>().enabled = true;
-        otherGun.GetComponent<Gun>().UpdateDisplay();
-        gameObject.SetActive(false);
-        gameObject.GetComponent<Gun>().enabled = false;
+        gameObject.SetActive(toggle);
+        gameObject.GetComponent<Gun>().enabled = toggle;
     }
     
+    public void ToggleMenu()
+    {
+        if (weaponModCanvas.activeSelf) CloseMenu();
+        else OpenMenu();
+    }
 
     public void OpenMenu()
     {
@@ -226,6 +215,11 @@ public class Gun : MonoBehaviour
         //Debug.Log("Ammo " + maxAmmo);
     }
 
+    public void ToggleFire(bool toggle)
+    {
+        fireButtonPressed = toggle;
+    }
+
     public void Fire()
     {
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
@@ -282,11 +276,6 @@ public class Gun : MonoBehaviour
             audioSource.PlayOneShot(fireSound);
             cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
             StartCoroutine(muzzleFlash(0.05f));
-
-
-            //uncomment when tuned
-
-            //StartCoroutine(cameraShake.Shake(shakeDuration, shakeMagnitude));
 
             UpdateDisplay();
 

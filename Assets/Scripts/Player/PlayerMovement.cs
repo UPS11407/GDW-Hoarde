@@ -54,6 +54,10 @@ public class PlayerMovement : MonoBehaviour
 
     private void OnEnable()
     {
+        move = playerControls.Player.Move;
+        jump = playerControls.Player.Jump;
+        look = playerControls.Player.Look;
+
         move.Enable();
         jump.Enable();
         look.Enable();

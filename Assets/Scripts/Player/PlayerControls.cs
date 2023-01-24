@@ -10,11 +10,19 @@ public class PlayerControls : MonoBehaviour
     InputAction heal;
     InputAction sprint;
     InputAction crouch;
+    InputAction swapWeapon;
 
-    public PlayerMovement playerMovement { get; }
-    public PlayerInput playerContr { get; }
-    public Player player { get; }
+    public PlayerMovement playerMovement;
+    public PlayerInput playerContr;
+    public Player player;
+    public WeaponManager weaponManager;
 
+    private void Start()
+    {
+        playerMovement = GetComponent<PlayerMovement>();
+        player = GetComponent<Player>();
+        weaponManager = GetComponent<WeaponManager>();
+    }
 
     private void OnEnable()
     {
@@ -25,15 +33,19 @@ public class PlayerControls : MonoBehaviour
         heal = playerContr.Player.Heal;
         sprint = playerContr.Player.Sprint;
         crouch = playerContr.Player.Crouch;
+        swapWeapon = playerContr.Player.SwapWeapon;
+
+        
 
         //fire
         interact.performed += ctx => player.InteractWithObject();
-        //reload
-        //swapMod
+        reload.performed += ctx => weaponManager.Reload();
+        swapMod.performed += ctx => ToggleMenu();
         heal.performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
         sprint.performed += ctx => playerMovement.Sprint(ctx, true);
         sprint.canceled += ctx => playerMovement.Sprint(ctx, false);
         //crouch
+        swapWeapon.performed += ctx => weaponManager.SwapWeapon();
 
         fire.Enable();
         interact.Enable();
@@ -42,6 +54,7 @@ public class PlayerControls : MonoBehaviour
         heal.Enable();
         sprint.Enable();
         crouch.Enable();
+        swapWeapon.Enable();
     }
 
     private void OnDisable()
@@ -53,5 +66,11 @@ public class PlayerControls : MonoBehaviour
         heal.Disable();
         sprint.Disable();
         crouch.Disable();
+        swapWeapon.Disable();
+    }
+
+    void ToggleMenu()
+    {
+
     }
 }

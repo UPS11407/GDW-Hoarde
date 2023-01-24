@@ -16657,7 +16657,6 @@ MonoBehaviour:
   gripMod: {fileID: 11400000, guid: 0dce517640311314eb6d489f4f21042c, type: 2}
   magMod: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
   ammoMod: {fileID: 11400000, guid: 14e47fb06084eef4aa0012b44d4cbe30, type: 2}
-  currentWeapon: 0
   fireSound: {fileID: 8300000, guid: 9237137918a06444fa57aafc05e2bb7b, type: 3}
   reloadSound: {fileID: 8300000, guid: 4cbb391129be9a249907d8724946f94d, type: 3}
   emptySound: {fileID: 8300000, guid: 3984f49eeee2c1543b5ca5ab0534d51d, type: 3}
@@ -42698,7 +42697,6 @@ MonoBehaviour:
   gripMod: {fileID: 11400000, guid: 0dce517640311314eb6d489f4f21042c, type: 2}
   magMod: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
   ammoMod: {fileID: 11400000, guid: 14e47fb06084eef4aa0012b44d4cbe30, type: 2}
-  currentWeapon: 1
   fireSound: {fileID: 8300000, guid: 26b582db48352e546b516b342df041e2, type: 3}
   reloadSound: {fileID: 8300000, guid: 4cbb391129be9a249907d8724946f94d, type: 3}
   emptySound: {fileID: 8300000, guid: 3984f49eeee2c1543b5ca5ab0534d51d, type: 3}
@@ -56473,6 +56471,8 @@ GameObject:
   - component: {fileID: 1460383305}
   - component: {fileID: 1460383306}
   - component: {fileID: 1460383307}
+  - component: {fileID: 1460383309}
+  - component: {fileID: 1460383308}
   m_Layer: 9
   m_Name: Player
   m_TagString: Player
@@ -56768,6 +56768,33 @@ MonoBehaviour:
   frequency: 25
   _camera: {fileID: 475529209}
   cameraParent: {fileID: 1094528840}
+--- !u!114 &1460383308
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460383296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 19228e97f23cae24e8cab26133ed60ee, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1460383309
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460383296}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 360f53c860fd8cb4c98042d334c467a1, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerMovement: {fileID: 1460383301}
+  player: {fileID: 1460383303}
+  gun: {fileID: 0}
 --- !u!1 &1460857405
 GameObject:
   m_ObjectHideFlags: 0

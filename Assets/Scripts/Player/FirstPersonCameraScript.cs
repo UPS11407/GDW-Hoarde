@@ -12,6 +12,7 @@ public class FirstPersonCameraScript : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
     }
+    /*
     private void Update()
     {
         if (transform.parent.GetComponent<PlayerControls>().speed != transform.parent.GetComponent<PlayerControls>().originalSpeed)
@@ -24,6 +25,7 @@ public class FirstPersonCameraScript : MonoBehaviour
 
         }
     }
+    */
     // Update is called once per frame
     void FixedUpdate()
     {
