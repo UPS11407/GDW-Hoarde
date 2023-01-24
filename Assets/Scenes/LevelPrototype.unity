@@ -16653,6 +16653,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponModCanvas: {fileID: 550569253}
   gunStats: {fileID: 11400000, guid: 9b153a9d97511014ebe99403ffd875a4, type: 2}
+  railGunMod: {fileID: 11400000, guid: a2dbc38873dbae5448c78205859d4a00, type: 2}
   barrelMod: {fileID: 11400000, guid: 04ea1a05f062b28459a5339d71ebc875, type: 2}
   gripMod: {fileID: 11400000, guid: 0dce517640311314eb6d489f4f21042c, type: 2}
   magMod: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
@@ -16668,6 +16669,7 @@ MonoBehaviour:
   currentAmmoDisplay: {fileID: 272430197}
   maxAmmoDisplay: {fileID: 592402395}
   muzzleLight: {fileID: 1994481301}
+  railLine: {fileID: 0}
   bulletTracer: {fileID: 8016567771343347392, guid: 5bee1a0a9d2750e49bc3c4a94999a508, type: 3}
   tracerStart: {fileID: 1949781342}
 --- !u!82 &526765646
@@ -42693,6 +42695,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   weaponModCanvas: {fileID: 1839018301}
   gunStats: {fileID: 11400000, guid: b6b6dd88a23255644ba1a304b376b98b, type: 2}
+  railGunMod: {fileID: 11400000, guid: a2dbc38873dbae5448c78205859d4a00, type: 2}
   barrelMod: {fileID: 11400000, guid: 0fe75045cfd033648973c53c8288db9a, type: 2}
   gripMod: {fileID: 11400000, guid: 0dce517640311314eb6d489f4f21042c, type: 2}
   magMod: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
@@ -42708,6 +42711,7 @@ MonoBehaviour:
   currentAmmoDisplay: {fileID: 272430197}
   maxAmmoDisplay: {fileID: 592402395}
   muzzleLight: {fileID: 1521201594}
+  railLine: {fileID: 0}
   bulletTracer: {fileID: 8016567771343347392, guid: 5bee1a0a9d2750e49bc3c4a94999a508, type: 3}
   tracerStart: {fileID: 11490597}
 --- !u!82 &809864636
@@ -51128,6 +51132,7 @@ GameObject:
   - component: {fileID: 1174487368}
   - component: {fileID: 1174487370}
   - component: {fileID: 1174487369}
+  - component: {fileID: 1174487371}
   m_Layer: 10
   m_Name: Railgun
   m_TagString: Untagged
@@ -51161,7 +51166,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1174487367}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 57d7836b304d8ef4785b1337de1ec3e3, type: 3}
   m_Name: 
@@ -51280,6 +51285,39 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!114 &1174487371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1174487367}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3249970fbe68d444d872d92b163d7c2d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  weaponModCanvas: {fileID: 330082352}
+  gunStats: {fileID: 11400000, guid: 0c764f13f29c39d4f8344d045c2e569f, type: 2}
+  railGunMod: {fileID: 11400000, guid: 9d922dc027c172343a67a6ced6bf0977, type: 2}
+  barrelMod: {fileID: 11400000, guid: 2e3390782f988674eb83098cfa7e8420, type: 2}
+  gripMod: {fileID: 11400000, guid: 2e3390782f988674eb83098cfa7e8420, type: 2}
+  magMod: {fileID: 11400000, guid: 2e3390782f988674eb83098cfa7e8420, type: 2}
+  ammoMod: {fileID: 11400000, guid: 2e3390782f988674eb83098cfa7e8420, type: 2}
+  fireSound: {fileID: 8300000, guid: 26b582db48352e546b516b342df041e2, type: 3}
+  reloadSound: {fileID: 8300000, guid: 4cbb391129be9a249907d8724946f94d, type: 3}
+  emptySound: {fileID: 8300000, guid: 3984f49eeee2c1543b5ca5ab0534d51d, type: 3}
+  playerCamera: {fileID: 475529208}
+  cameraShake: {fileID: 475529210}
+  cameraRecoil: {fileID: 475529211}
+  bulletPrefab: {fileID: 919132149155446097, guid: cfcfb9a2c6fae9a45a261b3a2b31eac9, type: 3}
+  otherGun: {fileID: 0}
+  currentAmmoDisplay: {fileID: 272430197}
+  maxAmmoDisplay: {fileID: 592402395}
+  muzzleLight: {fileID: 383545755}
+  railLine: {fileID: -6828216985687236538, guid: 879b169739deae547b6fab2e6297a04a, type: 3}
+  bulletTracer: {fileID: 0}
+  tracerStart: {fileID: 625267382}
 --- !u!1 &1176376696
 GameObject:
   m_ObjectHideFlags: 0
@@ -56780,6 +56818,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 19228e97f23cae24e8cab26133ed60ee, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  guns: []
+  gunInventory: 0000000000000000
 --- !u!114 &1460383309
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -56794,7 +56834,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   playerMovement: {fileID: 1460383301}
   player: {fileID: 1460383303}
-  gun: {fileID: 0}
+  weaponManager: {fileID: 0}
 --- !u!1 &1460857405
 GameObject:
   m_ObjectHideFlags: 0

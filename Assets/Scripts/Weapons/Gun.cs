@@ -22,6 +22,7 @@ public class Gun : MonoBehaviour
     //public GunStatScriptableObjects rifleStats;
 
     [SerializeField] GunStatScriptableObjects gunStats;
+    [SerializeField] RailgunModScriptableObject railGunMod;
     [SerializeField] WeaponModScriptableObject barrelMod;
     [SerializeField] WeaponModScriptableObject gripMod;
     [SerializeField] WeaponModScriptableObject magMod;
@@ -68,10 +69,15 @@ public class Gun : MonoBehaviour
     bool isExplosive;
     float explosionSize;
 
+    bool isCharged = false;
+    float chargeTime;
+    bool initialChargeDone = false;
+
     [SerializeField] Light muzzleLight;
     float muzzleLightTime;
     float muzzleLightDuration = 0.1f;
 
+    [SerializeField] LineRenderer railLine;
     [SerializeField] TrailRenderer bulletTracer;
     [SerializeField] GameObject tracerStart;
 
@@ -90,14 +96,63 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        if (fireButtonPressed == true)
+        if (isCharged)
+        {
+            if (fireButtonPressed == true)
+            {
+                if (currentAmmo > 0)
+                {
+                    chargeTime += railGunMod.chargeUpTimeRate * Time.deltaTime;
+                }
+                else if (chargeTime > 100 && (railGunMod.fireMode == RailgunModScriptableObject.FireMode.single || initialChargeDone == true))
+                {
+                    chargeTime = 100;
+                }
+
+                if (railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= railGunMod.initialMaxCharge)
+                {
+                    Fire();
+                    initialChargeDone = true;
+                }
+
+
+
+                if (railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= 100 && initialChargeDone == true)
+                {
+
+                    Fire();
+
+                }
+
+            }
+            else if (fireButtonPressed == false)
+            {
+                initialChargeDone = false;
+                if (chargeTime > 0)
+                {
+                    Fire();
+                }
+
+            }
+            if (chargeTime > 0)
+            {
+                muzzleLight.enabled = true;
+                muzzleLight.intensity = 1 * (chargeTime / 100);
+                muzzleLight.color = Color.Lerp(new Color(0, 128, 255, 1), new Color(255, 22, 0, 1), (chargeTime / 100));
+                //Debug.Log($"FOV: {Mathf.Lerp(60, 45, chargeTime / 100)}");
+                //Camera.main.fieldOfView = Mathf.Lerp(90, 60, chargeTime / 100);
+
+            }
+        }
+        else if(fireButtonPressed == true)
         {
             Fire();
-            if(gripMod.fireMode == WeaponModScriptableObject.FireMode.single)
+            if (gripMod.fireMode == WeaponModScriptableObject.FireMode.single)
             {
                 fireButtonPressed = false;
             }
         }
+
     }
 
     private void Awake()
@@ -161,7 +216,7 @@ public class Gun : MonoBehaviour
 
     public void UpdateWeaponStats()
     {
-        maxAmmo = gunStats.magazineSize + barrelMod.magazineSizeModifier + gripMod.magazineSizeModifier + ammoMod.magazineSizeModifier + magMod.magazineSizeModifier;
+        maxAmmo = gunStats.magazineSize + barrelMod.magazineSizeModifier + gripMod.magazineSizeModifier + ammoMod.magazineSizeModifier + magMod.magazineSizeModifier + railGunMod.magazineSizeModifier;
         if (maxAmmo <= 0)
         {
             maxAmmo = 1;
@@ -175,27 +230,35 @@ public class Gun : MonoBehaviour
 
         bulletsPerShot = gunStats.bulletsPerShot + barrelMod.additionalBulletsPerShot + gripMod.additionalBulletsPerShot + ammoMod.additionalBulletsPerShot + magMod.additionalBulletsPerShot;
 
-        spread = gunStats.spread + barrelMod.spreadModifier + gripMod.spreadModifier + ammoMod.spreadModifier + magMod.spreadModifier;
+        spread = gunStats.spread + barrelMod.spreadModifier + gripMod.spreadModifier + ammoMod.spreadModifier + magMod.spreadModifier + railGunMod.spreadModifier;
         if (spread < 0)
         {
             spread = 0;
         }
 
-        recoil = gunStats.recoil + barrelMod.recoilModifier + gripMod.recoilModifier + ammoMod.recoilModifier + magMod.recoilModifier;
+        recoil = gunStats.recoil + barrelMod.recoilModifier + gripMod.recoilModifier + ammoMod.recoilModifier + magMod.recoilModifier + railGunMod.recoilModifier;
 
         damage = gunStats.damage + (gunStats.damage * barrelMod.damageModifier) + (gunStats.damage * gripMod.damageModifier) + (gunStats.damage * ammoMod.damageModifier) + (gunStats.damage * magMod.damageModifier);
 
-        explosionSize = barrelMod.explosionSizeIncrease + magMod.explosionSizeIncrease + ammoMod.explosionSizeIncrease + gripMod.explosionSizeIncrease;
+        explosionSize = barrelMod.explosionSizeIncrease + magMod.explosionSizeIncrease + ammoMod.explosionSizeIncrease + gripMod.explosionSizeIncrease + railGunMod.explosionSizeIncrease;
 
-        if (barrelMod.enablesExplosionImpact || magMod.enablesExplosionImpact || ammoMod.enablesExplosionImpact || gripMod.enablesExplosionImpact)
+        if (barrelMod.enablesExplosionImpact || magMod.enablesExplosionImpact || ammoMod.enablesExplosionImpact || gripMod.enablesExplosionImpact || railGunMod.enablesExplosionImpact)
         {
             isExplosive = true;
         } else
         {
             isExplosive = false;
         }
+        
+        if (gunStats.isCharged)
+        {
+            isCharged = true;
+        } else
+        {
+            isCharged = false;
+        }
 
-        if (ammoMod.becomeProjectile || gunStats)
+        if (ammoMod.becomeProjectile)
         {
             isProjectile = true;
         } else
@@ -255,16 +318,37 @@ public class Gun : MonoBehaviour
                         Debug.Log(hit.transform);
                         Debug.Log(spread);
                         //Instantiate(debugObject, hit.point, transform.rotation);
-                        if (hit.transform.tag == "Enemy")
+                        if (isCharged)
                         {
+                            if (hit.transform.tag == "Enemy")
+                            {
 
-                            hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
-                            
+                                hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage + damage * (chargeTime / 100) * railGunMod.chargeUpModifier);
+                                //Debug.Log($"Added Damage: {damage * (chargeTime / 100) * railGunMod.chargeUpModifier}");
+                                //Debug.Log($"Charge: { (chargeTime / 100)}");
+                                //Debug.Log($"railGunMod.chargeUpModifier: { railGunMod.chargeUpModifier}");
 
+
+                            }
+                            chargeTime = 0;
+                            LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity, gameObject.transform);
+                            line.startWidth = (float)(damage * 0.05);
+                            StartCoroutine(SpawnLine(line, hit));
+
+                        } else
+                        {
+                            if (hit.transform.tag == "Enemy")
+                            {
+
+                                hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
+
+
+                            }
+                            TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
+                            tracer.startWidth = (float)(damage * 0.1);
+                            StartCoroutine(SpawnTrail(tracer, hit));
                         }
-                        TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
-                        tracer.startWidth = (float)(damage * 0.1);
-                        StartCoroutine(SpawnTrail(tracer, hit));
+                        
 
                     }
                 }
@@ -292,6 +376,25 @@ public class Gun : MonoBehaviour
         muzzleLight.intensity = damage * bulletsPerShot;
         yield return new WaitForSeconds(duration);
         muzzleLight.enabled = false;
+    }
+
+    IEnumerator SpawnLine(LineRenderer line, RaycastHit hit)
+    {
+        float time = 0;
+        line.SetPosition(0, line.transform.position);
+        line.SetPosition(1, hit.point);
+
+
+        while (time <= 1)
+        {
+
+            time += Time.deltaTime;
+
+            yield return null;
+        }
+
+
+        Destroy(line.gameObject);
     }
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
