@@ -5,8 +5,13 @@ using UnityEngine;
 public class WeaponManager : MonoBehaviour
 {
     public List<Gun> guns;
-    int activeGun;
+    public int activeGun;
     public int[] gunInventory = new int[2];
+
+    private void Start()
+    {
+        Debug.Log(guns[activeGun].gameObject.name);
+    }
 
     public int GetActiveGun()
     {
@@ -28,8 +33,14 @@ public class WeaponManager : MonoBehaviour
         guns[activeGun].ToggleFire(fire);
     }
 
+    public void ToggleFireButton(bool toggle)
+    {
+        guns[activeGun].ToggleFireButton(toggle);
+    }
+
     public void SwapWeapon()
     {
+        Debug.Log("Hi");
         if (activeGun == gunInventory[0])
         {
             activeGun = gunInventory[1];

@@ -91,7 +91,6 @@ public class Gun : MonoBehaviour
         UpdateWeaponStats();
         currentAmmo = maxAmmo;
         UpdateDisplay();
-
     }
 
     private void Update()
@@ -162,17 +161,16 @@ public class Gun : MonoBehaviour
 
     private void OnEnable()
     {
-        fire = playerContr.Player.Fire;
-        fire.Enable();
-        fire.started += ctx => fireButtonPressed = true;
-        fire.canceled += ctx => fireButtonPressed = false;
+
     }
     private void OnDisable()
     {
         fire.Disable();
-        reload.Disable();
-        swapMod.Disable();
-        swapWeapon.Disable();
+    }
+
+    public void ToggleFireButton(bool toggle)
+    {
+        fireButtonPressed = toggle;
     }
 
     public void RunReload()

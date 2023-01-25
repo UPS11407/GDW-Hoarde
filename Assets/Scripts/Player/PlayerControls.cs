@@ -13,9 +13,14 @@ public class PlayerControls : MonoBehaviour
     InputAction swapWeapon;
 
     PlayerMovement playerMovement;
-    PlayerInput playerContr;
+    public PlayerInput playerContr;
     Player player;
     WeaponManager weaponManager;
+
+    private void Awake()
+    {
+        playerContr = new PlayerInput();
+    }
 
     private void Start()
     {
@@ -35,17 +40,7 @@ public class PlayerControls : MonoBehaviour
         crouch = playerContr.Player.Crouch;
         swapWeapon = playerContr.Player.SwapWeapon;
 
-        
 
-        //fire
-        interact.performed += ctx => player.InteractWithObject();
-        reload.performed += ctx => weaponManager.Reload();
-        swapMod.performed += ctx => ToggleMenu();
-        heal.performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        sprint.performed += ctx => playerMovement.Sprint(ctx, true);
-        sprint.canceled += ctx => playerMovement.Sprint(ctx, false);
-        //crouch
-        swapWeapon.performed += ctx => weaponManager.SwapWeapon();
 
         fire.Enable();
         interact.Enable();
@@ -55,6 +50,19 @@ public class PlayerControls : MonoBehaviour
         sprint.Enable();
         crouch.Enable();
         swapWeapon.Enable();
+
+        fire.started += ctx => weaponManager.ToggleFire(true);
+        fire.canceled += ctx => weaponManager.ToggleFire(false);
+        interact.performed += ctx => player.InteractWithObject();
+        reload.performed += ctx => weaponManager.Reload();
+        swapMod.performed += ctx => ToggleMenu();
+        heal.performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
+        sprint.performed += ctx => playerMovement.Sprint(ctx, true);
+        sprint.canceled += ctx => playerMovement.Sprint(ctx, false);
+        //crouch
+        swapWeapon.performed += ctx => weaponManager.SwapWeapon();
+
+
     }
 
     private void OnDisable()
