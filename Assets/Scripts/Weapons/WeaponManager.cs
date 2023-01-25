@@ -40,7 +40,6 @@ public class WeaponManager : MonoBehaviour
 
     public void SwapWeapon()
     {
-        Debug.Log("Hi");
         if (activeGun == gunInventory[0])
         {
             activeGun = gunInventory[1];
