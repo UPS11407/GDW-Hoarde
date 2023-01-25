@@ -248,7 +248,7 @@ public class Gun : MonoBehaviour
         {
             //Play Shoot Sound
             shootTime = Time.time;
-            UseAmmo(currentAmmo);
+            currentAmmo--;
             
             
             for (int i = 0; i < bulletsPerShot; i++)
@@ -404,11 +404,7 @@ public class Gun : MonoBehaviour
         UpdateDisplay();
     }
 
-    public void UseAmmo(int ammo)
-    {
-        //bullets[ammo].gameObject.SetActive(false);
-        currentAmmo--;
-    }
+    
 
     public void changeBarrel(WeaponModScriptableObject mod)
     {
