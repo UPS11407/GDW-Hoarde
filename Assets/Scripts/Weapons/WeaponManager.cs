@@ -35,15 +35,18 @@ public class WeaponManager : MonoBehaviour
 
     public void SwapWeapon()
     {
-        if (activeGun == gunInventory[0])
+        if (guns[activeGun].canReload)
         {
-            activeGun = gunInventory[1];
-            DoWeaponSwap(gunInventory[0], gunInventory[1]);
-        }
-        else
-        {
-            activeGun = gunInventory[0];
-            DoWeaponSwap(gunInventory[1], gunInventory[0]);
+            if (activeGun == gunInventory[0])
+            {
+                activeGun = gunInventory[1];
+                DoWeaponSwap(gunInventory[0], gunInventory[1]);
+            }
+            else
+            {
+                activeGun = gunInventory[0];
+                DoWeaponSwap(gunInventory[1], gunInventory[0]);
+            }
         }
     }
 
