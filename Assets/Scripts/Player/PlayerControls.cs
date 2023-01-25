@@ -13,20 +13,16 @@ public class PlayerControls : MonoBehaviour
     InputAction swapWeapon;
 
     PlayerMovement playerMovement;
-    public PlayerInput playerContr;
+    PlayerInput playerContr;
     Player player;
     WeaponManager weaponManager;
-
-    private void Awake()
-    {
-        playerContr = new PlayerInput();
-    }
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
+        playerContr = playerMovement.playerControls;
     }
 
     private void OnEnable()
@@ -77,8 +73,28 @@ public class PlayerControls : MonoBehaviour
         swapWeapon.Disable();
     }
 
-    void ToggleMenu()
+    public void ToggleMenu()
     {
+        if (weaponModCanvas.activeSelf) CloseMenu();
+        else OpenMenu();
+    }
 
+    public void OpenMenu()
+    {
+        playerMovement.enableLook = false;
+        weaponManager.guns[weaponManager.activeGun].canShoot = false;
+        Cursor.visible = true;
+        Cursor.lockState = CursorLockMode.Confined;
+        weaponModCanvas.SetActive(true);
+    }
+
+    public void CloseMenu()
+    {
+        playerMovement.enableLook = true;
+        weaponManager.guns[weaponManager.activeGun].canShoot = true;
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.None;
+        weaponModCanvas.SetActive(false);
+        UpdateWeaponStats();
     }
 }

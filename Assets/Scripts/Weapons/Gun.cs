@@ -6,15 +6,9 @@ using TMPro;
 
 public class Gun : MonoBehaviour
 {
-    InputAction fire;
-    InputAction reload;
-    InputAction swapMod;
-    InputAction swapWeapon;
-    public PlayerInput playerContr;
     bool fireButtonPressed = false;
-    bool canShoot = true;
+    public bool canShoot = true;
     bool canReload = true;
-    PlayerMovement playerMovement;
 
     [SerializeField] GameObject weaponModCanvas;
 
@@ -87,7 +81,6 @@ public class Gun : MonoBehaviour
     void Start()
     {
         audioSource = GetComponent<AudioSource>();
-        playerMovement = GetComponentInParent<PlayerMovement>();
         UpdateWeaponStats();
         currentAmmo = maxAmmo;
         UpdateDisplay();
@@ -154,20 +147,6 @@ public class Gun : MonoBehaviour
 
     }
 
-    private void Awake()
-    {
-        playerContr = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-
-    }
-    private void OnDisable()
-    {
-        fire.Disable();
-    }
-
     public void ToggleFireButton(bool toggle)
     {
         fireButtonPressed = toggle;
@@ -187,30 +166,7 @@ public class Gun : MonoBehaviour
         gameObject.GetComponent<Gun>().enabled = toggle;
     }
     
-    public void ToggleMenu()
-    {
-        if (weaponModCanvas.activeSelf) CloseMenu();
-        else OpenMenu();
-    }
 
-    public void OpenMenu()
-    {
-        playerMovement.enableLook = false;
-        canShoot = false;
-        Cursor.visible = true;
-        Cursor.lockState = CursorLockMode.Confined;
-        weaponModCanvas.SetActive(true);
-    }
-
-    public void CloseMenu()
-    {
-        playerMovement.enableLook = true;
-        canShoot = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.None;
-        weaponModCanvas.SetActive(false);
-        UpdateWeaponStats();
-    }
 
     public void UpdateWeaponStats()
     {
