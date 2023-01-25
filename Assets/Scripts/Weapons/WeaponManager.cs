@@ -8,11 +8,6 @@ public class WeaponManager : MonoBehaviour
     public int activeGun;
     public int[] gunInventory = new int[2];
 
-    private void Start()
-    {
-        Debug.Log(guns[activeGun].gameObject.name);
-    }
-
     public int GetActiveGun()
     {
         return activeGun;
