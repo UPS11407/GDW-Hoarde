@@ -9,6 +9,7 @@ public class Gun : MonoBehaviour
     bool fireButtonPressed = false;
     public bool canShoot = true;
     public bool canReload = true;
+    public bool canSwap = true;
 
     public GameObject weaponModCanvas;
 

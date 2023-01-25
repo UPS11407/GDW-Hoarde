@@ -19,8 +19,6 @@ public class PlayerControls : MonoBehaviour
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
 
-    [SerializeField] GameObject weaponModCanvas;
-
     private void Awake()
     {
         playerContr = new PlayerInput();

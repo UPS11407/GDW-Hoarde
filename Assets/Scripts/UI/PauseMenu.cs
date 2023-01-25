@@ -31,6 +31,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 0;
         foreach(Gun guns in weaponManager.guns)
         {
+            guns.canSwap = false;
             guns.enabled = false;
         }
         player.GetComponent<PlayerMovement>().enabled = false;
@@ -44,6 +45,7 @@ public class PauseMenu : MonoBehaviour
         Time.timeScale = 1.0f;
         foreach (Gun guns in weaponManager.guns)
         {
+            guns.canSwap = true;
             guns.enabled = true;
         }
         player.GetComponent<PlayerMovement>().enabled = true;
