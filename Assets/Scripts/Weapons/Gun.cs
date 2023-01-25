@@ -10,7 +10,7 @@ public class Gun : MonoBehaviour
     public bool canShoot = true;
     bool canReload = true;
 
-    [SerializeField] GameObject weaponModCanvas;
+    public GameObject weaponModCanvas;
 
     //public GunStatScriptableObjects pistolStats;
     //public GunStatScriptableObjects rifleStats;
@@ -145,6 +145,11 @@ public class Gun : MonoBehaviour
             }
         }
 
+    }
+
+    public void ToggleWeaponModCanvas(bool toggle)
+    {
+        weaponModCanvas.SetActive(toggle);
     }
 
     public void ToggleFireButton(bool toggle)

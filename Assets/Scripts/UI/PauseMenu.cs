@@ -9,28 +9,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject player;
     public WeaponManager weaponManager;
 
-    PlayerInput playerInputs;
-    InputAction pause;
     ControlsMenu controlsMenu;
 
-    private void Awake()
-    {
-        playerInputs = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-        pause = playerInputs.Player.Pause;
-        pause.Enable();
-        pause.performed += ctx => RunPause();
-    }
-
-    private void OnDisable()
-    {
-        pause.Disable();
-    }
-
-    void RunPause()
+    public void RunPause()
     {
         if(menu.activeInHierarchy == true)
         {

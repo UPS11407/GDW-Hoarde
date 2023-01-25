@@ -11,18 +11,26 @@ public class PlayerControls : MonoBehaviour
     InputAction sprint;
     InputAction crouch;
     InputAction swapWeapon;
+    InputAction pause;
 
     PlayerMovement playerMovement;
     PlayerInput playerContr;
     Player player;
     WeaponManager weaponManager;
+    public PauseMenu pauseMenu;
+
+    [SerializeField] GameObject weaponModCanvas;
+
+    private void Awake()
+    {
+        playerContr = new PlayerInput();
+    }
 
     private void Start()
     {
         playerMovement = GetComponent<PlayerMovement>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
-        playerContr = playerMovement.playerControls;
     }
 
     private void OnEnable()
@@ -35,8 +43,7 @@ public class PlayerControls : MonoBehaviour
         sprint = playerContr.Player.Sprint;
         crouch = playerContr.Player.Crouch;
         swapWeapon = playerContr.Player.SwapWeapon;
-
-
+        pause = playerContr.Player.Pause;
 
         fire.Enable();
         interact.Enable();
@@ -46,6 +53,7 @@ public class PlayerControls : MonoBehaviour
         sprint.Enable();
         crouch.Enable();
         swapWeapon.Enable();
+        pause.Enable();
 
         fire.started += ctx => weaponManager.ToggleFire(true);
         fire.canceled += ctx => weaponManager.ToggleFire(false);
@@ -57,7 +65,7 @@ public class PlayerControls : MonoBehaviour
         sprint.canceled += ctx => playerMovement.Sprint(ctx, false);
         //crouch
         swapWeapon.performed += ctx => weaponManager.SwapWeapon();
-
+        pause.performed += ctx => pauseMenu.RunPause();
 
     }
 
@@ -71,11 +79,12 @@ public class PlayerControls : MonoBehaviour
         sprint.Disable();
         crouch.Disable();
         swapWeapon.Disable();
+        pause.Disable();
     }
 
     public void ToggleMenu()
     {
-        if (weaponModCanvas.activeSelf) CloseMenu();
+        if (weaponManager.guns[weaponManager.activeGun].weaponModCanvas.activeSelf) CloseMenu();
         else OpenMenu();
     }
 
@@ -85,7 +94,7 @@ public class PlayerControls : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        weaponModCanvas.SetActive(true);
+        weaponManager.ToggleWeaponModCanvas(true);
     }
 
     public void CloseMenu()
@@ -94,7 +103,7 @@ public class PlayerControls : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
-        weaponModCanvas.SetActive(false);
-        UpdateWeaponStats();
+        weaponManager.ToggleWeaponModCanvas(false);
+        weaponManager.UpdateWeaponStats();
     }
 }

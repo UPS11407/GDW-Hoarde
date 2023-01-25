@@ -60,4 +60,14 @@ public class WeaponManager : MonoBehaviour
         guns[weaponTo].ToggleSelf(true);
         guns[weaponTo].UpdateDisplay();
     }
+
+    public void UpdateWeaponStats()
+    {
+        guns[activeGun].UpdateWeaponStats();
+    }
+
+    public void ToggleWeaponModCanvas(bool toggle)
+    {
+        guns[activeGun].ToggleWeaponModCanvas(toggle);
+    }
 }
