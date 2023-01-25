@@ -7,25 +7,6 @@ using UnityEngine.InputSystem;
 public class SceneControl : MonoBehaviour
 {
     public bool mainMenu;
-    PlayerInput playerInputs;
-    InputAction pause;
-
-    private void Awake()
-    {
-        playerInputs = new PlayerInput();
-    }
-
-    private void OnEnable()
-    {
-        pause = playerInputs.Player.Pause;
-        pause.Enable();
-        pause.performed += ctx => LeaveMainMenu();
-    }
-
-    private void OnDisable()
-    {
-        pause.Disable();
-    }
 
     void LeaveMainMenu()
     {
