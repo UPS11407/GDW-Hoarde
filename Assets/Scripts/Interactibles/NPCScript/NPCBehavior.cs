@@ -47,6 +47,6 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     void UpdateHUD()
     {
-        hudText.text = hudHints[state];
+        hudText.text = hudHints[state+1];
     }
 }

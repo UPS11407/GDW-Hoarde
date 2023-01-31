@@ -78,7 +78,7 @@ public class Chest : MonoBehaviour, IInteractible
             
         }
     }
-    
+
     IEnumerator ModMenuText()
     {
         menuText.SetActive(true);
