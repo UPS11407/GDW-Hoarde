@@ -12,6 +12,7 @@ public class PlayerControls : MonoBehaviour
     InputAction crouch;
     InputAction swapWeapon;
     InputAction pause;
+    InputAction melee;
 
     PlayerMovement playerMovement;
     PlayerInput playerContr;
@@ -42,6 +43,7 @@ public class PlayerControls : MonoBehaviour
         crouch = playerContr.Player.Crouch;
         swapWeapon = playerContr.Player.SwapWeapon;
         pause = playerContr.Player.Pause;
+        melee = playerContr.Player.Melee;
 
         fire.Enable();
         interact.Enable();
@@ -52,6 +54,7 @@ public class PlayerControls : MonoBehaviour
         crouch.Enable();
         swapWeapon.Enable();
         pause.Enable();
+        melee.Enable();
 
         fire.started += ctx => weaponManager.ToggleFire(true);
         fire.canceled += ctx => weaponManager.ToggleFire(false);
@@ -64,6 +67,7 @@ public class PlayerControls : MonoBehaviour
         //crouch
         swapWeapon.performed += ctx => weaponManager.SwapWeapon();
         pause.performed += ctx => pauseMenu.RunPause();
+        melee.performed += ctx => player.QuickMelee();
 
     }
 

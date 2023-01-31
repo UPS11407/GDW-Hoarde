@@ -17,6 +17,9 @@ public class Player : MonoBehaviour
     float healCharge;
     float currentHP;
 
+    float meleeDelay = 1.0f;
+    float meleeTime;
+    float meleeDamage = 4.0f;
     void Start()
     {
         currentHP = maxHP;
@@ -129,4 +132,30 @@ public class Player : MonoBehaviour
             rayhit.collider.gameObject.GetComponent<IInteractible>().Interact();
         }
     }
+
+    public void QuickMelee()
+    {
+        RaycastHit hit;
+        if (Time.time > meleeTime + meleeDelay)
+        {
+            meleeTime = Time.time;
+            Debug.Log("Punch");
+            if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
+            {
+
+                if (hit.transform.tag == "Enemy")
+                {
+
+                    hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
+                    
+
+
+                }
+            }
+        }
+        
+
+    }
+    
+
 }
