@@ -8,6 +8,6 @@ public class Battery : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        NPC.state = 1;
+        NPC.ChangeState();
     }
 }

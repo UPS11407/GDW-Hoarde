@@ -9,6 +9,8 @@ public class Chest : MonoBehaviour, IInteractible
     bool canInteract = true;
     Animator animator;
     public GameObject menuText;
+    public bool tutorialChest;
+
 
     public void Interact()
     {
@@ -16,54 +18,64 @@ public class Chest : MonoBehaviour, IInteractible
         {
             animator.Play("Open");
             canInteract = false;
-            if (player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun && player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto
-                && player.GetComponent<WeaponInventory>().ammoUpgrades.explosive && player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
+            if (tutorialChest)
             {
-                Debug.Log("All Upgrades Unlocked, Skipping Roll");
+                GameObject.Find("Pistol").GetComponent<Gun>().canSwap = true;
+                player.GetComponent<WeaponManager>().SwapWeapon();
+                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().ChangeState();
             }
             else
             {
-                //more brainrot (need to rework for release game)
-                while (true)
+                if (player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun && player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto
+                    && player.GetComponent<WeaponInventory>().ammoUpgrades.explosive && player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
                 {
-                    itemIndex = RollItem();
-
-                    if (itemIndex == 0 && !player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun)
-                    {
-                        player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun = true;
-                        Debug.Log("Rolled Shotgun");
-                        break;
-                    }
-
-                    if (itemIndex == 1 && !player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto)
-                    {
-                        player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto = true;
-                        Debug.Log("Rolled FullAuto");
-                        break;
-                    }
-
-                    if (itemIndex == 2 && !player.GetComponent<WeaponInventory>().ammoUpgrades.explosive)
-                    {
-                        player.GetComponent<WeaponInventory>().ammoUpgrades.explosive = true;
-                        Debug.Log("Rolled Explosive Ammo");
-                        break;
-                    }
-
-                    if (itemIndex == 3 && !player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
-                    {
-                        player.GetComponent<WeaponInventory>().magazineUpgrades.extended = true;
-                        Debug.Log("Rolled Extended Mag");
-                        break;
-                    }
-
-                    Debug.LogWarning("Re-Rolling");
+                    Debug.Log("All Upgrades Unlocked, Skipping Roll");
                 }
-            }
+                else
+                {
+                    //more brainrot (need to rework for release game)
+                    while (true)
+                    {
+                        itemIndex = RollItem();
 
+                        if (itemIndex == 0 && !player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun)
+                        {
+                            player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun = true;
+                            Debug.Log("Rolled Shotgun");
+                            break;
+                        }
+
+                        if (itemIndex == 1 && !player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto)
+                        {
+                            player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto = true;
+                            Debug.Log("Rolled FullAuto");
+                            break;
+                        }
+
+                        if (itemIndex == 2 && !player.GetComponent<WeaponInventory>().ammoUpgrades.explosive)
+                        {
+                            player.GetComponent<WeaponInventory>().ammoUpgrades.explosive = true;
+                            Debug.Log("Rolled Explosive Ammo");
+                            break;
+                        }
+
+                        if (itemIndex == 3 && !player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
+                        {
+                            player.GetComponent<WeaponInventory>().magazineUpgrades.extended = true;
+                            Debug.Log("Rolled Extended Mag");
+                            break;
+                        }
+
+                        Debug.LogWarning("Re-Rolling");
+                    }
+                }
+
+                StartCoroutine(ModMenuText());
+            }
             Debug.Log("YOU GOT LIGMA");
             
             Destroy(gameObject, 6);
-            StartCoroutine(ModMenuText());
+            
         }
     }
     
