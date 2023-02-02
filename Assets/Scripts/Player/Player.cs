@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using TMPro;
 
 public class Player : MonoBehaviour
 {
@@ -10,8 +11,13 @@ public class Player : MonoBehaviour
     public Image hpImage;
     public Image healChargeBar;
     public float maxHealCharge = 4.0f;
+
+    public GameObject camera;
+    public LayerMask interactibleMask;
+    public GameObject interactText;
     public float interactRange;
     public GameObject healText;
+
 
     public AudioSource audioPlayer;
     float healCharge;
@@ -43,6 +49,7 @@ public class Player : MonoBehaviour
             Cursor.visible = true;
             SceneControl.ChangeScene("Death");
         }
+        CheckIfInteractible();
     }
 
     /// <summary>
@@ -130,6 +137,20 @@ public class Player : MonoBehaviour
         if (rayhit.collider != null)
         {
             rayhit.collider.gameObject.GetComponent<IInteractible>().Interact();
+        }
+    }
+
+    void CheckIfInteractible()
+    {
+        RaycastHit hit;
+        if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, interactibleMask))
+        {
+            interactText.SetActive(true);
+            interactText.GetComponent<TextMeshProUGUI>().text = $"(E) - {hit.transform.name}";
+        }
+        else
+        {
+            interactText.SetActive(false);
         }
     }
 

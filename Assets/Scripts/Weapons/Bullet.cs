@@ -17,12 +17,10 @@ public class Bullet : MonoBehaviour
 
         if (isExplosive)
         {
-            GameObject[] enemies = GameObject.FindGameObjectsWithTag("Enemy");
-            foreach (GameObject enemy in enemies)
+            Collider[] hitColliders = Physics.OverlapSphere(transform.position,explosionRange, 3);
+            foreach (var hitCollider in hitColliders)
             {
-                if(Vector3.Distance(enemy.transform.position, transform.position) < explosionRange){
-                    enemy.GetComponent<EnemyBase>().TakeDamage(damage);
-                }
+                hitCollider.GetComponent<EnemyBase>().TakeDamage(damage);
             }
             GameObject boom = (GameObject)Instantiate(fireEffect, transform.position, transform.rotation);
             Destroy(boom, 2.5f);

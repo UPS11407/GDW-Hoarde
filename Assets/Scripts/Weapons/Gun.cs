@@ -275,8 +275,7 @@ public class Gun : MonoBehaviour
 
                     if (Physics.Raycast(playerCamera.transform.position, bulletDir, out hit, float.MaxValue))
                     {
-                        Debug.Log(hit.transform);
-                        Debug.Log(spread);
+                        
                         //Instantiate(debugObject, hit.point, transform.rotation);
                         if (isCharged)
                         {

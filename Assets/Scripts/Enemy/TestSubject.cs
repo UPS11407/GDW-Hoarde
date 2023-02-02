@@ -5,6 +5,7 @@ using UnityEngine;
 public class TestSubject : EnemyBase
 {
     bool attacking = false;
+    
 
     private void Update()
     {

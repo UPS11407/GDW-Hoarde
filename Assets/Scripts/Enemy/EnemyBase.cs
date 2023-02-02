@@ -17,15 +17,15 @@ public class EnemyBase : MonoBehaviour
     [Tooltip("% chance to drop a heal pickup")]
     [Range(0, 100)]
     public int healDropChance;
-    float currentHP;
+    protected float currentHP;
 
-    int dropVal;
+    protected int dropVal;
 
     internal GameObject player;
     internal Animator animator;
 
     Rigidbody rigid;
-    NavMeshAgent agent;
+    protected NavMeshAgent agent;
 
     private void Awake()
     {
@@ -64,7 +64,7 @@ public class EnemyBase : MonoBehaviour
         return distance;
     }
 
-    public void CheckIfDead()
+    public virtual void CheckIfDead()
     {
         if(currentHP <= 0)
         {
@@ -79,7 +79,7 @@ public class EnemyBase : MonoBehaviour
         }
     }
 
-    void DropPickup()
+    protected void DropPickup()
     {
         Instantiate(healPickupPrefab, transform.position, Quaternion.Euler(0, 0, 0));
     }
@@ -96,7 +96,7 @@ public class EnemyBase : MonoBehaviour
     /// Sets the Nav Mesh Agent's target to the player's current position.
     /// Also stops agent's movement if they are in attack range
     /// </summary>
-    public void ChasePlayer()
+    public virtual void ChasePlayer()
     {
         if(GetPlayerDistance() <= _attackRange)
         {
@@ -118,9 +118,7 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage(float val)
     {
-        Debug.Log("HP BEFORE:" + currentHP);
         currentHP -= val;
 
-        Debug.Log("HP After:" + currentHP);
     }
 }
