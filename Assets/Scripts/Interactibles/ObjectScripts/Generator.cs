@@ -10,9 +10,12 @@ public class Generator : MonoBehaviour, IInteractible
     public GameObject[] lights;
     public GameObject spawner;
     AudioSource generatorSound;
+    Animator animator;
+    bool canInteract = true;
 
     private void Awake()
     {
+        animator = gameObject.transform.parent.parent.GetComponent<Animator>();
         spawner.SetActive(false);
         generatorSound = GetComponent<AudioSource>();
         powerDoors = GameObject.FindGameObjectsWithTag("Power Door");
@@ -30,10 +33,15 @@ public class Generator : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        if (fuse)
+        if (canInteract)
         {
-            TurnOnPower();
-            fuse = false;
+            canInteract = false;
+            if (fuse)
+            {
+                TurnOnPower();
+                animator.Play("TurnOn");
+                fuse = false;
+            }
         }
     }
 
@@ -50,7 +58,7 @@ public class Generator : MonoBehaviour, IInteractible
             light.SetActive(true);
         }
 
-        generatorSound.Play();
+        //generatorSound.Play();
 
         johnatelo.ChangeState();
     }
