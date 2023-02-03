@@ -111,7 +111,7 @@ public class EnemyBase : MonoBehaviour
 
         if(agent.destination != player.transform.position)
         {
-            agent.ResetPath();  
+           // agent.ResetPath();  
             agent.SetDestination(player.transform.position);
         }
     }
