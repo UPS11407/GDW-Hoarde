@@ -7,6 +7,7 @@ public class Generator : MonoBehaviour, IInteractible
     public bool fuse = false;
     GameObject[] powerDoors;
     public NPCBehavior johnatelo;
+    public GameObject fuseObj;
     public GameObject[] lights;
     public GameObject spawner;
     AudioSource generatorSound;
@@ -47,6 +48,7 @@ public class Generator : MonoBehaviour, IInteractible
 
     public void TurnOnPower()
     {
+        fuseObj.SetActive(true);
         spawner.SetActive(true);
         foreach (GameObject door in powerDoors)
         {

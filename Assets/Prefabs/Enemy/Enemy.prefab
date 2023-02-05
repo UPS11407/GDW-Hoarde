@@ -390,7 +390,7 @@ MonoBehaviour:
   _speed: 2
   _damage: 1
   _attackRange: 2
-  chaseRange: 100
+  chaseRange: 200
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   healDropChance: 20
 --- !u!195 &2169045710317889876

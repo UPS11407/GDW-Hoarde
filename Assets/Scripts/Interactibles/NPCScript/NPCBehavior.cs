@@ -13,6 +13,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public string[] hudHints;
     bool interactible = true;
 
+    private void Start()
+    {
+        UpdateHUD();
+    }
+
     public void Interact()
     {
         if (interactible) StartCoroutine(Talk(dialogue[state]));
