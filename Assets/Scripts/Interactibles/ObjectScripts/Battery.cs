@@ -9,7 +9,7 @@ public class Battery : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        NPC.ChangeState();
+        NPC.state = 4;
         gen.fuse = true;
 
         Destroy(gameObject);

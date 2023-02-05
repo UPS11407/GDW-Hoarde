@@ -12,10 +12,14 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public TextMeshProUGUI hudText;
     public string[] hudHints;
     bool interactible = true;
+    public BoxCollider genDoorColl;
+    public BoxCollider gunDoorColl;
 
     private void Start()
     {
         UpdateHUD();
+        genDoorColl.enabled = false;
+        gunDoorColl.enabled = false;
     }
 
     public void Interact()
@@ -53,5 +57,13 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     void UpdateHUD()
     {
         hudText.text = hudHints[state+1];
+        if (state >= 1)
+        {
+            gunDoorColl.enabled = true;
+        }
+        if (state >= 3)
+        {
+            genDoorColl.enabled = true;
+        }
     }
 }

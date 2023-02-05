@@ -34,15 +34,12 @@ public class Generator : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        if (canInteract)
+        if (canInteract && fuse)
         {
             canInteract = false;
-            if (fuse)
-            {
-                TurnOnPower();
-                animator.Play("TurnOn");
-                fuse = false;
-            }
+            TurnOnPower();
+            animator.Play("TurnOn");
+            fuse = false;
         }
     }
 
@@ -62,6 +59,6 @@ public class Generator : MonoBehaviour, IInteractible
 
         //generatorSound.Play();
 
-        johnatelo.ChangeState();
+        johnatelo.state = 5;
     }
 }

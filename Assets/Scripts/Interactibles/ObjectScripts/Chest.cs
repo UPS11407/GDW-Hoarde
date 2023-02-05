@@ -22,7 +22,7 @@ public class Chest : MonoBehaviour, IInteractible
             {
                 GameObject.Find("Pistol").GetComponent<Gun>().canSwap = true;
                 player.GetComponent<WeaponManager>().SwapWeapon();
-                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().ChangeState();
+                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 2;
             }
             else
             {
