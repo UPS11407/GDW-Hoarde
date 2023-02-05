@@ -27,7 +27,8 @@ public class Chest : MonoBehaviour, IInteractible
             else
             {
                 if (player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun && player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto
-                    && player.GetComponent<WeaponInventory>().ammoUpgrades.explosive && player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
+                    && player.GetComponent<WeaponInventory>().ammoUpgrades.explosive && player.GetComponent<WeaponInventory>().magazineUpgrades.extended 
+                    && player.GetComponent<WeaponInventory>().barrelUpgrades.sniper && player.GetComponent<WeaponInventory>().magazineUpgrades.quick)
                 {
                     Debug.Log("All Upgrades Unlocked, Skipping Roll");
                 }
@@ -63,6 +64,20 @@ public class Chest : MonoBehaviour, IInteractible
                         {
                             player.GetComponent<WeaponInventory>().magazineUpgrades.extended = true;
                             Debug.Log("Rolled Extended Mag");
+                            break;
+                        }
+
+                        if (itemIndex == 4 && !player.GetComponent<WeaponInventory>().magazineUpgrades.quick)
+                        {
+                            player.GetComponent<WeaponInventory>().magazineUpgrades.quick = true;
+                            Debug.Log("Rolled Quick Mag");
+                            break;
+                        }
+
+                        if (itemIndex == 5 && !player.GetComponent<WeaponInventory>().barrelUpgrades.sniper)
+                        {
+                            player.GetComponent<WeaponInventory>().barrelUpgrades.sniper = true;
+                            Debug.Log("Rolled Sniper Barrel");
                             break;
                         }
 
