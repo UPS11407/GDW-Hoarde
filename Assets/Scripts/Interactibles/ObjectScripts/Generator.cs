@@ -59,8 +59,8 @@ public class Generator : MonoBehaviour, IInteractible
         }
 
         //generatorSound.Play();
-        johnatelo.UpdateHUD();
         johnatelo.state = 5;
+        johnatelo.UpdateHUD();
         StartCoroutine(disableTextBox());
     }
 
