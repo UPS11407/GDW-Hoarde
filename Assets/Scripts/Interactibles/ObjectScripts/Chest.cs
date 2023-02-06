@@ -2,6 +2,34 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
+/*
+I will come back to this later
+#if UNITY_EDITOR
+using UnityEditor;
+[CustomEditor(typeof(Chest))]
+public class ChestEditor : Editor
+{
+    public override void OnInspectorGUI()
+    {
+        
+        //DrawDefaultInspector();
+
+        Chest script = (Chest)target;
+
+        script.menuText = EditorGUILayout.ObjectField("Menu Text", script.menuText, typeof(GameObject), true) as GameObject;
+
+        script.tutorialChest = EditorGUILayout.Toggle("Tutorial Chest", script.tutorialChest);
+        if (script.tutorialChest)
+        {
+            script.enemyPrefab = EditorGUILayout.ObjectField("Enemy Prefab", script.enemyPrefab, typeof(GameObject), true) as GameObject;
+            script.enemyCollection = EditorGUILayout.ObjectField("Enemy Collection", script.enemyCollection, typeof(GameObject), true) as GameObject;
+            script.location = EditorGUILayout.ObjectField("Spawn Locations", script.location, typeof(GameObject), true) as GameObject;
+        }
+    }
+}
+#endif
+*/
+
 public class Chest : MonoBehaviour, IInteractible
 {
     int itemIndex;
@@ -9,7 +37,17 @@ public class Chest : MonoBehaviour, IInteractible
     bool canInteract = true;
     Animator animator;
     public GameObject menuText;
+
     public bool tutorialChest;
+
+    //[HideInInspector]
+    public GameObject enemyPrefab;
+
+    //[HideInInspector]
+    public Transform[] locations;
+
+    //[HideInInspector]
+    public GameObject enemyCollection;
 
 
     public void Interact()
@@ -23,6 +61,13 @@ public class Chest : MonoBehaviour, IInteractible
                 GameObject.Find("Pistol").GetComponent<Gun>().canSwap = true;
                 player.GetComponent<WeaponManager>().SwapWeapon();
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 2;
+                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().UpdateHUD();
+
+                foreach(Transform location in locations)
+                {
+                    Instantiate(enemyPrefab, location.position, Quaternion.Euler(0, 0, 0), enemyCollection.transform);
+                }
+                
             }
             else
             {

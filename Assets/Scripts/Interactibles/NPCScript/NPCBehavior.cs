@@ -13,13 +13,21 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public string[] hudHints;
     bool interactible = true;
     public BoxCollider genDoorColl;
-    public BoxCollider gunDoorColl;
+    public BoxCollider[] doorColliders;
+    public GameObject[] enemies;
 
     private void Start()
     {
         UpdateHUD();
         genDoorColl.enabled = false;
-        gunDoorColl.enabled = false;
+        foreach(BoxCollider coll in doorColliders)
+        {
+            coll.enabled = false;
+        }
+        foreach (GameObject enemy in enemies)
+        {
+            enemy.SetActive(false);
+        }
     }
 
     public void Interact()
@@ -54,12 +62,20 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         UpdateHUD();
     }
 
-    void UpdateHUD()
+    public void UpdateHUD()
     {
         hudText.text = hudHints[state+1];
         if (state >= 1)
         {
-            gunDoorColl.enabled = true;
+            foreach (BoxCollider coll in doorColliders)
+            {
+                coll.enabled = true;
+            }
+            
+            foreach (GameObject enemy in enemies)
+            {
+                if(enemy != null) enemy.SetActive(true);
+            }
         }
         if (state >= 3)
         {

@@ -10,6 +10,7 @@ public class Generator : MonoBehaviour, IInteractible
     public GameObject fuseObj;
     public GameObject[] lights;
     public GameObject spawner;
+    public GameObject hintText;
     AudioSource generatorSound;
     Animator animator;
     bool canInteract = true;
@@ -58,7 +59,14 @@ public class Generator : MonoBehaviour, IInteractible
         }
 
         //generatorSound.Play();
-
+        johnatelo.UpdateHUD();
         johnatelo.state = 5;
+        StartCoroutine(disableTextBox());
+    }
+
+    IEnumerator disableTextBox()
+    {
+        yield return new WaitForSeconds(60);
+        hintText.SetActive(false);
     }
 }
