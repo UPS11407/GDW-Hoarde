@@ -14,6 +14,6 @@ public class ControlsMenu : MonoBehaviour
     {
         gameObject.SetActive(false);
 
-        pauseMenu.OpenMenu();
+        pauseMenu.gameObject.SetActive(true);
     }
 }

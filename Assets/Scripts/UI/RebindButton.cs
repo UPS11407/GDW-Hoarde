@@ -5,14 +5,10 @@ using TMPro;
 
 public class RebindButton : MonoBehaviour
 {
-    GameObject player;
+    public GameObject player;
+    public PlayerInput playerInput;
     public InputActionReference input;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-
-    private void Start()
-    {
-        player = GameObject.Find("Player");
-    }
 
     public void StartRebind()
     {
@@ -27,10 +23,11 @@ public class RebindButton : MonoBehaviour
     void EndRebind()
     {
         var control = rebindingOperation.selectedControl;
+
         rebindingOperation.Dispose();
 
         gameObject.GetComponentInChildren<TMP_Text>().text = control.ToString().Split('/')[2];
 
-
+        player.GetComponent<PlayerControlsManager>().ReinitPlayerActions();
     }
 }

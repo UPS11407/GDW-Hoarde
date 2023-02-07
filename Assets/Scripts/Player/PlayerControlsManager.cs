@@ -9,8 +9,8 @@ public class PlayerControlsManager : MonoBehaviour
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
 
+    public PlayerControls playerControls;
     PlayerInput playerInput;
-    PlayerControls playerControls;
 
     //player's speed
     public float moveSpeed = 6f;
@@ -48,6 +48,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void Awake()
     {
+        playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
         playerControls = new PlayerControls();
@@ -94,6 +95,8 @@ public class PlayerControlsManager : MonoBehaviour
 
     void Update()
     {
+        Debug.Log(playerInput.actions["Fire"].IsPressed());
+
         if (enableLook) DoLook(mouseSensitivity);
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -188,33 +191,40 @@ public class PlayerControlsManager : MonoBehaviour
 
     void InitPlayerActions()
     {
-        playerControls.Player.Fire.started += ctx => weaponManager.ToggleFire(true);
-        playerControls.Player.Fire.canceled += ctx => weaponManager.ToggleFire(false);
-        playerControls.Player.Interact.performed += ctx => player.InteractWithObject();
-        playerControls.Player.Reload.performed += ctx => weaponManager.Reload();
-        playerControls.Player.SwapMod.performed += ctx => ToggleMenu();
-        playerControls.Player.Heal.performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerControls.Player.Sprint.performed += ctx => Sprint(ctx, true);
-        playerControls.Player.Sprint.canceled += ctx => Sprint(ctx, false);
+        playerInput.actions["Fire"].started += ctx => weaponManager.ToggleFire(true);
+        playerInput.actions["Fire"].canceled += ctx => weaponManager.ToggleFire(false);
+        playerInput.actions["Interact"].performed += ctx => player.InteractWithObject();
+        playerInput.actions["Reload"].performed += ctx => weaponManager.Reload();
+        playerInput.actions["SwapMod"].performed += ctx => ToggleMenu();
+        playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
+        playerInput.actions["Sprint"].performed += ctx => Sprint(ctx, true);
+        playerInput.actions["Sprint"].canceled += ctx => Sprint(ctx, false);
         //crouch
-        playerControls.Player.SwapWeapon.performed += ctx => weaponManager.SwapWeapon();
-        playerControls.Player.Pause.performed += ctx => pauseMenu.RunPause();
-        playerControls.Player.Melee.performed += ctx => player.QuickMelee();
+        playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
+        playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
+        playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
     }
 
     void DeinitPlayerActions()
     {
-        playerControls.Player.Fire.started -= ctx => weaponManager.ToggleFire(true);
-        playerControls.Player.Fire.canceled -= ctx => weaponManager.ToggleFire(false);
-        playerControls.Player.Interact.performed -= ctx => player.InteractWithObject();
-        playerControls.Player.Reload.performed -= ctx => weaponManager.Reload();
-        playerControls.Player.SwapMod.performed -= ctx => ToggleMenu();
-        playerControls.Player.Heal.performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerControls.Player.Sprint.performed -= ctx => Sprint(ctx, true);
-        playerControls.Player.Sprint.canceled -= ctx => Sprint(ctx, false);
+        playerInput.actions["Fire"].started -= ctx => weaponManager.ToggleFire(true);
+        playerInput.actions["Fire"].canceled -= ctx => weaponManager.ToggleFire(false);
+        playerInput.actions["Interact"].performed -= ctx => player.InteractWithObject();
+        playerInput.actions["Reload"].performed -= ctx => weaponManager.Reload();
+        playerInput.actions["SwapMod"].performed -= ctx => ToggleMenu();
+        playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
+        playerInput.actions["Sprint"].performed -= ctx => Sprint(ctx, true);
+        playerInput.actions["Sprint"].canceled -= ctx => Sprint(ctx, false);
         //crouch
-        playerControls.Player.SwapWeapon.performed -= ctx => weaponManager.SwapWeapon();
-        playerControls.Player.Pause.performed -= ctx => pauseMenu.RunPause();
-        playerControls.Player.Melee.performed -= ctx => player.QuickMelee();
+        playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
+        playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
+        playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
+    }
+
+    public void ReinitPlayerActions()
+    {
+        DeinitPlayerActions();
+
+        InitPlayerActions();
     }
 }

@@ -9,9 +9,9 @@ public class PauseMenu : MonoBehaviour
     public GameObject player;
     public GameObject HUD;
     public WeaponManager weaponManager;
-    PlayerInput playerContr;
+    public ControlsMenu controlsMenu;
 
-    ControlsMenu controlsMenu;
+    PlayerInput playerContr;
 
     public void RunPause()
     {
@@ -23,16 +23,23 @@ public class PauseMenu : MonoBehaviour
             }
             else
             {
-                OpenMenu();
+                if (controlsMenu.gameObject.activeInHierarchy)
+                {
+                    controlsMenu.CloseMenu();
+                }
+                else
+                {
+                    OpenMenu();
+                }
+                
             }
+            Debug.Log(playerContr.currentActionMap.ToString());
         }
         else
         {
             playerContr = player.GetComponent<PlayerInput>();
             RunPause();
         }
-
-        Debug.Log(playerContr.currentActionMap.ToString());
     }
 
     public void OpenMenu()
@@ -71,8 +78,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenControlsMenu()
     {
-        CloseMenu();
-
+        menu.SetActive(false);
         controlsMenu.OpenMenu();
     }
 }
