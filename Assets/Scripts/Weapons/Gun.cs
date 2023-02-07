@@ -68,13 +68,10 @@ public class Gun : MonoBehaviour
     float chargeTime;
     bool initialChargeDone = false;
 
-    [SerializeField] Light muzzleLight;
-    float muzzleLightTime;
-    float muzzleLightDuration = 0.1f;
-
     [SerializeField] LineRenderer railLine;
     [SerializeField] TrailRenderer bulletTracer;
     [SerializeField] GameObject tracerStart;
+    [SerializeField] MuzzleFlash muzzleFlash;
 
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
@@ -129,12 +126,10 @@ public class Gun : MonoBehaviour
             }
             if (chargeTime > 0)
             {
-                muzzleLight.enabled = true;
-                muzzleLight.intensity = 1 * (chargeTime / 100);
-                muzzleLight.color = Color.Lerp(new Color(0, 128, 255, 1), new Color(255, 22, 0, 1), (chargeTime / 100));
-                //Debug.Log($"FOV: {Mathf.Lerp(60, 45, chargeTime / 100)}");
-                //Camera.main.fieldOfView = Mathf.Lerp(90, 60, chargeTime / 100);
-
+                //   ETHAN PLEASE MAKE A DIFFERENT LIGHT FOR THE CHARGEUP
+                //muzzleLight.enabled = true;
+                //muzzleLight.intensity = 1 * (chargeTime / 100);
+                //muzzleLight.color = Color.Lerp(new Color(0, 128, 255, 1), new Color(255, 22, 0, 1), (chargeTime / 100));
             }
         }
         else if(fireButtonPressed == true)
@@ -318,7 +313,7 @@ public class Gun : MonoBehaviour
 
             audioSource.PlayOneShot(fireSound);
             cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
-            StartCoroutine(muzzleFlash(0.05f));
+            muzzleFlash.FlashMuzzle(damage, bulletsPerShot, 0.05f);
 
             UpdateDisplay();
 
@@ -328,13 +323,6 @@ public class Gun : MonoBehaviour
             audioSource.PlayOneShot(emptySound);
         }
 
-    }
-    IEnumerator muzzleFlash(float duration)
-    {
-        muzzleLight.enabled = true;
-        muzzleLight.intensity = damage * bulletsPerShot;
-        yield return new WaitForSeconds(duration);
-        muzzleLight.enabled = false;
     }
 
     IEnumerator SpawnLine(LineRenderer line, RaycastHit hit)
