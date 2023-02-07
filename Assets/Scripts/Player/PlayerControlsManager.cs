@@ -9,7 +9,6 @@ public class PlayerControlsManager : MonoBehaviour
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
 
-    public PlayerControls playerControls;
     PlayerInput playerInput;
 
     //player's speed
@@ -51,20 +50,12 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
-        playerControls = new PlayerControls();
 
         InitPlayerActions();
     }
 
-    private void OnEnable()
-    {
-        playerControls.Enable();
-    }
-    
     private void OnDisable()
     {
-        playerControls.Disable();
-
         DeinitPlayerActions();
     }
     
@@ -95,8 +86,6 @@ public class PlayerControlsManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerInput.actions["Fire"].IsPressed());
-
         if (enableLook) DoLook(mouseSensitivity);
 
         if (Input.GetKey(KeyCode.LeftShift))
@@ -118,7 +107,7 @@ public class PlayerControlsManager : MonoBehaviour
         else audioSource.mute = true;
 
 
-        if (!jumping && playerControls.Player.Jump.inProgress && IsGrounded())
+        if (!jumping && playerInput.actions["Jump"].inProgress && IsGrounded())
         {
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             StartCoroutine(WaitForJump());
@@ -127,7 +116,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoLook(float sensitivity)
     {
-        Vector2 lookDir = playerControls.Player.Look.ReadValue<Vector2>();
+        Vector2 lookDir = playerInput.actions["Look"].ReadValue<Vector2>();
         Vector3 rotationVar = new Vector3(-lookDir.y, lookDir.x, 0);
         Vector3 currentRotation = rotationVar * Time.deltaTime * (sensitivity / 3);
 
@@ -146,7 +135,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoWalk()
     {
-        Vector2 moveDir = playerControls.Player.Move.ReadValue<Vector2>();
+        Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 moveX = moveDir.y * new Vector3(cameraParent.forward.x, 0, cameraParent.forward.z).normalized * moveSpeed;
         Vector3 moveZ = moveDir.x * new Vector3(cameraParent.right.x, 0, cameraParent.right.z).normalized * moveSpeed;
 

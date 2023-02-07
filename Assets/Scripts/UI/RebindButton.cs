@@ -5,17 +5,28 @@ using TMPro;
 
 public class RebindButton : MonoBehaviour
 {
-    public GameObject player;
     public PlayerInput playerInput;
-    public InputActionReference input;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
 
-    public void StartRebind()
+    public void StartRebind(string input)
     {
         gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
 
-        rebindingOperation = input.action.PerformInteractiveRebinding()
+        rebindingOperation = playerInput.actions[input].PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
+            .OnComplete(operation => EndRebind())
+            .Start();
+    }
+
+    public void StartRebindComposite(string input)
+    {
+        gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
+
+        var bindingIndex = playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input);
+
+        rebindingOperation = playerInput.actions["Move"].PerformInteractiveRebinding()
+            .OnMatchWaitForAnother(0.1f)
+            .WithTargetBinding(bindingIndex)
             .OnComplete(operation => EndRebind())
             .Start();
     }
@@ -27,7 +38,5 @@ public class RebindButton : MonoBehaviour
         rebindingOperation.Dispose();
 
         gameObject.GetComponentInChildren<TMP_Text>().text = control.ToString().Split('/')[2];
-
-        player.GetComponent<PlayerControlsManager>().ReinitPlayerActions();
     }
 }
