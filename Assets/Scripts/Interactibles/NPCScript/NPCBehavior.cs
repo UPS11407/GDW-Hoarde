@@ -15,9 +15,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public BoxCollider genDoorColl;
     public BoxCollider[] doorColliders;
     public GameObject[] enemies;
-
+    GameObject player;
+    [SerializeField] float dialogueRange;
     private void Start()
     {
+        player = GameObject.Find("Player");
         UpdateHUD();
         genDoorColl.enabled = false;
         foreach(BoxCollider coll in doorColliders)
@@ -29,7 +31,14 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             enemy.SetActive(false);
         }
     }
-
+    private void Update()
+    {
+        
+        if (interactible == false && Vector3.Distance(transform.position, player.transform.position) > dialogueRange)
+        {
+            EndDialogue();
+        }
+    }
     public void Interact()
     {
         if (interactible) StartCoroutine(Talk(dialogue[state]));
@@ -44,16 +53,21 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             
             text.SetText(a);
 
-            yield return new WaitForSeconds(0.075f);
+            yield return new WaitForSeconds(0.01f);
         }
         if (passable[state])
         {
             ChangeState();
         }
+        if (Vector3.Distance(transform.position, player.transform.position) > dialogueRange)
+        {
+            Debug.Log("BREAK");
+            EndDialogue();
+            yield break;
+        }
         UpdateHUD();
-        yield return new WaitForSeconds(2);
-        interactible = true;
-        text.SetText("");
+        yield return new WaitForSeconds(5);
+        EndDialogue();
     }
 
     public void ChangeState()
@@ -81,5 +95,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         {
             genDoorColl.enabled = true;
         }
+    }
+
+    public void EndDialogue()
+    {
+        interactible = true;
+        text.SetText("");
     }
 }

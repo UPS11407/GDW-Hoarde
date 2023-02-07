@@ -87,6 +87,12 @@ public class Player : MonoBehaviour
         UpdateHealthDisplay();
     }
 
+    public void TakeDamageOverTime(float dmg)
+    {
+        currentHP -= dmg;
+        //audioPlayer.Play(); make this play at a rate
+        UpdateHealthDisplay();
+    }
     /// <summary>
     /// Adds heal to player's currentHP. Does not exceed max hp
     /// </summary>
