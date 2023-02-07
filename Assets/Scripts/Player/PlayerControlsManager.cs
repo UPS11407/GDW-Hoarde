@@ -94,8 +94,6 @@ public class PlayerControlsManager : MonoBehaviour
 
     void Update()
     {
-        Debug.Log(playerControls.Player.Fire.inProgress);
-
         if (enableLook) DoLook(mouseSensitivity);
 
         if (Input.GetKey(KeyCode.LeftShift))
