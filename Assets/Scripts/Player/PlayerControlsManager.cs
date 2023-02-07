@@ -168,7 +168,7 @@ public class PlayerControlsManager : MonoBehaviour
         return grounded;
     }
 
-    public void Sprint(InputAction.CallbackContext context, bool keyDown)
+    private void Sprint(bool keyDown)
     {
 
     }
@@ -182,6 +182,11 @@ public class PlayerControlsManager : MonoBehaviour
         jumping = false;
     }
 
+    private void Crouch()
+    {
+
+    }
+
     void InitPlayerActions()
     {
         playerInput.actions["Fire"].started += ctx => weaponManager.ToggleFire(true);
@@ -190,9 +195,9 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed += ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed += ctx => ToggleMenu();
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].performed += ctx => Sprint(ctx, true);
-        playerInput.actions["Sprint"].canceled += ctx => Sprint(ctx, false);
-        //crouch
+        playerInput.actions["Sprint"].performed += ctx => Sprint(true);
+        playerInput.actions["Sprint"].canceled += ctx => Sprint(false);
+        playerInput.actions["Crouch"].canceled += ctx => Crouch();
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
@@ -206,9 +211,9 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed -= ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed -= ctx => ToggleMenu();
         playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].performed -= ctx => Sprint(ctx, true);
-        playerInput.actions["Sprint"].canceled -= ctx => Sprint(ctx, false);
-        //crouch
+        playerInput.actions["Sprint"].performed -= ctx => Sprint(true);
+        playerInput.actions["Sprint"].canceled -= ctx => Sprint(false);
+        playerInput.actions["Crouch"].canceled -= ctx => Crouch();
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
