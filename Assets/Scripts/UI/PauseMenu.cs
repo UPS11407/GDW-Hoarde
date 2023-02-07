@@ -8,8 +8,16 @@ public class PauseMenu : MonoBehaviour
     public GameObject menu;
     public GameObject player;
     public WeaponManager weaponManager;
+    PlayerInput playerContr;
+    PlayerControlsManager playerControlsManager;
 
     ControlsMenu controlsMenu;
+
+    private void Awake()
+    {
+        playerContr = player.GetComponent<PlayerInput>();
+        playerControlsManager = player.GetComponent<PlayerControlsManager>();
+    }
 
     public void RunPause()
     {
@@ -25,6 +33,7 @@ public class PauseMenu : MonoBehaviour
 
     public void OpenMenu()
     {
+        playerContr.SwitchCurrentActionMap("Menu");
         Cursor.lockState = CursorLockMode.None;
         Cursor.visible = true;
         menu.SetActive(true);
@@ -34,11 +43,11 @@ public class PauseMenu : MonoBehaviour
             guns.canSwap = false;
             guns.enabled = false;
         }
-        player.GetComponent<PlayerMovement>().enabled = false;
     }
 
     public void CloseMenu()
     {
+        playerContr.SwitchCurrentActionMap("Player");
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
         menu.SetActive(false);
@@ -48,7 +57,6 @@ public class PauseMenu : MonoBehaviour
             guns.canSwap = true;
             guns.enabled = true;
         }
-        player.GetComponent<PlayerMovement>().enabled = true;
     }
 
     public void OpenControlsMenu()

@@ -23,12 +23,12 @@ public class HeadBob : MonoBehaviour
     Vector3 startPos;
 
     private Rigidbody _rb;
-    PlayerMovement playerMove;
+    PlayerControlsManager playerControlsManager;
 
     private void Awake()
     {
         _rb = GetComponent<Rigidbody>();
-        playerMove = GetComponent<PlayerMovement>();
+        playerControlsManager = GetComponent<PlayerControlsManager>();
         startPos = _camera.localPosition;
     }
 
@@ -46,7 +46,7 @@ public class HeadBob : MonoBehaviour
         float speed = new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude;
 
         if (speed < toggleSpeed) return;
-        if (!playerMove.IsGrounded()) return;
+        if (!playerControlsManager.IsGrounded()) return;
 
         PlayMotion(FootStepMotion());
     }
