@@ -155,6 +155,6 @@ public class Chest : MonoBehaviour, IInteractible
 
     int RollItem()
     {
-        return Random.Range(0, 4);
+        return Random.Range(0, 6);
     }
 }

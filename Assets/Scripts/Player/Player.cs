@@ -149,7 +149,7 @@ public class Player : MonoBehaviour
     void CheckIfInteractible()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, interactibleMask))
+        if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, layerMask: 1 << 8))
         {
             interactText.SetActive(true);
             interactText.GetComponent<TextMeshProUGUI>().text = $"(E) - {hit.transform.name}";
