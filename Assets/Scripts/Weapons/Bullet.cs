@@ -20,7 +20,10 @@ public class Bullet : MonoBehaviour
             Collider[] hitColliders = Physics.OverlapSphere(transform.position,explosionRange, 3);
             foreach (var hitCollider in hitColliders)
             {
+                if(hitCollider.gameObject.tag == "Enemy")
+            {
                 hitCollider.GetComponent<EnemyBase>().TakeDamage(damage);
+            }
             }
             GameObject boom = (GameObject)Instantiate(fireEffect, transform.position, transform.rotation);
             Destroy(boom, 2.5f);
