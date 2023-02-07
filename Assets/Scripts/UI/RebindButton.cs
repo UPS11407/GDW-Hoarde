@@ -7,6 +7,7 @@ public class RebindButton : MonoBehaviour
 {
     public PlayerInput playerInput;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
+    public PlayerControlsManager player;
 
     public void StartRebind(string input)
     {
@@ -38,5 +39,7 @@ public class RebindButton : MonoBehaviour
         rebindingOperation.Dispose();
 
         gameObject.GetComponentInChildren<TMP_Text>().text = control.ToString().Split('/')[2];
+
+        player.SaveBindings();
     }
 }

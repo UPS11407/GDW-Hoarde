@@ -5,6 +5,8 @@ using UnityEngine.InputSystem;
 
 public class PlayerControlsManager : MonoBehaviour
 {
+    public const string RebindsKey = "rebinds";
+
     Player player;
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
@@ -37,14 +39,6 @@ public class PlayerControlsManager : MonoBehaviour
     float quickFOV = 75.0f;
     bool jumping;
 
-    void Start()
-    {
-        _rb = GetComponent<Rigidbody>();
-        _col = GetComponent<CapsuleCollider>();
-        audioSource = GetComponent<AudioSource>();
-        Time.timeScale = 1.0f;
-    }
-
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -52,6 +46,16 @@ public class PlayerControlsManager : MonoBehaviour
         weaponManager = GetComponent<WeaponManager>();
 
         InitPlayerActions();
+
+        GetRebinds();
+    }
+
+    void Start()
+    {
+        _rb = GetComponent<Rigidbody>();
+        _col = GetComponent<CapsuleCollider>();
+        audioSource = GetComponent<AudioSource>();
+        Time.timeScale = 1.0f;
     }
 
     private void OnDisable()
@@ -215,5 +219,21 @@ public class PlayerControlsManager : MonoBehaviour
         DeinitPlayerActions();
 
         InitPlayerActions();
+    }
+
+    public void GetRebinds()
+    {
+        string rebinds = PlayerPrefs.GetString(RebindsKey, string.Empty);
+
+        if (string.IsNullOrEmpty(rebinds)) { return; }
+
+        playerInput.actions.LoadBindingOverridesFromJson(rebinds);
+    }
+
+    public void SaveBindings()
+    {
+        string rebinds = playerInput.actions.SaveBindingOverridesAsJson();
+
+        PlayerPrefs.SetString(RebindsKey, rebinds);
     }
 }
