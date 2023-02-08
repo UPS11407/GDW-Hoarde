@@ -13,20 +13,7 @@ public class RebindButton : MonoBehaviour
 
     private void Start()
     {
-        if (!isComposite)
-        {
-            gameObject.GetComponentInChildren<TMP_Text>().text =
-                InputControlPath.ToHumanReadableString(
-                playerInput.actions[input].bindings[0].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice);
-        }
-        else
-        {
-            gameObject.GetComponentInChildren<TMP_Text>().text =
-                InputControlPath.ToHumanReadableString(
-                playerInput.actions["Move"].bindings[playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input)].effectivePath,
-                InputControlPath.HumanReadableStringOptions.OmitDevice);
-        }
+        DoButtonText();
     }
     
     public void StartRebind()
@@ -87,5 +74,23 @@ public class RebindButton : MonoBehaviour
         rebindingOperation.Dispose();
 
         player.SaveBindings();
+    }
+
+    public void DoButtonText()
+    {
+        if (!isComposite)
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions[input].bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions["Move"].bindings[playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input)].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
     }
 }
