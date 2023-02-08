@@ -8,8 +8,17 @@ public class RebindButton : MonoBehaviour
     public PlayerInput playerInput;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     public PlayerControlsManager player;
+    public string input;
 
-    public void StartRebind(string input)
+    private void Start()
+    {
+        gameObject.GetComponentInChildren<TMP_Text>().text =
+        InputControlPath.ToHumanReadableString(
+            playerInput.actions[input].bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+    }
+
+    public void StartRebind()
     {
         gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
 
@@ -17,11 +26,11 @@ public class RebindButton : MonoBehaviour
             .OnMatchWaitForAnother(0.1f)
             .WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation => EndRebind())
-            .OnCancel(operation => EndRebind())
+            .OnCancel(operation => CancelRebind())
             .Start();
     }
 
-    public void StartRebindComposite(string input)
+    public void StartRebindComposite()
     {
         gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
 
@@ -32,8 +41,18 @@ public class RebindButton : MonoBehaviour
             .WithTargetBinding(bindingIndex)
             .WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation => EndRebind())
-            .OnCancel(operation => EndRebind())
+            .OnCancel(operation => CancelRebind())
             .Start();
+    }
+
+    void CancelRebind()
+    {
+        gameObject.GetComponentInChildren<TMP_Text>().text =
+        InputControlPath.ToHumanReadableString(
+            playerInput.actions[input].bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        rebindingOperation.Dispose();
     }
 
     void EndRebind()
