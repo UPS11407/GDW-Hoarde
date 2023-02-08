@@ -8,19 +8,30 @@ public class RebindButton : MonoBehaviour
     public PlayerInput playerInput;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
     public PlayerControlsManager player;
+    public bool isComposite;
     public string input;
 
     private void Start()
     {
-        gameObject.GetComponentInChildren<TMP_Text>().text =
-        InputControlPath.ToHumanReadableString(
-            playerInput.actions[input].bindings[0].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
+        if (!isComposite)
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions[input].bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions["Move"].bindings[playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input)].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
     }
-
+    
     public void StartRebind()
     {
-        gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
+        gameObject.GetComponentInChildren<TMP_Text>().text = ">  <";
 
         rebindingOperation = playerInput.actions[input].PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
@@ -32,7 +43,7 @@ public class RebindButton : MonoBehaviour
 
     public void StartRebindComposite()
     {
-        gameObject.GetComponentInChildren<TMP_Text>().text = "Waiting for input...";
+        gameObject.GetComponentInChildren<TMP_Text>().text = ">  <";
 
         var bindingIndex = playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input);
 
@@ -47,11 +58,20 @@ public class RebindButton : MonoBehaviour
 
     void CancelRebind()
     {
-        gameObject.GetComponentInChildren<TMP_Text>().text =
-        InputControlPath.ToHumanReadableString(
-            playerInput.actions[input].bindings[0].effectivePath,
-            InputControlPath.HumanReadableStringOptions.OmitDevice);
-
+        if (!isComposite)
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions[input].bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
+        else
+        {
+            gameObject.GetComponentInChildren<TMP_Text>().text =
+                InputControlPath.ToHumanReadableString(
+                playerInput.actions["Move"].bindings[playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input)].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+        }
         rebindingOperation.Dispose();
     }
 
