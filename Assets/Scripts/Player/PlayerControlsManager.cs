@@ -241,4 +241,11 @@ public class PlayerControlsManager : MonoBehaviour
 
         PlayerPrefs.SetString(RebindsKey, rebinds);
     }
+
+    public void ClearBindings()
+    {
+        PlayerPrefs.SetString(RebindsKey, string.Empty);
+
+        playerInput.actions.LoadBindingOverridesFromJson(string.Empty);
+    }
 }

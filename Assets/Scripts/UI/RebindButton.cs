@@ -15,7 +15,9 @@ public class RebindButton : MonoBehaviour
 
         rebindingOperation = playerInput.actions[input].PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
+            .WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation => EndRebind())
+            .OnCancel(operation => EndRebind())
             .Start();
     }
 
@@ -28,17 +30,22 @@ public class RebindButton : MonoBehaviour
         rebindingOperation = playerInput.actions["Move"].PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
             .WithTargetBinding(bindingIndex)
+            .WithCancelingThrough("<Keyboard>/escape")
             .OnComplete(operation => EndRebind())
+            .OnCancel(operation => EndRebind())
             .Start();
     }
 
     void EndRebind()
     {
-        var control = rebindingOperation.selectedControl;
+        int bindingIndex = rebindingOperation.action.GetBindingIndexForControl(rebindingOperation.selectedControl);
+
+        gameObject.GetComponentInChildren<TMP_Text>().text =
+        InputControlPath.ToHumanReadableString(
+            rebindingOperation.action.bindings[bindingIndex].effectivePath, 
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         rebindingOperation.Dispose();
-
-        gameObject.GetComponentInChildren<TMP_Text>().text = control.ToString().Split('/')[2];
 
         player.SaveBindings();
     }
