@@ -18,6 +18,7 @@ public class Player : MonoBehaviour
     public float interactRange;
     public GameObject healText;
 
+    HurtIndicator hurtIndicator;
 
     public AudioSource audioPlayer;
     float healCharge;
@@ -30,6 +31,7 @@ public class Player : MonoBehaviour
     {
         currentHP = maxHP;
         UpdateHealthDisplay();
+        hurtIndicator = GetComponent<HurtIndicator>();
     }
 
     private void Update()
@@ -85,6 +87,7 @@ public class Player : MonoBehaviour
         currentHP -= dmg;
         audioPlayer.Play();
         UpdateHealthDisplay();
+        hurtIndicator.Hurt();
     }
 
     public void TakeDamageOverTime(float dmg)
