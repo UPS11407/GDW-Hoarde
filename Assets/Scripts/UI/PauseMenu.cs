@@ -33,7 +33,6 @@ public class PauseMenu : MonoBehaviour
                 }
                 
             }
-            Debug.Log(playerContr.currentActionMap.ToString());
         }
         else
         {

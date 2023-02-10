@@ -11,14 +11,18 @@ public class RebindButton : MonoBehaviour
     public bool isComposite;
     public string input;
 
+    Button button;
+
     private void Start()
     {
         DoButtonText();
+        button = GetComponent<Button>();
     }
     
     public void StartRebind()
     {
         gameObject.GetComponentInChildren<TMP_Text>().text = ">  <";
+        button.interactable = false;
 
         rebindingOperation = playerInput.actions[input].PerformInteractiveRebinding()
             .OnMatchWaitForAnother(0.1f)
@@ -45,6 +49,8 @@ public class RebindButton : MonoBehaviour
 
     void CancelRebind()
     {
+        button.interactable = true;
+
         if (!isComposite)
         {
             gameObject.GetComponentInChildren<TMP_Text>().text =
@@ -64,6 +70,8 @@ public class RebindButton : MonoBehaviour
 
     void EndRebind()
     {
+        button.interactable = true;
+
         int bindingIndex = rebindingOperation.action.GetBindingIndexForControl(rebindingOperation.selectedControl);
 
         gameObject.GetComponentInChildren<TMP_Text>().text =
