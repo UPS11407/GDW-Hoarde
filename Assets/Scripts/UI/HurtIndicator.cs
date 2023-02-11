@@ -26,6 +26,11 @@ public class HurtIndicator : MonoBehaviour
             timeToFade -= Time.deltaTime;
         }
 
+        if (player.GetHP() > player.maxHP * (hpToIndicatorStay / 100))
+        {
+            //heartbeat noise
+        }
+
         indicator.color = Color.Lerp(new Color(255, 255, 255, 0), Color.white, fadePercent);
     }
 
