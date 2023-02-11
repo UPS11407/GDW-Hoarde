@@ -7,7 +7,8 @@ public class RebindButton : MonoBehaviour
 {
     public PlayerInput playerInput;
     private InputActionRebindingExtensions.RebindingOperation rebindingOperation;
-    public PlayerControlsManager player;
+    public PlayerControlsManager playerControlsManager;
+    public Player player;
     public bool isComposite;
     public string input;
 
@@ -35,6 +36,7 @@ public class RebindButton : MonoBehaviour
     public void StartRebindComposite()
     {
         gameObject.GetComponentInChildren<TMP_Text>().text = ">  <";
+        button.interactable = false;
 
         var bindingIndex = playerInput.actions["Move"].bindings.IndexOf(x => x.isPartOfComposite && x.name == input);
 
@@ -81,7 +83,9 @@ public class RebindButton : MonoBehaviour
 
         rebindingOperation.Dispose();
 
-        player.SaveBindings();
+        playerControlsManager.SaveBindings();
+
+        player.UpdateBindings();
     }
 
     public void DoButtonText()

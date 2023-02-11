@@ -16,8 +16,9 @@ public class Player : MonoBehaviour
     public LayerMask interactibleMask;
     public GameObject interactText;
     public float interactRange;
-    public GameObject healText;
+    public TMP_Text healText;
 
+    PlayerControlsManager playerControlsManager;
     HurtIndicator hurtIndicator;
 
     public AudioSource audioPlayer;
@@ -27,22 +28,29 @@ public class Player : MonoBehaviour
     float meleeDelay = 1.0f;
     float meleeTime;
     float meleeDamage = 4.0f;
+
+    string[] bindings;
+
     void Start()
     {
         currentHP = maxHP;
         UpdateHealthDisplay();
         hurtIndicator = GetComponent<HurtIndicator>();
+        playerControlsManager = GetComponent<PlayerControlsManager>();
+        bindings = new string[2];
+
+        UpdateBindings();
     }
 
     private void Update()
     {
         if(healCharge == maxHealCharge)
         {
-            healText.SetActive(true);
+            healText.gameObject.SetActive(true);
         }
         else
         {
-            healText.SetActive(false);
+            healText.gameObject.SetActive(false);
         }
 
         if(currentHP <= 0)
@@ -155,7 +163,7 @@ public class Player : MonoBehaviour
         if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, layerMask: 1 << 8))
         {
             interactText.SetActive(true);
-            interactText.GetComponent<TextMeshProUGUI>().text = $"(E) - {hit.transform.name}";
+            interactText.GetComponent<TextMeshProUGUI>().text = $"{bindings[0]} - {hit.transform.name}";
         }
         else
         {
@@ -186,6 +194,17 @@ public class Player : MonoBehaviour
         
 
     }
-    
 
+    public void UpdateBindings()
+    {
+        bindings[0] = InputControlPath.ToHumanReadableString(
+                playerControlsManager.playerInput.actions["Interact"].bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        bindings[1] = InputControlPath.ToHumanReadableString(
+                playerControlsManager.playerInput.actions["Heal"].bindings[0].effectivePath,
+                InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        healText.text = $"Press {bindings[1]} to Heal";
+    }
 }
