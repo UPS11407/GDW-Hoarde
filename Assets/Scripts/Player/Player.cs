@@ -148,7 +148,7 @@ public class Player : MonoBehaviour
     {
         RaycastHit rayhit;
 
-        Physics.Raycast(origin: Camera.main.transform.position, direction: Camera.main.transform.forward, out rayhit, maxDistance: interactRange, layerMask: 1 << 8);
+        Physics.Raycast(origin: Camera.main.transform.position, direction: Camera.main.transform.forward, out rayhit, maxDistance: interactRange, layerMask: 1 << 8, QueryTriggerInteraction.Collide);
         //Debug.DrawRay(start: Camera.main.transform.position, dir: Camera.main.transform.forward * 10, Color.red, 60);
 
         if (rayhit.collider != null)
@@ -160,7 +160,7 @@ public class Player : MonoBehaviour
     void CheckIfInteractible()
     {
         RaycastHit hit;
-        if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, layerMask: 1 << 8))
+        if (Physics.Raycast(camera.transform.position, camera.transform.TransformDirection(Vector3.forward), out hit, interactRange, layerMask: 1 << 8, QueryTriggerInteraction.Collide))
         {
             interactText.SetActive(true);
             interactText.GetComponent<TextMeshProUGUI>().text = $"{bindings[0]} - {hit.transform.name}";

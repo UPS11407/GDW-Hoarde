@@ -4,7 +4,7 @@ using UnityEngine;
 
 /*Script for opening doors, just a simple on trigger, open the door, and on exit,
  leave. TWEAKS NEEDED: Bullets currently act as  a door opener*/
-public class DoorController : MonoBehaviour
+public class DoorController : MonoBehaviour, IInteractible
 {
     Animator doorAnim;
 
@@ -15,7 +15,7 @@ public class DoorController : MonoBehaviour
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("Enemy") || other.tag.Equals("Player"))
+        if(other.tag.Equals("Enemy"))
         doorAnim.SetBool("isOpening", true);
     }
 
@@ -23,5 +23,10 @@ public class DoorController : MonoBehaviour
     {
         if (other.tag.Equals("Enemy") || other.tag.Equals("Player"))
             doorAnim.SetBool("isOpening", false);
+    }
+    public void Interact()
+    {
+       
+        doorAnim.SetBool("isOpening", true);
     }
 }

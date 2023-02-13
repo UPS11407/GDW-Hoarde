@@ -11,8 +11,8 @@ GameObject:
   - component: {fileID: 3865692365216213833}
   - component: {fileID: 3865692365216213175}
   - component: {fileID: 3865692365216213832}
-  m_Layer: 0
-  m_Name: DoorEntryTrigger
+  m_Layer: 8
+  m_Name: Open Door
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
