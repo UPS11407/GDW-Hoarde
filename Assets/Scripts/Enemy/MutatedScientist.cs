@@ -19,6 +19,22 @@ public class MutatedScientist : EnemyBase
         }
     }
 
+    public override void CheckIfDead()
+    {
+        if (currentHP <= 0)
+        {
+            dropVal = Random.Range(0, 100);
+
+            if (dropVal < healDropChance)
+            {
+                DropPickup();
+            }
+            agent.enabled = false;
+            GameObject projectile = (GameObject)Instantiate(projectilePrefab, projectileStart.transform.position, projectileStart.transform.rotation);
+            Destroy(gameObject);
+        }
+    }
+
     IEnumerator AttackPlayer()
     {
         attacking = true;
@@ -33,6 +49,6 @@ public class MutatedScientist : EnemyBase
     public void Shoot()
     {
         GameObject projectile = (GameObject)Instantiate(projectilePrefab, projectileStart.transform.position, projectileStart.transform.rotation);
-        projectile.GetComponent<Rigidbody>().velocity = (player.transform.position - projectile.transform.position).normalized * projectileSpeed;
+        projectile.GetComponent<Rigidbody>().velocity = (player.transform.position - projectile.transform.position).normalized * (projectileSpeed + Random.Range(-7,0));
     }
 }

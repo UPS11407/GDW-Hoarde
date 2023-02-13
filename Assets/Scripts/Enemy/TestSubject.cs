@@ -5,7 +5,26 @@ using UnityEngine;
 public class TestSubject : EnemyBase
 {
     bool attacking = false;
-    
+
+    private void Start()
+    {
+        switch (Random.Range(0, 8))
+        {
+            case 8:
+                _speed *= 4.5f;
+                break;
+            case 7:
+                _speed *= 3.0f;
+                break;
+            case 6:
+
+            case 5:
+                _speed *= 1.5f;
+                break;
+            
+        }
+        UpdateSpeed();
+    }
 
     private void Update()
     {

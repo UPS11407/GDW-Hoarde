@@ -33,13 +33,14 @@ public class EnemyBase : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
-        agent.speed = _speed;
+        UpdateSpeed();
 
         currentHP = _maxHP;
     }
 
     public void EnemyUpdate()
     {
+
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
         if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
@@ -50,6 +51,10 @@ public class EnemyBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+    }
+    public void UpdateSpeed()
+    {
+        agent.speed = _speed;
     }
 
     /// <summary>

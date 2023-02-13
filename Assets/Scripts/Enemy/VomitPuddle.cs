@@ -13,7 +13,7 @@ public class VomitPuddle : MonoBehaviour
         //Destroy(this.gameObject, _duration);
     }
 
-    private void Update()
+    private void FixedUpdate()
     {
         if (isOnPuddle)
         {

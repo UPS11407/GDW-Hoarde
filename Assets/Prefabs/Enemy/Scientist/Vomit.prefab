@@ -111,7 +111,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bfa65ff5f9a1081499524ade0a27729a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _directDamage: 5
+  _directDamage: 2
   _puddleDamage: 1
   vomitPuddlePrefab: {fileID: 7475675749480729888, guid: 52507245476f0ae4ea3852b9e30d4348, type: 3}
   puddleDuration: 5
