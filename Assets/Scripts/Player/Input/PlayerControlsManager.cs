@@ -11,7 +11,7 @@ public class PlayerControlsManager : MonoBehaviour
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
 
-    PlayerInput playerInput;
+    public PlayerInput playerInput;
 
     //player's speed
     public float moveSpeed = 6f;
@@ -195,7 +195,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed += ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed += ctx => ToggleMenu();
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].performed += ctx => Sprint(true);
+        playerInput.actions["Sprint"].started += ctx => Sprint(true);
         playerInput.actions["Sprint"].canceled += ctx => Sprint(false);
         playerInput.actions["Crouch"].canceled += ctx => Crouch();
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
@@ -247,5 +247,7 @@ public class PlayerControlsManager : MonoBehaviour
         PlayerPrefs.SetString(RebindsKey, string.Empty);
 
         playerInput.actions.LoadBindingOverridesFromJson(string.Empty);
+
+        player.UpdateBindings();
     }
 }

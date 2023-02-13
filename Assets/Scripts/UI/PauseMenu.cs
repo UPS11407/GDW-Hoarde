@@ -33,7 +33,6 @@ public class PauseMenu : MonoBehaviour
                 }
                 
             }
-            Debug.Log(playerContr.currentActionMap.ToString());
         }
         else
         {
@@ -52,6 +51,7 @@ public class PauseMenu : MonoBehaviour
         HUD.SetActive(false);
         menu.SetActive(true);
         Time.timeScale = 0;
+        //
         foreach(Gun guns in weaponManager.guns)
         {
             guns.canSwap = false;

@@ -313,7 +313,7 @@ public class Gun : MonoBehaviour
 
             audioSource.PlayOneShot(fireSound);
             cameraRecoil.Recoil(-recoil, recoil * 0.5f, recoil * 0.175f);
-            muzzleFlash.FlashMuzzle(damage, bulletsPerShot, 0.05f);
+            muzzleFlash.FlashMuzzle(damage, bulletsPerShot, 0.03f);
 
             UpdateDisplay();
 
