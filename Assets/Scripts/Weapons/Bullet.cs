@@ -21,9 +21,9 @@ public class Bullet : MonoBehaviour
             foreach (var hitCollider in hitColliders)
             {
                 if(hitCollider.gameObject.tag == "Enemy")
-            {
+                {
                 hitCollider.GetComponent<EnemyBase>().TakeDamage(damage);
-            }
+                }
             }
             GameObject boom = (GameObject)Instantiate(fireEffect, transform.position, transform.rotation);
             Destroy(boom, 2.5f);

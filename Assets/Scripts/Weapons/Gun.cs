@@ -155,7 +155,7 @@ public class Gun : MonoBehaviour
 
     public void RunReload()
     {
-        if (canReload)
+        if (canReload && currentAmmo != maxAmmo)
         {
             StartCoroutine(Reload());
         }
@@ -225,7 +225,8 @@ public class Gun : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        //currentAmmo = maxAmmo;
+        currentAmmo = 0;
+        Reload();
         shootTime = Time.time + modDelay;
 
         UpdateDisplay();
