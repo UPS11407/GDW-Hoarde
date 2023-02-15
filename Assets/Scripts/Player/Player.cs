@@ -8,8 +8,6 @@ using TMPro;
 public class Player : MonoBehaviour
 {
     public float maxHP;
-    public Image hpImage;
-    public Image healChargeBar;
     public float maxHealCharge = 4.0f;
 
     public GameObject camera;
@@ -137,8 +135,7 @@ public class Player : MonoBehaviour
 
     void UpdateHealthDisplay()
     {
-        hpImage.fillAmount = currentHP / maxHP;
-        healChargeBar.fillAmount = healCharge / maxHealCharge;
+        GetComponent<HealthUI>().SetHealth(currentHP / maxHP);
     }
 
     /// <summary>
