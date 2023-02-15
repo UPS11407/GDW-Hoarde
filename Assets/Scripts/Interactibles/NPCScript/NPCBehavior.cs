@@ -53,7 +53,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             
             text.SetText(a);
 
-            yield return new WaitForSeconds(0.01f);
+            yield return new WaitForSeconds(0.0125f);
         }
         if (passable[state])
         {
