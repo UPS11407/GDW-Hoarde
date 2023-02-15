@@ -11,8 +11,6 @@ public class HealthUI : MonoBehaviour
     {
         healthbar.fillAmount = healthPercentage;
 
-        Debug.Log(healthPercentage);
-
         if (healthPercentage * 100 > 50)
         {
             healthbar.color = Color.Lerp(Color.yellow, Color.green, (healthPercentage * 100 - 50) / 50);
