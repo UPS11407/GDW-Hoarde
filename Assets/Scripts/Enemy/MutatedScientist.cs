@@ -48,6 +48,8 @@ public class MutatedScientist : EnemyBase
 
     public void Shoot()
     {
+        transform.rotation = Quaternion.LookRotation(player.transform.position - transform.position);
+        transform.rotation = Quaternion.Euler(0, transform.rotation.eulerAngles.y, 0);
         GameObject projectile = (GameObject)Instantiate(projectilePrefab, projectileStart.transform.position, projectileStart.transform.rotation);
         projectile.GetComponent<Rigidbody>().velocity = (player.transform.position - projectile.transform.position).normalized * (projectileSpeed + Random.Range(-7,0));
     }
