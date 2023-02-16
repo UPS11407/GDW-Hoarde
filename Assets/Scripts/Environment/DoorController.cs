@@ -29,4 +29,8 @@ public class DoorController : MonoBehaviour, IInteractible
        
         doorAnim.SetBool("isOpening", true);
     }
+    public void Open()
+    {
+        doorAnim.SetBool("isOpening", true);
+    }
 }
