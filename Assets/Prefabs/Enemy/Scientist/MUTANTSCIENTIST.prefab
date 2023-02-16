@@ -10833,7 +10833,7 @@ GameObject:
   - component: {fileID: 5424629145981525831}
   - component: {fileID: 5424629145981525824}
   m_Layer: 3
-  m_Name: MUTANTSCIENTIST
+  m_Name: MutantScientist
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -10925,7 +10925,7 @@ MonoBehaviour:
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   healDropChance: 65
   projectilePrefab: {fileID: 2270862220715573762, guid: 9e78468b15b9bdf45b4a755cf80022e3, type: 3}
-  projectileStart: {fileID: 0}
+  projectileStart: {fileID: 516664915592899043}
   projectileSpeed: 11
 --- !u!195 &5424629145981525824
 NavMeshAgent:

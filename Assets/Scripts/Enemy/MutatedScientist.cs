@@ -38,10 +38,10 @@ public class MutatedScientist : EnemyBase
     IEnumerator AttackPlayer()
     {
         attacking = true;
-        animator.SetBool("isAttacking", true);
+       // animator.SetBool("isAttacking", true);
         yield return new WaitForSeconds(0.6f);
         attacking = false;
-        animator.SetBool("isAttacking", false);
+       // animator.SetBool("isAttacking", false);
 
         Shoot();
     }
