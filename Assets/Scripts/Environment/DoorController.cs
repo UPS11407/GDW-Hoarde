@@ -7,7 +7,7 @@ using UnityEngine;
 public class DoorController : MonoBehaviour, IInteractible
 {
     Animator doorAnim;
-
+    bool locked = false;
     // Start is called before the first frame update
     void Start()
     {
@@ -15,8 +15,12 @@ public class DoorController : MonoBehaviour, IInteractible
     }
     private void OnTriggerEnter(Collider other)
     {
-        if(other.tag.Equals("Enemy"))
-        doorAnim.SetBool("isOpening", true);
+
+        if (other.tag.Equals("Enemy") && !locked)
+        {
+            doorAnim.SetBool("isOpening", true);
+        }
+        
     }
 
     private void OnTriggerExit(Collider other)
@@ -26,11 +30,23 @@ public class DoorController : MonoBehaviour, IInteractible
     }
     public void Interact()
     {
-       
-        doorAnim.SetBool("isOpening", true);
+
+        Open();
     }
     public void Open()
     {
-        doorAnim.SetBool("isOpening", true);
+        if (!locked)
+        {
+            doorAnim.SetBool("isOpening", true);
+        }
+        
+    }
+    public void Lock()
+    {
+        locked = true;
+    }
+    public void Unlock()
+    {
+        locked = false;
     }
 }

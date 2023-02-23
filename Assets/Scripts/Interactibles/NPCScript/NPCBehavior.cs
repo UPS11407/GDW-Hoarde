@@ -14,6 +14,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     bool interactible = true;
     public BoxCollider genDoorColl;
     public BoxCollider[] doorColliders;
+    public Door[] eventDoors;
     public GameObject[] enemies;
     GameObject player;
     [SerializeField] float dialogueRange;
@@ -24,8 +25,10 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         genDoorColl.enabled = false;
         foreach(BoxCollider coll in doorColliders)
         {
-            coll.enabled = false;
+            coll.gameObject.GetComponent<DoorController>().Lock();
+
         }
+        
         foreach (GameObject enemy in enemies)
         {
             enemy.SetActive(false);
@@ -83,9 +86,10 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         {
             foreach (BoxCollider coll in doorColliders)
             {
-                coll.enabled = true;
+                coll.gameObject.GetComponent<DoorController>().Unlock();
             }
             
+
             foreach (GameObject enemy in enemies)
             {
                 if(enemy != null) enemy.SetActive(true);

@@ -68,7 +68,7 @@ public class Gun : MonoBehaviour
     float chargeTime;
     bool initialChargeDone = false;
 
-    bool modReloadRequired;
+    public bool modReloadRequired;
 
     [SerializeField] LineRenderer railLine;
     [SerializeField] TrailRenderer bulletTracer;
@@ -227,9 +227,10 @@ public class Gun : MonoBehaviour
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
 
-        currentAmmo = 0;
+        
         if (modReloadRequired)
         {
+            currentAmmo = 0;
             Reload();
             modReloadRequired = false;
         }
