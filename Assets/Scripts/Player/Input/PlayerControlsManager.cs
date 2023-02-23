@@ -92,7 +92,7 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (enableLook) DoLook(mouseSensitivity);
 
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift) && IsGrounded())
         {
             moveSpeed = 9f;
             Camera.main.fieldOfView = quickFOV;
@@ -101,7 +101,7 @@ public class PlayerControlsManager : MonoBehaviour
         else
         {
             Camera.main.fieldOfView = 60.0f;
-            moveSpeed = 6f;
+          //  moveSpeed = 6f;
             audioSource.pitch = 0.66f;
         }
         if (_rb.velocity.magnitude >= 5.5 && IsGrounded())
@@ -249,5 +249,17 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions.LoadBindingOverridesFromJson(string.Empty);
 
         player.UpdateBindings();
+    }
+
+    private void OnCollisionEnter(Collision collision)
+    {
+        if (collision.gameObject.tag == "Stairs")
+        {
+               moveSpeed = 2f;
+        }
+        else
+        {
+            moveSpeed = 6f;
+        }
     }
 }
