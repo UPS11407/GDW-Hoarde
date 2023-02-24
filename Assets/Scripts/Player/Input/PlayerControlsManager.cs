@@ -202,6 +202,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
+        playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed += ctx => pauseMenu.RunPause();
     }
 
     void DeinitPlayerActions()
@@ -218,6 +219,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
+        playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed -= ctx => pauseMenu.RunPause();
     }
 
     public void ReinitPlayerActions()
