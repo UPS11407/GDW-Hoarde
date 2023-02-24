@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEditor.VersionControl;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
@@ -33,7 +34,7 @@ public class PlayerControlsManager : MonoBehaviour
     public Transform cameraParent;
 
     public bool enableLook = true;
-
+    bool onStairs = false;
     AudioSource audioSource;
 
     float quickFOV = 75.0f;
@@ -98,10 +99,10 @@ public class PlayerControlsManager : MonoBehaviour
             Camera.main.fieldOfView = quickFOV;
             audioSource.pitch = 1.0f;
         }
-        else
+        else if (!onStairs)
         {
             Camera.main.fieldOfView = 60.0f;
-          //  moveSpeed = 6f;
+            moveSpeed = 6f;
             audioSource.pitch = 0.66f;
         }
         if (_rb.velocity.magnitude >= 5.5 && IsGrounded())
@@ -256,10 +257,13 @@ public class PlayerControlsManager : MonoBehaviour
         if (collision.gameObject.tag == "Stairs")
         {
                moveSpeed = 2f;
+            onStairs = true;
         }
         else
         {
             moveSpeed = 6f;
+            onStairs = false;
+
         }
     }
 }
