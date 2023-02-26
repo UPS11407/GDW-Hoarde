@@ -22,3 +22,6 @@ Texture filtering: Used a 2x2 box filter that takes the average value of the nea
 Character Outlines: Outlines with a main texture image were added as a replacement for the standard shader. The amount of extrusion for the outline is larger due to the models.\
 Particles: The default Unity particle system was used in conjunction with the rim lighting learned in class. The particles would trigger from a separate C# script upon enemy death.\
 Shadows: The shadows were made through a shader that was placed onto certain objects. To brighten the objects, the objects colour value was multiplied by 5.
+
+Outside References:
+Blood decal 2D texture: https://opengameart.org/content/filth-texture-set-trakrustdecal1tga. Used this as a placeholder texture for the decal for when the enemy is damaged, since I'm horrible at drawing. It will be replaced once our 2D artist makes a blood splatter texture.
