@@ -16,6 +16,8 @@ public class Bloom : MonoBehaviour
     // Start is called before the first frame update
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
     {
+        const int BoxDownPass = 0;
+        const int BoxUpPass = 1;
 
         if (bloom == null)
         {
@@ -29,7 +31,7 @@ public class Bloom : MonoBehaviour
 
         RenderTextureFormat format = source.format;
         RenderTexture currentDestination = textures[0] = RenderTexture.GetTemporary(width, height, 0, format);
-        Graphics.Blit(source, currentDestination, bloom);
+        Graphics.Blit(source, currentDestination, bloom, BoxDownPass);
         RenderTexture currentSource = currentDestination;
         int i = 1;
         for (; iterations < i; i++)
@@ -41,7 +43,7 @@ public class Bloom : MonoBehaviour
                 break;
             }
             currentDestination = textures[i] = RenderTexture.GetTemporary(width, height, 0, format);
-            Graphics.Blit(currentSource, currentDestination, bloom);
+            Graphics.Blit(currentSource, currentDestination, bloom, BoxDownPass);
             currentSource = currentDestination;
 
         }
@@ -49,12 +51,12 @@ public class Bloom : MonoBehaviour
         {
             currentDestination = textures[i];
             textures[i] = null;
-            Graphics.Blit(currentSource, currentDestination, bloom);
+            Graphics.Blit(currentSource, currentDestination, bloom, BoxUpPass);
             RenderTexture.ReleaseTemporary(currentSource);
             currentSource = currentDestination;
         }
         Graphics.Blit(currentDestination, destination, bloom);
-        Graphics.Blit(currentDestination, destination, colourGrading);
+        Graphics.Blit(currentDestination, destination, colourGrading, BoxUpPass);
         RenderTexture.ReleaseTemporary(currentSource);
         
     }

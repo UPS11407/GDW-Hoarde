@@ -22,9 +22,7 @@ Shader "Custom/Enemy"
 
         sampler2D _MainTex;
         sampler2D _Decal1;
-        sampler2D _Decal2;
         float _ShowDecal1;
-        float _ShowDecal2;
         half _Shininess;
         float4 _BloodColor;
 

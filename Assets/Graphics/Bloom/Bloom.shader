@@ -8,7 +8,8 @@ Shader "Custom/Bloom"
     }
     CGINCLUDE
         #include "UnityCG.cginc"
-        sampler2D _MainTex;
+        sampler2D _MainTex, _SourceTex;
+        float4 _MainTex_TexelSize;
         struct VertexData {
             float4 vertex : POSITION;
             float2 uv : TEXCOORD0;
@@ -23,6 +24,14 @@ Shader "Custom/Bloom"
             i.uv = v.uv;
             return i;
         }
+        half3 Sample(float2 uv){
+            return tex2D(_MainTex, uv).rgb;
+        }
+        half3 SampleBox(float2 uv, float delta){
+            float4 o = _MainTex_TexelSize.xyxy * float2(-delta, delta).xxyy;
+            half3 s = Sample(uv + o.xy) + Sample(uv + o.zy) + Sample(uv + o.xw) + Sample(uv + o.zw);
+            return s * 0.25f;
+        }
     ENDCG
     SubShader
     {
@@ -36,7 +45,8 @@ Shader "Custom/Bloom"
             #pragma vertex VertexProgram
             #pragma fragment FragmentProgram
             half4 FragmentProgram (Interpolators i) : SV_Target {
-                return tex2D(_MainTex, i.uv);
+                //return tex2D(_MainTex, i.uv);
+                return half4(SampleBox(i.uv, 0.5), 1);
             }
             ENDCG
         }
