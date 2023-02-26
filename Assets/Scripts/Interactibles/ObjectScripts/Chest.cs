@@ -54,7 +54,9 @@ public class Chest : MonoBehaviour, IInteractible
     {
         if (canInteract)
         {
-            animator.Play("Open");
+            animator.Play("Cube");
+            animator.Play("Glass");
+            animator.Play("Handle");
             canInteract = false;
             if (tutorialChest)
             {
