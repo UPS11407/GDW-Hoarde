@@ -61,11 +61,11 @@ Material:
         m_Offset: {x: 0, y: 0}
     - _myBump:
         m_Texture: {fileID: 2800000, guid: 030b5bbfc79bb474987d2f0faa71c700, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     - _texture:
         m_Texture: {fileID: 2800000, guid: c52b2f207a97cc3468cdfd1ff1ddd741, type: 3}
-        m_Scale: {x: 1, y: 1}
+        m_Scale: {x: 0.5, y: 0.5}
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
