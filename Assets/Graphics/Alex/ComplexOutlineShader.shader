@@ -14,7 +14,7 @@ Shader "Alexander/ComplexOutlineShader"
     }
         SubShader
         {
-        CGPROGRAM //SECOND PASS
+        CGPROGRAM //first pass
             #pragma surface surf Standard //creating basic lambert shader
             struct Input
             {
@@ -39,7 +39,7 @@ Shader "Alexander/ComplexOutlineShader"
             Pass{
                 Cull Front
 
-                CGPROGRAM
+                CGPROGRAM // second pass
             //access vertex and fragment shader
             #pragma vertex vert
             #pragma fragment frag    
