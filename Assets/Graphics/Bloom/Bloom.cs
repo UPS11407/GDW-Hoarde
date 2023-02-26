@@ -55,8 +55,8 @@ public class Bloom : MonoBehaviour
             RenderTexture.ReleaseTemporary(currentSource);
             currentSource = currentDestination;
         }
-        Graphics.Blit(currentDestination, destination, bloom);
-        Graphics.Blit(currentDestination, destination, colourGrading, BoxUpPass);
+        Graphics.Blit(currentDestination, destination, bloom, BoxUpPass);
+        Graphics.Blit(currentDestination, destination, colourGrading);
         RenderTexture.ReleaseTemporary(currentSource);
         
     }
