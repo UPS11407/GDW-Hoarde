@@ -393,9 +393,6 @@ MonoBehaviour:
   chaseRange: 200
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   healDropChance: 20
-  mat: {fileID: 2100000, guid: 9ba36e81d1b41d1438057f75a6775c62, type: 2}
-  isDecalOff: 1
-  character: {fileID: 4837086918367894315}
 --- !u!195 &2169045710317889876
 NavMeshAgent:
   m_ObjectHideFlags: 0
@@ -947,7 +944,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 587fa9c47ee5b434394460461324aa80, type: 2}
+  - {fileID: 2100000, guid: 18ae44b5906fb554ab05143be140523a, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
