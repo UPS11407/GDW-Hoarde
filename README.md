@@ -3,7 +3,7 @@
  Second Year GDW Project - Ontario Tech University
  
 **Computer Graphics Links:**  
-Slides/Presentation: https://docs.google.com/presentation/d/1t6Ub1c58rGJUVIe3Jk6XOE_ePL8v9IEWOLOvpZk1RHU/edit?usp=sharing  
+Slides/Presentation: https://docs.google.com/presentation/d/1NFASQ3cFClaRGrcFFls1AlGgtkelJdcnCQDGvHQe_uA/edit#slide=id.p
 Trello/Planner: https://trello.com/invite/b/7Xf5ASdL/ATTI789cda3810159fbbbe0fb832bbe51c80ACC868BA/computer-graphics-planning  
 Group Screen Capture: https://media.discordapp.net/attachments/933432174605123594/1065041380327575552/MNC.PNG?width=1440&height=173  
 Presentation Video: https://youtu.be/NvNogDoG7h4  
