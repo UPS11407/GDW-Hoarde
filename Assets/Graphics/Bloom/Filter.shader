@@ -1,4 +1,4 @@
-Shader "Custom/Bloom"
+Shader "Custom/Filter"
 {
     Properties
     {

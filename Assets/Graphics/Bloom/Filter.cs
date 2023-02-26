@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using System;
 
-public class Bloom : MonoBehaviour
+public class Filter : MonoBehaviour
 {
     public Shader bloomShader;
 
