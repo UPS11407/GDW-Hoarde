@@ -45,7 +45,7 @@ Shader "Alexander/Shadow"
         {
             fixed4 col = tex2D(_MainTex, i.uv);
         fixed shadow = SHADOW_ATTENUATION(i);
-        col.rgb *= i.diff * shadow;
+        col.rgb *= i.diff * shadow * 5;
         return col;
         }
           ENDCG
@@ -78,5 +78,6 @@ Shader "Alexander/Shadow"
         }
         ENDCG
     }
+                    UsePass "Legacy Shaders/VertexLit/SHADOWCASTER"
     }
 }
