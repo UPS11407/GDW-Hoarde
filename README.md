@@ -12,7 +12,7 @@ Members in Computer Graphics:
 Alexander Phillips: A multi-faceted dev that has worked on various programming, design but mainly art contributions to the game.  
 Ethan Zafra: Mainly a programmer that works on the game's gameplay scripts. In the previous semester, I've tried working on lighting to improve the level's visual appearance.  
 
-Contribution for group assignment:
+Contribution for group assignment:\
 Alexander Phillips: 
 Ethan Zafra: Enemy Decals and Texture Filtering.
 
