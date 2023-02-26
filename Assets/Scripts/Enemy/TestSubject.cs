@@ -5,9 +5,12 @@ using UnityEngine;
 public class TestSubject : EnemyBase
 {
     bool attacking = false;
-
+    public bool isDecalOff = true;
+    [SerializeField] GameObject character;
+    
     private void Start()
     {
+        
         switch (Random.Range(0, 8))
         {
             case 8:
@@ -34,6 +37,8 @@ public class TestSubject : EnemyBase
         {
             StartCoroutine(AttackPlayer());
         }
+
+        DamagedDecalOn();
     }
 
     IEnumerator AttackPlayer()
@@ -47,6 +52,17 @@ public class TestSubject : EnemyBase
         if (GetPlayerDistance() <= _attackRange + 0.5f)
         {
             player.GetComponent<Player>().TakeDamage(_damage);
+        }
+    }
+
+    void DamagedDecalOn()
+    {
+        if(_maxHP > currentHP && isDecalOff)
+        {
+            Debug.Log("Boom");
+            
+            character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
+            isDecalOff = false;
         }
     }
 }
