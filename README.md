@@ -6,7 +6,7 @@
 Slides/Presentation: https://docs.google.com/presentation/d/1NFASQ3cFClaRGrcFFls1AlGgtkelJdcnCQDGvHQe_uA/edit#slide=id.p
 Trello/Planner: https://trello.com/invite/b/7Xf5ASdL/ATTI789cda3810159fbbbe0fb832bbe51c80ACC868BA/computer-graphics-planning  
 Group Screen Capture: https://media.discordapp.net/attachments/933432174605123594/1065041380327575552/MNC.PNG?width=1440&height=173  
-Presentation Video: https://youtu.be/NvNogDoG7h4  
+Presentation Video: https://youtu.be/gJ7QWGfTnxA 
 
 Members in Computer Graphics:  
 Alexander Phillips: A multi-faceted dev that has worked on various programming, design but mainly art contributions to the game.  
