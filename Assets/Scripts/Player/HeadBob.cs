@@ -17,6 +17,8 @@ public class HeadBob : MonoBehaviour
     [SerializeField] private Transform _camera = null;
     [SerializeField] private Transform cameraParent = null;
 
+    [SerializeField] private float returnSpeed;
+
     //speed at which the head bob starts to occur, if we want to increase the head bob amount when the player-
     //sprints/dashes, we could set another toggle amount value for that.
     float toggleSpeed = 3.0f;
@@ -61,7 +63,7 @@ public class HeadBob : MonoBehaviour
     void ResetPos() //this method allows the camera to go back to it's local origin after movement
     {
         if (_camera.localPosition == startPos) return;
-        _camera.localPosition = Vector3.Lerp(_camera.localPosition, startPos, 1 * Time.deltaTime);
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, startPos, returnSpeed * Time.deltaTime);
     }
 
     Vector3 FocusTarget() //allows for the headbob to stay centered relative to where the player walks.
