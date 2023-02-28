@@ -40,6 +40,8 @@ public class PlayerControlsManager : MonoBehaviour
     float quickFOV = 75.0f;
     bool jumping;
 
+    public float speed;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -91,21 +93,11 @@ public class PlayerControlsManager : MonoBehaviour
 
     void Update()
     {
+        speed = new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude;
+
         if (enableLook) DoLook(mouseSensitivity);
 
-        if (Input.GetKey(KeyCode.LeftShift) && IsGrounded())
-        {
-            moveSpeed = 9f;
-            Camera.main.fieldOfView = quickFOV;
-            audioSource.pitch = 1.0f;
-        }
-        else if (!onStairs)
-        {
-            Camera.main.fieldOfView = 60.0f;
-            moveSpeed = 6f;
-            audioSource.pitch = 0.66f;
-        }
-        if (_rb.velocity.magnitude >= 5.5 && IsGrounded())
+        if (speed >= 5.5 && IsGrounded())
         {
             audioSource.mute = false;
         }
@@ -117,6 +109,8 @@ public class PlayerControlsManager : MonoBehaviour
             _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
             StartCoroutine(WaitForJump());
         }
+
+        
     }
 
     void DoLook(float sensitivity)
@@ -171,7 +165,18 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void Sprint(bool keyDown)
     {
-
+        if (IsGrounded() && keyDown)
+        {
+            moveSpeed = 9f;
+            Camera.main.fieldOfView = quickFOV;
+            audioSource.pitch = 1.0f;
+        }
+        else if (!onStairs)
+        {
+            Camera.main.fieldOfView = 60.0f;
+            moveSpeed = 6f;
+            audioSource.pitch = 0.66f;
+        }
     }
 
     IEnumerator WaitForJump()
@@ -181,11 +186,6 @@ public class PlayerControlsManager : MonoBehaviour
         yield return new WaitForSeconds(0.05f);
 
         jumping = false;
-    }
-
-    private void Crouch()
-    {
-
     }
 
     void InitPlayerActions()
@@ -198,7 +198,6 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
         playerInput.actions["Sprint"].started += ctx => Sprint(true);
         playerInput.actions["Sprint"].canceled += ctx => Sprint(false);
-        playerInput.actions["Crouch"].canceled += ctx => Crouch();
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
@@ -215,7 +214,6 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
         playerInput.actions["Sprint"].performed -= ctx => Sprint(true);
         playerInput.actions["Sprint"].canceled -= ctx => Sprint(false);
-        playerInput.actions["Crouch"].canceled -= ctx => Crouch();
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
@@ -252,6 +250,11 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions.LoadBindingOverridesFromJson(string.Empty);
 
         player.UpdateBindings();
+    }
+
+    public float GetSpeed()
+    {
+        return speed;
     }
 
     private void OnCollisionEnter(Collision collision)

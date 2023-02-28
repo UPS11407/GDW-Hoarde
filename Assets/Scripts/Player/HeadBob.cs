@@ -11,13 +11,23 @@ public class HeadBob : MonoBehaviour
     [SerializeField] private bool isEnabled = true;
 
     //amplitude and frequency values of head bob, these values can be tweaked to whatever works
-    [SerializeField, Range(0,0.1f)] private float amplitude = 0.015f;
-    [SerializeField, Range(0,30f)] private float frequency = 20.0f;
+    [SerializeField, Range(0, 30f)] private float frequency = 13.5f;
+
+    [SerializeField, Range(0,0.1f)] private float xAmplitude = 0.015f;
+    [SerializeField, Range(0,0.1f)] private float yAmplitude = 0.015f;
+
+    float frequencyStart;
+    float xAmpStart;
+    float yAmpStart;
 
     [SerializeField] private Transform _camera = null;
     [SerializeField] private Transform cameraParent = null;
 
     [SerializeField] private float returnSpeed;
+
+    [SerializeField] private AnimationCurve yMotionCurve;
+
+    [SerializeField] float timeSinceStart;
 
     //speed at which the head bob starts to occur, if we want to increase the head bob amount when the player-
     //sprints/dashes, we could set another toggle amount value for that.
@@ -29,6 +39,10 @@ public class HeadBob : MonoBehaviour
 
     private void Awake()
     {
+        frequencyStart = frequency;
+        xAmpStart = xAmplitude;
+        yAmpStart = yAmplitude;
+
         _rb = GetComponent<Rigidbody>();
         playerControlsManager = GetComponent<PlayerControlsManager>();
         startPos = _camera.localPosition;
@@ -40,23 +54,39 @@ public class HeadBob : MonoBehaviour
         if (!isEnabled) return; //if headbob isn't enabled.
 
         CheckMotion();
-        ResetPos();
+
+        if (playerControlsManager.speed < toggleSpeed) ResetPos();
+
         _camera.LookAt(FocusTarget());
     }
     void CheckMotion() //this method checks to see if the player is moving and isnt on the ground
     {
-        float speed = new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude;
-
-        if (speed < toggleSpeed) return;
+        if (playerControlsManager.speed < toggleSpeed) return;
         if (!playerControlsManager.IsGrounded()) return;
 
         PlayMotion(FootStepMotion());
     }
     Vector3 FootStepMotion() //this method simulates the footsteps
     {
+        timeSinceStart += Time.deltaTime;
         Vector3 pos = Vector3.zero;
-        pos.y += Mathf.Sin(Time.time * frequency) * amplitude;
-        pos.x += Mathf.Cos(Time.time * frequency / 2) * amplitude * 2;
+        pos.y += Mathf.Sin(timeSinceStart * frequency) * yAmplitude;
+        pos.x += Mathf.Sin(timeSinceStart * frequency / 2) * xAmplitude;
+
+        if (playerControlsManager.playerInput.actions["Sprint"].inProgress)
+        {
+            frequency = frequencyStart * 2;
+            xAmplitude = xAmpStart * 1.5f;
+            yAmplitude = yAmpStart * 1.5f;
+        }
+        else
+        {
+            frequency = frequencyStart;
+
+            xAmplitude = xAmpStart;
+            yAmplitude = yAmpStart;
+        }
+
         return pos;
     }
 
@@ -64,6 +94,7 @@ public class HeadBob : MonoBehaviour
     {
         if (_camera.localPosition == startPos) return;
         _camera.localPosition = Vector3.Lerp(_camera.localPosition, startPos, returnSpeed * Time.deltaTime);
+        timeSinceStart = 0;
     }
 
     Vector3 FocusTarget() //allows for the headbob to stay centered relative to where the player walks.
@@ -74,6 +105,6 @@ public class HeadBob : MonoBehaviour
     }
     void PlayMotion(Vector3 motion) //simple play method
     {
-        _camera.localPosition += motion;
+        _camera.localPosition = motion;
     }
 }
