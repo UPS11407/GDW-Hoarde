@@ -42,6 +42,9 @@ public class PlayerControlsManager : MonoBehaviour
 
     public float speed;
 
+    float xRotation;
+    float yRotation;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -116,20 +119,19 @@ public class PlayerControlsManager : MonoBehaviour
     void DoLook(float sensitivity)
     {
         Vector2 lookDir = playerInput.actions["Look"].ReadValue<Vector2>();
-        Vector3 rotationVar = new Vector3(-lookDir.y, lookDir.x, 0);
-        Vector3 currentRotation = rotationVar * Time.deltaTime * (sensitivity / 3);
 
-        if ((cameraParent.eulerAngles + currentRotation).x <= 80 && (cameraParent.eulerAngles + currentRotation).x >= -1)
+        if (lookDir == Vector2.zero)
         {
-            cameraParent.eulerAngles += currentRotation;
+            return;
         }
-        else if ((cameraParent.eulerAngles + currentRotation).x <= 361 && (cameraParent.eulerAngles + currentRotation).x >= 290)
-        {
-            cameraParent.eulerAngles += currentRotation;
-        }
-        else return;
 
+        lookDir = lookDir * Time.deltaTime * (sensitivity / 3);
 
+        yRotation += lookDir.x;
+        xRotation -= lookDir.y;
+        xRotation = Mathf.Clamp(xRotation, -89, 89);
+
+        cameraParent.eulerAngles = new Vector3(xRotation, yRotation, 0);
     }
 
     void DoWalk()
@@ -266,7 +268,8 @@ public class PlayerControlsManager : MonoBehaviour
         }
         else
         {
-            moveSpeed = 6f;
+            Sprint(false);
+            
             onStairs = false;
 
         }

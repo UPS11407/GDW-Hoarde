@@ -6,8 +6,13 @@ public class Inventory : MonoBehaviour
 {
     public enum AmmoTypes { STANDARD, EXPLOSIVE, INCINDIARY, SLOW, RAILGUN };
 
+    public const int MaxInventorySlotsCount = 7;
+
     public List<InventorySlot> inventorySlots;
     public TrashSlot trashSlot;
+
+    public List<InventoryAttachment> allItems;
+    public List<InventoryItem> inventoryItems;
 
     public int standardAmmo;
     public int fireAmmo;
@@ -17,7 +22,12 @@ public class Inventory : MonoBehaviour
 
     public AmmoTypes selectedAmmo;
 
-    public int AmmoCount()
+    private void Start()
+    {
+        inventoryItems.Capacity = MaxInventorySlotsCount;
+    }
+
+    public int UpdateAmmoCount()
     {
         switch (selectedAmmo)
         {
@@ -31,9 +41,12 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public void AddItem()
+    public bool AddItem()
     {
 
+
+
+        return true;
     }
 
     public void TrashItem()

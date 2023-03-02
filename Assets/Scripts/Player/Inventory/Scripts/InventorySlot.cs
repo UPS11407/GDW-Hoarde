@@ -5,4 +5,6 @@ using UnityEngine;
 public class InventorySlot : MonoBehaviour
 {
     public InventoryAttachment attachment;
+    string attachmentType;
+
 }

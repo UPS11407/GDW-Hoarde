@@ -14,9 +14,9 @@ public class InventoryAttachment : ScriptableObject
     public enum GripType { NULL, STANDARD, BURST, AUTO };
 
     public string attachmentName;
-    public Image image;
+    public Sprite image;
     public GunType gunType;
-    public string description;
+    public string description = "Sample Text";
     public AttachmentType attachmentType;
     public BarrelType barrelType;
     public MagazineType magazineType;
