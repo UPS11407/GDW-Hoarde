@@ -7,6 +7,7 @@ public class TestSubject : EnemyBase
     bool attacking = false;
     public bool isDecalOff = true;
     [SerializeField] GameObject character;
+    float _enrageSpeedboost = 1;
     
     private void Start()
     {
@@ -38,7 +39,7 @@ public class TestSubject : EnemyBase
             StartCoroutine(AttackPlayer());
         }
 
-        DamagedDecalOn();
+        Damaged();
     }
 
     IEnumerator AttackPlayer()
@@ -55,12 +56,12 @@ public class TestSubject : EnemyBase
         }
     }
 
-    void DamagedDecalOn()
+    void Damaged()
     {
         if(_maxHP > currentHP && isDecalOff)
         {
-            Debug.Log("Boom");
-            
+            //_speed *= _enrageSpeedboost;
+            //UpdateSpeed();
             character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
             isDecalOff = false;
         }

@@ -8,10 +8,18 @@ public class DoorController : MonoBehaviour, IInteractible
 {
     Animator doorAnim;
     bool locked = false;
+    bool queuedOpen;
     // Start is called before the first frame update
     void Start()
     {
         doorAnim = this.transform.parent.GetComponent<Animator>();
+    }
+    private void Update()
+    {
+        if (queuedOpen)
+        {
+            Open();
+        }
     }
     private void OnTriggerEnter(Collider other)
     {
@@ -19,6 +27,9 @@ public class DoorController : MonoBehaviour, IInteractible
         if (other.tag.Equals("Enemy") && !locked)
         {
             doorAnim.SetBool("isOpening", true);
+        } else if ((other.tag.Equals("Enemy") && locked))
+        {
+            queuedOpen = true;
         }
         
     }
@@ -37,6 +48,7 @@ public class DoorController : MonoBehaviour, IInteractible
     {
         if (!locked)
         {
+            queuedOpen = false;
             doorAnim.SetBool("isOpening", true);
         }
         

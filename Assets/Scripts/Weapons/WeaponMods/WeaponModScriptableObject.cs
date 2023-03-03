@@ -6,8 +6,9 @@ public class WeaponModScriptableObject : ScriptableObject
 {
     
     public enum FireMode { None, single, burst, fullAuto };
-
+    public enum DamageType { Standard, Incindiary, Slow};
     public FireMode fireMode;
+    public DamageType damageType;
     
     public float spreadModifier = 0.0f; //+
     public float damageModifier = 0.00f; // 1 = 100%

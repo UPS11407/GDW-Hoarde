@@ -199,6 +199,8 @@ public class Gun : MonoBehaviour
 
         explosionSize = barrelMod.explosionSizeIncrease + magMod.explosionSizeIncrease + ammoMod.explosionSizeIncrease + gripMod.explosionSizeIncrease + railGunMod.explosionSizeIncrease;
 
+
+
         if (barrelMod.enablesExplosionImpact || magMod.enablesExplosionImpact || ammoMod.enablesExplosionImpact || gripMod.enablesExplosionImpact || railGunMod.enablesExplosionImpact)
         {
             isExplosive = true;
@@ -206,6 +208,8 @@ public class Gun : MonoBehaviour
         {
             isExplosive = false;
         }
+
+
         
         if (gunStats.isCharged)
         {
@@ -303,8 +307,20 @@ public class Gun : MonoBehaviour
                             if (hit.transform.tag == "Enemy")
                             {
 
-                                hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
-
+                                
+                                if(ammoMod.damageType == WeaponModScriptableObject.DamageType.Incindiary)
+                                {
+                                    hit.transform.gameObject.GetComponent<EnemyBase>().ApplyDamageOverTime(damage * 0.5f);
+                                    hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage * 0.5f);
+                                } else if (ammoMod.damageType == WeaponModScriptableObject.DamageType.Slow)
+                                {
+                                    hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
+                                    hit.transform.gameObject.GetComponent<EnemyBase>().ApplySlow(damage);
+                                }
+                                else
+                                {
+                                    hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
+                                }
 
                             }
                             TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);

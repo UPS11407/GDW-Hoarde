@@ -17,13 +17,24 @@ public class EnemyBase : MonoBehaviour
     [Tooltip("% chance to drop a heal pickup")]
     [Range(0, 100)]
     public int healDropChance;
-    protected float currentHP;
+    //protected float currentHP;
+    public float currentHP;
 
     protected int dropVal;
 
     internal GameObject player;
     internal Animator animator;
 
+    public float damageOverTime;
+    [SerializeField] float damageOverTimeModifier;
+    float dotTime;
+    [SerializeField] float dotRate;
+
+  
+    [SerializeField] float slowDurationModifier;
+    [SerializeField] float slowSpeedModifier;
+    bool slowed;
+    IEnumerator slowCoroutine;
     Rigidbody rigid;
     protected NavMeshAgent agent;
 
@@ -34,12 +45,13 @@ public class EnemyBase : MonoBehaviour
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
         UpdateSpeed();
-
         currentHP = _maxHP;
     }
 
     public void EnemyUpdate()
     {
+        TakeDamageOverTime();
+        
 
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
@@ -51,6 +63,7 @@ public class EnemyBase : MonoBehaviour
         {
             Destroy(gameObject);
         }
+
     }
     public void UpdateSpeed()
     {
@@ -71,6 +84,7 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void CheckIfDead()
     {
+        
         if(currentHP <= 0)
         {
             dropVal = Random.Range(0, 100);
@@ -126,4 +140,77 @@ public class EnemyBase : MonoBehaviour
         currentHP -= val;
 
     }
+    public void ApplyDamageOverTime(float DoT)
+    {
+        damageOverTime += (DoT * damageOverTimeModifier);
+    }
+    public void TakeDamageOverTime()
+    {
+        if (damageOverTime > 0)
+        {
+            if(Time.time > dotTime + dotRate)
+            {
+
+                dotTime = Time.time;
+                DOTDamage(dotRate);
+            }
+            /*
+            if (damageOverTime <= 2)
+            {
+                StartCoroutine(DamageOverTime(damageOverTime));
+            }
+            else
+            {
+                StartCoroutine(DamageOverTime(2));
+            }*/
+
+        }
+
+    } 
+    public void DOTDamage(float damage)
+    {
+        
+        Debug.Log("DOT");
+        if (damageOverTime < damage)
+        {
+            damageOverTime -= damageOverTime;
+            TakeDamage(damageOverTime);
+        } else
+        {
+            damageOverTime -= damage;
+            TakeDamage(damage);
+        }
+               
+    }
+
+    public void ApplySlow(float duration)
+    {
+        if (!slowed)
+        {
+            slowCoroutine = Slow(duration  * slowDurationModifier);
+            StartCoroutine(slowCoroutine);
+        } else
+        {
+            StopCoroutine(slowCoroutine);
+            slowCoroutine = Slow(duration * slowDurationModifier);
+            StartCoroutine(slowCoroutine);
+        }
+        
+
+    }
+
+    
+
+    IEnumerator Slow(float slowDuration)
+    {
+        slowed = true;
+        Debug.Log("Slowed");
+        agent.speed = _speed * slowSpeedModifier;
+        
+        yield return new WaitForSeconds(slowDuration);
+        
+        slowed = false;
+        agent.speed = _speed;
+    }
+
 }

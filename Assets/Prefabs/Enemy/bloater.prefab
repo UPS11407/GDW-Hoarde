@@ -1479,7 +1479,7 @@ GameObject:
   - component: {fileID: 157619521602118855}
   - component: {fileID: 157619521602118840}
   m_Layer: 3
-  m_Name: Bloater
+  m_Name: bloater
   m_TagString: Enemy
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1570,6 +1570,9 @@ MonoBehaviour:
   chaseRange: 100
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   healDropChance: 50
+  damageOverTimeModifier: 2
+  slowDurationModifier: 1
+  slowSpeedModifier: 0.5
   _explosionRange: 8
   _explosionDelay: 2.5
   fireEffect: {fileID: 7998370103052633914, guid: d83ba6c77664d08448ea9748f06b672c, type: 3}
