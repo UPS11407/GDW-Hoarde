@@ -3,7 +3,6 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
-using UnityEngine.AI;
 using TMPro;
 
 public class Player : MonoBehaviour
@@ -26,13 +25,21 @@ public class Player : MonoBehaviour
 
     float meleeDelay = 1.0f;
     float meleeTime;
-    [SerializeField] float meleeDamage = 1.0f;
-    [SerializeField] float meleeKnockbackStrength = 250.0f;
+    float meleeDamage = 4.0f;
 
     string[] bindings;
 
+    public float maxStamina = 100;
+    public float stamina;
+    public float regenStamina = 1;
+
+    public float staminaToMelee = 20;
+
+    public float timeSinceUsedStamina = 0;
+
     void Start()
     {
+        stamina = maxStamina;
         currentHP = maxHP;
         UpdateHealthDisplay();
         hurtIndicator = GetComponent<HurtIndicator>();
@@ -60,6 +67,15 @@ public class Player : MonoBehaviour
             SceneControl.ChangeScene("Death");
         }
         CheckIfInteractible();
+
+        if (timeSinceUsedStamina >= 5.0f && stamina < maxStamina)
+        {
+            RegenStamina(regenStamina * Time.smoothDeltaTime);
+        }
+        else if (timeSinceUsedStamina < 5.0f && playerControlsManager.speed < 7)
+        {
+            timeSinceUsedStamina += Time.smoothDeltaTime;
+        }
     }
 
     /// <summary>
@@ -74,7 +90,7 @@ public class Player : MonoBehaviour
             healCharge = maxHealCharge;
         }
 
-        UpdateHealthDisplay();
+        UpdateChargeDisplay();
     }
 
     /// <summary>
@@ -133,11 +149,34 @@ public class Player : MonoBehaviour
         }
 
         UpdateHealthDisplay();
+        UpdateChargeDisplay();
+    }
+
+    public void TakeStamina(float value)
+    {
+        stamina -= value;
+        UpdateStaminaDisplay();
+    }
+
+    void RegenStamina(float value)
+    {
+        stamina += value;
+        UpdateStaminaDisplay();
+    }
+
+    void UpdateStaminaDisplay()
+    {
+        GetComponent<StaminaUI>().SetStamina(stamina / 100);
     }
 
     void UpdateHealthDisplay()
     {
         GetComponent<HealthUI>().SetHealth(currentHP / maxHP);
+    }
+
+    void UpdateChargeDisplay()
+    {
+        GetComponent<HealthChargeUI>().SetCharge((int)healCharge);
     }
 
     /// <summary>
@@ -173,9 +212,15 @@ public class Player : MonoBehaviour
     public void QuickMelee()
     {
         RaycastHit hit;
-        if (Time.time > meleeTime + meleeDelay)
+        if (Time.time > meleeTime + meleeDelay && stamina > staminaToMelee)
         {
             meleeTime = Time.time;
+
+            Debug.Log("Punch");
+
+            TakeStamina(staminaToMelee);
+            timeSinceUsedStamina = 0;
+
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
             {
 
@@ -183,29 +228,12 @@ public class Player : MonoBehaviour
                 {
 
                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
-                    StartCoroutine(Knockback(hit));
-                    //hit.transform.gameObject.GetComponent<EnemyBase>().Knockback();
-
+                    
 
 
                 }
             }
         }
-        
-
-    }
-    IEnumerator Knockback(RaycastHit hit)
-    {
-        hit.transform.gameObject.GetComponent<NavMeshAgent>().enabled = false;
-        hit.transform.gameObject.GetComponent<Rigidbody>().velocity = (hit.transform.position - gameObject.transform.position).normalized * meleeKnockbackStrength;
-        Debug.Log((hit.transform.position - gameObject.transform.position).normalized * meleeKnockbackStrength);
-        
-        yield return new WaitForSeconds(1.0f);
-        //Debug.Log("True");
-        //hit.transform.gameObject.GetComponent<EnemyBase>().UpdateSpeed();
-
-        hit.transform.gameObject.GetComponent<NavMeshAgent>().enabled = true;
-
     }
 
     public void UpdateBindings()

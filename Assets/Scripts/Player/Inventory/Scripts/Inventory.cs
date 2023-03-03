@@ -11,20 +11,19 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> inventorySlots;
     public TrashSlot trashSlot;
 
-    public List<InventoryAttachment> allItems;
-    public List<InventoryItem> inventoryItems;
-
     public int standardAmmo;
     public int fireAmmo;
     public int slowAmmo;
     public int explosiveAmmo;
     public int railgunCharge;
 
+    public GameObject weaponModCanvas;
+
     public AmmoTypes selectedAmmo;
 
-    private void Start()
+    public void ToggleWeaponModCanvas(bool toggle)
     {
-        inventoryItems.Capacity = MaxInventorySlotsCount;
+        weaponModCanvas.SetActive(toggle);
     }
 
     public int UpdateAmmoCount()
@@ -41,8 +40,12 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public bool AddItem()
+    public bool AddRandomItem()
     {
+        if (inventorySlots.Count >= MaxInventorySlotsCount)
+        {
+            return false;
+        }
 
 
 
