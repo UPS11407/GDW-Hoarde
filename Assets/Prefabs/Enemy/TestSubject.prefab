@@ -399,6 +399,7 @@ MonoBehaviour:
   dotRate: 1
   slowDurationModifier: 1
   slowSpeedModifier: 0.5
+  knockBackStrength: 100
   isDecalOff: 1
   character: {fileID: 4837086918367894315}
 --- !u!195 &2169045710317889876
