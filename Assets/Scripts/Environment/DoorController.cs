@@ -56,9 +56,11 @@ public class DoorController : MonoBehaviour, IInteractible
     public void Lock()
     {
         locked = true;
+        gameObject.name = "LOCKED";
     }
     public void Unlock()
     {
         locked = false;
+        gameObject.name = "Open Door";
     }
 }

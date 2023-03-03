@@ -73,7 +73,7 @@ public class HeadBob : MonoBehaviour
         pos.y += Mathf.Sin(timeSinceStart * frequency) * yAmplitude;
         pos.x += Mathf.Sin(timeSinceStart * frequency / 2) * xAmplitude;
 
-        if (playerControlsManager.playerInput.actions["Sprint"].inProgress)
+        if (playerControlsManager.speed > 7f)
         {
             frequency = frequencyStart * 2;
             xAmplitude = xAmpStart * 1.5f;
