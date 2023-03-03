@@ -29,8 +29,17 @@ public class Player : MonoBehaviour
 
     string[] bindings;
 
+    public float maxStamina = 100;
+    public float stamina;
+    public float regenStamina = 1;
+
+    public float staminaToMelee = 20;
+
+    public float timeSinceUsedStamina = 0;
+
     void Start()
     {
+        stamina = maxStamina;
         currentHP = maxHP;
         UpdateHealthDisplay();
         hurtIndicator = GetComponent<HurtIndicator>();
@@ -58,6 +67,15 @@ public class Player : MonoBehaviour
             SceneControl.ChangeScene("Death");
         }
         CheckIfInteractible();
+
+        if (timeSinceUsedStamina >= 5.0f && stamina < maxStamina)
+        {
+            RegenStamina(regenStamina * Time.smoothDeltaTime);
+        }
+        else if (timeSinceUsedStamina < 5.0f && playerControlsManager.speed < 7)
+        {
+            timeSinceUsedStamina += Time.smoothDeltaTime;
+        }
     }
 
     /// <summary>
@@ -72,7 +90,7 @@ public class Player : MonoBehaviour
             healCharge = maxHealCharge;
         }
 
-        UpdateHealthDisplay();
+        UpdateChargeDisplay();
     }
 
     /// <summary>
@@ -131,11 +149,34 @@ public class Player : MonoBehaviour
         }
 
         UpdateHealthDisplay();
+        UpdateChargeDisplay();
+    }
+
+    public void TakeStamina(float value)
+    {
+        stamina -= value;
+        UpdateStaminaDisplay();
+    }
+
+    void RegenStamina(float value)
+    {
+        stamina += value;
+        UpdateStaminaDisplay();
+    }
+
+    void UpdateStaminaDisplay()
+    {
+        GetComponent<StaminaUI>().SetStamina(stamina / 100);
     }
 
     void UpdateHealthDisplay()
     {
         GetComponent<HealthUI>().SetHealth(currentHP / maxHP);
+    }
+
+    void UpdateChargeDisplay()
+    {
+        GetComponent<HealthChargeUI>().SetCharge((int)healCharge);
     }
 
     /// <summary>
@@ -171,10 +212,15 @@ public class Player : MonoBehaviour
     public void QuickMelee()
     {
         RaycastHit hit;
-        if (Time.time > meleeTime + meleeDelay)
+        if (Time.time > meleeTime + meleeDelay && stamina > staminaToMelee)
         {
             meleeTime = Time.time;
+
             Debug.Log("Punch");
+
+            TakeStamina(staminaToMelee);
+            timeSinceUsedStamina = 0;
+
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
             {
 
@@ -188,8 +234,6 @@ public class Player : MonoBehaviour
                 }
             }
         }
-        
-
     }
 
     public void UpdateBindings()

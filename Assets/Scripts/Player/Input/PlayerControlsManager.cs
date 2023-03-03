@@ -45,6 +45,12 @@ public class PlayerControlsManager : MonoBehaviour
     float xRotation;
     float yRotation;
 
+    public bool sprinting;
+    bool resetSprint;
+    bool resetWHileSprinting;
+
+    public float staminaToRun = 1;
+
     private void Awake()
     {
         playerInput = GetComponent<PlayerInput>();
@@ -113,7 +119,23 @@ public class PlayerControlsManager : MonoBehaviour
             StartCoroutine(WaitForJump());
         }
 
-        
+        Sprint();
+
+        if (sprinting && speed > 1)
+        {
+            player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
+            ResetSprintVariables();
+        }
+        else if (sprinting && speed < 1 && resetWHileSprinting)
+        {
+            player.timeSinceUsedStamina = 0;
+            resetWHileSprinting = false;
+        }
+
+        if (sprinting && !(player.stamina > 0))
+        {
+            sprinting = false;
+        }
     }
 
     void DoLook(float sensitivity)
@@ -165,19 +187,25 @@ public class PlayerControlsManager : MonoBehaviour
         return grounded;
     }
 
-    private void Sprint(bool keyDown)
+    private void Sprint()
     {
-        if (IsGrounded() && keyDown)
+        if (IsGrounded() && sprinting && player.stamina > 0)
         {
             moveSpeed = 9f;
             Camera.main.fieldOfView = quickFOV;
             audioSource.pitch = 1.0f;
+            resetSprint = true;
         }
-        else if (!onStairs)
+        else if (resetSprint)
         {
             Camera.main.fieldOfView = 60.0f;
             moveSpeed = 6f;
             audioSource.pitch = 0.66f;
+            resetSprint = false;
+            if (player.timeSinceUsedStamina > 0.1f)
+            {
+                player.timeSinceUsedStamina = 0;
+            }
         }
     }
 
@@ -198,8 +226,8 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed += ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed += ctx => ToggleMenu();
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].started += ctx => Sprint(true);
-        playerInput.actions["Sprint"].canceled += ctx => Sprint(false);
+        playerInput.actions["Sprint"].started += ctx => ResetSprintVariables();
+        playerInput.actions["Sprint"].canceled += ctx => sprinting = false;
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
@@ -214,8 +242,8 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed -= ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed -= ctx => ToggleMenu();
         playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].performed -= ctx => Sprint(true);
-        playerInput.actions["Sprint"].canceled -= ctx => Sprint(false);
+        playerInput.actions["Sprint"].performed -= ctx => ResetSprintVariables();
+        playerInput.actions["Sprint"].canceled -= ctx => sprinting = false;
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
@@ -263,15 +291,20 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Stairs")
         {
-               moveSpeed = 2f;
+            moveSpeed = 2f;
             onStairs = true;
         }
         else
         {
-            Sprint(false);
-            
+            sprinting = false;
             onStairs = false;
 
         }
+    }
+
+    void ResetSprintVariables()
+    {
+        resetWHileSprinting = true;
+        sprinting = true;
     }
 }
