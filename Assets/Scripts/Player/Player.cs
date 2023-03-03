@@ -67,7 +67,10 @@ public class Player : MonoBehaviour
             SceneControl.ChangeScene("Death");
         }
         CheckIfInteractible();
+    }
 
+    private void FixedUpdate()
+    {
         if (timeSinceUsedStamina >= 5.0f && stamina < maxStamina)
         {
             RegenStamina(regenStamina * Time.smoothDeltaTime);
@@ -212,7 +215,7 @@ public class Player : MonoBehaviour
     public void QuickMelee()
     {
         RaycastHit hit;
-        if (Time.time > meleeTime + meleeDelay && stamina > staminaToMelee)
+        if (Time.time > meleeTime + meleeDelay && stamina >= staminaToMelee)
         {
             meleeTime = Time.time;
 
