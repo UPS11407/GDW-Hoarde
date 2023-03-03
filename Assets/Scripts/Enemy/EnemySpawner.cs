@@ -32,7 +32,7 @@ public class EnemySpawner : MonoBehaviour
         locationIndex = Random.Range(0, 4);
         canSpawn = false;
         yield return new WaitForSeconds(spawnDelay);
-        if(player.transform.transform.position.y > 9f)
+        if(player.transform.transform.position.y > 5f)
         {
             SpawnEnemy(spawnLocationsSecond[locationIndex]);
         }
