@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.InputSystem;
+using UnityEngine.AI;
 using TMPro;
 
 public class Player : MonoBehaviour
@@ -25,7 +26,8 @@ public class Player : MonoBehaviour
 
     float meleeDelay = 1.0f;
     float meleeTime;
-    float meleeDamage = 4.0f;
+    [SerializeField] float meleeDamage = 1.0f;
+    [SerializeField] float meleeKnockbackStrength = 250.0f;
 
     string[] bindings;
 
@@ -174,7 +176,6 @@ public class Player : MonoBehaviour
         if (Time.time > meleeTime + meleeDelay)
         {
             meleeTime = Time.time;
-            Debug.Log("Punch");
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
             {
 
@@ -182,13 +183,28 @@ public class Player : MonoBehaviour
                 {
 
                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
-                    
+                    StartCoroutine(Knockback(hit));
+                    //hit.transform.gameObject.GetComponent<EnemyBase>().Knockback();
+
 
 
                 }
             }
         }
         
+
+    }
+    IEnumerator Knockback(RaycastHit hit)
+    {
+        hit.transform.gameObject.GetComponent<NavMeshAgent>().enabled = false;
+        hit.transform.gameObject.GetComponent<Rigidbody>().velocity = (hit.transform.position - gameObject.transform.position).normalized * meleeKnockbackStrength;
+        Debug.Log((hit.transform.position - gameObject.transform.position).normalized * meleeKnockbackStrength);
+        
+        yield return new WaitForSeconds(1.0f);
+        //Debug.Log("True");
+        //hit.transform.gameObject.GetComponent<EnemyBase>().UpdateSpeed();
+
+        hit.transform.gameObject.GetComponent<NavMeshAgent>().enabled = true;
 
     }
 

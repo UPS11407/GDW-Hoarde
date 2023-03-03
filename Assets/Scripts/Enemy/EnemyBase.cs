@@ -38,6 +38,9 @@ public class EnemyBase : MonoBehaviour
     Rigidbody rigid;
     protected NavMeshAgent agent;
 
+    bool knockBacked;
+    [SerializeField] float knockBackStrength;
+
     private void Awake()
     {
         player = GameObject.Find("Player");
@@ -55,6 +58,21 @@ public class EnemyBase : MonoBehaviour
 
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
+        /*
+        if (knockBacked)
+        {
+
+            agent.enabled = false;
+            rigid.velocity = -transform.forward * knockBackStrength;
+            knockBacked = false;
+            Debug.Log(rigid.velocity);
+
+        }
+        else if (rigid.velocity == Vector3.zero)
+        {
+            
+            //agent.enabled = true;
+        }*/
         if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
         {
             ChasePlayer();
@@ -150,19 +168,10 @@ public class EnemyBase : MonoBehaviour
         {
             if(Time.time > dotTime + dotRate)
             {
-
                 dotTime = Time.time;
                 DOTDamage(dotRate);
             }
-            /*
-            if (damageOverTime <= 2)
-            {
-                StartCoroutine(DamageOverTime(damageOverTime));
-            }
-            else
-            {
-                StartCoroutine(DamageOverTime(2));
-            }*/
+            
 
         }
 
@@ -170,7 +179,6 @@ public class EnemyBase : MonoBehaviour
     public void DOTDamage(float damage)
     {
         
-        Debug.Log("DOT");
         if (damageOverTime < damage)
         {
             damageOverTime -= damageOverTime;
@@ -180,26 +188,25 @@ public class EnemyBase : MonoBehaviour
             damageOverTime -= damage;
             TakeDamage(damage);
         }
-               
+
     }
 
     public void ApplySlow(float duration)
     {
         if (!slowed)
         {
-            slowCoroutine = Slow(duration  * slowDurationModifier);
+            slowCoroutine = Slow(duration * slowDurationModifier);
             StartCoroutine(slowCoroutine);
-        } else
+        }
+        else
         {
             StopCoroutine(slowCoroutine);
             slowCoroutine = Slow(duration * slowDurationModifier);
             StartCoroutine(slowCoroutine);
         }
-        
+
 
     }
-
-    
 
     IEnumerator Slow(float slowDuration)
     {
@@ -211,6 +218,11 @@ public class EnemyBase : MonoBehaviour
         
         slowed = false;
         agent.speed = _speed;
+    }
+    public void Knockback()
+    {
+        Debug.Log("PUNCHED");
+        knockBacked = true;
     }
 
 }
