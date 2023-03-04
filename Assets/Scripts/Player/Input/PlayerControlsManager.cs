@@ -14,7 +14,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     public PlayerInput playerInput;
 
-    //player's speed
+    //playeqr's speed
     public float moveSpeed = 6f;
     //player's sensitivity
     public float mouseSensitivity = 75f;
@@ -308,6 +308,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void ResetSprintVariables()
     {
+        player.timeSinceUsedStamina = 0;
         resetWHileSprinting = true;
         sprinting = true;
     }
