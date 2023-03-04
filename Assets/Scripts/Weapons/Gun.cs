@@ -291,13 +291,15 @@ public class Gun : MonoBehaviour
                             {
 
                                 hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage + damage * (chargeTime / 100) * railGunMod.chargeUpModifier);
-                                //Debug.Log($"Added Damage: {damage * (chargeTime / 100) * railGunMod.chargeUpModifier}");
-                                //Debug.Log($"Charge: { (chargeTime / 100)}");
-                                //Debug.Log($"railGunMod.chargeUpModifier: { railGunMod.chargeUpModifier}");
+                                
+                                Debug.Log($"Added Damage: {damage * (chargeTime / 100) * railGunMod.chargeUpModifier}");
+                                Debug.Log($"ChargeTime: { (chargeTime)}");
+                                Debug.Log($"Charge: { (chargeTime / 100)}");
+                                Debug.Log($"railGunMod.chargeUpModifier: { railGunMod.chargeUpModifier}");
 
 
                             }
-                            chargeTime = 0;
+                            
                             LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity, gameObject.transform);
                             line.startWidth = (float)(damage * 0.05);
                             StartCoroutine(SpawnLine(line, hit));
@@ -327,9 +329,10 @@ public class Gun : MonoBehaviour
                             tracer.startWidth = (float)(damage * 0.1);
                             StartCoroutine(SpawnTrail(tracer, hit));
                         }
-                        
 
+                        
                     }
+                    chargeTime = 0;
                 }
                     
             }

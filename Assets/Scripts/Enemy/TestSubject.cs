@@ -60,8 +60,8 @@ public class TestSubject : EnemyBase
     {
         if(_maxHP > currentHP && isDecalOff)
         {
-            //_speed *= _enrageSpeedboost;
-            //UpdateSpeed();
+            _speed *= 1.5f;
+            UpdateSpeed();
             character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
             isDecalOff = false;
         }

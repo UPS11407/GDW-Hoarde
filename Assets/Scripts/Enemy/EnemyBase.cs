@@ -58,11 +58,12 @@ public class EnemyBase : MonoBehaviour
 
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
-        /*
+        
         if (knockBacked)
         {
 
             agent.enabled = false;
+            rigid.constraints = RigidbodyConstraints.None;
             rigid.velocity = -transform.forward * knockBackStrength;
             knockBacked = false;
             Debug.Log(rigid.velocity);
@@ -70,9 +71,9 @@ public class EnemyBase : MonoBehaviour
         }
         else if (rigid.velocity == Vector3.zero)
         {
-            
-            //agent.enabled = true;
-        }*/
+            rigid.constraints = RigidbodyConstraints.FreezeAll;
+            agent.enabled = true;
+        }
         if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
         {
             ChasePlayer();
@@ -155,6 +156,7 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage(float val)
     {
+        Debug.Log(val);
         currentHP -= val;
 
     }

@@ -30,7 +30,7 @@ Shader "Custom/Filter"
         half3 SampleBox(float2 uv, float delta){
             float4 o = _MainTex_TexelSize.xyxy * float2(-delta, delta).xxyy;
             half3 s = Sample(uv + o.xy) + Sample(uv + o.zy) + Sample(uv + o.xw) + Sample(uv + o.zw);
-            return s * 0.25f;
+            return s / 9.0f;
         }
     ENDCG
     SubShader
@@ -46,7 +46,7 @@ Shader "Custom/Filter"
             #pragma fragment FragmentProgram
             half4 FragmentProgram (Interpolators i) : SV_Target {
                 //return tex2D(_MainTex, i.uv);
-                return half4(SampleBox(i.uv, 0.5), 1);
+                return half4(SampleBox(i.uv, 0.75), 1);
             }
             ENDCG
         }

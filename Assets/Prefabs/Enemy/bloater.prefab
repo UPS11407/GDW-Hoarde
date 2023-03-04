@@ -1570,9 +1570,13 @@ MonoBehaviour:
   chaseRange: 100
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   healDropChance: 50
+  currentHP: 0
+  damageOverTime: 0
   damageOverTimeModifier: 2
+  dotRate: 0
   slowDurationModifier: 1
   slowSpeedModifier: 0.5
+  knockBackStrength: 50
   _explosionRange: 8
   _explosionDelay: 2.5
   fireEffect: {fileID: 7998370103052633914, guid: d83ba6c77664d08448ea9748f06b672c, type: 3}
