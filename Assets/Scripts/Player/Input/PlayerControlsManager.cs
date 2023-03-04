@@ -136,6 +136,15 @@ public class PlayerControlsManager : MonoBehaviour
         {
             sprinting = false;
         }
+
+        if (speed > 7)
+        {
+            Camera.main.fieldOfView = quickFOV;
+        }
+        else
+        {
+            Camera.main.fieldOfView = 60.0f;
+        }
     }
 
     void DoLook(float sensitivity)
@@ -151,7 +160,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         yRotation += lookDir.x;
         xRotation -= lookDir.y;
-        xRotation = Mathf.Clamp(xRotation, -89, 89);
+        xRotation = Mathf.Clamp(xRotation, -89, 70);
 
         cameraParent.eulerAngles = new Vector3(xRotation, yRotation, 0);
     }
@@ -192,13 +201,11 @@ public class PlayerControlsManager : MonoBehaviour
         if (sprinting && player.stamina > 0)
         {
             moveSpeed = 9f;
-            Camera.main.fieldOfView = quickFOV;
             audioSource.pitch = 1.0f;
             resetSprint = true;
         }
         else if (resetSprint)
         {
-            Camera.main.fieldOfView = 60.0f;
             moveSpeed = 6f;
             audioSource.pitch = 0.66f;
             resetSprint = false;
