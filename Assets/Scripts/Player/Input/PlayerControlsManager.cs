@@ -121,7 +121,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         Sprint();
 
-        if (sprinting && speed > 1)
+        if (sprinting && speed > 1 && IsGrounded())
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
             ResetSprintVariables();
@@ -189,7 +189,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void Sprint()
     {
-        if (IsGrounded() && sprinting && player.stamina > 0)
+        if (sprinting && player.stamina > 0)
         {
             moveSpeed = 9f;
             Camera.main.fieldOfView = quickFOV;
@@ -291,14 +291,11 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Stairs")
         {
-            moveSpeed = 2f;
             onStairs = true;
         }
         else
         {
-            sprinting = false;
             onStairs = false;
-
         }
     }
 
