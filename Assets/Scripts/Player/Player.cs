@@ -71,11 +71,11 @@ public class Player : MonoBehaviour
 
     private void FixedUpdate()
     {
-        if (timeSinceUsedStamina >= 5.0f && stamina < maxStamina)
+        if (timeSinceUsedStamina >= 4.0f && stamina < maxStamina)
         {
             RegenStamina(regenStamina * Time.smoothDeltaTime);
         }
-        else if (timeSinceUsedStamina < 5.0f && playerControlsManager.speed < 7)
+        else if (timeSinceUsedStamina < 4.0f && playerControlsManager.speed < 7)
         {
             timeSinceUsedStamina += Time.smoothDeltaTime;
         }
