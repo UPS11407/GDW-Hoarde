@@ -44,6 +44,8 @@ public class Gun : MonoBehaviour
     public TextMeshProUGUI maxAmmoDisplay;
 
 
+    bool bursting = false;
+
     float shootTime;
     float shootDelay;
     float reloadDelay;
@@ -88,6 +90,8 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        Debug.Log(bursting);
+
         if (isCharged)
         {
             if (fireButtonPressed == true)
@@ -106,8 +110,6 @@ public class Gun : MonoBehaviour
                     Fire();
                     initialChargeDone = true;
                 }
-
-
 
                 if (railGunMod.fireMode == RailgunModScriptableObject.FireMode.fullAuto && chargeTime >= 100 && initialChargeDone == true)
                 {
@@ -134,9 +136,19 @@ public class Gun : MonoBehaviour
                 //muzzleLight.color = Color.Lerp(new Color(0, 128, 255, 1), new Color(255, 22, 0, 1), (chargeTime / 100));
             }
         }
-        else if(fireButtonPressed == true)
+
+
+        else if(fireButtonPressed == true && !bursting)
         {
             Fire();
+
+            if (gripMod.fireMode == WeaponModScriptableObject.FireMode.burst)
+            {
+                fireButtonPressed = false;
+                StartCoroutine(BurstFire());
+                
+            }
+
             if (gripMod.fireMode == WeaponModScriptableObject.FireMode.single)
             {
                 fireButtonPressed = false;
@@ -420,7 +432,25 @@ public class Gun : MonoBehaviour
         UpdateDisplay();
     }
 
-    
+    IEnumerator BurstFire()
+    {
+        bursting = true;
+        if(currentAmmo >= 1)
+        {
+            yield return new WaitForSeconds(shootDelay);
+                Fire();
+            yield return new WaitForSeconds(shootDelay);
+                Fire();
+            yield return new WaitForSeconds(0.40f);
+        } else
+        {
+            yield return new WaitForSeconds(shootDelay);
+                Fire();
+            yield return new WaitForSeconds(0.40f);
+        }
+        
+        bursting = false;
+    }
 
     public void changeBarrel(WeaponModScriptableObject mod)
     {
