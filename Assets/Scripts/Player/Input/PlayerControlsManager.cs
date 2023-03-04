@@ -14,7 +14,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     public GameObject inventoryMenu;
 
-    Inventory inventory;
+    public Inventory inventory;
 
     public PlayerInput playerInput;
 
@@ -82,7 +82,7 @@ public class PlayerControlsManager : MonoBehaviour
     
     public void ToggleMenu()
     {
-        if (weaponManager.guns[weaponManager.activeGun].weaponModCanvas.activeSelf) CloseMenu();
+        if (inventory.weaponModCanvas.activeSelf) CloseMenu();
         else OpenMenu();
     }
 
