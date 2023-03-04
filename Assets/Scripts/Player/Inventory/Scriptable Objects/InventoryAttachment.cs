@@ -8,10 +8,10 @@ public class InventoryAttachment : ScriptableObject
 {
     public enum GunType { NULL, PISTOL, RIFLE, RAILGUN };
     public enum AttachmentType { BARREL, MAGAZINE, GRIP, AMMO };
-    public enum BarrelType { NULL, SNIPER, SHOTGUN, STANDARD, SPEEDCHARGE }
-    public enum AmmoType { NULL, STANDARD, EXPLOSIVE, INCINDIARY, SLOW };
-    public enum MagazineType { NULL, STANDARD, HIGHCAPACITY, QUICKRELOAD, CALICO };
-    public enum GripType { NULL, STANDARD, BURST, AUTO };
+    public enum BarrelType { NULL, SNIPER, SHOTGUN, SPEEDCHARGE }
+    public enum AmmoType { NULL, EXPLOSIVE, INCINDIARY, SLOW };
+    public enum MagazineType { NULL, HIGHCAPACITY, QUICKRELOAD, CALICO };
+    public enum GripType { NULL, BURST, AUTO };
 
     public string attachmentName;
     public Sprite image;

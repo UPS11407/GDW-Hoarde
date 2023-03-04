@@ -12,6 +12,10 @@ public class PlayerControlsManager : MonoBehaviour
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
 
+    public GameObject inventoryMenu;
+
+    Inventory inventory;
+
     public PlayerInput playerInput;
 
     //player's speed
@@ -56,6 +60,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
+        inventory = GetComponent<Inventory>();
 
         InitPlayerActions();
 
@@ -87,7 +92,7 @@ public class PlayerControlsManager : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        weaponManager.ToggleWeaponModCanvas(true);
+        inventory.ToggleWeaponModCanvas(true);
     }
 
     public void CloseMenu()
@@ -96,7 +101,7 @@ public class PlayerControlsManager : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
-        weaponManager.ToggleWeaponModCanvas(false);
+        inventory.ToggleWeaponModCanvas(false);
         weaponManager.UpdateWeaponStats();
     }
 
@@ -291,14 +296,15 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (collision.gameObject.tag == "Stairs")
         {
-            moveSpeed = 2f;
             onStairs = true;
         }
-        else
+        else if (collision.gameObject.layer == 6)
         {
-            sprinting = false;
             onStairs = false;
-
+        }
+        else 
+        {
+            onStairs = false;
         }
     }
 
