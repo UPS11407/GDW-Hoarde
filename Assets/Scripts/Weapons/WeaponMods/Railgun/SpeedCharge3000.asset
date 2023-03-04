@@ -23,4 +23,4 @@ MonoBehaviour:
   recoilModifier: -2
   chargeUpTimeRate: 750
   initialMaxCharge: 1000
-  chargeUpModifier: 0.75
+  chargeUpModifier: 0.4

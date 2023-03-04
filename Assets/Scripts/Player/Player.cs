@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     float meleeDelay = 1.0f;
     float meleeTime;
-    float meleeDamage = 4.0f;
+    [SerializeField] float meleeDamage = 4.0f;
 
     string[] bindings;
 
@@ -231,7 +231,7 @@ public class Player : MonoBehaviour
                 {
 
                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
-                    
+                    hit.transform.gameObject.GetComponent<EnemyBase>().Knockback();
 
 
                 }
