@@ -147,7 +147,7 @@ public class PlayerControlsManager : MonoBehaviour
             return;
         }
 
-        lookDir = lookDir * Time.deltaTime * (sensitivity / 3);
+        lookDir = lookDir * Time.smoothDeltaTime * (sensitivity / 3);
 
         yRotation += lookDir.x;
         xRotation -= lookDir.y;
