@@ -79,10 +79,19 @@ public class DoorController : MonoBehaviour, IInteractible
 
         
     }
+
+    public void ForceLock()
+    {
+        gameObject.name = "LOCKED";
+        locked = true;
+        lockState = LockState.locked;
+    }
+
     public void Unlock()
     {
         locked = false;
         gameObject.name = "Open Door";
+        lockState = LockState.charging;
     }
 
     IEnumerator LockDoor()
@@ -92,6 +101,5 @@ public class DoorController : MonoBehaviour, IInteractible
         lockState = LockState.locked;
         yield return new WaitForSeconds(lockDuration);
         Unlock();
-        lockState = LockState.charging;
     }
 }

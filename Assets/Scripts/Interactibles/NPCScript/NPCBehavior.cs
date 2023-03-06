@@ -22,10 +22,10 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     {
         player = GameObject.Find("Player");
         UpdateHUD();
-        genDoor.Lock();
+        genDoor.ForceLock();
         foreach(DoorController door in doorColliders)
         {
-            door.Lock();
+            door.ForceLock();
 
         }
         
