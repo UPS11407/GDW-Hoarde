@@ -7,18 +7,30 @@ using UnityEngine;
 public class DoorController : MonoBehaviour, IInteractible
 {
     Animator doorAnim;
-    bool locked = false;
+    public bool locked = false;
     bool queuedOpen;
+
+    [SerializeField] float lockDuration;
+    [SerializeField] float lockCooldown;
+    float lockTime;
+    public enum LockState { lockable, locked, charging }
+    public LockState lockState;
+
     // Start is called before the first frame update
     void Start()
     {
         doorAnim = this.transform.parent.GetComponent<Animator>();
+        lockTime = -lockCooldown;
     }
     private void Update()
     {
         if (queuedOpen)
         {
             Open();
+        }
+        if (Time.time > lockTime + lockCooldown)
+        {
+            lockState = LockState.lockable;
         }
     }
     private void OnTriggerEnter(Collider other)
@@ -41,7 +53,6 @@ public class DoorController : MonoBehaviour, IInteractible
     }
     public void Interact()
     {
-
         Open();
     }
     public void Open()
@@ -55,12 +66,32 @@ public class DoorController : MonoBehaviour, IInteractible
     }
     public void Lock()
     {
-        locked = true;
-        gameObject.name = "LOCKED";
+        if (Time.time > lockTime + lockCooldown)
+        {
+
+            lockTime = Time.time;
+            gameObject.name = "LOCKED";
+            StartCoroutine(LockDoor());
+
+        }
+        
+        
+
+        
     }
     public void Unlock()
     {
         locked = false;
         gameObject.name = "Open Door";
+    }
+
+    IEnumerator LockDoor()
+    {
+       
+        locked = true;
+        lockState = LockState.locked;
+        yield return new WaitForSeconds(lockDuration);
+        Unlock();
+        lockState = LockState.charging;
     }
 }
