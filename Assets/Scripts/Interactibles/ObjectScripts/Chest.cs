@@ -39,6 +39,7 @@ public class Chest : MonoBehaviour, IInteractible
     public GameObject menuText;
 
     public bool tutorialChest;
+    public bool railChest;
 
     //[HideInInspector]
     public GameObject enemyPrefab;
@@ -70,6 +71,16 @@ public class Chest : MonoBehaviour, IInteractible
                     Instantiate(enemyPrefab, location.position, Quaternion.Euler(0, 0, 0), enemyCollection.transform);
                 }
                 
+            }
+            else if (railChest)
+            {
+                GameObject pistol = GameObject.Find("Pistol");
+                if(pistol != null)
+                {
+                    pistol.SetActive(false);
+                }
+                player.GetComponent<WeaponManager>().gunInventory = new int[]{1, 2};
+                player.GetComponent<WeaponManager>().SetActiveGun(2);
             }
             else
             {
