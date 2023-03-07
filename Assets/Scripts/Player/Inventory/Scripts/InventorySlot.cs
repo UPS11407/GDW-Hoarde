@@ -12,12 +12,15 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     string attachmentName;
     string attachmentDescription;
 
+    public bool isAmmoSlot = true;
+
     public void OnDrop(PointerEventData eventData)
     {
         if (eventData.pointerDrag != null)
         {
-            Debug.Log("Drop");
             eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = GetComponent<RectTransform>().anchoredPosition;
+            eventData.pointerDrag.GetComponent<Transform>().SetParent(transform);
+            eventData.pointerDrag.GetComponent<DragDrop>().itemSlot = GetComponent<InventorySlot>();
         }
     }
 }

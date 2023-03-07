@@ -91,3 +91,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   item: {fileID: 0}
   emptyImage: {fileID: 0}
+  isDraggable: 1

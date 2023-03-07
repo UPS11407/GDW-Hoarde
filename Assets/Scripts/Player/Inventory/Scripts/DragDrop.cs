@@ -8,9 +8,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     RectTransform trans;
     Canvas canvas;
     CanvasGroup canvasGroup;
+    public InventorySlot itemSlot;
 
     private void Awake()
     {
+        itemSlot = GetComponent<InventorySlot>();
         trans = GetComponent<RectTransform>();
         canvas = GameObject.Find("UI").GetComponent<Canvas>();
         canvasGroup = GetComponent<CanvasGroup>();
@@ -18,12 +20,22 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnBeginDrag(PointerEventData eventData)
     {
+        if (itemSlot != null && !itemSlot.isAmmoSlot)
+        {
+            return;
+        }
+
         canvasGroup.blocksRaycasts = false;
         canvasGroup.alpha = 0.6f;
     }
 
     public void OnDrag(PointerEventData eventData)
     {
+        if (itemSlot != null && !itemSlot.isAmmoSlot)
+        {
+            return;
+        }
+
         trans.anchoredPosition += eventData.delta / canvas.scaleFactor;
     }
 
