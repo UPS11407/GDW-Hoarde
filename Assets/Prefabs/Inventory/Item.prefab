@@ -115,6 +115,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dfa9e42f46f2a9e4797f2adfcccca104, type: 2}
   - {fileID: 11400000, guid: 5122ae79801530c499e8c59e45b3c92b, type: 2}
   - {fileID: 11400000, guid: be2e83beef7fe904c8fa413a18cdf973, type: 2}
+  emptyImage: {fileID: 21300000, guid: 32163e7219e3d614e9c0e848dd7d8280, type: 3}
   attachment: {fileID: 0}
 --- !u!114 &4465397580202105607
 MonoBehaviour:
@@ -128,6 +129,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e83b9c1ee22ae45a0276639ff8e26f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  itemSlot: {fileID: 0}
 --- !u!222 &8023926253333950529
 CanvasRenderer:
   m_ObjectHideFlags: 0

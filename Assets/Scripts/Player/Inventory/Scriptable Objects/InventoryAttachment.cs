@@ -9,7 +9,7 @@ public class InventoryAttachment : ScriptableObject
     public enum GunType { NULL, PISTOL, RIFLE, RAILGUN };
     public enum AttachmentType { BARREL, MAGAZINE, GRIP, AMMO };
     public enum BarrelType { NULL, SNIPER, SHOTGUN, SPEEDCHARGE }
-    public enum AmmoType { NULL, EXPLOSIVE, INCINDIARY, SLOW };
+    public enum AmmoType { NULL, RAILGUN, STANDARD, EXPLOSIVE, INCINDIARY, SLOW };
     public enum MagazineType { NULL, HIGHCAPACITY, QUICKRELOAD, CALICO };
     public enum GripType { NULL, BURST, AUTO };
 

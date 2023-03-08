@@ -8,6 +8,8 @@ public class PlayerControlsManager : MonoBehaviour
 {
     public const string RebindsKey = "rebinds";
 
+    InfoBoxText infoBoxText;
+
     Player player;
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
@@ -57,10 +59,11 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void Awake()
     {
+        infoBoxText = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
+
         playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
-        inventory = GetComponent<Inventory>();
 
         InitPlayerActions();
 
@@ -103,6 +106,7 @@ public class PlayerControlsManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         inventory.ToggleWeaponModCanvas(false);
         weaponManager.UpdateWeaponStats();
+        infoBoxText.ToggleSelf(false);
     }
 
     void Update()

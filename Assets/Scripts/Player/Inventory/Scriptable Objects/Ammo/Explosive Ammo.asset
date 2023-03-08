@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20821c69b98d7c40822a4b1e95c9b2c, type: 3}
   m_Name: Explosive Ammo
   m_EditorClassIdentifier: 
-  attachmentName: 
+  attachmentName: Explosive Ammo
   image: {fileID: 21300000, guid: 9be9e719200d78c4d8d1078a3a69ee97, type: 3}
   gunType: 0
   description: Sample Text
@@ -20,4 +20,4 @@ MonoBehaviour:
   barrelType: 0
   magazineType: 0
   gripType: 0
-  ammoType: 2
+  ammoType: 3

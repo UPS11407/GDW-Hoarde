@@ -1,14 +1,15 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using static InventoryAttachment;
 
 public class Inventory : MonoBehaviour
 {
-    public enum AmmoTypes { STANDARD, EXPLOSIVE, INCINDIARY, SLOW, RAILGUN };
-
     public const int MaxInventorySlotsCount = 7;
 
     public List<InventorySlot> inventorySlots;
+    public List<InventorySlot> weaponSlots;
+    public List<InventorySlot> ammoSlots;
     public TrashSlot trashSlot;
 
     public int standardAmmo;
@@ -19,7 +20,7 @@ public class Inventory : MonoBehaviour
 
     public GameObject weaponModCanvas;
 
-    public AmmoTypes selectedAmmo;
+    public AmmoType selectedAmmo;
 
     public void ToggleWeaponModCanvas(bool toggle)
     {
@@ -30,11 +31,11 @@ public class Inventory : MonoBehaviour
     {
         switch (selectedAmmo)
         {
-            case AmmoTypes.STANDARD: return standardAmmo;
-            case AmmoTypes.EXPLOSIVE: return explosiveAmmo;
-            case AmmoTypes.SLOW: return slowAmmo;
-            case AmmoTypes.INCINDIARY: return fireAmmo;
-            case AmmoTypes.RAILGUN: return railgunCharge;
+            case AmmoType.STANDARD: return standardAmmo;
+            case AmmoType.EXPLOSIVE: return explosiveAmmo;
+            case AmmoType.SLOW: return slowAmmo;
+            case AmmoType.INCINDIARY: return fireAmmo;
+            case AmmoType.RAILGUN: return railgunCharge;
         }
 
         return 0;
@@ -47,7 +48,11 @@ public class Inventory : MonoBehaviour
             return false;
         }
 
+        foreach (InventorySlot slot in inventorySlots)
+        {
 
+        }
+        
 
         return true;
     }
