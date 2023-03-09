@@ -56,19 +56,19 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         previousSlot = trans.parent.GetComponent<RectTransform>();
 
-        foreach (InventorySlot slot in inventory.weaponSlots)
+        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
         {
-            slot.transform.GetChild(0).GetComponent<Image>().color = emptyColor;
+            if (slot.transform.childCount > 0) slot.transform.GetChild(0).GetComponent<Image>().color = emptyColor;
         }
 
-            foreach (InventorySlot slot in inventory.weaponSlots)
+        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
         {
             if (slot.slotGunType == GunType.NULL || slot.slotGunType == itemSlot.item.attachmentWeapon)
             {
                 if (slot.slotAttachmentType == itemSlot.item.attachmentType)
                 {
                     slot.GetComponent<Image>().color = Color.white;
-                    slot.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+                    if (slot.transform.childCount > 0) slot.transform.GetChild(0).GetComponent<Image>().color = Color.white;
                 }
             }
         }
@@ -104,10 +104,10 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             trans.SetParent(previousSlot);
         }
 
-        foreach (InventorySlot slot in inventory.weaponSlots)
+        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
         {
             slot.GetComponent<Image>().color = emptyColor;
-            slot.transform.GetChild(0).GetComponent<Image>().color = Color.white;
+            if (slot.transform.childCount > 0) slot.transform.GetChild(0).GetComponent<Image>().color = Color.white;
         }
     }
 
@@ -122,6 +122,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
             eventData.pointerCurrentRaycast.gameObject.GetComponent<Image>().color = Color.white;
             inventory.selectedAmmo = System.Enum.Parse<AmmoType>(eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryItem>().ammoType, true);
+            inventory.selectedAmmoSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryItem>();
             Debug.Log(inventory.selectedAmmo);
         }
     }
@@ -182,7 +183,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     public void OnPointerExit(PointerEventData eventData)
     {
-        Debug.Log("exit");
         infoBox.ToggleSelf(false);
     }
 }

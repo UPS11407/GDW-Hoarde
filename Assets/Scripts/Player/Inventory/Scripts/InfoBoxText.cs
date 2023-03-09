@@ -12,7 +12,7 @@ public class InfoBoxText : MonoBehaviour
     public TMP_Text att_name;
     public TMP_Text att_weapon;
     public TMP_Text att_desc;
-    public TMP_Text att_weaponStatic;
+    public TMP_Text weaponBulletCount;
     
 
     private void Awake()
@@ -34,11 +34,11 @@ public class InfoBoxText : MonoBehaviour
 
         if (isAmmo)
         {
-            att_weaponStatic.gameObject.SetActive(false);
+            weaponBulletCount.text = "Count: ";
         }
         else
         {
-            att_weaponStatic.gameObject.SetActive(true);
+            weaponBulletCount.text = "Weapon: ";
         }
     }
 
@@ -46,7 +46,7 @@ public class InfoBoxText : MonoBehaviour
     {
         att_desc.gameObject.SetActive(toggle);
         att_weapon.gameObject.SetActive(toggle);
-        att_weaponStatic.gameObject.SetActive(toggle);
+        weaponBulletCount.gameObject.SetActive(toggle);
         att_name.gameObject.SetActive(toggle);
         GetComponent<Image>().enabled = toggle;
     }
