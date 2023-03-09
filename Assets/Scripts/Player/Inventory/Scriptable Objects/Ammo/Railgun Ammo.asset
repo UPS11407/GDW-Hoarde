@@ -10,14 +10,14 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: a20821c69b98d7c40822a4b1e95c9b2c, type: 3}
-  m_Name: Standard Barrel
+  m_Name: Railgun Ammo
   m_EditorClassIdentifier: 
-  attachmentName: 
-  image: {fileID: 21300000, guid: 5c798224710b3d548a1f92455299e8b4, type: 3}
+  attachmentName: Railgun Ammo
+  image: {fileID: 0}
   gunType: 0
   description: Sample Text
-  attachmentType: 0
-  barrelType: 3
+  attachmentType: 3
+  barrelType: 0
   magazineType: 0
   gripType: 0
-  ammoType: 0
+  ammoType: 1

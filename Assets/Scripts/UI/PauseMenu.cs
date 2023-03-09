@@ -10,34 +10,42 @@ public class PauseMenu : MonoBehaviour
     public GameObject HUD;
     public WeaponManager weaponManager;
     public ControlsMenu controlsMenu;
+    public PlayerControlsManager playerControlsManager;
 
     PlayerInput playerContr;
 
     public void RunPause()
     {
-        if (playerContr != null)
+        if (!playerControlsManager.inventory.weaponModCanvas.activeSelf)
         {
-            if (menu.activeInHierarchy == true)
+            if (playerContr != null)
             {
-                CloseMenu();
-            }
-            else
-            {
-                if (controlsMenu.gameObject.activeInHierarchy)
+                if (menu.activeInHierarchy == true)
                 {
-                    controlsMenu.CloseMenu();
+                    CloseMenu();
                 }
                 else
                 {
-                    OpenMenu();
+                    if (controlsMenu.gameObject.activeInHierarchy)
+                    {
+                        controlsMenu.CloseMenu();
+                    }
+                    else
+                    {
+                        OpenMenu();
+                    }
+
                 }
-                
+            }
+            else
+            {
+                playerContr = player.GetComponent<PlayerInput>();
+                RunPause();
             }
         }
         else
         {
-            playerContr = player.GetComponent<PlayerInput>();
-            RunPause();
+            playerControlsManager.CloseMenu();
         }
     }
 

@@ -8,16 +8,23 @@ public class PlayerControlsManager : MonoBehaviour
 {
     public const string RebindsKey = "rebinds";
 
+    InfoBoxText infoBoxText;
+
     Player player;
     WeaponManager weaponManager;
     public PauseMenu pauseMenu;
+    public GameObject HUD;
+
+    public GameObject inventoryMenu;
+
+    public Inventory inventory;
 
     public PlayerInput playerInput;
 
     //playeqr's speed
     public float moveSpeed = 6f;
     //player's sensitivity
-    public float mouseSensitivity = 75f;
+    public float mouseSensitivity = 6f;
 
     //variable for jump force
     public float jumpForce = 5f;
@@ -53,6 +60,9 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void Awake()
     {
+        infoBoxText = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
+        inventory.UpdateWeaponType();
+
         playerInput = GetComponent<PlayerInput>();
         player = GetComponent<Player>();
         weaponManager = GetComponent<WeaponManager>();
@@ -68,6 +78,8 @@ public class PlayerControlsManager : MonoBehaviour
         _col = GetComponent<CapsuleCollider>();
         audioSource = GetComponent<AudioSource>();
         Time.timeScale = 1.0f;
+
+        inventory.ToggleVisibleSlots(false);
     }
 
     private void OnDisable()
@@ -77,7 +89,7 @@ public class PlayerControlsManager : MonoBehaviour
     
     public void ToggleMenu()
     {
-        if (weaponManager.guns[weaponManager.activeGun].weaponModCanvas.activeSelf) CloseMenu();
+        if (inventory.weaponModCanvas.activeSelf) CloseMenu();
         else OpenMenu();
     }
 
@@ -87,7 +99,10 @@ public class PlayerControlsManager : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
-        weaponManager.ToggleWeaponModCanvas(true);
+        inventory.ToggleWeaponModCanvas(true);
+        inventory.ToggleVisibleSlots(true);
+        HUD.SetActive(false);
+        inventory.UpdateWeaponType();
     }
 
     public void CloseMenu()
@@ -96,8 +111,12 @@ public class PlayerControlsManager : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
-        weaponManager.ToggleWeaponModCanvas(false);
+        inventory.ToggleVisibleSlots(false);
+        inventory.ToggleWeaponModCanvas(false);
+        inventory.UpdateWeaponStats();
         weaponManager.UpdateWeaponStats();
+        infoBoxText.ToggleSelf(false);
+        HUD.SetActive(true);
     }
 
     void Update()
@@ -156,11 +175,11 @@ public class PlayerControlsManager : MonoBehaviour
             return;
         }
 
-        lookDir = lookDir * Time.smoothDeltaTime * (sensitivity / 3);
+        lookDir = lookDir * (sensitivity / 100);
 
         yRotation += lookDir.x;
         xRotation -= lookDir.y;
-        xRotation = Mathf.Clamp(xRotation, -89, 70);
+        xRotation = Mathf.Clamp(xRotation, -85, 85);
 
         cameraParent.eulerAngles = new Vector3(xRotation, yRotation, 0);
     }
@@ -300,7 +319,11 @@ public class PlayerControlsManager : MonoBehaviour
         {
             onStairs = true;
         }
-        else
+        else if (collision.gameObject.layer == 6)
+        {
+            onStairs = false;
+        }
+        else 
         {
             onStairs = false;
         }
