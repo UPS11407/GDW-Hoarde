@@ -36,6 +36,9 @@ public class EnemyBase : MonoBehaviour
     bool slowed;
     IEnumerator slowCoroutine;
     Rigidbody rigid;
+    RagdollEnabler RagdollEnabler;
+    [SerializeField]
+    float deathFadeOut = 2f;
     protected NavMeshAgent agent;
 
     bool knockBacked;
@@ -67,6 +70,7 @@ public class EnemyBase : MonoBehaviour
             rigid.velocity = -transform.forward * knockBackStrength;
             knockBacked = false;
             Debug.Log(rigid.velocity);
+            //RagdollEnabler.EnableRagdoll();
 
         }
         else if (rigid.velocity == Vector3.zero)
@@ -112,11 +116,35 @@ public class EnemyBase : MonoBehaviour
             {
                 DropPickup();
             }
+            Debug.Log("Enemy should be dead");
+            //Destroy(gameObject);
+            //rigid.detectCollisions = false;
+            animator.enabled = false;
             agent.enabled = false;
             Destroy(gameObject);
+            //RagdollEnabler.EnableRagdoll();
+            // FadeAway();
         }
     }
 
+    private IEnumerator FadeAway()
+    {
+        yield return new WaitForSeconds(deathFadeOut);
+
+        if (RagdollEnabler != null)
+        {
+            RagdollEnabler.DisableAllRigidbodies();
+        }
+
+        float time = 0;
+        while (time < 1)
+        {
+            transform.position += Vector3.down * Time.deltaTime;
+            time += Time.deltaTime;
+            yield return null;
+        }
+        Destroy(gameObject);
+    }
     protected void DropPickup()
     {
         Instantiate(healPickupPrefab, transform.position, Quaternion.Euler(0, 0, 0));
