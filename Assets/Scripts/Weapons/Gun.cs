@@ -459,6 +459,14 @@ public class Gun : MonoBehaviour
             barrelMod = mod;
         }
         
+    }    
+    public void changeBarrel(RailgunModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            railGunMod = mod;
+        }
+        
     }
     public void changeMag(WeaponModScriptableObject mod)
     {

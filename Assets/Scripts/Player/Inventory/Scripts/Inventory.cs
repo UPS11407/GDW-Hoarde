@@ -16,7 +16,7 @@ public class Inventory : MonoBehaviour
     public List<InventoryAttachment> availableAttachments;
     public List<kvp> keys;
     public Dictionary<InventoryAttachment, ScriptableObject> attachmentPairs = new Dictionary<InventoryAttachment, ScriptableObject>();
-    public List<ScriptableObject> standardAttachments;
+    public List<WeaponModScriptableObject> standardAttachments;
 
     InventorySlot barrelSlot;
     InventorySlot gripSlot;
@@ -34,6 +34,7 @@ public class Inventory : MonoBehaviour
     public GameObject weaponModCanvas;
 
     public AmmoType selectedAmmo;
+    public RailgunModScriptableObject standardRailgunAttachment;
 
     private void Awake()
     {
@@ -171,13 +172,13 @@ public class Inventory : MonoBehaviour
         weaponManager.guns[weaponManager.activeGun].changeAmmo((WeaponModScriptableObject)attachmentPairs[selectedAmmoSlot.attachment]);
 
         if (barrelSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)standardAttachments[0]);
+        else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardAttachments[0]);
 
         if (gripSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeGrip((WeaponModScriptableObject)attachmentPairs[gripSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeGrip((WeaponModScriptableObject)standardAttachments[1]);
+        else weaponManager.guns[weaponManager.activeGun].changeGrip(standardAttachments[1]);
 
         if (magazineSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)attachmentPairs[magazineSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)standardAttachments[2]);
+        else weaponManager.guns[weaponManager.activeGun].changeMag(standardAttachments[2]);
     }
 
     public void UpdateWeaponStatsRailgun()
@@ -193,7 +194,7 @@ public class Inventory : MonoBehaviour
         }
 
         if (barrelSlot != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)standardAttachments[3]);
+        else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
     }
 }
 [System.Serializable]
