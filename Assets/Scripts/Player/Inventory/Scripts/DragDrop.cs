@@ -143,7 +143,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             )
             
         {
-            Debug.Log(eventData.pointerDrag);
             eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
             return;
         }
