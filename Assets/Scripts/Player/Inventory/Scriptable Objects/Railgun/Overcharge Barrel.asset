@@ -12,9 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20821c69b98d7c40822a4b1e95c9b2c, type: 3}
   m_Name: Overcharge Barrel
   m_EditorClassIdentifier: 
-  attachmentName: 
+  attachmentName: Overcharge Barrel
   image: {fileID: 0}
-  gunType: 0
+  gunType: 3
   description: Sample Text
   attachmentType: 0
   barrelType: 1

@@ -12,12 +12,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a20821c69b98d7c40822a4b1e95c9b2c, type: 3}
   m_Name: Calico Mag
   m_EditorClassIdentifier: 
-  attachmentName: 
+  attachmentName: Calico Mag
   image: {fileID: 0}
   gunType: 1
   description: Sample Text
   attachmentType: 1
   barrelType: 0
-  magazineType: 4
+  magazineType: 3
   gripType: 0
   ammoType: 0
