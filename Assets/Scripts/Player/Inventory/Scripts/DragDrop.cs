@@ -20,7 +20,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     Color emptyColor = Color.gray;
 
     public InfoBoxText infoBox;
-    
+
     private void Awake()
     {
         infoBox = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
@@ -100,8 +100,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         if (transform.parent == inventoryTransform)
         {
-            trans.anchoredPosition = previousSlot.localPosition;
             trans.SetParent(previousSlot);
+            trans.localPosition = Vector2.zero;
         }
 
         foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
@@ -132,11 +132,44 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         InventorySlot slot = trans.parent.GetComponent<InventorySlot>();
         InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>();
 
-        if (slot.isAmmoSlot || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType != slot.slotAttachmentType) 
-            || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon != slot.slotGunType))
+        var draggedAttachmentType = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType;
+        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;
+
+
+        if (
+            slot.isAmmoSlot 
+            || (slot.isWeaponSlot && draggedAttachmentType != slot.slotAttachmentType)
+            || (slot.isWeaponSlot && draggedAttachmentWeapon != slot.slotGunType)
+            )
             
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.anchoredPosition;
+            Debug.Log(eventData.pointerDrag);
+            eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+            return;
+        }
+
+        if (
+            (prevSlot.isWeaponSlot && GetComponent<InventoryItem>().attachmentType != prevSlot.slotAttachmentType)
+            || (prevSlot.isWeaponSlot && GetComponent<InventoryItem>().attachmentWeapon != prevSlot.slotGunType)
+            )
+        {
+            
+
+            foreach (InventorySlot inventorySlot in inventory.inventorySlots)
+            {
+                if (inventorySlot.transform.childCount < 1)
+                {
+                    
+                    eventData.pointerDrag.transform.SetParent(inventorySlot.transform);
+                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+                    eventData.pointerDrag.GetComponent<RectTransform>().localScale = Vector3.one;
+                    eventData.pointerDrag.GetComponent<DragDrop>().previousSlot = inventorySlot.GetComponent<RectTransform>();
+                    return;
+                }
+            }
+
+            eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+            eventData.pointerDrag.GetComponent<RectTransform>().localScale = Vector3.one;
             return;
         }
 

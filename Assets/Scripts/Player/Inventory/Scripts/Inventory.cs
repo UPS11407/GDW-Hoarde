@@ -169,6 +169,10 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        if (barrelSlot.transform.childCount < 1) barrelSlot.item = null;
+        if (magazineSlot.transform.childCount < 1) magazineSlot.item = null;
+        if (gripSlot.transform.childCount < 1) gripSlot.item = null;
+
         weaponManager.guns[weaponManager.activeGun].changeAmmo((WeaponModScriptableObject)attachmentPairs[selectedAmmoSlot.attachment]);
 
         if (barrelSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
