@@ -130,7 +130,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void OnDrop(PointerEventData eventData)
     {
         InventorySlot slot = trans.parent.GetComponent<InventorySlot>();
-        InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot;
+        InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>();
 
         if (slot.isAmmoSlot || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType != slot.slotAttachmentType) 
             || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon != slot.slotGunType))
