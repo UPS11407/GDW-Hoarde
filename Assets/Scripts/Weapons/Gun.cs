@@ -90,7 +90,6 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(bursting);
 
         if (isCharged)
         {

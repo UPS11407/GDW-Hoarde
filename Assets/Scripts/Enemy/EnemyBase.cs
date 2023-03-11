@@ -71,7 +71,6 @@ public class EnemyBase : MonoBehaviour
             knockBacked = false;
             Debug.Log(rigid.velocity);
             //RagdollEnabler.EnableRagdoll();
-
         }
         else if (rigid.velocity == Vector3.zero)
         {
@@ -253,6 +252,12 @@ public class EnemyBase : MonoBehaviour
     {
         Debug.Log("PUNCHED");
         knockBacked = true;
+        StartCoroutine(KnockbackLimiter(2));
+    }
+    IEnumerator KnockbackLimiter(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        rigid.velocity = Vector3.zero;
     }
 
 }
