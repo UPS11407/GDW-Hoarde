@@ -37,6 +37,7 @@ public class Chest : MonoBehaviour, IInteractible
     bool canInteract = true;
     Animator animator;
     public GameObject menuText;
+    Inventory inventory;
 
     public bool tutorialChest;
     public bool railChest;
@@ -50,17 +51,18 @@ public class Chest : MonoBehaviour, IInteractible
     //[HideInInspector]
     public GameObject enemyCollection;
 
-
     public void Interact()
     {
         if (canInteract)
         {
-            animator.Play("Cube");
-            animator.Play("Glass");
-            animator.Play("Handle");
-            canInteract = false;
+            
             if (tutorialChest)
             {
+                animator.Play("Cube");
+                animator.Play("Glass");
+                animator.Play("Handle");
+                canInteract = false;
+
                 GameObject.Find("Pistol").GetComponent<Gun>().canSwap = true;
                 player.GetComponent<WeaponManager>().SwapWeapon();
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 2;
@@ -74,6 +76,11 @@ public class Chest : MonoBehaviour, IInteractible
             }
             else if (railChest)
             {
+                animator.Play("Cube");
+                animator.Play("Glass");
+                animator.Play("Handle");
+                canInteract = false;
+
                 GameObject pistol = GameObject.Find("Pistol");
                 if(pistol != null)
                 {
@@ -84,65 +91,18 @@ public class Chest : MonoBehaviour, IInteractible
             }
             else
             {
-                if (player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun && player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto
-                    && player.GetComponent<WeaponInventory>().ammoUpgrades.explosive && player.GetComponent<WeaponInventory>().magazineUpgrades.extended 
-                    && player.GetComponent<WeaponInventory>().barrelUpgrades.sniper && player.GetComponent<WeaponInventory>().magazineUpgrades.quick)
+                if (!inventory.CheckForEmptySlot())
                 {
-                    Debug.Log("All Upgrades Unlocked, Skipping Roll");
-                }
-                else
-                {
-                    //more brainrot (need to rework for release game)
-                    while (true)
-                    {
-                        itemIndex = RollItem();
-
-                        if (itemIndex == 0 && !player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun)
-                        {
-                            player.GetComponent<WeaponInventory>().barrelUpgrades.shotgun = true;
-                            Debug.Log("Rolled Shotgun");
-                            break;
-                        }
-
-                        if (itemIndex == 1 && !player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto)
-                        {
-                            player.GetComponent<WeaponInventory>().gripUpgrades.fullAuto = true;
-                            Debug.Log("Rolled FullAuto");
-                            break;
-                        }
-
-                        if (itemIndex == 2 && !player.GetComponent<WeaponInventory>().ammoUpgrades.explosive)
-                        {
-                            player.GetComponent<WeaponInventory>().ammoUpgrades.explosive = true;
-                            Debug.Log("Rolled Explosive Ammo");
-                            break;
-                        }
-
-                        if (itemIndex == 3 && !player.GetComponent<WeaponInventory>().magazineUpgrades.extended)
-                        {
-                            player.GetComponent<WeaponInventory>().magazineUpgrades.extended = true;
-                            Debug.Log("Rolled Extended Mag");
-                            break;
-                        }
-
-                        if (itemIndex == 4 && !player.GetComponent<WeaponInventory>().magazineUpgrades.quick)
-                        {
-                            player.GetComponent<WeaponInventory>().magazineUpgrades.quick = true;
-                            Debug.Log("Rolled Quick Mag");
-                            break;
-                        }
-
-                        if (itemIndex == 5 && !player.GetComponent<WeaponInventory>().barrelUpgrades.sniper)
-                        {
-                            player.GetComponent<WeaponInventory>().barrelUpgrades.sniper = true;
-                            Debug.Log("Rolled Sniper Barrel");
-                            break;
-                        }
-
-                        Debug.LogWarning("Re-Rolling");
-                    }
+                    Debug.Log("Inventory Full *UI PLACEHOLDER*");
+                    return;
                 }
 
+                animator.Play("Cube");
+                animator.Play("Glass");
+                animator.Play("Handle");
+                canInteract = false;
+
+                inventory.AddRandomItem(RollItem());
                 StartCoroutine(ModMenuText());
             }
             Debug.Log("YOU GOT LIGMA");
@@ -161,6 +121,7 @@ public class Chest : MonoBehaviour, IInteractible
 
     private void Awake()
     {
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         //menuText = GameObject.Find("ChestText");
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
@@ -168,6 +129,6 @@ public class Chest : MonoBehaviour, IInteractible
 
     int RollItem()
     {
-        return Random.Range(0, 6);
+        return Random.Range(0, inventory.availableAttachments.Count);
     }
 }

@@ -58,6 +58,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     public float staminaToRun = 1;
 
+
     private void Awake()
     {
         infoBoxText = GameObject.Find("Info Box").GetComponent<InfoBoxText>();

@@ -7,7 +7,6 @@ using static InventoryAttachment;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    public WeaponManager weaponManager;
     public InventoryItem item;
 
     public bool isAmmoSlot;

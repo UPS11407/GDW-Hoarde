@@ -33,6 +33,8 @@ public class Inventory : MonoBehaviour
 
     public GameObject weaponModCanvas;
 
+    public GameObject itemPrefab;
+
     public AmmoType selectedAmmo;
     public RailgunModScriptableObject standardRailgunAttachment;
 
@@ -92,20 +94,42 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public bool AddRandomItem()
+    public void AddRandomItem(int attachment)
     {
-        if (inventorySlots.Count >= MaxInventorySlotsCount)
+        var itemSlot = NextSlot();
+
+        var itemObject = Instantiate(itemPrefab, itemSlot.transform).GetComponent<InventoryItem>();
+
+        itemObject.attachment = availableAttachments[attachment];
+        itemObject.UpdateItemStats();
+        itemSlot.item = itemObject;
+        itemObject.GetComponent<DragDrop>().previousSlot = itemSlot.GetComponent<RectTransform>();
+    }
+
+    public InventorySlot NextSlot()
+    {
+        foreach(InventorySlot slot in inventorySlots)
         {
-            return false;
+            if (slot.transform.childCount < 1)
+            {
+                return slot;
+            }
         }
 
+        return null;
+    }
+
+    public bool CheckForEmptySlot()
+    {
         foreach (InventorySlot slot in inventorySlots)
         {
-
+            if (slot.transform.childCount < 1)
+            {
+                return true;
+            }
         }
-        
 
-        return true;
+        return false;
     }
 
     public void ToggleVisibleSlots(bool toggle)

@@ -61,7 +61,7 @@ public class EnemyBase : MonoBehaviour
 
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
-        
+        /*
         if (knockBacked)
         {
 
@@ -72,7 +72,8 @@ public class EnemyBase : MonoBehaviour
             Debug.Log(rigid.velocity);
             //RagdollEnabler.EnableRagdoll();
         }
-        else if (rigid.velocity == Vector3.zero)
+        else */
+        if (rigid.velocity == Vector3.zero)
         {
             rigid.constraints = RigidbodyConstraints.FreezeAll;
             agent.enabled = true;
@@ -248,11 +249,19 @@ public class EnemyBase : MonoBehaviour
         slowed = false;
         agent.speed = _speed;
     }
+    /*
     public void Knockback()
     {
         Debug.Log("PUNCHED");
         knockBacked = true;
         StartCoroutine(KnockbackLimiter(2));
+    }*/
+    public void Knockback(GameObject knockbacker)
+    {
+        agent.enabled = false;
+        rigid.constraints = RigidbodyConstraints.None;
+        rigid.velocity = (transform.position - knockbacker.transform.position).normalized * knockBackStrength;
+        KnockbackLimiter(2);
     }
     IEnumerator KnockbackLimiter(float duration)
     {
