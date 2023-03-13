@@ -192,9 +192,7 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage(float val)
     {
-        Debug.Log(val);
         currentHP -= val;
-
     }
     public void ApplyDamageOverTime(float DoT)
     {

@@ -71,6 +71,8 @@ public class PlayerControlsManager : MonoBehaviour
         InitPlayerActions();
 
         GetRebinds();
+
+        Physics.gravity = new Vector3(0, -22.0f, 0);
     }
 
     void Start()
@@ -135,7 +137,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (!jumping && playerInput.actions["Jump"].inProgress && IsGrounded())
         {
-            _rb.AddForce(Vector3.up * jumpForce, ForceMode.Impulse);
+            _rb.AddForce(Vector3.up * jumpForce * _rb.mass, ForceMode.Impulse);
             StartCoroutine(WaitForJump());
         }
 
