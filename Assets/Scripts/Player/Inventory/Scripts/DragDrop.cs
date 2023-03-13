@@ -11,7 +11,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     Canvas canvas;
     CanvasGroup canvasGroup;
     public InventorySlot itemSlot;
-    public InventorySlot trashSlot;
 
     Transform inventoryTransform;
     Inventory inventory;
@@ -23,6 +22,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
     private void Awake()
     {
+        previousSlot = transform.parent.GetComponent<RectTransform>();
+
         infoBox = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
         trans = GetComponent<RectTransform>();
         canvas = GameObject.Find("UI").GetComponent<Canvas>();

@@ -20,6 +20,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag != null)
         {
+            if (eventData.pointerDrag.transform.parent.GetComponent<InventorySlot>().isAmmoSlot)
+            {
+                return;
+            }
+
             item = eventData.pointerDrag.GetComponent<InventoryItem>();
 
             if (isAmmoSlot || (isWeaponSlot && item.attachmentType != slotAttachmentType) || (isWeaponSlot && item.attachmentWeapon != slotGunType))
@@ -34,10 +39,5 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<DragDrop>().itemSlot = GetComponent<InventorySlot>();
             eventData.pointerDrag.GetComponent<DragDrop>().previousSlot = eventData.pointerDrag.GetComponent<RectTransform>().parent.GetComponent<RectTransform>();
         }
-    }
-
-    void DoTrash()
-    {
-        
     }
 }
