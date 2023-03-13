@@ -102,7 +102,10 @@ public class Chest : MonoBehaviour, IInteractible
                 animator.Play("Handle");
                 canInteract = false;
 
-                inventory.AddRandomItem(RollItem());
+                int randRoll = RollItem();
+
+                inventory.AddRandomItem(randRoll);
+                inventory.availableAttachments.Remove(inventory.availableAttachments[randRoll]);
                 StartCoroutine(ModMenuText());
             }
             Debug.Log("YOU GOT LIGMA");

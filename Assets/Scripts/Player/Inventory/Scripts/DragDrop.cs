@@ -133,7 +133,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>();
 
         var draggedAttachmentType = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType;
-        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;\
+        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;
 
         if (prevSlot.isAmmoSlot)
         {
@@ -190,6 +190,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         if (slot.isTrashSlot)
         {
+            inventory.availableAttachments.Add(itemSlot.item.attachment);
             Destroy(gameObject);
         }
     }
