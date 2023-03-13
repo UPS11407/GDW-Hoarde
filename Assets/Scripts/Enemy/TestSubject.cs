@@ -8,6 +8,7 @@ public class TestSubject : EnemyBase
     public bool isDecalOff = true;
     [SerializeField] GameObject character;
     float _enrageSpeedboost = 1;
+    float attackNum = 0;
     
     private void Start()
     {
@@ -39,13 +40,24 @@ public class TestSubject : EnemyBase
             StartCoroutine(AttackPlayer());
         }
 
+        if (_speed > 5)
+        {
+            animator.SetBool("running", true);
+        }
+        else
+        {
+            animator.SetBool("running", false);
+        }
+
         Damaged();
     }
 
     IEnumerator AttackPlayer()
     {
         attacking = true;
+        attackNum = Random.Range(0, 0.2f);
         animator.SetBool("isAttacking", true);
+        animator.SetFloat("attackType", attackNum);
         yield return new WaitForSeconds(0.6f);
         attacking = false;
         animator.SetBool("isAttacking", false);

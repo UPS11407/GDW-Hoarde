@@ -24,6 +24,8 @@ public class EnemyBase : MonoBehaviour
 
     internal GameObject player;
     internal Animator animator;
+    public bool multipleAnimations = false;
+    float walkNum = 0f;
 
     public float damageOverTime;
     [SerializeField] float damageOverTimeModifier;
@@ -52,6 +54,9 @@ public class EnemyBase : MonoBehaviour
         animator = GetComponent<Animator>();
         UpdateSpeed();
         currentHP = _maxHP;
+
+        walkNum = Random.Range(0f, 0.2f);
+
     }
 
     public void EnemyUpdate()
@@ -164,7 +169,10 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     public virtual void ChasePlayer()
     {
-        if(GetPlayerDistance() <= _attackRange)
+        if (multipleAnimations)
+            animator.SetFloat("walkType", walkNum);
+
+        if (GetPlayerDistance() <= _attackRange)
         {
             animator.SetBool("isWalking", false);
             agent.isStopped = true;
