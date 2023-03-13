@@ -25,8 +25,6 @@ public class HeadBob : MonoBehaviour
 
     [SerializeField] private float returnSpeed;
 
-    [SerializeField] private AnimationCurve yMotionCurve;
-
     [SerializeField] float timeSinceStart;
 
     //speed at which the head bob starts to occur, if we want to increase the head bob amount when the player-

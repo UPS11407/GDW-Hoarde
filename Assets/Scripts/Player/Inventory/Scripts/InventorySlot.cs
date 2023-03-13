@@ -11,6 +11,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
 
     public bool isAmmoSlot;
     public bool isWeaponSlot;
+    public bool isTrashSlot;
 
     public AttachmentType slotAttachmentType;
     public GunType slotGunType;
@@ -33,5 +34,10 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<DragDrop>().itemSlot = GetComponent<InventorySlot>();
             eventData.pointerDrag.GetComponent<DragDrop>().previousSlot = eventData.pointerDrag.GetComponent<RectTransform>().parent.GetComponent<RectTransform>();
         }
+    }
+
+    void DoTrash()
+    {
+        
     }
 }

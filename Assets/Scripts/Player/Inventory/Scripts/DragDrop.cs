@@ -11,7 +11,7 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     Canvas canvas;
     CanvasGroup canvasGroup;
     public InventorySlot itemSlot;
-    TrashSlot trashSlot;
+    public InventorySlot trashSlot;
 
     Transform inventoryTransform;
     Inventory inventory;
@@ -133,8 +133,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
         InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>();
 
         var draggedAttachmentType = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType;
-        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;
+        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;\
 
+        if (prevSlot.isAmmoSlot)
+        {
+            return;
+        }
 
         if (
             slot.isAmmoSlot 
@@ -183,6 +187,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         trans.localScale = Vector3.one;
         eventData.pointerDrag.GetComponent<DragDrop>().trans.localScale = Vector3.one;
+
+        if (slot.isTrashSlot)
+        {
+            Destroy(gameObject);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

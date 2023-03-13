@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     public WeaponManager weaponManager;
 
-    public const int MaxInventorySlotsCount = 8;
+    public const int MaxInventorySlotsCount = 4;
 
     public List<InventorySlotGroups> weaponSlots;
     public List<InventorySlot> inventorySlots;
@@ -23,7 +23,7 @@ public class Inventory : MonoBehaviour
     InventorySlot magazineSlot;
 
     public InventoryItem selectedAmmoSlot;
-    public TrashSlot trashSlot;
+    public InventorySlot trashSlot;
 
     public int standardAmmo;
     public int fireAmmo;
