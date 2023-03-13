@@ -37,7 +37,7 @@ public class Chest : MonoBehaviour, IInteractible
     bool canInteract = true;
     Animator animator;
     public GameObject menuText;
-    Inventory inventory;
+    public Inventory inventory;
 
     public bool tutorialChest;
     public bool railChest;
@@ -121,7 +121,6 @@ public class Chest : MonoBehaviour, IInteractible
 
     private void Awake()
     {
-        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         //menuText = GameObject.Find("ChestText");
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
