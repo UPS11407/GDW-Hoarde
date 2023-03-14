@@ -151,7 +151,7 @@ public class PlayerControlsManager : MonoBehaviour
         }
         if (sprinting && speed > 7 && !IsGrounded())
         {
-            player.TakeStamina(staminaToRun/2 * Time.smoothDeltaTime);
+            player.TakeStamina(staminaToRun / 1.5f * Time.smoothDeltaTime);
             ResetSprintVariables();
         }
         else if (sprinting && speed < 1 && resetWHileSprinting)
