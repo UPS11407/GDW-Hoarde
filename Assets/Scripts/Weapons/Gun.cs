@@ -90,7 +90,6 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        Debug.Log(bursting);
 
         if (isCharged)
         {
@@ -461,6 +460,14 @@ public class Gun : MonoBehaviour
         if (mod != null)
         {
             barrelMod = mod;
+        }
+        
+    }    
+    public void changeBarrel(RailgunModScriptableObject mod)
+    {
+        if (mod != null)
+        {
+            railGunMod = mod;
         }
         
     }

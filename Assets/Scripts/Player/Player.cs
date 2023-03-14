@@ -37,6 +37,7 @@ public class Player : MonoBehaviour
 
     public float timeSinceUsedStamina = 0;
 
+    
     void Start()
     {
         stamina = maxStamina;
@@ -231,7 +232,7 @@ public class Player : MonoBehaviour
                 {
 
                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
-                    hit.transform.gameObject.GetComponent<EnemyBase>().Knockback();
+                    hit.transform.gameObject.GetComponent<EnemyBase>().Knockback(this.gameObject);
 
 
                 }
@@ -250,5 +251,9 @@ public class Player : MonoBehaviour
                 InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         healText.text = $"Press {bindings[1]} to Heal";
+    }
+    public void Knockback(GameObject knockbacker, float knockbackStrength)
+    {
+        gameObject.GetComponent<Rigidbody>().velocity = (transform.position - knockbacker.transform.position).normalized * knockbackStrength;
     }
 }

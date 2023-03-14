@@ -11,7 +11,6 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     Canvas canvas;
     CanvasGroup canvasGroup;
     public InventorySlot itemSlot;
-    TrashSlot trashSlot;
 
     Transform inventoryTransform;
     Inventory inventory;
@@ -20,9 +19,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     Color emptyColor = Color.gray;
 
     public InfoBoxText infoBox;
-    
+
     private void Awake()
     {
+        previousSlot = transform.parent.GetComponent<RectTransform>();
+
         infoBox = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
         trans = GetComponent<RectTransform>();
         canvas = GameObject.Find("UI").GetComponent<Canvas>();
@@ -100,8 +101,8 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         if (transform.parent == inventoryTransform)
         {
-            trans.anchoredPosition = previousSlot.localPosition;
             trans.SetParent(previousSlot);
+            trans.localPosition = Vector2.zero;
         }
 
         foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
@@ -130,10 +131,49 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
     public void OnDrop(PointerEventData eventData)
     {
         InventorySlot slot = trans.parent.GetComponent<InventorySlot>();
+        InventorySlot prevSlot = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>();
 
-        if (slot.isAmmoSlot || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType != slot.slotAttachmentType) || (slot.isWeaponSlot && eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon != slot.slotGunType))
+        var draggedAttachmentType = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentType;
+        var draggedAttachmentWeapon = eventData.pointerDrag.GetComponent<InventoryItem>().attachmentWeapon;
+
+        if (prevSlot.isAmmoSlot)
         {
-            eventData.pointerDrag.GetComponent<RectTransform>().anchoredPosition = eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.anchoredPosition;
+            return;
+        }
+
+        if (
+            slot.isAmmoSlot 
+            || (slot.isWeaponSlot && draggedAttachmentType != slot.slotAttachmentType)
+            || (slot.isWeaponSlot && draggedAttachmentWeapon != slot.slotGunType)
+            )
+            
+        {
+            eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+            return;
+        }
+
+        if (
+            (prevSlot.isWeaponSlot && GetComponent<InventoryItem>().attachmentType != prevSlot.slotAttachmentType)
+            || (prevSlot.isWeaponSlot && GetComponent<InventoryItem>().attachmentWeapon != prevSlot.slotGunType)
+            )
+        {
+            
+
+            foreach (InventorySlot inventorySlot in inventory.inventorySlots)
+            {
+                if (inventorySlot.transform.childCount < 1)
+                {
+                    
+                    eventData.pointerDrag.transform.SetParent(inventorySlot.transform);
+                    eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+                    eventData.pointerDrag.GetComponent<RectTransform>().localScale = Vector3.one;
+                    eventData.pointerDrag.GetComponent<DragDrop>().previousSlot = inventorySlot.GetComponent<RectTransform>();
+                    return;
+                }
+            }
+
+            eventData.pointerDrag.GetComponent<RectTransform>().localPosition = Vector2.zero;
+            eventData.pointerDrag.GetComponent<RectTransform>().localScale = Vector3.one;
             return;
         }
 
@@ -148,6 +188,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         trans.localScale = Vector3.one;
         eventData.pointerDrag.GetComponent<DragDrop>().trans.localScale = Vector3.one;
+
+        if (slot.isTrashSlot)
+        {
+            inventory.availableAttachments.Add(itemSlot.item.attachment);
+            Destroy(gameObject);
+        }
     }
 
     public void OnPointerEnter(PointerEventData eventData)

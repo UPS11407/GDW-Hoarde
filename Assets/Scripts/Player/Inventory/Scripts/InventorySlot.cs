@@ -7,11 +7,11 @@ using static InventoryAttachment;
 
 public class InventorySlot : MonoBehaviour, IDropHandler
 {
-    public WeaponManager weaponManager;
     public InventoryItem item;
 
     public bool isAmmoSlot;
     public bool isWeaponSlot;
+    public bool isTrashSlot;
 
     public AttachmentType slotAttachmentType;
     public GunType slotGunType;
@@ -20,6 +20,11 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag != null)
         {
+            if (eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>().isAmmoSlot)
+            {
+                return;
+            }
+
             item = eventData.pointerDrag.GetComponent<InventoryItem>();
 
             if (isAmmoSlot || (isWeaponSlot && item.attachmentType != slotAttachmentType) || (isWeaponSlot && item.attachmentWeapon != slotGunType))

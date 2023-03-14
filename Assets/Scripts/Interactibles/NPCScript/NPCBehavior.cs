@@ -12,28 +12,15 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public TextMeshProUGUI hudText;
     public string[] hudHints;
     bool interactible = true;
-    public DoorController genDoor;
-    public DoorController[] doorColliders;
-    public DoorController[] eventDoors;
-    public GameObject[] enemies;
-    GameObject player;
-    [SerializeField] float dialogueRange;
-    private void Start()
+    protected GameObject player;
+    public float dialogueRange;
+
+    protected void Startup()
     {
         player = GameObject.Find("Player");
         UpdateHUD();
-        genDoor.ForceLock();
-        foreach(DoorController door in doorColliders)
-        {
-            door.ForceLock();
-
-        }
-        
-        foreach (GameObject enemy in enemies)
-        {
-            enemy.SetActive(false);
-        }
     }
+
     private void Update()
     {
         if (interactible == false && Vector3.Distance(transform.position, player.transform.position) > dialogueRange)
@@ -78,27 +65,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         UpdateHUD();
     }
 
-    public void UpdateHUD()
+    public virtual void UpdateHUD()
     {
-        hudText.text = hudHints[state+1];
-        if (state >= 1)
-        {
-            foreach (DoorController door in doorColliders)
-            {
-                door.Unlock();
-            }
-
-
-            foreach (GameObject enemy in enemies)
-            {
-                if(enemy != null) enemy.SetActive(true);
-            }
-        }
-
-        if (state >= 3)
-        {
-            genDoor.Unlock();
-        }
+        hudText.gameObject.SetActive(true);
+        hudText.transform.parent.gameObject.SetActive(true);
+        hudText.text = hudHints[state + 1];
     }
 
     public void EndDialogue()

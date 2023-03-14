@@ -8,7 +8,6 @@ public class PauseMenu : MonoBehaviour
     public GameObject menu;
     public GameObject player;
     public GameObject HUD;
-    public WeaponManager weaponManager;
     public ControlsMenu controlsMenu;
     public PlayerControlsManager playerControlsManager;
 
@@ -59,12 +58,6 @@ public class PauseMenu : MonoBehaviour
         HUD.SetActive(false);
         menu.SetActive(true);
         Time.timeScale = 0;
-        //
-        foreach(Gun guns in weaponManager.guns)
-        {
-            guns.canSwap = false;
-            guns.enabled = false;
-        }
     }
 
     public void CloseMenu()
@@ -76,12 +69,6 @@ public class PauseMenu : MonoBehaviour
         HUD.SetActive(true);
         menu.SetActive(false);
         Time.timeScale = 1.0f;
-
-        foreach (Gun guns in weaponManager.guns)
-        {
-            guns.canSwap = true;
-            guns.enabled = true;
-        }
     }
 
     public void OpenControlsMenu()

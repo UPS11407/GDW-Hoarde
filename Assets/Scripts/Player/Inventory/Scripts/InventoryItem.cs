@@ -6,9 +6,6 @@ using static InventoryAttachment;
 
 public class InventoryItem : MonoBehaviour
 {
-    public List<InventoryAttachment> itemTypes;
-    public List<InventoryAttachment> ammoTypes;
-
     public Sprite emptyImage;
     public InventoryAttachment attachment;
     public GunType attachmentWeapon;
@@ -19,6 +16,11 @@ public class InventoryItem : MonoBehaviour
     public string ammoType;
 
     private void Awake()
+    {
+        UpdateItemStats();
+    }
+
+    public void UpdateItemStats()
     {
         if (attachment == null)
         {

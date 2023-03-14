@@ -8,7 +8,7 @@ public class Inventory : MonoBehaviour
 {
     public WeaponManager weaponManager;
 
-    public const int MaxInventorySlotsCount = 8;
+    public const int MaxInventorySlotsCount = 4;
 
     public List<InventorySlotGroups> weaponSlots;
     public List<InventorySlot> inventorySlots;
@@ -16,14 +16,14 @@ public class Inventory : MonoBehaviour
     public List<InventoryAttachment> availableAttachments;
     public List<kvp> keys;
     public Dictionary<InventoryAttachment, ScriptableObject> attachmentPairs = new Dictionary<InventoryAttachment, ScriptableObject>();
-    public List<ScriptableObject> standardAttachments;
+    public List<WeaponModScriptableObject> standardAttachments;
 
     InventorySlot barrelSlot;
     InventorySlot gripSlot;
     InventorySlot magazineSlot;
 
     public InventoryItem selectedAmmoSlot;
-    public TrashSlot trashSlot;
+    public InventorySlot trashSlot;
 
     public int standardAmmo;
     public int fireAmmo;
@@ -33,7 +33,10 @@ public class Inventory : MonoBehaviour
 
     public GameObject weaponModCanvas;
 
+    public GameObject itemPrefab;
+
     public AmmoType selectedAmmo;
+    public RailgunModScriptableObject standardRailgunAttachment;
 
     private void Awake()
     {
@@ -91,20 +94,42 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public bool AddRandomItem()
+    public void AddRandomItem(int attachment)
     {
-        if (inventorySlots.Count >= MaxInventorySlotsCount)
+        var itemSlot = NextSlot();
+
+        var itemObject = Instantiate(itemPrefab, itemSlot.transform).GetComponent<InventoryItem>();
+
+        itemObject.attachment = availableAttachments[attachment];
+        itemObject.UpdateItemStats();
+        itemSlot.item = itemObject;
+        itemObject.GetComponent<DragDrop>().previousSlot = itemSlot.GetComponent<RectTransform>();
+    }
+
+    public InventorySlot NextSlot()
+    {
+        foreach(InventorySlot slot in inventorySlots)
         {
-            return false;
+            if (slot.transform.childCount < 1)
+            {
+                return slot;
+            }
         }
 
+        return null;
+    }
+
+    public bool CheckForEmptySlot()
+    {
         foreach (InventorySlot slot in inventorySlots)
         {
-
+            if (slot.transform.childCount < 1)
+            {
+                return true;
+            }
         }
-        
 
-        return true;
+        return false;
     }
 
     public void ToggleVisibleSlots(bool toggle)
@@ -143,11 +168,6 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public void TrashItem()
-    {
-
-    }
-
     public void UpdateWeaponStats()
     {
         foreach(InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
@@ -168,32 +188,33 @@ public class Inventory : MonoBehaviour
             }
         }
 
+        if (barrelSlot.transform.childCount < 1) barrelSlot.item = null;
+        if (magazineSlot.transform.childCount < 1) magazineSlot.item = null;
+        if (gripSlot.transform.childCount < 1) gripSlot.item = null;
+
         weaponManager.guns[weaponManager.activeGun].changeAmmo((WeaponModScriptableObject)attachmentPairs[selectedAmmoSlot.attachment]);
 
         if (barrelSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)standardAttachments[0]);
+        else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardAttachments[0]);
 
         if (gripSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeGrip((WeaponModScriptableObject)attachmentPairs[gripSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeGrip((WeaponModScriptableObject)standardAttachments[1]);
+        else weaponManager.guns[weaponManager.activeGun].changeGrip(standardAttachments[1]);
 
         if (magazineSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)attachmentPairs[magazineSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)standardAttachments[2]);
+        else weaponManager.guns[weaponManager.activeGun].changeMag(standardAttachments[2]);
+
+        if (trashSlot.transform.childCount > 1)
+        {
+            Destroy(trashSlot.transform.GetChild(1).gameObject);
+        }
     }
 
     public void UpdateWeaponStatsRailgun()
     {
-        foreach (InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
-        {
-            switch (slot.slotAttachmentType)
-            {
-                case AttachmentType.BARREL:
-                    barrelSlot = slot;
-                    break;
-            }
-        }
+        barrelSlot = weaponSlots[weaponManager.activeGun].slots[0];
 
         if (barrelSlot != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)standardAttachments[3]);
+        else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
     }
 }
 [System.Serializable]

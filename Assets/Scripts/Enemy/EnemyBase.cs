@@ -24,6 +24,8 @@ public class EnemyBase : MonoBehaviour
 
     internal GameObject player;
     internal Animator animator;
+    public bool multipleAnimations = false;
+    float walkNum = 0f;
 
     public float damageOverTime;
     [SerializeField] float damageOverTimeModifier;
@@ -52,6 +54,9 @@ public class EnemyBase : MonoBehaviour
         animator = GetComponent<Animator>();
         UpdateSpeed();
         currentHP = _maxHP;
+
+        walkNum = Random.Range(0f, 0.2f);
+
     }
 
     public void EnemyUpdate()
@@ -61,7 +66,7 @@ public class EnemyBase : MonoBehaviour
 
         CheckIfDead();
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
-        
+        /*
         if (knockBacked)
         {
 
@@ -71,9 +76,9 @@ public class EnemyBase : MonoBehaviour
             knockBacked = false;
             Debug.Log(rigid.velocity);
             //RagdollEnabler.EnableRagdoll();
-
         }
-        else if (rigid.velocity == Vector3.zero)
+        else */
+        if (rigid.velocity == Vector3.zero)
         {
             rigid.constraints = RigidbodyConstraints.FreezeAll;
             agent.enabled = true;
@@ -164,7 +169,10 @@ public class EnemyBase : MonoBehaviour
     /// </summary>
     public virtual void ChasePlayer()
     {
-        if(GetPlayerDistance() <= _attackRange)
+        if (multipleAnimations)
+            animator.SetFloat("walkType", walkNum);
+
+        if (GetPlayerDistance() <= _attackRange)
         {
             animator.SetBool("isWalking", false);
             agent.isStopped = true;
@@ -184,9 +192,7 @@ public class EnemyBase : MonoBehaviour
 
     public void TakeDamage(float val)
     {
-        Debug.Log(val);
         currentHP -= val;
-
     }
     public void ApplyDamageOverTime(float DoT)
     {
@@ -249,10 +255,24 @@ public class EnemyBase : MonoBehaviour
         slowed = false;
         agent.speed = _speed;
     }
+    /*
     public void Knockback()
     {
         Debug.Log("PUNCHED");
         knockBacked = true;
+        StartCoroutine(KnockbackLimiter(2));
+    }*/
+    public void Knockback(GameObject knockbacker)
+    {
+        agent.enabled = false;
+        rigid.constraints = RigidbodyConstraints.None;
+        rigid.velocity = (transform.position - knockbacker.transform.position).normalized * knockBackStrength;
+        KnockbackLimiter(2);
+    }
+    IEnumerator KnockbackLimiter(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+        rigid.velocity = Vector3.zero;
     }
 
 }
