@@ -20,7 +20,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
     {
         if (eventData.pointerDrag != null)
         {
-            if (eventData.pointerDrag.transform.parent.GetComponent<InventorySlot>().isAmmoSlot)
+            if (eventData.pointerDrag.GetComponent<DragDrop>().previousSlot.GetComponent<InventorySlot>().isAmmoSlot)
             {
                 return;
             }

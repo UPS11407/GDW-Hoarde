@@ -168,11 +168,6 @@ public class Inventory : MonoBehaviour
         
     }
 
-    public void TrashItem()
-    {
-
-    }
-
     public void UpdateWeaponStats()
     {
         foreach(InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
@@ -207,19 +202,16 @@ public class Inventory : MonoBehaviour
 
         if (magazineSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)attachmentPairs[magazineSlot.item.attachment]);
         else weaponManager.guns[weaponManager.activeGun].changeMag(standardAttachments[2]);
+
+        if (trashSlot.transform.childCount > 1)
+        {
+            Destroy(trashSlot.transform.GetChild(1).gameObject);
+        }
     }
 
     public void UpdateWeaponStatsRailgun()
     {
-        foreach (InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
-        {
-            switch (slot.slotAttachmentType)
-            {
-                case AttachmentType.BARREL:
-                    barrelSlot = slot;
-                    break;
-            }
-        }
+        barrelSlot = weaponSlots[weaponManager.activeGun].slots[0];
 
         if (barrelSlot != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
         else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
