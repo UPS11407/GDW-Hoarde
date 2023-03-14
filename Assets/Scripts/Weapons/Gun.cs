@@ -206,6 +206,10 @@ public class Gun : MonoBehaviour
         }
 
         recoil = gunStats.recoil + barrelMod.recoilModifier + gripMod.recoilModifier + ammoMod.recoilModifier + magMod.recoilModifier + railGunMod.recoilModifier;
+        if (recoil < 0)
+        {
+            recoil = 0;
+        }
 
         damage = gunStats.damage + (gunStats.damage * barrelMod.damageModifier) + (gunStats.damage * gripMod.damageModifier) + (gunStats.damage * ammoMod.damageModifier) + (gunStats.damage * magMod.damageModifier);
 
