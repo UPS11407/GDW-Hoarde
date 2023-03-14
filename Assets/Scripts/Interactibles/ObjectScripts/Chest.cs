@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 /*
@@ -93,7 +94,7 @@ public class Chest : MonoBehaviour, IInteractible
             {
                 if (!inventory.CheckForEmptySlot())
                 {
-                    Debug.Log("Inventory Full *UI PLACEHOLDER*");
+                    StartCoroutine(ModMenuText("! Inventory Full !", Color.red));
                     return;
                 }
 
@@ -106,7 +107,7 @@ public class Chest : MonoBehaviour, IInteractible
 
                 inventory.AddRandomItem(randRoll);
                 inventory.availableAttachments.Remove(inventory.availableAttachments[randRoll]);
-                StartCoroutine(ModMenuText());
+                StartCoroutine(ModMenuText("New Item Added! (Press B)", Color.white));
             }
             Debug.Log("YOU GOT LIGMA");
             
@@ -115,16 +116,17 @@ public class Chest : MonoBehaviour, IInteractible
         }
     }
 
-    IEnumerator ModMenuText()
+    IEnumerator ModMenuText(string text, Color color)
     {
         menuText.SetActive(true);
+        menuText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
+        menuText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
         yield return new WaitForSeconds(5.9f);
         menuText.SetActive(false);
     }
 
     private void Awake()
     {
-        //menuText = GameObject.Find("ChestText");
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
     }
