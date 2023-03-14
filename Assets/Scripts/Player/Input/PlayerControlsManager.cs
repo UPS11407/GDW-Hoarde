@@ -55,6 +55,7 @@ public class PlayerControlsManager : MonoBehaviour
     public bool sprinting;
     bool resetSprint;
     bool resetWHileSprinting;
+    bool canSprint;
 
     public float staminaToRun = 1;
 
@@ -143,7 +144,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         Sprint();
 
-        if (sprinting && speed > 1 && IsGrounded())
+        if (sprinting && speed > 7 && IsGrounded())
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
             ResetSprintVariables();
@@ -157,6 +158,16 @@ public class PlayerControlsManager : MonoBehaviour
         if (sprinting && !(player.stamina > 0))
         {
             sprinting = false;
+        }
+
+        if (sprinting && !canSprint)
+        {
+            sprinting = false;
+        }
+
+        if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress)
+        {
+            sprinting = true;
         }
 
         if (speed > 7)
@@ -192,6 +203,15 @@ public class PlayerControlsManager : MonoBehaviour
         Vector2 moveDir = playerInput.actions["Move"].ReadValue<Vector2>();
         Vector3 moveX = moveDir.y * new Vector3(cameraParent.forward.x, 0, cameraParent.forward.z).normalized * moveSpeed;
         Vector3 moveZ = moveDir.x * new Vector3(cameraParent.right.x, 0, cameraParent.right.z).normalized * moveSpeed;
+
+        if (moveDir.y > 0)
+        {
+            canSprint = true;
+        }
+        else
+        {
+            canSprint = false;
+        }
 
         if (moveDir == Vector2.zero)
         {
