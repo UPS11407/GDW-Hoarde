@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Shotgun Barrel
   image: {fileID: 21300000, guid: c969bab4bb34234438ca3445747ad46d, type: 3}
   gunType: 2
-  description: Sample Text
+  description: More bullets per shot, lower fire rate, lower accuracy.
   attachmentType: 0
   barrelType: 2
   magazineType: 0
