@@ -13,15 +13,15 @@ MonoBehaviour:
   m_Name: CalicoMag
   m_EditorClassIdentifier: 
   fireMode: 0
-  spreadModifier: -2
+  damageType: 0
+  spreadModifier: -200
   damageModifier: 4
   fireDelayModifier: 3
   bulletVelocityModifier: 0
   additionalBulletsPerShot: 0
-  dashDamageModifier: 0
-  dashDelayModifier: 0
   reloadDelayModifier: 3
   magazineSizeModifier: -100
   enablesExplosionImpact: 0
+  becomeProjectile: 0
   explosionSizeIncrease: 4
   recoilModifier: 5
