@@ -11,25 +11,45 @@ public class LightFlicker : MonoBehaviour
     [SerializeField] float timeOffMax = 2.5f;
     [SerializeField] float timeOffMin = 0.5f;
     float changeTime;
-    public Light light;
+    Light lightComponent;
+    public Material onMaterial;
+    public Material offMaterial;
+
     private void Awake()
     {
-        light = gameObject.GetComponent<Light>();
+        lightComponent = gameObject.GetComponent<Light>();
     }
+
     private void Update()
     {
         if(Time.time >= changeTime)
         {
-            light.enabled = !light.enabled;
-            if (light.enabled)
+            lightComponent.enabled = !lightComponent.enabled;
+            if (lightComponent.enabled)
             {
                 timeOn = Random.Range(timeOnMin, timeOnMax);
                 changeTime = Time.time + timeOn;
+                ToggleMat(true);
             } else
             {
                 timeOff = Random.Range(timeOffMin, timeOffMax);
                 changeTime = Time.time + timeOff;
+                ToggleMat(false);
             }
+        }
+    }
+
+    void ToggleMat(bool toggle)
+    {
+        var parentMesh = lightComponent.transform.parent.GetComponent<MeshRenderer>();
+
+        if (toggle)
+        {
+            parentMesh.material = onMaterial;
+        }
+        else
+        {
+            parentMesh.material = offMaterial;
         }
     }
 }
