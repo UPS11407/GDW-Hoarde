@@ -12,6 +12,9 @@ public class PlayerControlsManager : MonoBehaviour
 
     Player player;
     WeaponManager weaponManager;
+
+    public GameObject flashlight;
+
     public PauseMenu pauseMenu;
     public GameObject HUD;
 
@@ -290,6 +293,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
+        playerInput.actions["Flashlight"].performed += ctx => ToggleFlashlight();
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed += ctx => pauseMenu.RunPause();
     }
 
@@ -306,6 +310,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
+        playerInput.actions["Flashlight"].performed -= ctx => ToggleFlashlight();
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed -= ctx => pauseMenu.RunPause();
     }
 
@@ -367,5 +372,17 @@ public class PlayerControlsManager : MonoBehaviour
         player.timeSinceUsedStamina = 0;
         resetWHileSprinting = true;
         sprinting = true;
+    }
+
+    void ToggleFlashlight()
+    {
+        if (flashlight.activeSelf)
+        {
+            flashlight.SetActive(false);
+        }
+        else
+        {
+            flashlight.SetActive(true);
+        }
     }
 }
