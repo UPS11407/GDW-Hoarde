@@ -38,11 +38,10 @@ public class EnemyBase : MonoBehaviour
     bool slowed;
     IEnumerator slowCoroutine;
     Rigidbody rigid;
-    RagdollEnabler RagdollEnabler;
     [SerializeField]
     float deathFadeOut = 2f;
     protected NavMeshAgent agent;
-
+    private BoxCollider hitbox;
     bool knockBacked;
     [SerializeField] float knockBackStrength;
     public bool canAttack = true;
@@ -52,6 +51,7 @@ public class EnemyBase : MonoBehaviour
         rigid = GetComponent<Rigidbody>();
         agent = GetComponent<NavMeshAgent>();
         animator = GetComponent<Animator>();
+        hitbox = GetComponent<BoxCollider>();
         UpdateSpeed();
         currentHP = _maxHP;
 
@@ -78,10 +78,11 @@ public class EnemyBase : MonoBehaviour
             //RagdollEnabler.EnableRagdoll();
         }
         else */
-        if (rigid.velocity == Vector3.zero)
+        if (rigid.velocity == Vector3.zero && canAttack)
         {
             rigid.constraints = RigidbodyConstraints.FreezeAll;
             agent.enabled = true;
+            animator.enabled = true;
         }
         if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
         {
@@ -124,31 +125,12 @@ public class EnemyBase : MonoBehaviour
             Debug.Log("Enemy should be dead");
             //Destroy(gameObject);
             //rigid.detectCollisions = false;
+            canAttack = false;
             animator.enabled = false;
             agent.enabled = false;
-            Destroy(gameObject);
-            //RagdollEnabler.EnableRagdoll();
-            // FadeAway();
+            hitbox.enabled = false;
+            Destroy(gameObject, 2f);
         }
-    }
-
-    private IEnumerator FadeAway()
-    {
-        yield return new WaitForSeconds(deathFadeOut);
-
-        if (RagdollEnabler != null)
-        {
-            RagdollEnabler.DisableAllRigidbodies();
-        }
-
-        float time = 0;
-        while (time < 1)
-        {
-            transform.position += Vector3.down * Time.deltaTime;
-            time += Time.deltaTime;
-            yield return null;
-        }
-        Destroy(gameObject);
     }
     protected void DropPickup()
     {

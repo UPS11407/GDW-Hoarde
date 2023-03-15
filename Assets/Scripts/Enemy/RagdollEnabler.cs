@@ -5,7 +5,7 @@ using UnityEngine.AI;
 
 public class RagdollEnabler : MonoBehaviour
 {
-    public BoxCollider hitbox;
+   // public BoxCollider hitbox;
     [SerializeField]
     Animator Animator;
     [SerializeField]
@@ -14,8 +14,8 @@ public class RagdollEnabler : MonoBehaviour
     NavMeshAgent Agent;
     [SerializeField]
     bool StartRagdoll = false;
-    [SerializeField]
-    EnemyBase enemyBase;
+    //[SerializeField]
+  //  EnemyBase enemyBase;
     Rigidbody[] Rigidbodies;
     CharacterJoint[] CharacterJoints;
     private void Awake()
@@ -26,6 +26,7 @@ public class RagdollEnabler : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        /*
         if (StartRagdoll)
         {
             EnableRagdoll();
@@ -35,14 +36,21 @@ public class RagdollEnabler : MonoBehaviour
             //EnableAnimator();
            // enemyBase.enabled = true;
         }
+        */
     }
-
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Y))
+        {
+            EnableRagdoll();
+        }
+    }
     public void EnableRagdoll()
     {
         Animator.enabled = false;
         Agent.enabled = false;
-        hitbox.enabled = false;
-        enemyBase.enabled = false;
+    //    hitbox.enabled = false;
+       // enemyBase.enabled = false;
         foreach (CharacterJoint joint in CharacterJoints)
         {
             joint.enableCollision = true;
@@ -70,7 +78,7 @@ public class RagdollEnabler : MonoBehaviour
     {
         Animator.enabled = true;
         Agent.enabled = true;
-        hitbox.enabled = true;
+     //   hitbox.enabled = true;
         foreach (CharacterJoint joint in CharacterJoints)
         {
             joint.enableCollision = false;
