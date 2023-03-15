@@ -82,7 +82,7 @@ public class EnemyBase : MonoBehaviour
         {
             rigid.constraints = RigidbodyConstraints.FreezeAll;
             agent.enabled = true;
-            animator.enabled = true;
+            //animator.enabled = true;
         }
         if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
         {
