@@ -96,15 +96,6 @@
                     "initialStateCheck": true
                 },
                 {
-                    "name": "Crouch",
-                    "type": "Button",
-                    "id": "e4b94073-0234-4dec-b192-67171d06f19f",
-                    "expectedControlType": "Button",
-                    "processors": "",
-                    "interactions": "",
-                    "initialStateCheck": false
-                },
-                {
                     "name": "Pause",
                     "type": "Button",
                     "id": "215baa77-11ae-4125-af5b-e1c6b6a26184",
@@ -117,6 +108,15 @@
                     "name": "Melee",
                     "type": "Button",
                     "id": "e35ea6b3-1ec9-442b-b122-02211dd46438",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "Flashlight",
+                    "type": "Button",
+                    "id": "29b2e70a-27df-4ee8-aa7e-4b6e640c1203",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -489,39 +489,6 @@
                 },
                 {
                     "name": "",
-                    "id": "b9f64fc5-1ddf-459b-9feb-c51d8f3fa66c",
-                    "path": "<Keyboard>/leftCtrl",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "8d4f3914-eb38-49be-a1f2-d5dbd994c932",
-                    "path": "<Gamepad>/buttonEast",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Controller",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
-                    "id": "cd4e06db-8283-4be6-bf88-670d555822bc",
-                    "path": "<Keyboard>/c",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "Keyboard",
-                    "action": "Crouch",
-                    "isComposite": false,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "",
                     "id": "6f860763-1358-4e15-8d80-2c6f6c361e3b",
                     "path": "<Keyboard>/escape",
                     "interactions": "",
@@ -550,6 +517,17 @@
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "887b031e-9460-42e1-af44-293bf1470634",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Flashlight",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
