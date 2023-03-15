@@ -21,7 +21,6 @@ public class MuzzleFlash : MonoBehaviour
         image.sprite = flashList[RandomSprite()];
         image.enabled = true;
 
-        muzzleLight.intensity = damage * bulletsPerShot;
         yield return new WaitForSeconds(duration);
 
         muzzleLight.enabled = false;
