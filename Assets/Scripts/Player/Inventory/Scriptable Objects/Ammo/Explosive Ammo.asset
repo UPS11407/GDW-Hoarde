@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Explosive Ammo
   image: {fileID: 21300000, guid: 9be9e719200d78c4d8d1078a3a69ee97, type: 3}
   gunType: 0
-  description: Sample Text
+  description: We strapped bombs on your bullets!
   attachmentType: 3
   barrelType: 0
   magazineType: 0

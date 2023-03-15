@@ -15,7 +15,8 @@ MonoBehaviour:
   attachmentName: Incindiary Ammo
   image: {fileID: 21300000, guid: 3f4e21584d7a04f4f9a8b24e84532239, type: 3}
   gunType: 0
-  description: Sample Text
+  description: 'Ignite the monsters with Incindiary Ammo! Note: personal fire protection
+    not included in your purchase'
   attachmentType: 3
   barrelType: 0
   magazineType: 0

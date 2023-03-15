@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Slow Ammo
   image: {fileID: 21300000, guid: eb7d63cdf6a03664cb9749b861ccf715, type: 3}
   gunType: 0
-  description: Sample Text
+  description: Slow down your enemies with molasses infused bullets!
   attachmentType: 3
   barrelType: 0
   magazineType: 0
