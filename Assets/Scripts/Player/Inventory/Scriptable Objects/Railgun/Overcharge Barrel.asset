@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Overcharge Barrel
   image: {fileID: 0}
   gunType: 3
-  description: Sample Text
+  description: 'Longer charge: harder hit!'
   attachmentType: 0
   barrelType: 1
   magazineType: 0

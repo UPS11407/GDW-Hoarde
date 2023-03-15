@@ -15,7 +15,8 @@ MonoBehaviour:
   attachmentName: Speedcharge Barrel
   image: {fileID: 0}
   gunType: 3
-  description: Sample Text
+  description: 'After charging, the railgun can shoot multiple shots without needing
+    to charge again: speedier recovery!'
   attachmentType: 0
   barrelType: 3
   magazineType: 0
