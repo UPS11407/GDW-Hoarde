@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Shotgun Barrel
   image: {fileID: 21300000, guid: c969bab4bb34234438ca3445747ad46d, type: 3}
   gunType: 1
-  description: Sample Text
+  description: 
   attachmentType: 0
   barrelType: 2
   magazineType: 0

@@ -15,7 +15,8 @@ MonoBehaviour:
   attachmentName: Calico Mag
   image: {fileID: 0}
   gunType: 1
-  description: Sample Text
+  description: Bullets do much more damage and gun is perfectly accurate, but the
+    gun shoots slower and the mag size is 1 bullet
   attachmentType: 1
   barrelType: 0
   magazineType: 3

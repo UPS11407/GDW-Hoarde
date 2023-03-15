@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Quick Mag
   image: {fileID: 21300000, guid: 523c33e7a0c78be4cb784c232b88ea89, type: 3}
   gunType: 1
-  description: Sample Text
+  description: Makes reloading faster
   attachmentType: 1
   barrelType: 0
   magazineType: 2
