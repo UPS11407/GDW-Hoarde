@@ -45,7 +45,7 @@ public class EnemyBase : MonoBehaviour
 
     bool knockBacked;
     [SerializeField] float knockBackStrength;
-
+    public bool canAttack = true;
     private void Awake()
     {
         player = GameObject.Find("Player");

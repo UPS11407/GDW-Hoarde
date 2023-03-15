@@ -13,7 +13,7 @@ public class MutatedScientist : EnemyBase
     {
         EnemyUpdate();
 
-        if (GetPlayerDistance() <= _attackRange & !attacking)
+        if (GetPlayerDistance() <= _attackRange && !attacking && canAttack)
         {
             StartCoroutine(AttackPlayer());
         }
