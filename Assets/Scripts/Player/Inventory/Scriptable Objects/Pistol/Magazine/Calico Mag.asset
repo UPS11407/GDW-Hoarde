@@ -16,7 +16,7 @@ MonoBehaviour:
   image: {fileID: 0}
   gunType: 1
   description: Bullets do much more damage and gun is perfectly accurate, but the
-    gun shoots slower and the mag size is 1 bullet
+    gun shoots slower and the mag size is 1 bullet (gun do big BANG)
   attachmentType: 1
   barrelType: 0
   magazineType: 3
