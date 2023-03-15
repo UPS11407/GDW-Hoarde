@@ -252,8 +252,17 @@ public class Player : MonoBehaviour
 
         healText.text = $"Press {bindings[1]} to Heal";
     }
-    public void Knockback(GameObject knockbacker, float knockbackStrength)
+    void Knockback(GameObject knockbacker, float knockbackStrength)
     {
         gameObject.GetComponent<Rigidbody>().velocity = (transform.position - knockbacker.transform.position).normalized * knockbackStrength;
+        Debug.Log(gameObject.GetComponent<Rigidbody>().velocity);
+    }
+
+    public IEnumerator Knockback(float duration, GameObject knockbacker, float knockBackStrength)
+    {
+        gameObject.GetComponent<PlayerControlsManager>().movementLock = true;
+        Knockback(knockbacker, knockBackStrength);
+        yield return new WaitForSeconds(duration);
+        gameObject.GetComponent<PlayerControlsManager>().movementLock = false;
     }
 }

@@ -30,10 +30,11 @@ public class Amalgamation : EnemyBase
         if (GetPlayerDistance() <= _attackRange + 0.5f)
         {
             player.GetComponent<Player>().TakeDamage(_damage);
-            StartCoroutine(Knockback(1));
+            
+            StartCoroutine(player.GetComponent<Player>().Knockback(1,this.gameObject,attackKnockbackStrength));
         }
     }
-
+    /*
     IEnumerator Knockback(float duration)
     {
         player.GetComponent<PlayerControlsManager>().enabled = false;
@@ -41,6 +42,6 @@ public class Amalgamation : EnemyBase
         yield return new WaitForSeconds(duration);
         player.GetComponent<PlayerControlsManager>().enabled = true;
     }
-
+    */
     
 }

@@ -59,6 +59,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     public float staminaToRun = 1;
 
+    public bool movementLock;
 
     private void Awake()
     {
@@ -230,7 +231,11 @@ public class PlayerControlsManager : MonoBehaviour
 
     private void FixedUpdate()
     {
-        DoWalk();
+        if (!movementLock)
+        {
+            DoWalk();
+        }
+        
     }
 
     public bool IsGrounded()

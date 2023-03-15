@@ -20,6 +20,7 @@ public class BoomerExplosion : MonoBehaviour
             if(hitCollider.gameObject.tag == "Player")
             {
                 hitCollider.GetComponent<Player>().TakeDamage(_damage * damageMod);
+                StartCoroutine(hitCollider.GetComponent<Player>().Knockback(0.5f, this.gameObject, 25.0f * damageMod));
                 Debug.Log("HIT PLAYER");
                 Debug.Log(_damage * damageMod);
             }
@@ -27,6 +28,7 @@ public class BoomerExplosion : MonoBehaviour
             if(hitCollider.gameObject.tag == "Enemy")
             {
                 hitCollider.GetComponent<EnemyBase>().TakeDamage(_damage * damageMod);
+                hitCollider.GetComponent<EnemyBase>().Knockback(this.gameObject);
             }
 
             
