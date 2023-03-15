@@ -13,6 +13,7 @@ public class EnemyBase : MonoBehaviour
     public float _attackRange = 2.0f;
     public float chaseRange;
     public GameObject healPickupPrefab;
+    public GameObject rig;
 
     [Tooltip("% chance to drop a heal pickup")]
     [Range(0, 100)]
@@ -129,6 +130,7 @@ public class EnemyBase : MonoBehaviour
             agent.enabled = false;
             hitbox.enabled = false;
             Destroy(gameObject, 2f);
+            rig.SetActive(true);
             this.enabled = false;
         }
     }
