@@ -12,7 +12,6 @@ public class TestSubject : EnemyBase
     
     private void Start()
     {
-        
         switch (Random.Range(0, 8))
         {
             case 8:

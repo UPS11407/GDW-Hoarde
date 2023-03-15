@@ -41,7 +41,7 @@ public class EnemyBase : MonoBehaviour
     [SerializeField]
     float deathFadeOut = 2f;
     protected NavMeshAgent agent;
-    private BoxCollider hitbox;
+    protected BoxCollider hitbox;
     bool knockBacked;
     [SerializeField] float knockBackStrength;
     public bool canAttack = true;
@@ -113,7 +113,6 @@ public class EnemyBase : MonoBehaviour
 
     public virtual void CheckIfDead()
     {
-        
         if(currentHP <= 0)
         {
             dropVal = Random.Range(0, 100);
@@ -130,6 +129,7 @@ public class EnemyBase : MonoBehaviour
             agent.enabled = false;
             hitbox.enabled = false;
             Destroy(gameObject, 2f);
+            this.enabled = false;
         }
     }
     protected void DropPickup()
