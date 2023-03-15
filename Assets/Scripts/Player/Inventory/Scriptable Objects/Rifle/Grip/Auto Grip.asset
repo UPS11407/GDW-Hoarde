@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Full Auto Grip
   image: {fileID: 21300000, guid: 8e0a2580bfd8b654ca2e13d41271d273, type: 3}
   gunType: 2
-  description: Sample Text
+  description: HOLD FOR DAKKA
   attachmentType: 2
   barrelType: 0
   magazineType: 0

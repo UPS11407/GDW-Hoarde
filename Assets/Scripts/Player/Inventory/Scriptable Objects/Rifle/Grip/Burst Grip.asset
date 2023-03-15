@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Burst Shot Grip
   image: {fileID: 21300000, guid: 12a339c0e617f154d8b7e01fc17219c8, type: 3}
   gunType: 2
-  description: Sample Text
+  description: More bullets per pull
   attachmentType: 2
   barrelType: 0
   magazineType: 0
