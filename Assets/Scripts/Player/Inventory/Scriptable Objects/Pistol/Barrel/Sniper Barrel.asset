@@ -15,7 +15,7 @@ MonoBehaviour:
   attachmentName: Sniper Barrel
   image: {fileID: 21300000, guid: 4375ccf37f65fe4408d7d90d7c79a175, type: 3}
   gunType: 1
-  description: Sample Text
+  description: Bigger and more accurate bullet.
   attachmentType: 0
   barrelType: 1
   magazineType: 0
