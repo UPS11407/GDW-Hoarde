@@ -25,7 +25,7 @@ public class Player : MonoBehaviour
 
     float meleeDelay = 1.0f;
     float meleeTime;
-    [SerializeField] float meleeDamage = 4.0f;
+    float meleeDamage = 1.0f;
 
     string[] bindings;
 
