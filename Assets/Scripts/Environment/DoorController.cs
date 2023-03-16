@@ -15,6 +15,7 @@ public class DoorController : MonoBehaviour, IInteractible
     float lockTime;
     public enum LockState { lockable, locked, charging }
     public LockState lockState;
+    public bool isInteractable = true;
 
     // Start is called before the first frame update
     void Start()
@@ -53,7 +54,7 @@ public class DoorController : MonoBehaviour, IInteractible
     }
     public void Interact()
     {
-        Open();
+        if (isInteractable) Open();
     }
     public void Open()
     {

@@ -24,7 +24,7 @@ public class Generator : MonoBehaviour, IInteractible
 
         foreach (GameObject door in powerDoors)
         {
-            Destroy(door.transform.GetChild(0).gameObject);
+            door.GetComponentInChildren<DoorController>().ForceLock();
         }
 
         foreach (GameObject light in lights)
