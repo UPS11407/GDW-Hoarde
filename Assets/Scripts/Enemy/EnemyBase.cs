@@ -39,8 +39,6 @@ public class EnemyBase : MonoBehaviour
     bool slowed;
     IEnumerator slowCoroutine;
     Rigidbody rigid;
-    [SerializeField]
-    float deathFadeOut = 2f;
     protected NavMeshAgent agent;
     protected BoxCollider hitbox;
     bool knockBacked;
@@ -122,9 +120,6 @@ public class EnemyBase : MonoBehaviour
             {
                 DropPickup();
             }
-            Debug.Log("Enemy should be dead");
-            //Destroy(gameObject);
-            //rigid.detectCollisions = false;
             canAttack = false;
             animator.enabled = false;
             agent.enabled = false;
@@ -272,5 +267,4 @@ public class EnemyBase : MonoBehaviour
 
         rig.SetActive(true);
     }
-
 }
