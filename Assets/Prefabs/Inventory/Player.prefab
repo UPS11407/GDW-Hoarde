@@ -718,7 +718,6 @@ MonoBehaviour:
   canShoot: 1
   canReload: 1
   canSwap: 1
-  weaponModCanvas: {fileID: 0}
   gunStats: {fileID: 11400000, guid: 0c764f13f29c39d4f8344d045c2e569f, type: 2}
   railGunMod: {fileID: 11400000, guid: 9d922dc027c172343a67a6ced6bf0977, type: 2}
   barrelMod: {fileID: 11400000, guid: 2e3390782f988674eb83098cfa7e8420, type: 2}
@@ -883,7 +882,6 @@ MonoBehaviour:
   canShoot: 1
   canReload: 1
   canSwap: 1
-  weaponModCanvas: {fileID: 0}
   gunStats: {fileID: 11400000, guid: b6b6dd88a23255644ba1a304b376b98b, type: 2}
   railGunMod: {fileID: 11400000, guid: a2dbc38873dbae5448c78205859d4a00, type: 2}
   barrelMod: {fileID: 11400000, guid: 04ea1a05f062b28459a5339d71ebc875, type: 2}
@@ -1372,7 +1370,6 @@ GameObject:
   - component: {fileID: 6641092450832458891}
   - component: {fileID: 6641092450832458892}
   - component: {fileID: 6641092450832458893}
-  - component: {fileID: 6641092450832458894}
   - component: {fileID: 6641092450832458895}
   - component: {fileID: 6641092450832458880}
   - component: {fileID: 6641092450832458881}
@@ -1512,34 +1509,6 @@ MonoBehaviour:
   regenStamina: 10
   staminaToMelee: 20
   timeSinceUsedStamina: 0
---- !u!114 &6641092450832458894
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6641092450832458937}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9492b0f32514854395acd5a6d876555, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  barrelUpgrades:
-    standard: 1
-    shotgun: 0
-    sniper: 0
-  gripUpgrades:
-    standard: 1
-    fullAuto: 0
-    burst: 0
-  ammoUpgrades:
-    standard: 1
-    explosive: 0
-    slow: 0
-  magazineUpgrades:
-    standard: 1
-    extended: 0
-    quick: 0
 --- !u!82 &6641092450832458895
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1676,7 +1645,7 @@ MonoBehaviour:
   playerInput: {fileID: 6641092450832458936}
   moveSpeed: 6
   mouseSensitivity: 10
-  jumpForce: 5
+  jumpForce: 7
   groundMask:
     serializedVersion: 2
     m_Bits: 64
@@ -1686,6 +1655,10 @@ MonoBehaviour:
   sprinting: 0
   staminaToRun: 7
   movementLock: 0
+  runPosition: {x: 0.54, y: -0.76, z: 0}
+  walkPosition: {x: 0, y: -0.69, z: 0}
+  runRotation: {x: 0, y: -60, z: 0}
+  walkRotation: {x: 0, y: 0, z: 0}
 --- !u!114 &6641092450832458882
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2043,7 +2016,6 @@ MonoBehaviour:
   canShoot: 1
   canReload: 1
   canSwap: 0
-  weaponModCanvas: {fileID: 0}
   gunStats: {fileID: 11400000, guid: 9b153a9d97511014ebe99403ffd875a4, type: 2}
   railGunMod: {fileID: 11400000, guid: a2dbc38873dbae5448c78205859d4a00, type: 2}
   barrelMod: {fileID: 11400000, guid: 04ea1a05f062b28459a5339d71ebc875, type: 2}

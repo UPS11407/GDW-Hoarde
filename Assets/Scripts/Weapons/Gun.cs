@@ -11,8 +11,6 @@ public class Gun : MonoBehaviour
     public bool canReload = true;
     public bool canSwap = true;
 
-    public GameObject weaponModCanvas;
-
     //public GunStatScriptableObjects pistolStats;
     //public GunStatScriptableObjects rifleStats;
 
@@ -154,11 +152,6 @@ public class Gun : MonoBehaviour
             }
         }
 
-    }
-
-    public void ToggleWeaponModCanvas(bool toggle)
-    {
-        weaponModCanvas.SetActive(toggle);
     }
 
     public void ToggleFireButton(bool toggle)

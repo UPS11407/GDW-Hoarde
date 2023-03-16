@@ -66,6 +66,12 @@ public class PlayerControlsManager : MonoBehaviour
 
     public bool movementLock;
 
+    public Vector3 runPosition;
+    public Vector3 walkPosition;
+
+    public Vector3 runRotation;
+    public Vector3 walkRotation;
+
     private void Awake()
     {
         infoBoxText = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
@@ -176,6 +182,17 @@ public class PlayerControlsManager : MonoBehaviour
             sprinting = false;
         }
 
+        if (sprinting)
+        {
+            weaponManager.guns[weaponManager.activeGun].canShoot = false;
+            DoRunAnimation(true);
+        }
+        else
+        {
+            weaponManager.guns[weaponManager.activeGun].canShoot = true;
+            DoRunAnimation(false);
+        }
+
         if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress)
         {
             sprinting = true;
@@ -188,6 +205,20 @@ public class PlayerControlsManager : MonoBehaviour
         else
         {
             Camera.main.fieldOfView = 60.0f;
+        }
+    }
+
+    void DoRunAnimation(bool sprinting)
+    {
+        if ((weaponManager.activeGun == 1 || weaponManager.activeGun == 2) && sprinting)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = runPosition;
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(runRotation);
+        }
+        else if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = walkPosition;
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(walkRotation);
         }
     }
 
