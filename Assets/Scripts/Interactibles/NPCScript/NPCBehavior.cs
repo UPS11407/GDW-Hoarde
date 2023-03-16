@@ -27,6 +27,8 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         {
             EndDialogue();
         }
+
+        transform.forward =  new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
     }
     public void Interact()
     {
