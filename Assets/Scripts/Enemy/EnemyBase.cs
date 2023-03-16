@@ -251,12 +251,26 @@ public class EnemyBase : MonoBehaviour
         agent.enabled = false;
         rigid.constraints = RigidbodyConstraints.None;
         rigid.velocity = (transform.position - knockbacker.transform.position).normalized * knockBackStrength;
-        KnockbackLimiter(2);
+        StartCoroutine(KnockbackLimiter(2));
     }
     IEnumerator KnockbackLimiter(float duration)
     {
+        animator.enabled = false;
+        StartCoroutine(WaitForRig(0.2f));
+
+
         yield return new WaitForSeconds(duration);
         rigid.velocity = Vector3.zero;
+
+        animator.enabled = true;
+        rig.SetActive(false);
+    }
+
+    IEnumerator WaitForRig(float duration)
+    {
+        yield return new WaitForSeconds(duration);
+
+        rig.SetActive(true);
     }
 
 }
