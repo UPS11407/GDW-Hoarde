@@ -49,6 +49,7 @@ public class TestSubject : EnemyBase
         }
 
         Damaged();
+        Decal();
     }
 
     IEnumerator AttackPlayer()
@@ -73,8 +74,12 @@ public class TestSubject : EnemyBase
         {
             _speed *= 1.5f;
             UpdateSpeed();
-            character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
-            isDecalOff = false;
+            //character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
+            //isDecalOff = false;
         }
+    }
+    void Decal()
+    {
+        character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_DecalStr",0.4f + 0.1f * (1-(currentHP/_maxHP)));
     }
 }

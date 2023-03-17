@@ -40,6 +40,8 @@ public class Gun : MonoBehaviour
 
     [SerializeField] GameObject otherGun;
 
+    [SerializeField] GameObject bloodSplatter;
+ 
     public TextMeshProUGUI currentAmmoDisplay;
     public TextMeshProUGUI maxAmmoDisplay;
 
@@ -338,6 +340,7 @@ public class Gun : MonoBehaviour
                                 {
                                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
                                 }
+                                GameObject bloodParticles = (GameObject)Instantiate(bloodSplatter, hit.transform.position, hit.transform.rotation);
 
                             }
                             TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
@@ -444,12 +447,12 @@ public class Gun : MonoBehaviour
                 Fire();
             yield return new WaitForSeconds(shootDelay);
                 Fire();
-            yield return new WaitForSeconds(0.40f);
+            yield return new WaitForSeconds(shootDelay * 3);
         } else
         {
             yield return new WaitForSeconds(shootDelay);
                 Fire();
-            yield return new WaitForSeconds(0.40f);
+            yield return new WaitForSeconds(shootDelay * 3);
         }
         
         bursting = false;

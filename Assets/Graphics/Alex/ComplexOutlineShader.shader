@@ -7,9 +7,9 @@ Shader "Alexander/ComplexOutlineShader"
         _Outline("Outline Width", Range(.002,1.0)) = .005
         _BloodColor ("BloodColor", Color) = (0,0,0,0)
         _Decal1("Decal 1", 2D) = "white" {}
-        [Toggle] _ShowDecal1 ("Show Decal 1", float) = 0
-        
+        _DecalStr("Decal Strength", Range(0.4,0.5)) = 0
         _Shininess ("Shininess", Range(0,1)) = 0
+        _BloodShininess ("Blood Shininess", Range(0,1)) = 0
 
     }
         SubShader
@@ -24,16 +24,19 @@ Shader "Alexander/ComplexOutlineShader"
         sampler2D _Decal1;
         float _ShowDecal1;
         half _Shininess;
+        half _BloodShininess;
         float4 _BloodColor;
+        float _DecalStr;
+
         void surf(Input IN, inout SurfaceOutputStandard o)
         {
             
             fixed4 a = tex2D (_MainTex, IN.uv_MainTex);
-            fixed4 b = tex2D(_Decal1, IN.uv_MainTex) * _ShowDecal1 * _BloodColor;
+            fixed4 b = tex2D(_Decal1, IN.uv_MainTex) * _DecalStr * _BloodColor;
             
 
-            o.Albedo = b.r > 0.9 ? b.rgb : a.rgb;
-            o.Smoothness = _Shininess;
+            o.Albedo = b.r > 0.4 ? b.rgb : a.rgb;
+            o.Smoothness = b.r > 0.4 ? _BloodShininess : _Shininess;
         }
         ENDCG
             Pass{
