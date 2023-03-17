@@ -66,6 +66,35 @@ public class PlayerControlsManager : MonoBehaviour
 
     public bool movementLock;
 
+    public Vector3 runPosition;
+    public Vector3 walkPosition;
+
+    public Vector3 runRotation;
+    public Vector3 walkRotation;
+
+    public Vector3 pistolRunPosition;
+    public Vector3 pistolWalkPosition;
+
+    public Vector3 pistolRunRotation;
+    public Vector3 pistolWalkRotation;
+
+    Vector3 startPos;
+    Vector3 startRot;
+
+    public float timeToUnreadyPistol;
+    public float timeToReadyPistol;
+
+    public float timeToUnreadyRifle;
+    public float timeToReadyRifle;
+
+    float timeToUnreadyWeapon;
+    float timeToReadyWeapon;
+
+    float timeToLerp;
+    float maxLerpTime;
+
+    bool sprintingAnim;
+
     private void Awake()
     {
         infoBoxText = GameObject.Find("Info Box").GetComponent<InfoBoxText>();
@@ -80,6 +109,8 @@ public class PlayerControlsManager : MonoBehaviour
         GetRebinds();
 
         Physics.gravity = new Vector3(0, -22.0f, 0);
+
+        timeToLerp = maxLerpTime + 1;
     }
 
     void Start()
@@ -131,6 +162,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void Update()
     {
+        #region Sprint Stuff
         speed = new Vector3(_rb.velocity.x, 0, _rb.velocity.z).magnitude;
 
         if (enableLook) DoLook(mouseSensitivity);
@@ -148,40 +180,46 @@ public class PlayerControlsManager : MonoBehaviour
             StartCoroutine(WaitForJump());
         }
 
-        Sprint();
-
         if (sprinting && speed > 7 && IsGrounded())
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
-            ResetSprintVariables();
+            ResetSprintVariables(false);
+            if (!sprintingAnim)
+            {
+                UpdateAnimation(true);
+            }
         }
         if (sprinting && speed > 7 && !IsGrounded())
         {
             player.TakeStamina(staminaToRun / 1.5f * Time.smoothDeltaTime);
-            ResetSprintVariables();
+            ResetSprintVariables(true);
+            if (!sprintingAnim)
+            {
+                UpdateAnimation(true);
+            }
         }
         else if (sprinting && speed < 1 && resetWHileSprinting)
         {
             player.timeSinceUsedStamina = 0;
             resetWHileSprinting = false;
+            UpdateAnimation(false);
         }
 
-        if (sprinting && !(player.stamina > 0))
+        if (sprinting && (!(player.stamina > 0) || !canSprint))
         {
             sprinting = false;
+            canSprint = false;
+            UpdateAnimation(false);
         }
 
-        if (sprinting && !canSprint)
-        {
-            sprinting = false;
-        }
-
-        if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress)
+        if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress && IsGrounded())
         {
             sprinting = true;
+            ResetSprintVariables(false);
+            UpdateAnimation(true);
         }
 
-        if (speed > 7)
+        if (sprinting && canSprint)
         {
             Camera.main.fieldOfView = quickFOV;
         }
@@ -189,6 +227,82 @@ public class PlayerControlsManager : MonoBehaviour
         {
             Camera.main.fieldOfView = 60.0f;
         }
+
+        if (sprinting)
+        {
+            weaponManager.guns[weaponManager.activeGun].canShoot = false;
+            weaponManager.guns[weaponManager.activeGun].canSwap = false;
+        }
+        else
+        {
+            weaponManager.guns[weaponManager.activeGun].canSwap = true;
+        }
+
+        if (sprinting && !weaponManager.guns[weaponManager.activeGun].canReload)
+        {
+            sprinting = false;
+            canSprint = false;
+        }
+
+        Sprint();
+        #endregion
+
+
+
+        if (timeToLerp > maxLerpTime && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
+        {
+            weaponManager.guns[weaponManager.activeGun].canShoot = true;
+        }
+        else
+        {
+            DoRunAnimation(sprinting);
+            timeToLerp += Time.deltaTime;
+            weaponManager.guns[weaponManager.activeGun].canShoot = false;
+        }
+
+        if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
+        {
+            timeToReadyWeapon = timeToReadyRifle;
+            timeToUnreadyWeapon = timeToReadyRifle;
+        }
+        else
+        {
+            timeToReadyWeapon = timeToReadyPistol;
+            timeToUnreadyWeapon = timeToReadyPistol;
+        }
+    }
+
+    void DoRunAnimation(bool sprinting)
+    {
+        if ((weaponManager.activeGun == 1 || weaponManager.activeGun == 2) && sprinting && speed > 7)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTime());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTime()));
+            sprintingAnim = true;
+        }
+        else if (weaponManager.activeGun == 0 && sprinting && speed > 7)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTime());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTime()));
+            sprintingAnim = true;
+        }
+        else if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, walkPosition, GetLerpTime());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, walkRotation, GetLerpTime()));
+            sprintingAnim = false;
+        }
+        else if (weaponManager.activeGun == 0)
+        {
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolWalkPosition, GetLerpTime());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolWalkRotation, GetLerpTime()));
+            sprintingAnim = false;
+        }
+    }
+
+    float GetLerpTime()
+    {
+        return timeToLerp / maxLerpTime;
     }
 
     void DoLook(float sensitivity)
@@ -215,7 +329,7 @@ public class PlayerControlsManager : MonoBehaviour
         Vector3 moveX = moveDir.y * new Vector3(cameraParent.forward.x, 0, cameraParent.forward.z).normalized * moveSpeed;
         Vector3 moveZ = moveDir.x * new Vector3(cameraParent.right.x, 0, cameraParent.right.z).normalized * moveSpeed;
 
-        if (moveDir.y > 0)
+        if (moveDir.y > 0 && player.stamina > 0 && weaponManager.guns[weaponManager.activeGun].canReload)
         {
             canSprint = true;
         }
@@ -290,8 +404,8 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed += ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed += ctx => ToggleMenu();
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].started += ctx => ResetSprintVariables();
-        playerInput.actions["Sprint"].canceled += ctx => sprinting = false;
+        playerInput.actions["Sprint"].started += ctx => DoSprintStuff(true);
+        playerInput.actions["Sprint"].canceled += ctx => DoSprintStuff(false);
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
@@ -307,8 +421,8 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Reload"].performed -= ctx => weaponManager.Reload();
         playerInput.actions["SwapMod"].performed -= ctx => ToggleMenu();
         playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
-        playerInput.actions["Sprint"].performed -= ctx => ResetSprintVariables();
-        playerInput.actions["Sprint"].canceled -= ctx => sprinting = false;
+        playerInput.actions["Sprint"].performed -= ctx => DoSprintStuff(true);
+        playerInput.actions["Sprint"].canceled -= ctx => DoSprintStuff(false);
         playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
@@ -369,11 +483,55 @@ public class PlayerControlsManager : MonoBehaviour
         }
     }
 
-    void ResetSprintVariables()
+    void ResetSprintVariables(bool keyPress)
     {
         player.timeSinceUsedStamina = 0;
         resetWHileSprinting = true;
-        sprinting = true;
+        if (keyPress)
+        {
+            if (IsGrounded())
+            {
+                sprinting = true;
+            }
+        }
+
+        else
+        {
+            sprinting = true;
+        }
+    }
+
+    void DoSprintStuff(bool keyPress)
+    {
+        if (keyPress)
+        {
+            ResetSprintVariables(true);
+            UpdateAnimation(true);
+        }
+        else
+        {
+            sprinting = false;
+            UpdateAnimation(false);
+        }
+    }
+
+    void UpdateAnimation(bool sprinting)
+    {
+        var rotation = weaponManager.guns[weaponManager.activeGun].transform.localRotation;
+
+        if (weaponManager.activeGun == 0)
+        {
+            startRot = new Vector3(rotation.eulerAngles.x - 360, rotation.eulerAngles.y, rotation.eulerAngles.z);
+        }
+        else
+        {
+            startRot = new Vector3(rotation.eulerAngles.x, rotation.eulerAngles.y - 360, rotation.eulerAngles.z);
+        }
+        
+        startPos = weaponManager.guns[weaponManager.activeGun].transform.localPosition;
+
+        maxLerpTime = sprinting ? timeToUnreadyWeapon : timeToReadyWeapon;
+        timeToLerp = 0;
     }
 
     void ToggleFlashlight()
