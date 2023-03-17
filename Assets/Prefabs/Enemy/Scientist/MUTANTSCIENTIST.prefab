@@ -10879,7 +10879,7 @@ BoxCollider:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5154737724455428628}
-  m_Material: {fileID: 0}
+  m_Material: {fileID: 13400000, guid: 1bc362f32fe0114438c75c4b2922c963, type: 2}
   m_IsTrigger: 0
   m_Enabled: 1
   serializedVersion: 2
@@ -10923,10 +10923,17 @@ MonoBehaviour:
   _attackRange: 7
   chaseRange: 100
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
+  rig: {fileID: 0}
   healDropChance: 65
+  currentHP: 0
+  multipleAnimations: 0
+  damageOverTime: 0
   damageOverTimeModifier: 1
+  dotRate: 0
   slowDurationModifier: 0
   slowSpeedModifier: 0
+  knockBackStrength: 0
+  canAttack: 1
   projectilePrefab: {fileID: 2270862220715573762, guid: 9e78468b15b9bdf45b4a755cf80022e3, type: 3}
   projectileStart: {fileID: 516664915592899043}
   projectileSpeed: 11

@@ -9,7 +9,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 924870243473826441, guid: 8964202e0c852d94ca2ccb43dcdd24b1, type: 3}
       propertyPath: m_Name
-      value: Amalgamation
+      value: Amalgamation Variant
       objectReference: {fileID: 0}
     - target: {fileID: 924870243473826444, guid: 8964202e0c852d94ca2ccb43dcdd24b1, type: 3}
       propertyPath: m_RootOrder
@@ -55,6 +55,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5219088859668398184, guid: 8964202e0c852d94ca2ccb43dcdd24b1, type: 3}
+      propertyPath: m_Material
+      value: 
+      objectReference: {fileID: 13400000, guid: 1bc362f32fe0114438c75c4b2922c963, type: 2}
     - target: {fileID: 5468917795082179846, guid: 8964202e0c852d94ca2ccb43dcdd24b1, type: 3}
       propertyPath: m_Radius
       value: 0.0017255776
