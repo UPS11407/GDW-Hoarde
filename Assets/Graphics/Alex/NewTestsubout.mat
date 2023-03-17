@@ -62,8 +62,10 @@ Material:
         m_Offset: {x: 0, y: 0}
     m_Ints: []
     m_Floats:
+    - _BloodShininess: 0.24
     - _BumpScale: 1
     - _Cutoff: 0.5
+    - _DecalStr: 0.4
     - _DetailNormalMapScale: 1
     - _DstBlend: 0
     - _GlossMapScale: 1
@@ -72,7 +74,7 @@ Material:
     - _Metallic: 0
     - _Mode: 0
     - _OcclusionStrength: 1
-    - _Outline: 0.5
+    - _Outline: 0.002
     - _Parallax: 0.02
     - _Shininess: 0
     - _ShowDecal1: 0
