@@ -252,12 +252,14 @@ public class PlayerControlsManager : MonoBehaviour
         if (timeToLerp > maxLerpTime && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = true;
+            weaponManager.guns[weaponManager.activeGun].canSwap = true;
         }
         else
         {
             DoRunAnimation(sprinting);
             timeToLerp += Time.deltaTime;
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
+            weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
 
         if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
