@@ -47,6 +47,9 @@ public class PlayerControlsManager : MonoBehaviour
 
     public bool enableLook = true;
     bool onStairs = false;
+
+    public AudioClip[] walkSounds;
+    public AudioClip sprintSound;
     AudioSource audioSource;
 
     float quickFOV = 75.0f;
@@ -167,12 +170,14 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (enableLook) DoLook(mouseSensitivity);
 
-        if (speed >= 5.5 && IsGrounded())
+        if (speed >= 5.5 && IsGrounded() && !sprinting)
         {
-            audioSource.mute = false;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.volume = 0.2f;
+                audioSource.PlayOneShot(walkSounds[Random.Range(0, walkSounds.Length)]);
+            }
         }
-        else audioSource.mute = true;
-
 
         if (!jumping && playerInput.actions["Jump"].inProgress && IsGrounded())
         {
@@ -184,6 +189,11 @@ public class PlayerControlsManager : MonoBehaviour
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
             ResetSprintVariables(false);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.volume = 1;
+                audioSource.PlayOneShot(sprintSound);
+            }
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
@@ -374,13 +384,13 @@ public class PlayerControlsManager : MonoBehaviour
         if (sprinting && player.stamina > 0)
         {
             moveSpeed = 9f;
-            audioSource.pitch = 1.0f;
+            //audioSource.pitch = 1.0f;
             resetSprint = true;
         }
         else if (resetSprint)
         {
             moveSpeed = 6f;
-            audioSource.pitch = 0.66f;
+            //audioSource.pitch = 0.66f;
             resetSprint = false;
             if (player.timeSinceUsedStamina > 0.1f)
             {
