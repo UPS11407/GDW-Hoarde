@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 
@@ -13,33 +12,51 @@ public class InfoBoxText : MonoBehaviour
     public TMP_Text att_weapon;
     public TMP_Text att_desc;
     public TMP_Text weaponBulletCount;
+    public Inventory inventory;
+    new RectTransform transform;
     
 
     private void Awake()
     {
         canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        transform = GetComponent<RectTransform>();
         ToggleSelf(false);
     }
 
     private void Update()
     {
         MoveBox();
-    }
 
-    public void UpdateBox(string name, string weapon, string desc, bool isAmmo)
-    {
-        att_name.text = name;
-        att_weapon.text = weapon;   
-        att_desc.text = desc;
+        Debug.Log(transform.localPosition.x);
 
-        if (isAmmo)
+        if (transform.localPosition.y > 110)
         {
-            weaponBulletCount.text = "Count: ";
+            transform.pivot = Vector2.up;
         }
         else
         {
-            weaponBulletCount.text = "Weapon: ";
+            transform.pivot = Vector2.zero;
         }
+    }
+
+    public void UpdateBox(string name, string weapon, string desc)
+    {
+        att_name.text = name;
+
+        att_desc.text = desc;
+
+        weaponBulletCount.text = "Weapon: ";
+        att_weapon.text = weapon;
+    }
+
+    public void UpdateBox(string name, string weapon, string desc, InventorySlot itemslot)
+    {
+        att_name.text = name;
+
+        att_desc.text = desc;
+
+        weaponBulletCount.text = "Count: ";
+        att_weapon.text = inventory.GetAmmoCount(itemslot.item.attachment.ammoType).ToString();
     }
 
     public void ToggleSelf(bool toggle)

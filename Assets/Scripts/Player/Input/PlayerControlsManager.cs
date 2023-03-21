@@ -140,19 +140,37 @@ public class PlayerControlsManager : MonoBehaviour
     public void OpenMenu()
     {
         enableLook = false;
-        weaponManager.guns[weaponManager.activeGun].canShoot = false;
+        weaponManager.guns[weaponManager.activeGun].GetComponent<Gun>().enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         inventory.ToggleWeaponModCanvas(true);
         inventory.ToggleVisibleSlots(true);
         HUD.SetActive(false);
         inventory.UpdateWeaponType();
+
+        inventory.prevAmmo = inventory.selectedAmmo;
+
+        foreach(InventorySlot slot in inventory.weaponSlots[weaponManager.activeGun].slots)
+        {
+            if (slot.slotAttachmentType == InventoryAttachment.AttachmentType.MAGAZINE)
+            {
+                if (slot.item != null)
+                {
+                    inventory.prevMag = slot.item.attachment;
+                }
+                else
+                {
+                    inventory.prevMag = null;
+                }
+                
+            }
+        }        
     }
 
     public void CloseMenu()
     {
         enableLook = true;
-        weaponManager.guns[weaponManager.activeGun].canShoot = true;
+        weaponManager.guns[weaponManager.activeGun].GetComponent<Gun>().enabled = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
         inventory.ToggleVisibleSlots(false);

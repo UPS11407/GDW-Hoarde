@@ -25,6 +25,9 @@ public class Inventory : MonoBehaviour
     public InventoryItem selectedAmmoSlot;
     public InventorySlot trashSlot;
 
+    public AmmoType prevAmmo;
+    public InventoryAttachment prevMag;
+
     public int standardAmmo;
     public int fireAmmo;
     public int slowAmmo;
@@ -80,7 +83,7 @@ public class Inventory : MonoBehaviour
         }
     }
 
-    public int UpdateAmmoCount()
+    public int GetAmmoCount()
     {
         switch (selectedAmmo)
         {
@@ -92,6 +95,42 @@ public class Inventory : MonoBehaviour
         }
 
         return 0;
+    }
+
+    public int GetAmmoCount(AmmoType selectedAmmo)
+    {
+        switch (selectedAmmo)
+        {
+            case AmmoType.STANDARD: return standardAmmo;
+            case AmmoType.EXPLOSIVE: return explosiveAmmo;
+            case AmmoType.SLOW: return slowAmmo;
+            case AmmoType.INCINDIARY: return fireAmmo;
+            case AmmoType.RAILGUN: return railgunCharge;
+        }
+
+        return 0;
+    }
+
+    public void AddAmmo(int ammo, AmmoType prevAmmo)
+    {
+        switch (prevAmmo)
+        {
+            case AmmoType.STANDARD:
+                standardAmmo += ammo;
+                break;
+            case AmmoType.EXPLOSIVE:
+                explosiveAmmo += ammo;
+                break;
+            case AmmoType.SLOW:
+                slowAmmo += ammo;
+                break;
+            case AmmoType.INCINDIARY:
+                fireAmmo += ammo;
+                break;
+            case AmmoType.RAILGUN:
+                railgunCharge += ammo;
+                break;
+        }
     }
 
     public void AddRandomItem(int attachment)
@@ -202,6 +241,36 @@ public class Inventory : MonoBehaviour
 
         if (magazineSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)attachmentPairs[magazineSlot.item.attachment]);
         else weaponManager.guns[weaponManager.activeGun].changeMag(standardAttachments[2]);
+
+        if (!(magazineSlot.item == null && prevMag == null))
+        {
+            if (magazineSlot.item.attachment != prevMag)
+            {
+                AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
+                weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+            }
+        }
+        else if (magazineSlot.item == null && prevMag != null)
+        {
+            AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
+            weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+        }
+        else if (magazineSlot.item != null && prevMag == null)
+        {
+            AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
+            weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+        }
+
+        if (selectedAmmo != prevAmmo)
+        {
+            for (int i = 0; i < weaponManager.guns.Count; i++)
+            {
+                AddAmmo(weaponManager.guns[i].currentAmmo, prevAmmo);
+                weaponManager.guns[i].currentAmmo = 0;
+            }
+        }
+
+
 
         if (trashSlot.transform.childCount > 1)
         {
