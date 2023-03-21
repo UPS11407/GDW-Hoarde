@@ -242,23 +242,29 @@ public class Inventory : MonoBehaviour
         if (magazineSlot.item != null) weaponManager.guns[weaponManager.activeGun].changeMag((WeaponModScriptableObject)attachmentPairs[magazineSlot.item.attachment]);
         else weaponManager.guns[weaponManager.activeGun].changeMag(standardAttachments[2]);
 
-        if (!(magazineSlot.item == null && prevMag == null))
+        if (magazineSlot.item == null)
         {
-            if (magazineSlot.item.attachment != prevMag)
+            if (prevMag != null)
             {
                 AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
                 weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
             }
         }
-        else if (magazineSlot.item == null && prevMag != null)
+        else
         {
-            AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
-            weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
-        }
-        else if (magazineSlot.item != null && prevMag == null)
-        {
-            AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
-            weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+            if (prevMag != null)
+            {
+                if (magazineSlot.item.attachment != prevMag)
+                {
+                    AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
+                    weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+                }
+            }
+            else
+            {
+                AddAmmo(weaponManager.guns[weaponManager.activeGun].currentAmmo, prevAmmo);
+                weaponManager.guns[weaponManager.activeGun].currentAmmo = 0;
+            }
         }
 
         if (selectedAmmo != prevAmmo)

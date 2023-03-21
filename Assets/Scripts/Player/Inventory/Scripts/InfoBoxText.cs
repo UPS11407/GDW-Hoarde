@@ -27,15 +27,22 @@ public class InfoBoxText : MonoBehaviour
     {
         MoveBox();
 
-        Debug.Log(transform.localPosition.x);
-
         if (transform.localPosition.y > 110)
         {
-            transform.pivot = Vector2.up;
+            transform.pivot = new Vector2(transform.pivot.x, 1);
         }
         else
         {
-            transform.pivot = Vector2.zero;
+            transform.pivot = new Vector2(transform.pivot.x, 0);
+        }
+
+        if (transform.localPosition.x > 180)
+        {
+            transform.pivot = new Vector2(1, transform.pivot.y);
+        }
+        else
+        {
+            transform.pivot = new Vector2(0, transform.pivot.y);
         }
     }
 
