@@ -111,9 +111,9 @@ public class Inventory : MonoBehaviour
         return 0;
     }
 
-    public void AddAmmo(int ammo, AmmoType prevAmmo)
+    public void AddAmmo(int ammo, AmmoType ammoType)
     {
-        switch (prevAmmo)
+        switch (ammoType)
         {
             case AmmoType.STANDARD:
                 standardAmmo += ammo;
