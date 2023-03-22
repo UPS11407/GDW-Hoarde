@@ -15,11 +15,11 @@ public class Gun : MonoBehaviour
     //public GunStatScriptableObjects rifleStats;
 
     [SerializeField] GunStatScriptableObjects gunStats;
-    [SerializeField] RailgunModScriptableObject railGunMod;
-    [SerializeField] WeaponModScriptableObject barrelMod;
-    [SerializeField] WeaponModScriptableObject gripMod;
-    [SerializeField] WeaponModScriptableObject magMod;
-    [SerializeField] WeaponModScriptableObject ammoMod;
+    public RailgunModScriptableObject railGunMod;
+    public WeaponModScriptableObject barrelMod;
+    public WeaponModScriptableObject gripMod;
+    public WeaponModScriptableObject magMod;
+    public WeaponModScriptableObject ammoMod;
 
     private AudioSource audioSource;
     [SerializeField] AudioClip fireSound;

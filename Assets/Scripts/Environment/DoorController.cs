@@ -16,12 +16,18 @@ public class DoorController : MonoBehaviour, IInteractible
     public enum LockState { lockable, locked, charging }
     public LockState lockState;
     public bool isInteractable = true;
+    public bool forcedOpen = false;
+    
 
     // Start is called before the first frame update
     void Start()
     {
         doorAnim = this.transform.parent.GetComponent<Animator>();
         lockTime = -lockCooldown;
+        if (forcedOpen)
+        {
+            doorAnim.SetBool("isOpening", true);
+        }
     }
     private void Update()
     {
@@ -49,7 +55,7 @@ public class DoorController : MonoBehaviour, IInteractible
 
     private void OnTriggerExit(Collider other)
     {
-        if (other.tag.Equals("Enemy") || other.tag.Equals("Player"))
+        if ((other.tag.Equals("Enemy") || other.tag.Equals("Player")) && !forcedOpen)
             doorAnim.SetBool("isOpening", false);
     }
     public void Interact()

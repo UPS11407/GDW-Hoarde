@@ -14,7 +14,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     bool interactible = true;
     protected GameObject player;
     public float dialogueRange;
-
+    public bool lookToPlayer;
     protected void Startup()
     {
         player = GameObject.Find("Player");
@@ -27,8 +27,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         {
             EndDialogue();
         }
+        if (lookToPlayer)
+        {
+            transform.forward = new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
 
-        transform.forward =  new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+        }
     }
     public void Interact()
     {
