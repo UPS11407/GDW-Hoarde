@@ -47,6 +47,9 @@ public class PlayerControlsManager : MonoBehaviour
 
     public bool enableLook = true;
     bool onStairs = false;
+
+    public AudioClip[] walkSounds;
+    public AudioClip sprintSound;
     AudioSource audioSource;
 
     float quickFOV = 75.0f;
@@ -137,19 +140,37 @@ public class PlayerControlsManager : MonoBehaviour
     public void OpenMenu()
     {
         enableLook = false;
-        weaponManager.guns[weaponManager.activeGun].canShoot = false;
+        weaponManager.guns[weaponManager.activeGun].GetComponent<Gun>().enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         inventory.ToggleWeaponModCanvas(true);
         inventory.ToggleVisibleSlots(true);
         HUD.SetActive(false);
         inventory.UpdateWeaponType();
+
+        inventory.prevAmmo = inventory.selectedAmmo;
+
+        foreach(InventorySlot slot in inventory.weaponSlots[weaponManager.activeGun].slots)
+        {
+            if (slot.slotAttachmentType == InventoryAttachment.AttachmentType.MAGAZINE)
+            {
+                if (slot.item != null)
+                {
+                    inventory.prevMag = slot.item.attachment;
+                }
+                else
+                {
+                    inventory.prevMag = null;
+                }
+                
+            }
+        }        
     }
 
     public void CloseMenu()
     {
         enableLook = true;
-        weaponManager.guns[weaponManager.activeGun].canShoot = true;
+        weaponManager.guns[weaponManager.activeGun].GetComponent<Gun>().enabled = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.None;
         inventory.ToggleVisibleSlots(false);
@@ -167,12 +188,14 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (enableLook) DoLook(mouseSensitivity);
 
-        if (speed >= 5.5 && IsGrounded())
+        if (speed >= 5.5 && IsGrounded() && !sprinting)
         {
-            audioSource.mute = false;
+            if (!audioSource.isPlaying)
+            {
+                audioSource.volume = 0.2f;
+                audioSource.PlayOneShot(walkSounds[Random.Range(0, walkSounds.Length)]);
+            }
         }
-        else audioSource.mute = true;
-
 
         if (!jumping && playerInput.actions["Jump"].inProgress && IsGrounded())
         {
@@ -184,6 +207,11 @@ public class PlayerControlsManager : MonoBehaviour
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
             ResetSprintVariables(false);
+            if (!audioSource.isPlaying)
+            {
+                audioSource.volume = 1;
+                audioSource.PlayOneShot(sprintSound);
+            }
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
@@ -252,12 +280,14 @@ public class PlayerControlsManager : MonoBehaviour
         if (timeToLerp > maxLerpTime && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = true;
+            weaponManager.guns[weaponManager.activeGun].canSwap = true;
         }
         else
         {
             DoRunAnimation(sprinting);
             timeToLerp += Time.deltaTime;
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
+            weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
 
         if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
@@ -372,13 +402,13 @@ public class PlayerControlsManager : MonoBehaviour
         if (sprinting && player.stamina > 0)
         {
             moveSpeed = 9f;
-            audioSource.pitch = 1.0f;
+            //audioSource.pitch = 1.0f;
             resetSprint = true;
         }
         else if (resetSprint)
         {
             moveSpeed = 6f;
-            audioSource.pitch = 0.66f;
+            //audioSource.pitch = 0.66f;
             resetSprint = false;
             if (player.timeSinceUsedStamina > 0.1f)
             {

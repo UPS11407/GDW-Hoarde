@@ -1,7 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
-using UnityEngine.EventSystems;
 using TMPro;
 using UnityEngine.UI;
 
@@ -13,33 +12,58 @@ public class InfoBoxText : MonoBehaviour
     public TMP_Text att_weapon;
     public TMP_Text att_desc;
     public TMP_Text weaponBulletCount;
+    public Inventory inventory;
+    new RectTransform transform;
     
 
     private void Awake()
     {
         canvas = GameObject.Find("UI").GetComponent<Canvas>();
+        transform = GetComponent<RectTransform>();
         ToggleSelf(false);
     }
 
     private void Update()
     {
         MoveBox();
-    }
 
-    public void UpdateBox(string name, string weapon, string desc, bool isAmmo)
-    {
-        att_name.text = name;
-        att_weapon.text = weapon;   
-        att_desc.text = desc;
-
-        if (isAmmo)
+        if (transform.localPosition.y > 110)
         {
-            weaponBulletCount.text = "Count: ";
+            transform.pivot = new Vector2(transform.pivot.x, 1);
         }
         else
         {
-            weaponBulletCount.text = "Weapon: ";
+            transform.pivot = new Vector2(transform.pivot.x, 0);
         }
+
+        if (transform.localPosition.x > 180)
+        {
+            transform.pivot = new Vector2(1, transform.pivot.y);
+        }
+        else
+        {
+            transform.pivot = new Vector2(0, transform.pivot.y);
+        }
+    }
+
+    public void UpdateBox(string name, string weapon, string desc)
+    {
+        att_name.text = name;
+
+        att_desc.text = desc;
+
+        weaponBulletCount.text = "Weapon: ";
+        att_weapon.text = weapon;
+    }
+
+    public void UpdateBox(string name, string weapon, string desc, InventorySlot itemslot)
+    {
+        att_name.text = name;
+
+        att_desc.text = desc;
+
+        weaponBulletCount.text = "Count: ";
+        att_weapon.text = inventory.GetAmmoCount(itemslot.item.attachment.ammoType).ToString();
     }
 
     public void ToggleSelf(bool toggle)

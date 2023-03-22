@@ -122,9 +122,9 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
             }
 
             eventData.pointerCurrentRaycast.gameObject.GetComponent<Image>().color = Color.white;
+            var ammoSelect = System.Enum.Parse<AmmoType>(eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryItem>().ammoType, true);
             inventory.selectedAmmo = System.Enum.Parse<AmmoType>(eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryItem>().ammoType, true);
             inventory.selectedAmmoSlot = eventData.pointerCurrentRaycast.gameObject.GetComponent<InventoryItem>();
-            Debug.Log(inventory.selectedAmmo);
         }
     }
 
@@ -217,11 +217,11 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         if (itemSlot.isAmmoSlot)
         {
-            infoBox.UpdateBox(itemSlot.item.attachment.attachmentName, weapon, itemSlot.item.attachment.description, true);
+            infoBox.UpdateBox(itemSlot.item.attachment.attachmentName, weapon, itemSlot.item.attachment.description, itemSlot);
         }
         else
         {
-            infoBox.UpdateBox(itemSlot.item.attachment.attachmentName, weapon, itemSlot.item.attachment.description, false);
+            infoBox.UpdateBox(itemSlot.item.attachment.attachmentName, weapon, itemSlot.item.attachment.description);
         }
 
         

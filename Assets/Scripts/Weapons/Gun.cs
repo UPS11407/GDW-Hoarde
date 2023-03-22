@@ -33,16 +33,12 @@ public class Gun : MonoBehaviour
 
     [SerializeField] GameObject bulletPrefab;
 
-    //public GameObject pistol;
-    //public GameObject rifle;
-
-    [SerializeField] GameObject otherGun;
-
     [SerializeField] GameObject bloodSplatter;
  
     public TextMeshProUGUI currentAmmoDisplay;
     public TextMeshProUGUI maxAmmoDisplay;
 
+    [SerializeField] Inventory inventory; 
 
     bool bursting = false;
 
@@ -51,8 +47,8 @@ public class Gun : MonoBehaviour
     float reloadDelay;
     float modDelay;// = 4.0f;
 
-    int currentAmmo;
-    int maxAmmo;
+    public int currentAmmo;
+    public int maxAmmo;
 
     float damage;
     float bulletVelocity;
@@ -84,6 +80,7 @@ public class Gun : MonoBehaviour
     {
         audioSource = GetComponent<AudioSource>();
         UpdateWeaponStats();
+
         currentAmmo = maxAmmo;
         UpdateDisplay();
     }
@@ -163,7 +160,7 @@ public class Gun : MonoBehaviour
 
     public void RunReload()
     {
-        if (canReload && currentAmmo != maxAmmo)
+        if (canReload && currentAmmo != maxAmmo && inventory.GetAmmoCount() > 0)
         {
             StartCoroutine(Reload());
         }
@@ -240,14 +237,6 @@ public class Gun : MonoBehaviour
         canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
-
-        
-        if (modReloadRequired)
-        {
-            currentAmmo = 0;
-            Reload();
-            modReloadRequired = false;
-        }
         
         shootTime = Time.time + modDelay;
 
@@ -265,7 +254,6 @@ public class Gun : MonoBehaviour
     {
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
-            //Play Shoot Sound
             shootTime = Time.time;
             currentAmmo--;
             
@@ -401,7 +389,7 @@ public class Gun : MonoBehaviour
     public void UpdateDisplay()
     {
         currentAmmoDisplay.text = currentAmmo.ToString();
-        maxAmmoDisplay.text = maxAmmo.ToString();
+        maxAmmoDisplay.text = inventory.GetAmmoCount().ToString();
     }
 
     /*
@@ -420,13 +408,21 @@ public class Gun : MonoBehaviour
         canShoot = false;
         canReload = false;
 
+        int amountToReload = maxAmmo - currentAmmo;
+
+        if (inventory.GetAmmoCount() - amountToReload < 0)
+        {
+            amountToReload = inventory.GetAmmoCount();
+        }
+
         audioSource.PlayOneShot(reloadSound);
         audioSource.pitch = 0.94f;
         yield return new WaitForSeconds(reloadDelay);
         
         canShoot = true;
         canReload = true;
-        currentAmmo = maxAmmo;
+        currentAmmo += amountToReload;
+        inventory.AddAmmo(-amountToReload, inventory.selectedAmmo);
 
         UpdateDisplay();
     }
@@ -487,10 +483,5 @@ public class Gun : MonoBehaviour
         {
             gripMod = mod;
         }
-    }
-
-    public void ModReload()
-    {
-        modReloadRequired = true;
     }
 }
