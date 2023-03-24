@@ -321,7 +321,7 @@ public class Gun : MonoBehaviour
                                 {
                                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage);
                                 }
-                                GameObject bloodParticles = (GameObject)Instantiate(bloodSplatter, hit.transform.position, hit.transform.rotation);
+                                GameObject bloodParticles = (GameObject)Instantiate(bloodSplatter, hit.point, hit.transform.rotation);
 
                             }
                             TrailRenderer tracer = Instantiate(bulletTracer, tracerStart.transform.position, Quaternion.identity);
