@@ -75,7 +75,7 @@ public class TestSubject : EnemyBase
             _speed *= 1.5f;
             UpdateSpeed();
             //character.GetComponent<SkinnedMeshRenderer>().material.SetFloat("_ShowDecal1", 1.0f);
-            //isDecalOff = false;
+            isDecalOff = false;
         }
     }
     void Decal()
