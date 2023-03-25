@@ -282,6 +282,8 @@ public class Inventory : MonoBehaviour
         {
             Destroy(trashSlot.transform.GetChild(1).gameObject);
         }
+
+        weaponManager.guns[weaponManager.activeGun].UpdateWeaponStats();
     }
 
     public void UpdateWeaponStatsRailgun()

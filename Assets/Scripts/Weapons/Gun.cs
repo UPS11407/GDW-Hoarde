@@ -234,6 +234,12 @@ public class Gun : MonoBehaviour
             isProjectile = false;
         }
 
+        if (gripMod.fireMode == WeaponModScriptableObject.FireMode.burst)
+        {
+            shootDelay = 0;
+
+        }
+
         canShoot = true;
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
@@ -432,16 +438,16 @@ public class Gun : MonoBehaviour
         bursting = true;
         if(currentAmmo >= 1)
         {
-            yield return new WaitForSeconds(shootDelay);
+            yield return new WaitForSeconds(0.05f);
                 Fire();
-            yield return new WaitForSeconds(shootDelay);
+            yield return new WaitForSeconds(0.05f);
                 Fire();
-            yield return new WaitForSeconds(shootDelay * 3);
+            yield return new WaitForSeconds(2f);
         } else
         {
-            yield return new WaitForSeconds(shootDelay);
+            yield return new WaitForSeconds(0.05f);
                 Fire();
-            yield return new WaitForSeconds(shootDelay * 3);
+            yield return new WaitForSeconds(2f);
         }
         
         bursting = false;
