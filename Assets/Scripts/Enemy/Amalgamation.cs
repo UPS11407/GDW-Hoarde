@@ -29,7 +29,7 @@ public class Amalgamation : EnemyBase
 
         if (GetPlayerDistance() <= _attackRange + 0.5f)
         {
-            player.GetComponent<Player>().TakeDamage(_damage);
+            player.GetComponent<Player>().TakeDamage(_damage, "Amalgamation");
             
             StartCoroutine(player.GetComponent<Player>().Knockback(1,this.gameObject,attackKnockbackStrength));
         }

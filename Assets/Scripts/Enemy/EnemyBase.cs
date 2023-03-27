@@ -114,6 +114,7 @@ public class EnemyBase : MonoBehaviour
     {
         if(currentHP <= 0)
         {
+            GameObject.Find("Counter").GetComponent<Counters>().AddKill(1);
             dropVal = Random.Range(0, 100);
 
             if(dropVal < healDropChance)

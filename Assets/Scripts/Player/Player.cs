@@ -36,7 +36,7 @@ public class Player : MonoBehaviour
     public float staminaToMelee = 20;
 
     public float timeSinceUsedStamina = 0;
-
+    string lastDamageCreature;
     
     void Start()
     {
@@ -63,6 +63,7 @@ public class Player : MonoBehaviour
 
         if(currentHP <= 0)
         {
+            GameObject.Find("Counter").GetComponent<Counters>().SetKilledBy(lastDamageCreature);
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
             SceneControl.ChangeScene("Death");
@@ -108,7 +109,7 @@ public class Player : MonoBehaviour
     /// <summary>
     /// Reduces the player's health by dmg
     /// </summary>
-    public void TakeDamage(float dmg)
+    public void TakeDamage(float dmg, string source)
     {
         //audioClip;
         //audioPlayer.Stop();
@@ -116,6 +117,7 @@ public class Player : MonoBehaviour
         audioPlayer.Play();
         UpdateHealthDisplay();
         hurtIndicator.Hurt();
+        lastDamageCreature = source;
     }
 
     public void TakeDamageOverTime(float dmg)

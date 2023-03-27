@@ -13,7 +13,7 @@ public class VomitProjectile : MonoBehaviour
     {
         if (collision.gameObject.tag == "Player")
         {
-            collision.gameObject.GetComponent<Player>().TakeDamage(_directDamage);
+            collision.gameObject.GetComponent<Player>().TakeDamage(_directDamage, "Acid");
 
         }
         else

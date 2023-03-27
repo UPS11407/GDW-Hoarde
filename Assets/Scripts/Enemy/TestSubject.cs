@@ -64,7 +64,7 @@ public class TestSubject : EnemyBase
 
         if (GetPlayerDistance() <= _attackRange + 0.5f)
         {
-            player.GetComponent<Player>().TakeDamage(_damage);
+            player.GetComponent<Player>().TakeDamage(_damage, "Test Subject " + Random.Range(6, 49));
         }
     }
 
