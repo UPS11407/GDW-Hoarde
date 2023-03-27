@@ -30,7 +30,6 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         if (lookToPlayer)
         {
             transform.forward = new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
-
         }
     }
     public void Interact()
