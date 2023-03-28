@@ -38,6 +38,7 @@ public class InventorySlot : MonoBehaviour, IDropHandler
             eventData.pointerDrag.GetComponent<Transform>().localScale = Vector3.one;
             eventData.pointerDrag.GetComponent<DragDrop>().itemSlot = GetComponent<InventorySlot>();
             eventData.pointerDrag.GetComponent<DragDrop>().previousSlot = eventData.pointerDrag.GetComponent<RectTransform>().parent.GetComponent<RectTransform>();
+            GameObject.Find("EquipSound").GetComponent<AudioSource>().Play();
         }
     }
 }
