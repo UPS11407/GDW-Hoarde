@@ -15,7 +15,7 @@ public class PauseMenu : MonoBehaviour
 
     public void RunPause()
     {
-        if (!playerControlsManager.inventory.weaponModCanvas.activeSelf)
+        if (!playerControlsManager.inventory.weaponModCanvas.transform.GetChild(0).gameObject.activeSelf)
         {
             if (playerContr != null)
             {
