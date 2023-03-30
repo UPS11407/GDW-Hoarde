@@ -415,21 +415,21 @@ public class Gun : MonoBehaviour
     }
     public void UpdateDisplay()
     {
-        if (!currentAmmoDisplay.enabled)
-        {
-            currentAmmoDisplay.enabled = true;
-            maxAmmoDisplay.enabled = true;
-        }
-
         if (!isUnarmed)
         {
             currentAmmoDisplay.text = currentAmmo.ToString();
+            currentAmmoDisplay.color = Color.white;
+
             maxAmmoDisplay.text = inventory.GetAmmoCount().ToString();
+            maxAmmoDisplay.color = Color.white;
         }
         else
         {
-            currentAmmoDisplay.enabled = false;
-            maxAmmoDisplay.enabled = false;
+            currentAmmoDisplay.text = "-";
+            currentAmmoDisplay.color = Color.gray;
+
+            maxAmmoDisplay.text = "-";
+            maxAmmoDisplay.color = Color.gray;
         }
 
     }
