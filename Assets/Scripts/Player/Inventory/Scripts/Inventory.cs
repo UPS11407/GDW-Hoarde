@@ -14,6 +14,7 @@ public class Inventory : MonoBehaviour
     public List<InventorySlot> inventorySlots;
     public List<InventorySlot> ammoSlots;
     public List<InventoryAttachment> availableAttachments;
+    public InventoryAttachment railGunAttachment;
     public List<kvp> keys;
     public Dictionary<InventoryAttachment, ScriptableObject> attachmentPairs = new Dictionary<InventoryAttachment, ScriptableObject>();
     public List<WeaponModScriptableObject> standardAttachments;
@@ -143,7 +144,16 @@ public class Inventory : MonoBehaviour
 
         var itemObject = Instantiate(itemPrefab, itemSlot.transform).GetComponent<InventoryItem>();
 
-        itemObject.attachment = availableAttachments[attachment];
+        if (attachment > availableAttachments.Count)
+        {
+            itemObject.attachment = railGunAttachment;
+        }
+        else
+        {
+            itemObject.attachment = availableAttachments[attachment];
+        }
+
+        
         itemObject.UpdateItemStats();
         itemSlot.item = itemObject;
         itemObject.GetComponent<DragDrop>().previousSlot = itemSlot.GetComponent<RectTransform>();

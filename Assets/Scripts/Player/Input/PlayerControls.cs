@@ -143,6 +143,24 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Nightvision"",
+                    ""type"": ""Button"",
+                    ""id"": ""b009e877-94de-4649-9592-0d854be1eb6b"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ADS"",
+                    ""type"": ""Button"",
+                    ""id"": ""9f9f0756-6bc6-4692-a5ad-fd064249a049"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
                 }
             ],
             ""bindings"": [
@@ -381,7 +399,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": """",
                     ""id"": ""104f0ec8-bc9f-4605-9095-7c359b470cb3"",
                     ""path"": ""<Gamepad>/buttonWest"",
-                    ""interactions"": """",
+                    ""interactions"": ""Tap"",
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Reload"",
@@ -402,7 +420,7 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 {
                     ""name"": """",
                     ""id"": ""5af19989-a2e2-49fb-912d-6706359e527e"",
-                    ""path"": """",
+                    ""path"": ""<Gamepad>/dpad/up"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Controller"",
@@ -533,12 +551,78 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""131d1f27-af0d-47b9-b1c0-56a8214ddb6b"",
+                    ""path"": ""<Gamepad>/rightStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""Melee"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""887b031e-9460-42e1-af44-293bf1470634"",
                     ""path"": ""<Keyboard>/f"",
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
                     ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""6d3334a7-5356-4276-8a0c-ab09dbcd9cc8"",
+                    ""path"": ""<Gamepad>/dpad/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Flashlight"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4438125d-ecb9-418f-b2fb-d96a40abb608"",
+                    ""path"": ""<Keyboard>/g"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Nightvision"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""884bc01f-0e13-4ae2-850e-2cd1f11b13b7"",
+                    ""path"": ""<Gamepad>/dpad/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Nightvision"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""491d84c6-c349-4942-889b-ec51d64a5c89"",
+                    ""path"": ""<Mouse>/rightButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""ADS"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""34baed2c-9969-4db7-b6e8-e9a693ef05af"",
+                    ""path"": ""<Gamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Controller"",
+                    ""action"": ""ADS"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -552,6 +636,15 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""name"": ""Pause"",
                     ""type"": ""Button"",
                     ""id"": ""82c5846c-bcc9-43ff-9783-4049ecfec7b8"",
+                    ""expectedControlType"": ""Button"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""ShiftDialogue"",
+                    ""type"": ""Button"",
+                    ""id"": ""3c52be90-d2de-4b1b-a099-20d5bde26997"",
                     ""expectedControlType"": ""Button"",
                     ""processors"": """",
                     ""interactions"": """",
@@ -578,6 +671,28 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""groups"": ""Controller"",
                     ""action"": ""Pause"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""ac52a032-8ad8-491e-890c-7b9694c3a627"",
+                    ""path"": ""<Mouse>/leftButton"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftDialogue"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""7b955032-c4c0-4512-bd01-20845025efe1"",
+                    ""path"": ""<Gamepad>/buttonSouth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""ShiftDialogue"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 }
@@ -650,9 +765,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         m_Player_Pause = m_Player.FindAction("Pause", throwIfNotFound: true);
         m_Player_Melee = m_Player.FindAction("Melee", throwIfNotFound: true);
         m_Player_Flashlight = m_Player.FindAction("Flashlight", throwIfNotFound: true);
+        m_Player_Nightvision = m_Player.FindAction("Nightvision", throwIfNotFound: true);
+        m_Player_ADS = m_Player.FindAction("ADS", throwIfNotFound: true);
         // Menu
         m_Menu = asset.FindActionMap("Menu", throwIfNotFound: true);
         m_Menu_Pause = m_Menu.FindAction("Pause", throwIfNotFound: true);
+        m_Menu_ShiftDialogue = m_Menu.FindAction("ShiftDialogue", throwIfNotFound: true);
     }
 
     public void Dispose()
@@ -725,6 +843,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputAction m_Player_Pause;
     private readonly InputAction m_Player_Melee;
     private readonly InputAction m_Player_Flashlight;
+    private readonly InputAction m_Player_Nightvision;
+    private readonly InputAction m_Player_ADS;
     public struct PlayerActions
     {
         private @PlayerControls m_Wrapper;
@@ -742,6 +862,8 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         public InputAction @Pause => m_Wrapper.m_Player_Pause;
         public InputAction @Melee => m_Wrapper.m_Player_Melee;
         public InputAction @Flashlight => m_Wrapper.m_Player_Flashlight;
+        public InputAction @Nightvision => m_Wrapper.m_Player_Nightvision;
+        public InputAction @ADS => m_Wrapper.m_Player_ADS;
         public InputActionMap Get() { return m_Wrapper.m_Player; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -790,6 +912,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Flashlight.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
                 @Flashlight.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
                 @Flashlight.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnFlashlight;
+                @Nightvision.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNightvision;
+                @Nightvision.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNightvision;
+                @Nightvision.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnNightvision;
+                @ADS.started -= m_Wrapper.m_PlayerActionsCallbackInterface.OnADS;
+                @ADS.performed -= m_Wrapper.m_PlayerActionsCallbackInterface.OnADS;
+                @ADS.canceled -= m_Wrapper.m_PlayerActionsCallbackInterface.OnADS;
             }
             m_Wrapper.m_PlayerActionsCallbackInterface = instance;
             if (instance != null)
@@ -833,6 +961,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Flashlight.started += instance.OnFlashlight;
                 @Flashlight.performed += instance.OnFlashlight;
                 @Flashlight.canceled += instance.OnFlashlight;
+                @Nightvision.started += instance.OnNightvision;
+                @Nightvision.performed += instance.OnNightvision;
+                @Nightvision.canceled += instance.OnNightvision;
+                @ADS.started += instance.OnADS;
+                @ADS.performed += instance.OnADS;
+                @ADS.canceled += instance.OnADS;
             }
         }
     }
@@ -842,11 +976,13 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
     private readonly InputActionMap m_Menu;
     private IMenuActions m_MenuActionsCallbackInterface;
     private readonly InputAction m_Menu_Pause;
+    private readonly InputAction m_Menu_ShiftDialogue;
     public struct MenuActions
     {
         private @PlayerControls m_Wrapper;
         public MenuActions(@PlayerControls wrapper) { m_Wrapper = wrapper; }
         public InputAction @Pause => m_Wrapper.m_Menu_Pause;
+        public InputAction @ShiftDialogue => m_Wrapper.m_Menu_ShiftDialogue;
         public InputActionMap Get() { return m_Wrapper.m_Menu; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -859,6 +995,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
                 @Pause.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
                 @Pause.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnPause;
+                @ShiftDialogue.started -= m_Wrapper.m_MenuActionsCallbackInterface.OnShiftDialogue;
+                @ShiftDialogue.performed -= m_Wrapper.m_MenuActionsCallbackInterface.OnShiftDialogue;
+                @ShiftDialogue.canceled -= m_Wrapper.m_MenuActionsCallbackInterface.OnShiftDialogue;
             }
             m_Wrapper.m_MenuActionsCallbackInterface = instance;
             if (instance != null)
@@ -866,6 +1005,9 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
                 @Pause.started += instance.OnPause;
                 @Pause.performed += instance.OnPause;
                 @Pause.canceled += instance.OnPause;
+                @ShiftDialogue.started += instance.OnShiftDialogue;
+                @ShiftDialogue.performed += instance.OnShiftDialogue;
+                @ShiftDialogue.canceled += instance.OnShiftDialogue;
             }
         }
     }
@@ -912,9 +1054,12 @@ public partial class @PlayerControls : IInputActionCollection2, IDisposable
         void OnPause(InputAction.CallbackContext context);
         void OnMelee(InputAction.CallbackContext context);
         void OnFlashlight(InputAction.CallbackContext context);
+        void OnNightvision(InputAction.CallbackContext context);
+        void OnADS(InputAction.CallbackContext context);
     }
     public interface IMenuActions
     {
         void OnPause(InputAction.CallbackContext context);
+        void OnShiftDialogue(InputAction.CallbackContext context);
     }
 }

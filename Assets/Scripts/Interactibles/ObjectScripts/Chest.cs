@@ -140,6 +140,11 @@ public class Chest : MonoBehaviour, IInteractible
 
     int RollItem()
     {
+        if (player.GetComponent<WeaponManager>().gunInventory.Contains(3))
+        {
+            return Random.Range(0, inventory.availableAttachments.Count + 1);
+        }
+
         return Random.Range(0, inventory.availableAttachments.Count);
     }
 }

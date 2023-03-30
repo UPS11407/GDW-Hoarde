@@ -96,7 +96,7 @@ public class PlayerControlsManager : MonoBehaviour
     float timeToLerp;
     float maxLerpTime;
 
-    bool sprintingAnim;
+    public bool sprintingAnim;
 
     private void Awake()
     {

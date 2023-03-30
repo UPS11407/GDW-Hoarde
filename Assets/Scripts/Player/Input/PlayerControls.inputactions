@@ -121,6 +121,24 @@
                     "processors": "",
                     "interactions": "",
                     "initialStateCheck": false
+                },
+                {
+                    "name": "Nightvision",
+                    "type": "Button",
+                    "id": "b009e877-94de-4649-9592-0d854be1eb6b",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ADS",
+                    "type": "Button",
+                    "id": "9f9f0756-6bc6-4692-a5ad-fd064249a049",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
                 }
             ],
             "bindings": [
@@ -359,7 +377,7 @@
                     "name": "",
                     "id": "104f0ec8-bc9f-4605-9095-7c359b470cb3",
                     "path": "<Gamepad>/buttonWest",
-                    "interactions": "",
+                    "interactions": "Tap",
                     "processors": "",
                     "groups": "Controller",
                     "action": "Reload",
@@ -380,7 +398,7 @@
                 {
                     "name": "",
                     "id": "5af19989-a2e2-49fb-912d-6706359e527e",
-                    "path": "",
+                    "path": "<Gamepad>/dpad/up",
                     "interactions": "",
                     "processors": "",
                     "groups": "Controller",
@@ -511,12 +529,78 @@
                 },
                 {
                     "name": "",
+                    "id": "131d1f27-af0d-47b9-b1c0-56a8214ddb6b",
+                    "path": "<Gamepad>/rightStick/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "Melee",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
                     "id": "887b031e-9460-42e1-af44-293bf1470634",
                     "path": "<Keyboard>/f",
                     "interactions": "",
                     "processors": "",
                     "groups": "Keyboard",
                     "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "6d3334a7-5356-4276-8a0c-ab09dbcd9cc8",
+                    "path": "<Gamepad>/dpad/down",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Flashlight",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "4438125d-ecb9-418f-b2fb-d96a40abb608",
+                    "path": "<Keyboard>/g",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "Nightvision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "884bc01f-0e13-4ae2-850e-2cd1f11b13b7",
+                    "path": "<Gamepad>/dpad/left",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "Nightvision",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "491d84c6-c349-4942-889b-ec51d64a5c89",
+                    "path": "<Mouse>/rightButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Keyboard",
+                    "action": "ADS",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "34baed2c-9969-4db7-b6e8-e9a693ef05af",
+                    "path": "<Gamepad>/leftTrigger",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "Controller",
+                    "action": "ADS",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
@@ -530,6 +614,15 @@
                     "name": "Pause",
                     "type": "Button",
                     "id": "82c5846c-bcc9-43ff-9783-4049ecfec7b8",
+                    "expectedControlType": "Button",
+                    "processors": "",
+                    "interactions": "",
+                    "initialStateCheck": false
+                },
+                {
+                    "name": "ShiftDialogue",
+                    "type": "Button",
+                    "id": "3c52be90-d2de-4b1b-a099-20d5bde26997",
                     "expectedControlType": "Button",
                     "processors": "",
                     "interactions": "",
@@ -556,6 +649,28 @@
                     "processors": "",
                     "groups": "Controller",
                     "action": "Pause",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "ac52a032-8ad8-491e-890c-7b9694c3a627",
+                    "path": "<Mouse>/leftButton",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShiftDialogue",
+                    "isComposite": false,
+                    "isPartOfComposite": false
+                },
+                {
+                    "name": "",
+                    "id": "7b955032-c4c0-4512-bd01-20845025efe1",
+                    "path": "<Gamepad>/buttonSouth",
+                    "interactions": "",
+                    "processors": "",
+                    "groups": "",
+                    "action": "ShiftDialogue",
                     "isComposite": false,
                     "isPartOfComposite": false
                 }
