@@ -41,6 +41,9 @@ public class AmmoBox : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        GameObject.Find("Inventory").GetComponent<Inventory>().AddAmmo(Random.Range(20, 40), ammo);
+        var inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+
+        inventory.AddAmmo(Random.Range(20, 40), ammo);
+        inventory.weaponManager.guns[inventory.weaponManager.activeGun].UpdateDisplay();
     }
 }

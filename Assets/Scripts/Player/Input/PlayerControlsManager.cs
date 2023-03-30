@@ -153,7 +153,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         inventory.prevAmmo = inventory.selectedAmmo;
 
-        foreach(InventorySlot slot in inventory.weaponSlots[weaponManager.activeGun].slots)
+        foreach(InventorySlot slot in inventory.weaponSlots[weaponManager.activeGun - 1].slots)
         {
             if (slot.slotAttachmentType == InventoryAttachment.AttachmentType.MAGAZINE)
             {
@@ -178,7 +178,16 @@ public class PlayerControlsManager : MonoBehaviour
         Cursor.lockState = CursorLockMode.None;
         inventory.ToggleVisibleSlots(false);
         inventory.ToggleWeaponModCanvas(false);
-        inventory.UpdateWeaponStats();
+
+        if (weaponManager.activeGun == 3)
+        {
+            inventory.UpdateWeaponStatsRailgun();
+        }
+        else
+        {
+            inventory.UpdateWeaponStats();
+        }
+
         weaponManager.UpdateWeaponStats();
         infoBoxText.ToggleSelf(false);
         HUD.SetActive(true);

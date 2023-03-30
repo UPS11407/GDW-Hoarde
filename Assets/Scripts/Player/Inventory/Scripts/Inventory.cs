@@ -297,8 +297,15 @@ public class Inventory : MonoBehaviour
     {
         barrelSlot = weaponSlots[weaponManager.activeGun - 1].slots[0];
 
-        if (barrelSlot != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
-        else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
+        if (barrelSlot.item != null)
+        {
+            weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
+        }
+
+        else
+        {
+            weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
+        }
     }
 }
 [System.Serializable]
