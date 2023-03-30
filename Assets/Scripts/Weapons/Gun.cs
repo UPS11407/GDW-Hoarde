@@ -50,6 +50,8 @@ public class Gun : MonoBehaviour
     public int currentAmmo;
     public int maxAmmo;
 
+    public bool isUnarmed;
+
     float damage;
     float bulletVelocity;
     int bulletsPerShot;
@@ -78,8 +80,14 @@ public class Gun : MonoBehaviour
     // Start is called before the first frame update
     void Start()
     {
+        Cursor.visible = false;
+        Cursor.lockState = CursorLockMode.Locked;
+
         audioSource = GetComponent<AudioSource>();
-        UpdateWeaponStats();
+        if (!isUnarmed)
+        {
+            UpdateWeaponStats();
+        }
 
         currentAmmo = maxAmmo;
         UpdateDisplay();
@@ -87,6 +95,14 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        if (isUnarmed)
+        {
+            if (fireButtonPressed == true)
+            {
+                Fire();
+            }
+            return;
+        }
 
         if (isCharged)
         {
@@ -241,8 +257,6 @@ public class Gun : MonoBehaviour
         }
 
         canShoot = true;
-        Cursor.visible = false;
-        Cursor.lockState = CursorLockMode.Locked;
         
         shootTime = Time.time + modDelay;
 
@@ -258,6 +272,13 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
+        if (isUnarmed)
+        {
+            GameObject.Find("Player").GetComponent<Player>().QuickMelee();
+            return;
+        }
+
+
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
             shootTime = Time.time;
@@ -394,8 +415,23 @@ public class Gun : MonoBehaviour
     }
     public void UpdateDisplay()
     {
-        currentAmmoDisplay.text = currentAmmo.ToString();
-        maxAmmoDisplay.text = inventory.GetAmmoCount().ToString();
+        if (!currentAmmoDisplay.enabled)
+        {
+            currentAmmoDisplay.enabled = true;
+            maxAmmoDisplay.enabled = true;
+        }
+
+        if (!isUnarmed)
+        {
+            currentAmmoDisplay.text = currentAmmo.ToString();
+            maxAmmoDisplay.text = inventory.GetAmmoCount().ToString();
+        }
+        else
+        {
+            currentAmmoDisplay.enabled = false;
+            maxAmmoDisplay.enabled = false;
+        }
+
     }
 
     /*

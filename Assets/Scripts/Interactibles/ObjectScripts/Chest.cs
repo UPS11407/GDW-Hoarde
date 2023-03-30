@@ -64,8 +64,8 @@ public class Chest : MonoBehaviour, IInteractible
                 animator.Play("Handle");
                 canInteract = false;
 
-                GameObject.Find("Pistol").GetComponent<Gun>().canSwap = true;
-                player.GetComponent<WeaponManager>().SwapWeapon();
+                player.GetComponent<WeaponManager>().gunInventory.Add(2);
+                player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 2);
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 2;
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().UpdateHUD();
 
@@ -87,8 +87,8 @@ public class Chest : MonoBehaviour, IInteractible
                 {
                     pistol.SetActive(false);
                 }
-                player.GetComponent<WeaponManager>().gunInventory = new int[]{1, 2};
-                player.GetComponent<WeaponManager>().SetActiveGun(2);
+                player.GetComponent<WeaponManager>().gunInventory.Add(3);
+                player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 3);
             }
             else
             {

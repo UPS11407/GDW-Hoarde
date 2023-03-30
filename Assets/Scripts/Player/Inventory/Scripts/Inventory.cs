@@ -77,7 +77,7 @@ public class Inventory : MonoBehaviour
 
     void RunWeaponLoop(GunType gunType)
     {
-        foreach (InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
+        foreach (InventorySlot slot in weaponSlots[weaponManager.activeGun - 1].slots)
         {
             slot.slotGunType = gunType;
         }
@@ -179,17 +179,20 @@ public class Inventory : MonoBehaviour
             {
                 foreach (InventorySlot slot in weaponSlotGroups.slots)
                 {
-                    if (slot.slotGunType == GunType.PISTOL && weaponManager.GetActiveGun() == 0)
+                    if (slot.slotGunType == GunType.PISTOL && weaponManager.GetActiveGun() == 1)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
+                        Debug.Log(weaponManager.GetActiveGun());
                     }
-                    else if (slot.slotGunType == GunType.RIFLE && weaponManager.GetActiveGun() == 1)
+                    else if (slot.slotGunType == GunType.RIFLE && weaponManager.GetActiveGun() == 2)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
+                        Debug.Log(weaponManager.GetActiveGun());
                     }
-                    else if (slot.slotGunType == GunType.RAILGUN && weaponManager.GetActiveGun() == 2)
+                    else if (slot.slotGunType == GunType.RAILGUN && weaponManager.GetActiveGun() == 3)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
+                        Debug.Log(weaponManager.GetActiveGun());
                     }
                 }
             }
@@ -209,7 +212,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateWeaponStats()
     {
-        foreach(InventorySlot slot in weaponSlots[weaponManager.activeGun].slots)
+        foreach(InventorySlot slot in weaponSlots[weaponManager.activeGun - 1].slots)
         {
             switch (slot.slotAttachmentType)
             {
@@ -288,7 +291,7 @@ public class Inventory : MonoBehaviour
 
     public void UpdateWeaponStatsRailgun()
     {
-        barrelSlot = weaponSlots[weaponManager.activeGun].slots[0];
+        barrelSlot = weaponSlots[weaponManager.activeGun - 1].slots[0];
 
         if (barrelSlot != null) weaponManager.guns[weaponManager.activeGun].changeBarrel((WeaponModScriptableObject)attachmentPairs[barrelSlot.item.attachment]);
         else weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);

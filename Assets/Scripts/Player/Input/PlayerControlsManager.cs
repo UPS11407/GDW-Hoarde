@@ -133,8 +133,11 @@ public class PlayerControlsManager : MonoBehaviour
     
     public void ToggleMenu()
     {
-        if (inventory.weaponModCanvas.activeSelf) CloseMenu();
-        else OpenMenu();
+        if (!weaponManager.guns[weaponManager.activeGun].isUnarmed)
+        {
+            if (inventory.weaponModCanvas.activeSelf) CloseMenu();
+            else OpenMenu();
+        }
     }
 
     public void OpenMenu()
@@ -304,25 +307,25 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoRunAnimation(bool sprinting)
     {
-        if ((weaponManager.activeGun == 1 || weaponManager.activeGun == 2) && sprinting && speed > 7)
+        if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && speed > 7)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTime()));
             sprintingAnim = true;
         }
-        else if (weaponManager.activeGun == 0 && sprinting && speed > 7)
+        else if (weaponManager.activeGun == 1 && sprinting && speed > 7)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTime()));
             sprintingAnim = true;
         }
-        else if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
+        else if (weaponManager.activeGun == 2 || weaponManager.activeGun == 3)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, walkPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, walkRotation, GetLerpTime()));
             sprintingAnim = false;
         }
-        else if (weaponManager.activeGun == 0)
+        else if (weaponManager.activeGun == 1)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolWalkPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolWalkRotation, GetLerpTime()));
@@ -436,7 +439,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Heal"].performed += ctx => player.HealHP(player.maxHP * 0.3f, true);
         playerInput.actions["Sprint"].started += ctx => DoSprintStuff(true);
         playerInput.actions["Sprint"].canceled += ctx => DoSprintStuff(false);
-        playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
+        playerInput.actions["SwapWeapon"].performed += weaponManager.SwapWeapon;
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
         playerInput.actions["Flashlight"].performed += ctx => ToggleFlashlight();
@@ -453,7 +456,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Heal"].performed -= ctx => player.HealHP(player.maxHP * 0.3f, true);
         playerInput.actions["Sprint"].performed -= ctx => DoSprintStuff(true);
         playerInput.actions["Sprint"].canceled -= ctx => DoSprintStuff(false);
-        playerInput.actions["SwapWeapon"].performed += ctx => weaponManager.SwapWeapon();
+        playerInput.actions["SwapWeapon"].performed -= weaponManager.SwapWeapon;
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
         playerInput.actions["Flashlight"].performed -= ctx => ToggleFlashlight();
@@ -549,7 +552,7 @@ public class PlayerControlsManager : MonoBehaviour
     {
         var rotation = weaponManager.guns[weaponManager.activeGun].transform.localRotation;
 
-        if (weaponManager.activeGun == 0)
+        if (weaponManager.activeGun == 1)
         {
             startRot = new Vector3(rotation.eulerAngles.x - 360, rotation.eulerAngles.y, rotation.eulerAngles.z);
         }

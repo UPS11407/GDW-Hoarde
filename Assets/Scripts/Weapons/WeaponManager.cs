@@ -1,12 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 public class WeaponManager : MonoBehaviour
 {
     public List<Gun> guns;
     public int activeGun;
-    public int[] gunInventory = new int[2];
+    public List<int> gunInventory;
 
     public int GetActiveGun()
     {
@@ -33,19 +34,35 @@ public class WeaponManager : MonoBehaviour
         guns[activeGun].ToggleFireButton(toggle);
     }
 
-    public void SwapWeapon()
+    public void SwapWeapon(InputAction.CallbackContext ctx)
     {
         if (guns[activeGun].canReload && guns[activeGun].canSwap)
         {
-            if (activeGun == gunInventory[0])
+            var scrollFloat = ctx.action.ReadValue<float>();
+
+            int prevGun = activeGun;
+
+            if (scrollFloat > 0)
             {
-                activeGun = gunInventory[1];
-                DoWeaponSwap(gunInventory[0], gunInventory[1]);
+                activeGun++;
             }
             else
             {
-                activeGun = gunInventory[0];
-                DoWeaponSwap(gunInventory[1], gunInventory[0]);
+                activeGun--;
+            }
+
+            if (activeGun < 0)
+            {
+                activeGun = gunInventory.Count - 1;
+            }
+            else if (activeGun > gunInventory.Count - 1)
+            {
+                activeGun = 0;
+            }
+
+            if (gunInventory.Count > 1)
+            {
+                DoWeaponSwap(gunInventory[prevGun], gunInventory[activeGun]);
             }
         }
     }
