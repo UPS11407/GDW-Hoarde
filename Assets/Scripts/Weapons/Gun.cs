@@ -75,6 +75,9 @@ public class Gun : MonoBehaviour
     [SerializeField] GameObject tracerStart;
     [SerializeField] MuzzleFlash muzzleFlash;
 
+    [SerializeField] float laserDuration = 0.75f;
+    [SerializeField] float trailDuration = 1.0f;
+
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
     // Start is called before the first frame update
@@ -385,10 +388,11 @@ public class Gun : MonoBehaviour
         line.SetPosition(0, line.transform.position);
         line.SetPosition(1, hit.point);
 
-
-        while (time <= 1)
+        Color laserColor = line.material.GetColor("_EmissionColor");
+        while (time <= laserDuration)
         {
-
+            line.material.color = Color.Lerp(new Color(line.material.color.r, line.material.color.g, line.material.color.b, 1), new Color(line.material.color.r, line.material.color.g, line.material.color.b, 0), time / laserDuration);
+            line.material.SetColor("_EmissionColor", laserColor * Mathf.Pow(2.0f, Mathf.Lerp(3, -10, time / laserDuration)));
             time += Time.deltaTime;
 
             yield return null;
@@ -402,7 +406,7 @@ public class Gun : MonoBehaviour
     {
         float time = 0;
         Vector3 startPos = trail.transform.position;
-        while (time <= 1)
+        while (time <= trailDuration)
         {
             trail.transform.position = Vector3.Lerp(startPos, hit.point, time);
             time += Time.deltaTime / trail.time;
