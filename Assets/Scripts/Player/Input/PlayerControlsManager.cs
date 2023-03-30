@@ -135,7 +135,7 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (!weaponManager.guns[weaponManager.activeGun].isUnarmed)
         {
-            if (inventory.weaponModCanvas.activeSelf) CloseMenu();
+            if (inventory.weaponModCanvas.transform.GetChild(0).gameObject.activeSelf) CloseMenu();
             else OpenMenu();
         }
     }

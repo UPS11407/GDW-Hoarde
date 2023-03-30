@@ -49,12 +49,16 @@ public class Inventory : MonoBehaviour
                 (key.attachment, key.attachmentPair);
         }
 
-        weaponModCanvas.SetActive(false);
+        ToggleWeaponModCanvas(false);
     }
 
     public void ToggleWeaponModCanvas(bool toggle)
     {
-        weaponModCanvas.SetActive(toggle);
+        for(int i = 0; i < gameObject.transform.childCount - 1; i++)
+        {
+            Debug.Log(gameObject.transform.GetChild(i).name);
+            weaponModCanvas.transform.GetChild(i).gameObject.SetActive(toggle);
+        }
     }
 
     public void UpdateWeaponType()

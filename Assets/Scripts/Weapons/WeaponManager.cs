@@ -69,6 +69,7 @@ public class WeaponManager : MonoBehaviour
 
     public void DoWeaponSwap(int weaponFrom, int weaponTo)
     {
+        activeGun = weaponTo;
         guns[weaponFrom].ToggleSelf(false);
 
         guns[weaponTo].ToggleSelf(true);

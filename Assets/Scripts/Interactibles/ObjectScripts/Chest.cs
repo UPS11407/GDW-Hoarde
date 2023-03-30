@@ -37,11 +37,14 @@ public class Chest : MonoBehaviour, IInteractible
     GameObject player;
     bool canInteract = true;
     Animator animator;
-    public GameObject menuText;
-    public Inventory inventory;
+    GameObject menuText;
+    Inventory inventory;
 
     public bool tutorialChest;
     public bool railChest;
+
+
+    public GameObject spawnLocation;
 
     //[HideInInspector]
     public GameObject enemyPrefab;
@@ -110,7 +113,9 @@ public class Chest : MonoBehaviour, IInteractible
                 StartCoroutine(ModMenuText("New Item Added! (Press B)", Color.white));
             }
             Debug.Log("YOU GOT LIGMA");
-            
+
+            spawnLocation.SetActive(true);
+
             Destroy(gameObject, 6);
             
         }
@@ -129,6 +134,8 @@ public class Chest : MonoBehaviour, IInteractible
     {
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
+        menuText = GameObject.Find("ChestText");
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
     int RollItem()

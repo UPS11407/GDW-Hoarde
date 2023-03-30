@@ -127,6 +127,20 @@ public class EnemyBase : MonoBehaviour
             hitbox.enabled = false;
             Destroy(gameObject, 2f);
             rig.SetActive(true);
+            Collider[] col = gameObject.GetComponentsInChildren<Collider>();
+            foreach(Collider collid in col)
+            {
+                collid.gameObject.layer = 16;
+            }
+            TestSubject T;
+            if(TryGetComponent<TestSubject>(out T)) StopAllCoroutines();
+            
+            Amalgamation A;
+            if (TryGetComponent<Amalgamation>(out A)) StopAllCoroutines();
+
+            MutatedScientist M;
+            if (TryGetComponent<MutatedScientist>(out M)) StopAllCoroutines();
+
             this.enabled = false;
         }
     }
