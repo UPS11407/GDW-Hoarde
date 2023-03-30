@@ -93,10 +93,16 @@ public class PlayerControlsManager : MonoBehaviour
     float timeToUnreadyWeapon;
     float timeToReadyWeapon;
 
-    float timeToLerp;
-    float maxLerpTime;
+    float timeToLerpWeaponRun;
+    float maxLerpTimeWeaponRun;
 
     public bool sprintingAnim;
+
+    public bool aiming;
+    public bool waitingToAim;
+
+    float timeToLerpADS;
+    float maxLerpTimeADS;
 
     private void Awake()
     {
@@ -113,7 +119,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         Physics.gravity = new Vector3(0, -22.0f, 0);
 
-        timeToLerp = maxLerpTime + 1;
+        timeToLerpWeaponRun = maxLerpTimeWeaponRun + 1;
     }
 
     void Start()
@@ -285,11 +291,11 @@ public class PlayerControlsManager : MonoBehaviour
         }
 
         Sprint();
-        #endregion
+        
 
 
 
-        if (timeToLerp > maxLerpTime && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
+        if (timeToLerpWeaponRun > maxLerpTimeWeaponRun && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = true;
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
@@ -298,7 +304,7 @@ public class PlayerControlsManager : MonoBehaviour
         else
         {
             DoRunAnimation(sprinting);
-            timeToLerp += Time.deltaTime;
+            timeToLerpWeaponRun += Time.deltaTime;
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
@@ -312,6 +318,15 @@ public class PlayerControlsManager : MonoBehaviour
         {
             timeToReadyWeapon = timeToReadyPistol;
             timeToUnreadyWeapon = timeToReadyPistol;
+        }
+        #endregion
+
+        if (waitingToAim && !sprintingAnim)
+        {
+            waitingToAim = false;
+            aiming = true;
+            weaponManager.guns[weaponManager.activeGun].canReload = false;
+            weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
     }
 
@@ -343,7 +358,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     float GetLerpTime()
     {
-        return timeToLerp / maxLerpTime;
+        return timeToLerpWeaponRun / maxLerpTimeWeaponRun;
     }
 
     void DoLook(float sensitivity)
@@ -370,7 +385,7 @@ public class PlayerControlsManager : MonoBehaviour
         Vector3 moveX = moveDir.y * new Vector3(cameraParent.forward.x, 0, cameraParent.forward.z).normalized * moveSpeed;
         Vector3 moveZ = moveDir.x * new Vector3(cameraParent.right.x, 0, cameraParent.right.z).normalized * moveSpeed;
 
-        if (moveDir.y > 0 && player.stamina > 0 && weaponManager.guns[weaponManager.activeGun].canReload)
+        if (moveDir.y > 0 && player.stamina > 0 && weaponManager.guns[weaponManager.activeGun].canReload && !aiming && !waitingToAim)
         {
             canSprint = true;
         }
@@ -451,6 +466,9 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Pause"].performed += ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed += ctx => player.QuickMelee();
         playerInput.actions["Flashlight"].performed += ctx => ToggleFlashlight();
+        playerInput.actions["Nightvision"].performed += ctx => ToggleNightVision();
+        playerInput.actions["ADS"].started += ctx => AimDown(true);
+        playerInput.actions["ADS"].canceled += ctx => AimDown(false);
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed += ctx => pauseMenu.RunPause();
     }
 
@@ -468,6 +486,9 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["Pause"].performed -= ctx => pauseMenu.RunPause();
         playerInput.actions["Melee"].performed -= ctx => player.QuickMelee();
         playerInput.actions["Flashlight"].performed -= ctx => ToggleFlashlight();
+        playerInput.actions["Nightvision"].performed -= ctx => ToggleNightVision();
+        playerInput.actions["ADS"].started -= ctx => AimDown(true);
+        playerInput.actions["ADS"].canceled -= ctx => AimDown(false);
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed -= ctx => pauseMenu.RunPause();
     }
 
@@ -571,8 +592,8 @@ public class PlayerControlsManager : MonoBehaviour
         
         startPos = weaponManager.guns[weaponManager.activeGun].transform.localPosition;
 
-        maxLerpTime = sprinting ? timeToUnreadyWeapon : timeToReadyWeapon;
-        timeToLerp = 0;
+        maxLerpTimeWeaponRun = sprinting ? timeToUnreadyWeapon : timeToReadyWeapon;
+        timeToLerpWeaponRun = 0;
     }
 
     void ToggleFlashlight()
@@ -584,6 +605,32 @@ public class PlayerControlsManager : MonoBehaviour
         else
         {
             flashlight.SetActive(true);
+        }
+    }
+
+    void ToggleNightVision()
+    {
+
+    }
+
+    void AimDown(bool buttonToggle)
+    {
+        if (!weaponManager.guns[weaponManager.activeGun].isUnarmed)
+        {
+            if (buttonToggle)
+            {
+                waitingToAim = true;
+                canSprint = false;
+                DoSprintStuff(false);
+            }
+            else
+            {
+                waitingToAim = false;
+                aiming = false;
+                weaponManager.guns[weaponManager.activeGun].canReload = true;
+                weaponManager.guns[weaponManager.activeGun].canSwap = true;
+                canSprint = true;
+            }
         }
     }
 }
