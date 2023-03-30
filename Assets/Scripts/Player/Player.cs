@@ -46,7 +46,7 @@ public class Player : MonoBehaviour
         UpdateHealthDisplay();
         hurtIndicator = GetComponent<HurtIndicator>();
         playerControlsManager = GetComponent<PlayerControlsManager>();
-        bindings = new string[2];
+        bindings = new string[4];
 
         UpdateBindings();
     }
@@ -235,9 +235,7 @@ public class Player : MonoBehaviour
                 {
 
                     hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(meleeDamage);
-                    hit.transform.gameObject.GetComponent<EnemyBase>().Knockback(this.gameObject);
-
-
+                    hit.transform.gameObject.GetComponent<EnemyBase>().Knockback(gameObject);
                 }
             }
         }
@@ -252,6 +250,14 @@ public class Player : MonoBehaviour
         bindings[1] = InputControlPath.ToHumanReadableString(
                 playerControlsManager.playerInput.actions["Heal"].bindings[0].effectivePath,
                 InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        bindings[2] = InputControlPath.ToHumanReadableString(
+            playerControlsManager.playerInput.actions["Flashlight"].bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
+
+        bindings[3] = InputControlPath.ToHumanReadableString(
+            playerControlsManager.playerInput.actions["Nightvision"].bindings[0].effectivePath,
+            InputControlPath.HumanReadableStringOptions.OmitDevice);
 
         healText.text = $"Press {bindings[1]} to Heal";
     }

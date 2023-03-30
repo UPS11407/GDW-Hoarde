@@ -55,7 +55,7 @@ public class Inventory : MonoBehaviour
 
     public void ToggleWeaponModCanvas(bool toggle)
     {
-        for(int i = 0; i < gameObject.transform.childCount - 1; i++)
+        for(int i = 0; i < gameObject.transform.childCount; i++)
         {
             Debug.Log(gameObject.transform.GetChild(i).name);
             weaponModCanvas.transform.GetChild(i).gameObject.SetActive(toggle);

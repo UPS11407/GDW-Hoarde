@@ -293,6 +293,7 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = true;
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
+            sprintingAnim = false;
         }
         else
         {
@@ -302,7 +303,7 @@ public class PlayerControlsManager : MonoBehaviour
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
 
-        if (weaponManager.activeGun == 1 || weaponManager.activeGun == 2)
+        if (weaponManager.activeGun == 2 || weaponManager.activeGun == 3)
         {
             timeToReadyWeapon = timeToReadyRifle;
             timeToUnreadyWeapon = timeToReadyRifle;
@@ -332,13 +333,11 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, walkPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, walkRotation, GetLerpTime()));
-            sprintingAnim = false;
         }
         else if (weaponManager.activeGun == 1)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolWalkPosition, GetLerpTime());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolWalkRotation, GetLerpTime()));
-            sprintingAnim = false;
         }
     }
 
