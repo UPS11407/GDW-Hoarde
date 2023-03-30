@@ -37,7 +37,8 @@ public class Player : MonoBehaviour
 
     public float timeSinceUsedStamina = 0;
     string lastDamageCreature;
-    
+
+    public bool hasNV;
     void Start()
     {
         stamina = maxStamina;
