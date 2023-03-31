@@ -12,6 +12,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     [SerializeField] TMP_Text text;
     [SerializeField] TMP_Text NPCName;
+    [SerializeField] GameObject DialogueBox;
 
     public List<Dialogue> dialogue;
 
@@ -42,9 +43,10 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     IEnumerator Talk(List<DialogueText> dialogueText)
     {
-
+        DialogueBox.SetActive(true);
         playerControlsManager.playerInput.SwitchCurrentActionMap("Menu");
         interactible = false;
+        NPCName.text = dialogueText[dialogueState].name;
 
         int dialogueContinuation = dialogueState == dialogueText.Count - 1 ? dialogueText.Count + 1 : dialogueText.Count;
 
@@ -99,7 +101,9 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public void EndDialogue()
     {
         interactible = true;
+        DialogueBox.SetActive(false);
         text.SetText("");
+        NPCName.SetText("");
         playerControlsManager.playerInput.SwitchCurrentActionMap("Player");
     }
 
