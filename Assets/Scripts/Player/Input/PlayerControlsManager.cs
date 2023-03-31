@@ -44,6 +44,8 @@ public class PlayerControlsManager : MonoBehaviour
     private Rigidbody _rb;
 
     public Transform cameraParent;
+    [SerializeField] NightVision mainCameraNV;
+
 
     public bool enableLook = true;
     bool onStairs = false;
@@ -103,6 +105,8 @@ public class PlayerControlsManager : MonoBehaviour
 
     float timeToLerpADS;
     float maxLerpTimeADS;
+
+    //NightVision gunCameraNV;
 
     private void Awake()
     {
@@ -610,7 +614,18 @@ public class PlayerControlsManager : MonoBehaviour
 
     void ToggleNightVision()
     {
-
+        if (player.hasNV)
+        {
+            if (mainCameraNV.enabled)
+            {
+                mainCameraNV.enabled = false;
+            }
+            else
+            {
+                mainCameraNV.enabled = true;
+            }
+        }
+        
     }
 
     void AimDown(bool buttonToggle)

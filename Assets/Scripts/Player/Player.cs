@@ -39,7 +39,7 @@ public class Player : MonoBehaviour
     string lastDamageCreature;
 
     public bool hasNV;
-    public bool toggleNV;
+    
 
     void Start()
     {

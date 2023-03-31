@@ -46,7 +46,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             
             text.SetText(a);
 
-            yield return new WaitForSeconds(0.0125f);
+            yield return new WaitForSecondsRealtime(0.0125f);
         }
         if (passable[state])
         {
@@ -59,7 +59,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             yield break;
         }
         UpdateHUD();
-        yield return new WaitForSeconds(5);
+        yield return new WaitForSecondsRealtime(5);
         EndDialogue();
     }
 
