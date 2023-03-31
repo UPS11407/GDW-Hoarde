@@ -29,14 +29,10 @@ public class Johnatelo : NPCBehavior
     {
         base.UpdateHUD();
 
-        if (state == 1 && !weaponManager.gunInventory.Contains(1))
+        if (state == 0 && !weaponManager.gunInventory.Contains(1) && dialogueState == 3)
         {
             weaponManager.gunInventory.Add(1);
             player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 1);
-        }
-
-        if (state >= 1)
-        {
             foreach (DoorController door in doorColliders)
             {
                 door.Unlock();
@@ -49,9 +45,11 @@ public class Johnatelo : NPCBehavior
             }
         }
 
-        if (state >= 3)
+        if (state >= 1 && dialogueState == 2)
         {
             genDoor.Unlock();
         }
+
+        
     }
 }

@@ -44,14 +44,16 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     IEnumerator Talk(List<DialogueText> dialogueText)
     {
         DialogueBox.SetActive(true);
+        Time.timeScale = 0;
         playerControlsManager.playerInput.SwitchCurrentActionMap("Menu");
         interactible = false;
-        NPCName.text = dialogueText[dialogueState].name;
 
         int dialogueContinuation = dialogueState == dialogueText.Count - 1 ? dialogueText.Count + 1 : dialogueText.Count;
 
         for (int i = dialogueState; i < dialogueContinuation - 1; i++)
         {
+
+            NPCName.text = dialogueText[dialogueState].name;
 
             for (int j = 0; j <= dialogueText[dialogueState].text.Length; j++)
             {
@@ -102,6 +104,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     {
         interactible = true;
         DialogueBox.SetActive(false);
+        Time.timeScale = 1;
         text.SetText("");
         NPCName.SetText("");
         playerControlsManager.playerInput.SwitchCurrentActionMap("Player");

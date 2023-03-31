@@ -14,7 +14,7 @@ public class Generator : MonoBehaviour, IInteractible
     AudioSource generatorSound;
     Animator animator;
     bool canInteract = true;
-
+    public Animator doorAnimator;
     private void Awake()
     {
         animator = gameObject.transform.parent.parent.GetComponent<Animator>();
@@ -50,7 +50,7 @@ public class Generator : MonoBehaviour, IInteractible
         spawner.SetActive(true);
         foreach (GameObject door in powerDoors)
         {
-            door.GetComponent<Animator>().SetBool("isOpening", true);
+            doorAnimator.SetBool("isOpening", true);
             door.GetComponent<DoorController>().forcedOpen = true;
         }
 
@@ -60,7 +60,7 @@ public class Generator : MonoBehaviour, IInteractible
         }
 
         //generatorSound.Play();
-        johnatelo.state = 5;
+        johnatelo.state = 2;
         johnatelo.UpdateHUD();
         StartCoroutine(disableTextBox());
     }
