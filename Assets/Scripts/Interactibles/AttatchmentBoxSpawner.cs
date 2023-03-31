@@ -8,8 +8,7 @@ public class AttatchmentBoxSpawner : MonoBehaviour
     public GameObject[] locations;
     public Transform parent;
     bool spawning = false;
-    List<GameObject> validSpawnLocations;
-    bool first = true;
+    List<GameObject> validSpawnLocations = new List<GameObject>();
 
     private void Start()
     {
@@ -25,6 +24,7 @@ public class AttatchmentBoxSpawner : MonoBehaviour
         {
             var obj = Instantiate(attatchmentBox, loca.transform.position, loca.transform.rotation, parent);
             obj.GetComponent<Chest>().spawnLocation = loca;
+            obj.name = "Attatchment Crate";
             loca.SetActive(false);
         }
 
@@ -55,8 +55,9 @@ public class AttatchmentBoxSpawner : MonoBehaviour
         spawning = true;
         yield return new WaitForSeconds(120.0f);
         spawning = false;
-        var obj = Instantiate(attatchmentBox, validSpawnLocations[index].transform.position, validSpawnLocations[index].transform.rotation, parent);
+        GameObject obj = Instantiate(attatchmentBox, validSpawnLocations[index].transform.position, validSpawnLocations[index].transform.rotation, parent);
         obj.GetComponent<Chest>().spawnLocation = validSpawnLocations[index];
+        obj.name = "Attatchment Crate";
         validSpawnLocations[index].SetActive(false);
         validSpawnLocations.Clear();
     }

@@ -63,7 +63,7 @@ public class EnemyBase : MonoBehaviour
     }
     void PlaySound()
     {
-        Debug.Log("sound");
+        //Debug.Log("sound");
         StartCoroutine(Groan(Random.Range(8, 30)));
     }
 

@@ -50,7 +50,7 @@ public class Generator : MonoBehaviour, IInteractible
         spawner.SetActive(true);
         foreach (GameObject door in powerDoors)
         {
-            door.GetComponent<Animator>().SetBool("isOpening", true);
+            door.transform.parent.GetComponent<Animator>().SetBool("isOpening", true);
             door.GetComponent<DoorController>().forcedOpen = true;
         }
 

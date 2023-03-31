@@ -8,7 +8,7 @@ public class AmmoBoxSpawner : MonoBehaviour
     public GameObject[] locations;
     public Transform parent;
     bool spawning = false;
-    List<GameObject> validSpawnLocations;
+    List<GameObject> validSpawnLocations = new List<GameObject>();
 
     private void Update()
     {
@@ -18,6 +18,7 @@ public class AmmoBoxSpawner : MonoBehaviour
             {
                 if (loca.activeInHierarchy == true)
                 {
+                    Debug.Log(loca.name);
                     validSpawnLocations.Add(loca);
                 }
             }
@@ -34,8 +35,9 @@ public class AmmoBoxSpawner : MonoBehaviour
         spawning = true;
         yield return new WaitForSeconds(90.0f);
         spawning = false;
-        var obj = Instantiate(ammoBox, locations[index].transform.position, locations[index].transform.rotation, parent);
+        GameObject obj = Instantiate(ammoBox, locations[index].transform.position, locations[index].transform.rotation, parent);
         obj.GetComponent<AmmoBox>().spawnLocation = validSpawnLocations[index];
+        obj.name = "Ammo Box";
         validSpawnLocations.Clear();
     }
 }
