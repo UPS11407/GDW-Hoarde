@@ -43,6 +43,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     IEnumerator Talk(List<DialogueText> dialogueText)
     {
+        Time.timeScale = 0;
         DialogueBox.SetActive(true);
         Time.timeScale = 0;
         playerControlsManager.playerInput.SwitchCurrentActionMap("Menu");
@@ -102,6 +103,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     public void EndDialogue()
     {
+        Time.timeScale = 1.0f;
         interactible = true;
         DialogueBox.SetActive(false);
         Time.timeScale = 1;
