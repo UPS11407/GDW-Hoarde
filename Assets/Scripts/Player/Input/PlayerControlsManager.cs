@@ -623,6 +623,7 @@ public class PlayerControlsManager : MonoBehaviour
             else
             {
                 mainCameraNV.enabled = true;
+                GameObject.Find("Nightvision Sound").GetComponent<AudioSource>().Play();
             }
         }
         

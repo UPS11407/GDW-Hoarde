@@ -44,6 +44,10 @@ public class EnemyBase : MonoBehaviour
     bool knockBacked;
     [SerializeField] float knockBackStrength;
     public bool canAttack = true;
+
+    bool sound = false;
+    public AudioClip[] groans;
+
     private void Awake()
     {
         player = GameObject.Find("Player");
@@ -57,6 +61,20 @@ public class EnemyBase : MonoBehaviour
         walkNum = Random.Range(0f, 0.2f);
 
     }
+    void PlaySound()
+    {
+        Debug.Log("sound");
+        StartCoroutine(Groan(Random.Range(8, 30)));
+    }
+
+    IEnumerator Groan(int num)
+    {
+        sound = true;
+        yield return new WaitForSeconds(num);
+        sound = false;
+
+        GetComponent<AudioSource>().PlayOneShot(groans[Random.Range(0, groans.Length)]);
+    }
 
     public void EnemyUpdate()
     {
@@ -64,6 +82,12 @@ public class EnemyBase : MonoBehaviour
         
 
         CheckIfDead();
+
+        if (!sound)
+        {
+            PlaySound();
+        }
+
         //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
         /*
         if (knockBacked)
