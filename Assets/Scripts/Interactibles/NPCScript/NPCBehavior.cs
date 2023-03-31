@@ -43,6 +43,13 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     IEnumerator Talk(List<DialogueText> dialogueText)
     {
+        playerControlsManager.talkingTo = this;
+
+        if (dialogueState + 1 != dialogueText.Count)
+        {
+            dialogueState = 0;
+        }
+
         Time.timeScale = 0;
         DialogueBox.SetActive(true);
         Time.timeScale = 0;
@@ -110,6 +117,9 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         text.SetText("");
         NPCName.SetText("");
         playerControlsManager.playerInput.SwitchCurrentActionMap("Player");
+        StopAllCoroutines();
+
+        playerControlsManager.talkingTo = null;
     }
 
     [System.Serializable]

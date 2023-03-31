@@ -12,6 +12,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     InfoBoxText infoBoxText;
 
+    public NPCBehavior talkingTo;
     Player player;
     WeaponManager weaponManager;
 

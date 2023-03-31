@@ -5,6 +5,7 @@ using UnityEngine.InputSystem;
 
 public class PauseMenu : MonoBehaviour
 {
+    public GameObject dialogueMenu;
     public GameObject menu;
     public GameObject player;
     public GameObject HUD;
@@ -15,6 +16,12 @@ public class PauseMenu : MonoBehaviour
 
     public void RunPause()
     {
+        if (dialogueMenu.activeSelf)
+        {
+            playerControlsManager.talkingTo.EndDialogue();
+            return;
+        }
+
         if (!playerControlsManager.inventory.weaponModCanvas.transform.GetChild(0).gameObject.activeSelf)
         {
             if (playerContr != null)
