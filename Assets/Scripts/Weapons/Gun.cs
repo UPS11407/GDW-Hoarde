@@ -100,8 +100,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
-        //brain rot
-        isRunning = transform.parent.parent.parent.gameObject.GetComponent<PlayerControlsManager>().sprintingAnim;
+        isRunning = GameObject.Find("Player").GetComponent<PlayerControlsManager>().sprintingAnim;
         if (isUnarmed)
         {
             if (fireButtonPressed == true)

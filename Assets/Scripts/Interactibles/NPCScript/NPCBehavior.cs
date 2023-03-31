@@ -5,9 +5,16 @@ using TMPro;
 
 public class NPCBehavior : MonoBehaviour, IInteractible    
 {
+    public PlayerControlsManager playerControlsManager;
+
     public int state = 0;
-    [SerializeField] TextMeshProUGUI text;
-    public string[] dialogue;
+    public int dialogueState = 0;
+
+    [SerializeField] TMP_Text text;
+    [SerializeField] TMP_Text NPCName;
+
+    public List<Dialogue> dialogue;
+
     public bool[] passable;
     public TextMeshProUGUI hudText;
     public string[] hudHints;
@@ -15,6 +22,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     protected GameObject player;
     public float dialogueRange;
     public bool lookToPlayer;
+
     protected void Startup()
     {
         player = GameObject.Find("Player");
@@ -23,10 +31,6 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     private void Update()
     {
-        if (interactible == false && Vector3.Distance(transform.position, player.transform.position) > dialogueRange)
-        {
-            EndDialogue();
-        }
         if (lookToPlayer)
         {
             transform.forward = new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
@@ -34,33 +38,53 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     }
     public void Interact()
     {
-        if (interactible) StartCoroutine(Talk(dialogue[state]));
+        if (interactible) StartCoroutine(Talk(dialogue[state].dialogues));
     }
 
-    IEnumerator Talk(string dialogueText)
+    IEnumerator Talk(List<DialogueText> dialogueText)
     {
-        interactible = false;
-        for (int i = 0; i <= dialogueText.Length; i++)
-        {
-            string a = dialogueText.Substring(0, i);
-            
-            text.SetText(a);
 
-            yield return new WaitForSecondsRealtime(0.0125f);
+        playerControlsManager.playerInput.SwitchCurrentActionMap("Menu");
+        interactible = false;
+
+        if (dialogueState + 1 > dialogueText.Count)
+        {
+            dialogueState--;
         }
+
+        for (int i = 0; i < dialogueText.Count; i++)
+        {
+
+            for (int j = dialogueState; j <= dialogueText[dialogueState].text.Length; j++)
+            {
+                string a = dialogueText[dialogueState].text.Substring(0, j);
+
+                text.SetText(a);
+
+                if (playerControlsManager.progressDialogue)
+                {
+                    text.SetText(dialogueText[dialogueState].text);
+                    playerControlsManager.SetProgressDialogue(false);
+                    break;
+                }
+
+                yield return new WaitForSecondsRealtime(0.0125f);
+            }
+
+            yield return new WaitUntil(() => playerControlsManager.progressDialogue);
+
+            playerControlsManager.SetProgressDialogue(false);
+            dialogueState++;
+        }
+
         if (passable[state])
         {
             ChangeState();
         }
-        if (Vector3.Distance(transform.position, player.transform.position) > dialogueRange)
-        {
-            Debug.Log("BREAK");
-            EndDialogue();
-            yield break;
-        }
-        UpdateHUD();
-        yield return new WaitForSecondsRealtime(5);
+
+
         EndDialogue();
+        UpdateHUD();
     }
 
     public void ChangeState()
@@ -80,5 +104,19 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     {
         interactible = true;
         text.SetText("");
+        playerControlsManager.playerInput.SwitchCurrentActionMap("Player");
+    }
+
+    [System.Serializable]
+    public class Dialogue
+    {
+        public List<DialogueText> dialogues;
+    }
+
+    [System.Serializable]
+    public class DialogueText
+    {
+        public string name;
+        public string text;
     }
 }

@@ -57,6 +57,8 @@ public class PlayerControlsManager : MonoBehaviour
     float quickFOV = 75.0f;
     bool jumping;
 
+    public bool progressDialogue;
+
     public float speed;
 
     float xRotation;
@@ -474,6 +476,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["ADS"].started += ctx => AimDown(true);
         playerInput.actions["ADS"].canceled += ctx => AimDown(false);
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed += ctx => pauseMenu.RunPause();
+        playerInput.actions.FindActionMap("Menu").FindAction("ShiftDialogue").performed += ctx => SetProgressDialogue(true);
     }
 
     void DeinitPlayerActions()
@@ -494,6 +497,7 @@ public class PlayerControlsManager : MonoBehaviour
         playerInput.actions["ADS"].started -= ctx => AimDown(true);
         playerInput.actions["ADS"].canceled -= ctx => AimDown(false);
         playerInput.actions.FindActionMap("Menu").FindAction("Pause").performed -= ctx => pauseMenu.RunPause();
+        playerInput.actions.FindActionMap("Menu").FindAction("ShiftDialogue").performed -= ctx => SetProgressDialogue(true);
     }
 
     public void ReinitPlayerActions()
@@ -531,6 +535,11 @@ public class PlayerControlsManager : MonoBehaviour
     public float GetSpeed()
     {
         return speed;
+    }
+
+    public void SetProgressDialogue(bool set)
+    {
+        progressDialogue = set;
     }
 
     private void OnCollisionEnter(Collision collision)
