@@ -15,7 +15,6 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     public List<Dialogue> dialogue;
 
-    public bool[] passable;
     public TextMeshProUGUI hudText;
     public string[] hudHints;
     bool interactible = true;
@@ -47,15 +46,12 @@ public class NPCBehavior : MonoBehaviour, IInteractible
         playerControlsManager.playerInput.SwitchCurrentActionMap("Menu");
         interactible = false;
 
-        if (dialogueState + 1 > dialogueText.Count)
-        {
-            dialogueState--;
-        }
+        int dialogueContinuation = dialogueState == dialogueText.Count - 1 ? dialogueText.Count + 1 : dialogueText.Count;
 
-        for (int i = 0; i < dialogueText.Count; i++)
+        for (int i = dialogueState; i < dialogueContinuation - 1; i++)
         {
 
-            for (int j = dialogueState; j <= dialogueText[dialogueState].text.Length; j++)
+            for (int j = 0; j <= dialogueText[dialogueState].text.Length; j++)
             {
                 string a = dialogueText[dialogueState].text.Substring(0, j);
 
@@ -74,12 +70,11 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             yield return new WaitUntil(() => playerControlsManager.progressDialogue);
 
             playerControlsManager.SetProgressDialogue(false);
-            dialogueState++;
-        }
 
-        if (passable[state])
-        {
-            ChangeState();
+            if (dialogueState + 1 != dialogueText.Count)
+            {
+                dialogueState++;
+            }
         }
 
 
@@ -90,6 +85,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public void ChangeState()
     {
         state++;
+        dialogueState = 0;
         UpdateHUD();
     }
 
