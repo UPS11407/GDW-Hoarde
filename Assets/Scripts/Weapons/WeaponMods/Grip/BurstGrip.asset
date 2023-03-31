@@ -16,7 +16,7 @@ MonoBehaviour:
   damageType: 0
   spreadModifier: 0.15
   damageModifier: 0
-  fireDelayModifier: -0.15
+  fireDelayModifier: 0
   bulletVelocityModifier: 0
   additionalBulletsPerShot: 0
   reloadDelayModifier: 0

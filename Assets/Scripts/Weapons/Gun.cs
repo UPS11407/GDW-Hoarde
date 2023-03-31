@@ -78,6 +78,8 @@ public class Gun : MonoBehaviour
     [SerializeField] float laserDuration = 0.75f;
     [SerializeField] float trailDuration = 1.0f;
 
+    bool isRunning;
+
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
     // Start is called before the first frame update
@@ -98,6 +100,7 @@ public class Gun : MonoBehaviour
 
     private void Update()
     {
+        isRunning = gameObject.GetComponent<PlayerControlsManager>().sprintingAnim;
         if (isUnarmed)
         {
             if (fireButtonPressed == true)
@@ -107,7 +110,7 @@ public class Gun : MonoBehaviour
             return;
         }
 
-        if (isCharged)
+        if (isCharged && !isRunning)
         {
             if (fireButtonPressed == true)
             {
