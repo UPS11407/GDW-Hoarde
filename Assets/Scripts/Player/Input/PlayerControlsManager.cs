@@ -336,7 +336,7 @@ public class PlayerControlsManager : MonoBehaviour
         else
         {
             DoRunAnimation(sprinting);
-            timeToLerpWeaponRun += Time.deltaTime;
+            timeToLerpWeaponRun += Time.smoothDeltaTime;
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
@@ -378,7 +378,7 @@ public class PlayerControlsManager : MonoBehaviour
             DoADSAnimation();
         }
 
-        if (!(timeToLerpADS > maxLerpTimeADS)) timeToLerpADS += Time.fixedDeltaTime;
+        if (!(timeToLerpADS > maxLerpTimeADS)) timeToLerpADS += Time.smoothDeltaTime;
 
     }
 

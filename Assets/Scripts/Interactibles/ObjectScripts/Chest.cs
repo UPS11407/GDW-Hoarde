@@ -67,8 +67,15 @@ public class Chest : MonoBehaviour, IInteractible
                 animator.Play("Handle");
                 canInteract = false;
 
-                player.GetComponent<WeaponManager>().gunInventory.Add(2);
-                player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 2);
+                WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+
+                weaponManager.guns[weaponManager.activeGun].canReload = true;
+                weaponManager.guns[weaponManager.activeGun].canShoot = true;
+                weaponManager.guns[weaponManager.activeGun].canSwap = true;
+                weaponManager.guns[weaponManager.activeGun].isReloading = false;
+
+                weaponManager.gunInventory.Add(2);
+                weaponManager.DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 2);
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 1;
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().dialogueState = 0;
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().UpdateHUD();
@@ -86,13 +93,19 @@ public class Chest : MonoBehaviour, IInteractible
                 animator.Play("Handle");
                 canInteract = false;
 
+                WeaponManager weaponManager = player.GetComponent<WeaponManager>();
+
                 GameObject pistol = GameObject.Find("Pistol");
                 if(pistol != null)
                 {
+                    weaponManager.guns[weaponManager.activeGun].canReload = true;
+                    weaponManager.guns[weaponManager.activeGun].canShoot = true;
+                    weaponManager.guns[weaponManager.activeGun].canSwap = true;
+                    weaponManager.guns[weaponManager.activeGun].isReloading = false;
                     pistol.SetActive(false);
                 }
-                player.GetComponent<WeaponManager>().gunInventory.Add(3);
-                player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 3);
+                weaponManager.gunInventory.Add(3);
+                weaponManager.DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 3);
             }
             else
             {
