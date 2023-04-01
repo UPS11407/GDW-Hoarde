@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: Calico Mag
   m_EditorClassIdentifier: 
   attachmentName: Calico Mag
-  image: {fileID: 0}
+  image: {fileID: 21300000, guid: 88982e91785066e45b222c918da94b11, type: 3}
   gunType: 1
   description: Bullets do much more damage and gun is perfectly accurate, but the
     gun shoots slower and the mag size is 1 bullet (gun do big BANG)

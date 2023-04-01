@@ -355,6 +355,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (waitingToAim && !sprintingAnim)
         {
+            weaponCam.localRotation = Quaternion.Euler(Vector3.zero);
             timeToLerpADS = 0;
             waitingToAim = false;
             aiming = true;
