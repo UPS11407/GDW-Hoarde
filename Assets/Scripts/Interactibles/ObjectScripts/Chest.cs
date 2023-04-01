@@ -135,7 +135,7 @@ public class Chest : MonoBehaviour, IInteractible
     {
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
-        menuText = GameObject.Find("ChestText");
+        menuText = GameObject.Find("TExt");
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
