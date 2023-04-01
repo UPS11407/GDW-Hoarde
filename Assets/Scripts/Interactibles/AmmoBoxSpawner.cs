@@ -18,7 +18,7 @@ public class AmmoBoxSpawner : MonoBehaviour
             {
                 if (loca.activeInHierarchy == true)
                 {
-                    Debug.Log(loca.name);
+                    //Debug.Log(loca.name);
                     validSpawnLocations.Add(loca);
                 }
             }
