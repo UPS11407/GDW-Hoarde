@@ -11,6 +11,7 @@ public class EnemyBase : MonoBehaviour
     public float _speed = 2.0f;
     public float _damage = 1.0f;
     public float _attackRange = 2.0f;
+    public float liveRange;
     public float chaseRange;
     public GameObject healPickupPrefab;
     public GameObject rig;
@@ -22,7 +23,7 @@ public class EnemyBase : MonoBehaviour
     public float currentHP;
 
     protected int dropVal;
-
+    public float distanceOnChaseRange;
     internal GameObject player;
     internal Animator animator;
     public bool multipleAnimations = false;
@@ -107,9 +108,15 @@ public class EnemyBase : MonoBehaviour
             agent.enabled = true;
             //animator.enabled = true;
         }
-        if (NavMeshRemainingDistance(agent.path.corners) <= chaseRange)
+        if (NavMeshRemainingDistance(agent.path.corners) <= liveRange)
         {
-            ChasePlayer();
+            distanceOnChaseRange = NavMeshRemainingDistance(agent.path.corners) - chaseRange;
+            
+                ChasePlayer();
+                
+
+
+            
         }
         else
         {
@@ -190,7 +197,7 @@ public class EnemyBase : MonoBehaviour
         if (multipleAnimations)
             animator.SetFloat("walkType", walkNum);
 
-        if (GetPlayerDistance() <= _attackRange)
+        if (GetPlayerDistance() <= _attackRange || NavMeshRemainingDistance(agent.path.corners) >= chaseRange)
         {
             animator.SetBool("isWalking", false);
             agent.isStopped = true;

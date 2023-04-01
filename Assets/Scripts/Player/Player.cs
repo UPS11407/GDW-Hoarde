@@ -39,7 +39,11 @@ public class Player : MonoBehaviour
     string lastDamageCreature;
 
     public bool hasNV;
-    
+
+    public AudioSource ringingSource;
+    public AudioSource explosionSource;
+    public AudioClip initialRing;
+    public AudioClip fadeOutRing;
 
     void Start()
     {
@@ -224,7 +228,7 @@ public class Player : MonoBehaviour
         if (Time.time > meleeTime + meleeDelay && stamina >= staminaToMelee)
         {
             meleeTime = Time.time;
-
+            StartCoroutine(ThinkFastChuckleNuts(2, 0.5f));
             Debug.Log("Punch");
 
             TakeStamina(staminaToMelee);
@@ -232,7 +236,7 @@ public class Player : MonoBehaviour
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
             {
-
+                
                 if (hit.transform.tag == "Enemy")
                 {
 
@@ -241,6 +245,33 @@ public class Player : MonoBehaviour
                 }
             }
         }
+    }
+    
+    public IEnumerator ThinkFastChuckleNuts(int fadeOutLoopAmount, float volume)
+    {
+        ringingSource.volume = volume;
+        explosionSource.volume = volume;
+
+        ringingSource.enabled = true;
+        explosionSource.enabled = true;
+
+        explosionSource.Play();
+
+
+        int repeatNo = 0;
+        ringingSource.clip = initialRing;
+        while (repeatNo <= fadeOutLoopAmount)
+        {
+            ringingSource.Play();
+            repeatNo++;
+            yield return new WaitForSeconds(ringingSource.clip.length);
+        }
+        ringingSource.clip = fadeOutRing;
+        yield return new WaitForSeconds(ringingSource.clip.length);
+
+        ringingSource.enabled = false;
+        explosionSource.enabled = false;
+
     }
 
     public void UpdateBindings()
