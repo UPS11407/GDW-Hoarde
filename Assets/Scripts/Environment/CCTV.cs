@@ -14,7 +14,6 @@ public class CCTV : MonoBehaviour
     {
         player = GameObject.Find("Player");
         restRotation = transform.forward;
-        Debug.Log(restRotation);
     }
 
     // Update is called once per frame

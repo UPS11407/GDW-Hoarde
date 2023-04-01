@@ -258,7 +258,6 @@ public class PlayerControlsManager : MonoBehaviour
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
-                Debug.Log("This one");
             }
         }
         if (sprinting && speed > 7 && !IsGrounded())
@@ -268,7 +267,6 @@ public class PlayerControlsManager : MonoBehaviour
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
-                Debug.Log("This one");
             }
         }
         else if (sprinting && speed < 1 && resetWHileSprinting)
@@ -276,7 +274,6 @@ public class PlayerControlsManager : MonoBehaviour
             player.timeSinceUsedStamina = 0;
             resetWHileSprinting = false;
             UpdateAnimation(false);
-            Debug.Log("This one");
         }
 
         if (sprinting && (!(player.stamina > 0) || !canSprint))
@@ -284,7 +281,6 @@ public class PlayerControlsManager : MonoBehaviour
             sprinting = false;
             canSprint = false;
             UpdateAnimation(false);
-            Debug.Log("This one");
         }
 
         if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress && IsGrounded())
@@ -292,7 +288,6 @@ public class PlayerControlsManager : MonoBehaviour
             sprinting = true;
             ResetSprintVariables(false);
             UpdateAnimation(true);
-            Debug.Log("This one");
         }
 
         if (sprinting && canSprint)
@@ -676,7 +671,6 @@ public class PlayerControlsManager : MonoBehaviour
 
         maxLerpTimeWeaponRun = sprinting ? timeToUnreadyWeapon : timeToReadyWeapon;
         timeToLerpWeaponRun = 0;
-        Debug.Log("This one");
     }
 
     void ToggleFlashlight()

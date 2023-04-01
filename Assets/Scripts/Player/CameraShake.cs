@@ -11,7 +11,6 @@ public class CameraShake : MonoBehaviour
 
         while (i < duration)
         {
-            Debug.Log("Happen");
             float xPos = Random.Range(-1.0f, 1.0f) * strength;
             float yPos = Random.Range(-1.0f, 1.0f) * strength;
             float zPos = Random.Range(-1.0f, 1.0f) * strength;

@@ -228,8 +228,6 @@ public class Player : MonoBehaviour
         if (Time.time > meleeTime + meleeDelay && stamina >= staminaToMelee)
         {
             meleeTime = Time.time;
-            
-            Debug.Log("Punch");
 
             TakeStamina(staminaToMelee);
             timeSinceUsedStamina = 0;
@@ -299,7 +297,6 @@ public class Player : MonoBehaviour
     void Knockback(GameObject knockbacker, float knockbackStrength)
     {
         gameObject.GetComponent<Rigidbody>().velocity = (transform.position - knockbacker.transform.position).normalized * knockbackStrength;
-        Debug.Log(gameObject.GetComponent<Rigidbody>().velocity);
     }
 
     public IEnumerator Knockback(float duration, GameObject knockbacker, float knockBackStrength)

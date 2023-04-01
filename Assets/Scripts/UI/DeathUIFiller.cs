@@ -14,7 +14,6 @@ public class DeathUIFiller : MonoBehaviour
         counter = GameObject.Find("Counter").GetComponent<Counters>();
 
         killCount.text = counter.GetKills().ToString();
-        //Debug.Log(counter.GetTime());
         timeSurvived.text = (counter.GetTime() / 60f).ToString("0.##") + " minutes";
         deathResult.text = counter.GetKilledBy().ToString();
         Destroy(counter.gameObject);

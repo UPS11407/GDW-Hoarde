@@ -195,17 +195,14 @@ public class Inventory : MonoBehaviour
                     if (slot.slotGunType == GunType.PISTOL && weaponManager.GetActiveGun() == 1)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
-                        Debug.Log(weaponManager.GetActiveGun());
                     }
                     else if (slot.slotGunType == GunType.RIFLE && weaponManager.GetActiveGun() == 2)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
-                        Debug.Log(weaponManager.GetActiveGun());
                     }
                     else if (slot.slotGunType == GunType.RAILGUN && weaponManager.GetActiveGun() == 3)
                     {
                         slot.transform.parent.gameObject.SetActive(true);
-                        Debug.Log(weaponManager.GetActiveGun());
                     }
                 }
             }

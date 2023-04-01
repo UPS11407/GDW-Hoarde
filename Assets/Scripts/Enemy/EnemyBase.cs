@@ -64,7 +64,6 @@ public class EnemyBase : MonoBehaviour
     }
     void PlaySound()
     {
-        Debug.Log("sound");
         StartCoroutine(Groan(Random.Range(8, 30)));
     }
 
@@ -89,7 +88,6 @@ public class EnemyBase : MonoBehaviour
             PlaySound();
         }
 
-        //Debug.Log(NavMeshRemainingDistance(agent.path.corners));
         /*
         if (knockBacked)
         {
@@ -98,7 +96,6 @@ public class EnemyBase : MonoBehaviour
             rigid.constraints = RigidbodyConstraints.None;
             rigid.velocity = -transform.forward * knockBackStrength;
             knockBacked = false;
-            Debug.Log(rigid.velocity);
             //RagdollEnabler.EnableRagdoll();
         }
         else */
@@ -272,7 +269,6 @@ public class EnemyBase : MonoBehaviour
     IEnumerator Slow(float slowDuration)
     {
         slowed = true;
-        Debug.Log("Slowed");
         agent.speed = _speed * slowSpeedModifier;
         
         yield return new WaitForSeconds(slowDuration);
@@ -283,7 +279,6 @@ public class EnemyBase : MonoBehaviour
     /*
     public void Knockback()
     {
-        Debug.Log("PUNCHED");
         knockBacked = true;
         StartCoroutine(KnockbackLimiter(2));
     }*/

@@ -16,7 +16,6 @@ public class Counters : MonoBehaviour
     private void FixedUpdate()
     {
         time += Time.deltaTime;
-        //Debug.Log(time);
     }
 
     public void AddKill(int val)

@@ -268,8 +268,6 @@ public class Gun : MonoBehaviour
         shootTime = Time.time + modDelay;
 
         UpdateDisplay();
-
-        //Debug.Log("Ammo " + maxAmmo);
     }
 
     public void ToggleFire(bool toggle)
@@ -321,15 +319,7 @@ public class Gun : MonoBehaviour
                         {
                             if (hit.transform.tag == "Enemy")
                             {
-
                                 hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage + damage * (chargeTime / 100) * railGunMod.chargeUpModifier);
-                                
-                                Debug.Log($"Added Damage: {damage * (chargeTime / 100) * railGunMod.chargeUpModifier}");
-                                Debug.Log($"ChargeTime: { (chargeTime)}");
-                                Debug.Log($"Charge: { (chargeTime / 100)}");
-                                Debug.Log($"railGunMod.chargeUpModifier: { railGunMod.chargeUpModifier}");
-
-
                             }
                             
                             LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity, gameObject.transform);
