@@ -10,6 +10,7 @@ public class Gun : MonoBehaviour
     public bool canShoot = true;
     public bool canReload = true;
     public bool canSwap = true;
+    public bool isReloading = false;
 
     //public GunStatScriptableObjects pistolStats;
     //public GunStatScriptableObjects rifleStats;
@@ -458,6 +459,7 @@ public class Gun : MonoBehaviour
     {
         canShoot = false;
         canReload = false;
+        isReloading = true;
 
         int amountToReload = maxAmmo - currentAmmo;
 
@@ -472,6 +474,7 @@ public class Gun : MonoBehaviour
         
         canShoot = true;
         canReload = true;
+        isReloading = false;
         currentAmmo += amountToReload;
         inventory.AddAmmo(-amountToReload, inventory.selectedAmmo);
 

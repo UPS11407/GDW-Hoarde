@@ -258,6 +258,7 @@ public class PlayerControlsManager : MonoBehaviour
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
+                Debug.Log("This one");
             }
         }
         if (sprinting && speed > 7 && !IsGrounded())
@@ -267,6 +268,7 @@ public class PlayerControlsManager : MonoBehaviour
             if (!sprintingAnim)
             {
                 UpdateAnimation(true);
+                Debug.Log("This one");
             }
         }
         else if (sprinting && speed < 1 && resetWHileSprinting)
@@ -274,6 +276,7 @@ public class PlayerControlsManager : MonoBehaviour
             player.timeSinceUsedStamina = 0;
             resetWHileSprinting = false;
             UpdateAnimation(false);
+            Debug.Log("This one");
         }
 
         if (sprinting && (!(player.stamina > 0) || !canSprint))
@@ -281,6 +284,7 @@ public class PlayerControlsManager : MonoBehaviour
             sprinting = false;
             canSprint = false;
             UpdateAnimation(false);
+            Debug.Log("This one");
         }
 
         if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress && IsGrounded())
@@ -288,6 +292,7 @@ public class PlayerControlsManager : MonoBehaviour
             sprinting = true;
             ResetSprintVariables(false);
             UpdateAnimation(true);
+            Debug.Log("This one");
         }
 
         if (sprinting && canSprint)
@@ -303,14 +308,13 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
-            Debug.Log("No shoot");
         }
         else
         {
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
         }
 
-        if (sprinting && !weaponManager.guns[weaponManager.activeGun].canReload)
+        if (sprinting && weaponManager.guns[weaponManager.activeGun].isReloading)
         {
             sprinting = false;
             canSprint = false;
@@ -672,6 +676,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         maxLerpTimeWeaponRun = sprinting ? timeToUnreadyWeapon : timeToReadyWeapon;
         timeToLerpWeaponRun = 0;
+        Debug.Log("This one");
     }
 
     void ToggleFlashlight()
@@ -705,7 +710,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void AimDown(bool buttonToggle)
     {
-        if (!weaponManager.guns[weaponManager.activeGun].isUnarmed)
+        if (!weaponManager.guns[weaponManager.activeGun].isUnarmed && !weaponManager.guns[weaponManager.activeGun].isReloading)
         {
             if (buttonToggle)
             {
@@ -715,7 +720,6 @@ public class PlayerControlsManager : MonoBehaviour
                 moveSpeed = 4f;
                 waitingToAim = true;
                 canSprint = false;
-                DoSprintStuff(false);
             }
             else
             {
