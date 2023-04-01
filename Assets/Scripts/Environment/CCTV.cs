@@ -9,6 +9,9 @@ public class CCTV : MonoBehaviour
     float maxXRotation = 60.0f;
     float maxYRotation = 90.0f;
     float maxRotation = 75.0f;
+
+    public bool seesPlayer;
+
     // Start is called before the first frame update
     void Start()
     {
@@ -26,16 +29,16 @@ public class CCTV : MonoBehaviour
         Debug.Log(Vector3.Angle(restRotation, dir2P));
         if (rayhit.collider != null && Vector3.Angle(restRotation, dir2P) <= maxRotation)
         {
-            
+            seesPlayer = true;
 
             Quaternion target = Quaternion.LookRotation(dir2P);
             transform.rotation = Quaternion.Lerp(transform.rotation, target, 0.1f);
             //Vector3 currentRotation = transform.localRotation.eulerAngles;
             //transform.rotation = Quaternion.Euler(-Mathf.Clamp(currentRotation.x, -maxXRotation, maxXRotation), currentRotation.y, 0);
             //Debug.Log(currentRotation);
-            
-            
+
+
         }
-        else Debug.Log("Not Seen");
+        else seesPlayer = false;
     }
 }
