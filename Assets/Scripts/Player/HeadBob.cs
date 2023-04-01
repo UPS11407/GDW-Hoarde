@@ -49,11 +49,11 @@ public class HeadBob : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        if (!isEnabled) return; //if headbob isn't enabled.
+        if (!isEnabled || playerControlsManager.aiming) return; //if headbob isn't enabled.
 
         CheckMotion();
 
-        if (playerControlsManager.speed < toggleSpeed) ResetPos();
+        if (playerControlsManager.speed < toggleSpeed) ResetPos(returnSpeed * Time.deltaTime);
 
         _camera.LookAt(FocusTarget());
     }
@@ -61,6 +61,11 @@ public class HeadBob : MonoBehaviour
     {
         if (playerControlsManager.speed < toggleSpeed) return;
         if (!playerControlsManager.IsGrounded()) return;
+        if (playerControlsManager.GetLerpTimeADS() < 0.9)
+        {
+            ResetPos(playerControlsManager.GetLerpTimeADS());
+            return;
+        }
 
         PlayMotion(FootStepMotion());
     }
@@ -88,10 +93,10 @@ public class HeadBob : MonoBehaviour
         return pos;
     }
 
-    void ResetPos() //this method allows the camera to go back to it's local origin after movement
+    void ResetPos(float returnSpeed) //this method allows the camera to go back to it's local origin after movement
     {
         if (_camera.localPosition == startPos) return;
-        _camera.localPosition = Vector3.Lerp(_camera.localPosition, startPos, returnSpeed * Time.deltaTime);
+        _camera.localPosition = Vector3.Lerp(_camera.localPosition, startPos, returnSpeed);
         timeSinceStart = 0;
     }
 

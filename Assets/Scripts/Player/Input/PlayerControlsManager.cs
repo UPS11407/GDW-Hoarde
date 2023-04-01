@@ -103,11 +103,29 @@ public class PlayerControlsManager : MonoBehaviour
 
     public bool sprintingAnim;
 
+
+
+    float prevSpread;
     public bool aiming;
     public bool waitingToAim;
 
+    public float timeToADSPistol;
+    public float timeToADSRifle;
+
     float timeToLerpADS;
     float maxLerpTimeADS;
+
+    public Transform pistol;
+    public Transform rifle;
+    public Transform railgun;
+    public Transform weaponCam;
+    public GameObject crosshair;
+
+    Vector3 startPosADS;
+
+    public Vector3 pistolADSPos;
+    public Vector3 rifleADSPos;
+    public Vector3 railgunADSPos;
 
     //NightVision gunCameraNV;
 
@@ -285,6 +303,7 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
+            Debug.Log("No shoot");
         }
         else
         {
@@ -298,11 +317,8 @@ public class PlayerControlsManager : MonoBehaviour
         }
 
         Sprint();
-        
 
-
-
-        if (timeToLerpWeaponRun > maxLerpTimeWeaponRun && weaponManager.guns[weaponManager.activeGun].canReload && !sprinting)
+        if (timeToLerpWeaponRun > maxLerpTimeWeaponRun && !sprinting)
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = true;
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
@@ -330,40 +346,88 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (waitingToAim && !sprintingAnim)
         {
+            timeToLerpADS = 0;
             waitingToAim = false;
             aiming = true;
+            startPosADS = weaponCam.localPosition;
+            weaponManager.guns[weaponManager.activeGun].canShoot = true;
             weaponManager.guns[weaponManager.activeGun].canReload = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
         }
+
+        if (weaponManager.activeGun == 2 || weaponManager.activeGun == 3)
+        {
+            maxLerpTimeADS = timeToADSRifle;
+        }
+        else
+        {
+            maxLerpTimeADS = timeToADSPistol;
+        }
+
+        if (aiming)
+        {
+            DoADSAnimation();
+        }
+
+        if (!(timeToLerpADS > maxLerpTimeADS)) timeToLerpADS += Time.deltaTime;
+
     }
+
+    void DoADSAnimation()
+    {
+        if (weaponManager.activeGun == 3)
+        {
+            weaponCam.localPosition = Vector3.Lerp(startPosADS, railgunADSPos, GetLerpTimeADS());
+            railgun.transform.localRotation = Quaternion.Euler(walkRotation);
+            railgun.transform.localPosition = walkPosition;
+        }
+        else if(weaponManager.activeGun == 2)
+        {
+            weaponCam.localPosition = Vector3.Lerp(startPosADS, rifleADSPos, GetLerpTimeADS());
+            rifle.transform.localRotation = Quaternion.Euler(walkRotation);
+            rifle.transform.localPosition = walkPosition;
+        }
+        else if (weaponManager.activeGun == 1)
+        {
+            weaponCam.localPosition = Vector3.Lerp(startPosADS, pistolADSPos, GetLerpTimeADS());
+            pistol.transform.localRotation = Quaternion.Euler(pistolWalkRotation);
+            pistol.transform.localPosition = pistolWalkPosition;
+        }
+    }
+
+    public float GetLerpTimeADS()
+    {
+        return timeToLerpADS / maxLerpTimeADS;
+    }
+
 
     void DoRunAnimation(bool sprinting)
     {
         if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && speed > 7)
         {
-            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTime());
-            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTime()));
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTimeRun());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTimeRun()));
             sprintingAnim = true;
         }
         else if (weaponManager.activeGun == 1 && sprinting && speed > 7)
         {
-            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTime());
-            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTime()));
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTimeRun());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTimeRun()));
             sprintingAnim = true;
         }
         else if (weaponManager.activeGun == 2 || weaponManager.activeGun == 3)
         {
-            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, walkPosition, GetLerpTime());
-            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, walkRotation, GetLerpTime()));
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, walkPosition, GetLerpTimeRun());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, walkRotation, GetLerpTimeRun()));
         }
         else if (weaponManager.activeGun == 1)
         {
-            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolWalkPosition, GetLerpTime());
-            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolWalkRotation, GetLerpTime()));
+            weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolWalkPosition, GetLerpTimeRun());
+            weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolWalkRotation, GetLerpTimeRun()));
         }
     }
 
-    float GetLerpTime()
+    float GetLerpTimeRun()
     {
         return timeToLerpWeaponRun / maxLerpTimeWeaponRun;
     }
@@ -645,17 +709,30 @@ public class PlayerControlsManager : MonoBehaviour
         {
             if (buttonToggle)
             {
+                crosshair.SetActive(false);
+                prevSpread = weaponManager.guns[weaponManager.activeGun].spread;
+                weaponManager.guns[weaponManager.activeGun].spread = 0;
+                moveSpeed = 4f;
                 waitingToAim = true;
                 canSprint = false;
                 DoSprintStuff(false);
             }
             else
             {
+                weaponManager.guns[weaponManager.activeGun].spread = prevSpread;
+
+                moveSpeed = 6f;
+                crosshair.SetActive(true);
                 waitingToAim = false;
                 aiming = false;
                 weaponManager.guns[weaponManager.activeGun].canReload = true;
                 weaponManager.guns[weaponManager.activeGun].canSwap = true;
                 canSprint = true;
+                timeToLerpADS = 0;
+
+                pistol.transform.localRotation = Quaternion.Euler(pistolWalkRotation);
+                rifle.transform.localRotation = Quaternion.Euler(walkRotation);
+                railgun.transform.localRotation = Quaternion.Euler(walkRotation);
             }
         }
     }

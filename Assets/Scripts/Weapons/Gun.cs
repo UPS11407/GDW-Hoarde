@@ -55,7 +55,7 @@ public class Gun : MonoBehaviour
     float damage;
     float bulletVelocity;
     int bulletsPerShot;
-    float spread;
+    public float spread;
 
     float recoil;
 
@@ -387,6 +387,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator SpawnLine(LineRenderer line, RaycastHit hit)
     {
+        line.gameObject.layer = 10;
         float time = 0;
         line.SetPosition(0, line.transform.position);
         line.SetPosition(1, hit.point);
@@ -407,6 +408,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
     {
+        trail.gameObject.layer = 10;
         float time = 0;
         Vector3 startPos = trail.transform.position;
         while (time <= trailDuration)
