@@ -145,6 +145,7 @@ public class PlayerControlsManager : MonoBehaviour
         Physics.gravity = new Vector3(0, -22.0f, 0);
 
         timeToLerpWeaponRun = maxLerpTimeWeaponRun + 1;
+        timeToLerpADS = maxLerpTimeADS + 1;
     }
 
     void Start()
@@ -368,7 +369,7 @@ public class PlayerControlsManager : MonoBehaviour
             DoADSAnimation();
         }
 
-        if (!(timeToLerpADS > maxLerpTimeADS)) timeToLerpADS += Time.deltaTime;
+        if (!(timeToLerpADS > maxLerpTimeADS)) timeToLerpADS += Time.fixedDeltaTime;
 
     }
 

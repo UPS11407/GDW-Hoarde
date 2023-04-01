@@ -59,13 +59,13 @@ public class HeadBob : MonoBehaviour
     }
     void CheckMotion() //this method checks to see if the player is moving and isnt on the ground
     {
-        if (playerControlsManager.speed < toggleSpeed) return;
-        if (!playerControlsManager.IsGrounded()) return;
-        if (playerControlsManager.GetLerpTimeADS() < 0.9)
+        if (playerControlsManager.GetLerpTimeADS() < 1)
         {
             ResetPos(playerControlsManager.GetLerpTimeADS());
             return;
         }
+        if (playerControlsManager.speed < toggleSpeed) return;
+        if (!playerControlsManager.IsGrounded()) return;
 
         PlayMotion(FootStepMotion());
     }
