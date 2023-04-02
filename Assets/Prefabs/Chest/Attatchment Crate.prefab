@@ -346,7 +346,7 @@ GameObject:
   - component: {fileID: 134229966084788319}
   - component: {fileID: 2101411357355894580}
   m_Layer: 8
-  m_Name: AmmoCrate
+  m_Name: Attatchment Crate
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

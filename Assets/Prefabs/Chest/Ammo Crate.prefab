@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 119776437387451022}
   - component: {fileID: 864463665209953917}
   - component: {fileID: 3410508751502919009}
+  - component: {fileID: -644801934523926142}
   m_Layer: 8
   m_Name: Ammo Crate
   m_TagString: Untagged
@@ -62,6 +63,22 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLocation: {fileID: 0}
+--- !u!208 &-644801934523926142
+NavMeshObstacle:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 784286753363099700}
+  m_Enabled: 1
+  serializedVersion: 3
+  m_Shape: 1
+  m_Extents: {x: 0.505, y: 0.26, z: 0.47}
+  m_MoveThreshold: 0.1
+  m_Carve: 0
+  m_CarveOnlyStationary: 1
+  m_Center: {x: 0, y: 0, z: 0.42}
+  m_TimeToStationary: 0.5
 --- !u!1 &2868006267610201935
 GameObject:
   m_ObjectHideFlags: 0

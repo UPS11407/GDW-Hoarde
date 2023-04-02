@@ -8,6 +8,7 @@ public class AmmoBox : MonoBehaviour, IInteractible
     GameObject player;
     AmmoType ammo;
     public GameObject spawnLocation;
+    bool interactible;
 
     void Start()
     {
@@ -41,9 +42,16 @@ public class AmmoBox : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        var inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
+        if (interactible)
+        {
+            var inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-        inventory.AddAmmo(Random.Range(20, 40), ammo);
-        inventory.weaponManager.guns[inventory.weaponManager.activeGun].UpdateDisplay();
+            inventory.AddAmmo(Random.Range(20, 40), ammo);
+            inventory.weaponManager.guns[inventory.weaponManager.activeGun].UpdateDisplay();
+
+            interactible = false;
+            Destroy(gameObject, 1.5f);
+            
+        }
     }
 }
