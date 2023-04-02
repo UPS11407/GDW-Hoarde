@@ -85,11 +85,10 @@ Shader "Unlit/ScanLineShader"
                 // sample the texture
                 fixed4 col = float4(texR.r, texG.g, texB.b, 1);
                 float4 scanLine = tex2D(_ScanLineTex, i.uv * _ScreenParams.y / _ScanLineZoom);
-                float luminosity = saturate(lerp(0.0125,Luminance(col.rgb), _LuminaStrength));
+                float luminosity = lerp(0.0125,Luminance(col.rgb), _LuminaStrength);
                 //scanLine += i.diff * (1-_ScanLineStr)
                 col.rgb = _NVColor.rgb * luminosity * _NVStrength;
 
-                luminosity;
                 return lerp(col, col * scanLine, _ScanLineStr);
             }
             ENDCG

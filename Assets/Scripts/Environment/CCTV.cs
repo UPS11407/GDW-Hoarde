@@ -26,7 +26,7 @@ public class CCTV : MonoBehaviour
         Vector3 dir2P = (player.transform.position - gameObject.transform.position).normalized;
         Physics.Raycast(origin: transform.position, direction: dir2P, out rayhit, maxDistance: 30.0f, layerMask: 1 << 9);
         //Debug.DrawRay(start: Camera.main.transform.position, dir: Camera.main.transform.forward * 10, Color.red, 60);
-        Debug.Log(Vector3.Angle(restRotation, dir2P));
+        //Debug.Log(Vector3.Angle(restRotation, dir2P));
         if (rayhit.collider != null && Vector3.Angle(restRotation, dir2P) <= maxRotation)
         {
             seesPlayer = true;

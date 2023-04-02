@@ -2,7 +2,7 @@ Shader "Custom/Rim2"
 {
     Properties{
       
-      _Color("Color", Color) = (0,0,0,0)
+      _MainTex("Texture", 2D) = "white" {}
 
       _RimColor("Rim Color", Color) = (0.26,0.19,0.16,0.5)
       _RimPower("Rim Power", Range(0.5,8.0)) = 3.0
@@ -22,12 +22,11 @@ Shader "Custom/Rim2"
             float3 viewDir;
         };
         sampler2D _MainTex;
-        float4 _Color;
         float4 _RimColor;
         float _RimPower;
         float _Transparency;
         void surf(Input IN, inout SurfaceOutput o) {
-            o.Albedo = _Color.rgb;
+            o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;
             half rim = 1.0 - saturate(dot(normalize(IN.viewDir), o.Normal));
             o.Emission = _RimColor.rgb * pow(rim, _RimPower);
             o.Alpha = pow(rim, _RimPower) * _Transparency;
