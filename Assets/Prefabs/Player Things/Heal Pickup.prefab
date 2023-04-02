@@ -11,6 +11,7 @@ GameObject:
   - component: {fileID: 6316280865839202}
   - component: {fileID: 6316280865839231}
   - component: {fileID: 6316280865839203}
+  - component: {fileID: 4464403732144424321}
   m_Layer: 0
   m_Name: Heal Pickup
   m_TagString: Untagged
@@ -61,6 +62,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7168357fc53ca6349b93329cf8adc309, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!95 &4464403732144424321
+Animator:
+  serializedVersion: 4
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6316280865839230}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 9100000, guid: c0c0b10e72a753f48b4e5da4389ffca4, type: 2}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 1
+  m_LinearVelocityBlending: 0
+  m_StabilizeFeet: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &4596816717898707904
 GameObject:
   m_ObjectHideFlags: 0
