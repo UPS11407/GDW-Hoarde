@@ -13,8 +13,8 @@ Alexander Phillips: A multi-faceted dev that has worked on various programming, 
 Ethan Zafra: Mainly a programmer that works on the game's gameplay scripts. In the previous semester, I've tried working on lighting to improve the level's visual appearance.  
 
 Contribution for group assignment:\
-Alexander Phillips: Character Outlines, Particles and Shadows\
-Ethan Zafra: Enemy Decals and Texture Filtering.
+Alexander Phillips: Character Rim Lighting, Vertex Extrusion, Outlines, Particles and Texture Normal Maps\
+Ethan Zafra: Enemy Decals, Night Vision, Scan Lines, Lens Distorion, Color Grading and Specular Illumination.
 
 Group Assignment explanation:\
 Decals: Decals were added on top of the main enemy texture when a bool is true. A seperate script that is used for the enemy behavior turns on the bool when the enemy is damaged.\
