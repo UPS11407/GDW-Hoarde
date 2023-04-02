@@ -97,6 +97,7 @@ public class Bloated : EnemyBase
         for (float i = 0; i <= 0.4; i += Time.deltaTime)
         {
             _material.SetFloat("_Amount", i);
+            _material.SetColor("_Color", Color.red);
         }
     }
 
