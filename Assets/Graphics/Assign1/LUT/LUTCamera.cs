@@ -5,7 +5,7 @@ using UnityEngine;
 public class LUTCamera : MonoBehaviour
 {
     //public Shader myShader = null;
-    [SerializeField] Material m_renderMaterial;
+    public Material m_renderMaterial;
     
     
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
