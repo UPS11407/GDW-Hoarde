@@ -378,7 +378,7 @@ public class Gun : MonoBehaviour
 
     IEnumerator SpawnLine(LineRenderer line, RaycastHit hit)
     {
-        line.gameObject.layer = 10;
+        //line.gameObject.layer = 10;
         float time = 0;
         line.SetPosition(0, line.transform.position);
         line.SetPosition(1, hit.point);

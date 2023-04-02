@@ -6,6 +6,7 @@ public class NightVision : MonoBehaviour
 {
     //[SerializeField] Material m_renderMaterial;
     [SerializeField] Material scanLineMaterial;
+    
 
 
     private void OnRenderImage(RenderTexture source, RenderTexture destination)
