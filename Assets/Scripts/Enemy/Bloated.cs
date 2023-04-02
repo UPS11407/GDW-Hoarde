@@ -8,11 +8,14 @@ public class Bloated : EnemyBase
     [SerializeField] float _explosionRange;
     [SerializeField] float _explosionDelay;
     [SerializeField] GameObject fireEffect;
-
+    private Material _material;
     [SerializeField] AnimationCurve damageCurve;  
     bool triggered = false;
-    
 
+    private void Start()
+    {
+        _material = GetComponentInChildren<SkinnedMeshRenderer>().material;
+    }
     private void Update()
     {
         EnemyUpdate();
@@ -45,7 +48,7 @@ public class Bloated : EnemyBase
         triggered = true;
         //attacking = true;
         //animator.SetBool("isAttacking", true);
-
+        PufferFish();
         yield return new WaitForSeconds(_explosionDelay);
         //attacking = false;
         //animator.SetBool("isAttacking", false);
@@ -89,5 +92,13 @@ public class Bloated : EnemyBase
         }
     }
 
+    void PufferFish()
+    {
+        for (float i = 0; i <= 0.4; i += Time.deltaTime)
+        {
+            _material.SetFloat("_Amount", i);
+            _material.SetColor("_Color", Color.red);
+        }
+    }
 
 }

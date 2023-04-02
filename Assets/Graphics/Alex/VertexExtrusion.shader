@@ -4,6 +4,7 @@ Shader "Alexander/VertexExtrusion"
     {
         _MainTex ("Albedo (RGB)", 2D) = "white" {}
         _Amount ("Extrusion Amount", Range(0,1)) = .001
+        _Color("Color", Color) = (1,1,1,1)
     }
     SubShader
     {
@@ -26,6 +27,7 @@ Shader "Alexander/VertexExtrusion"
         };
         sampler2D _MainTex;
         half _Amount;
+        fixed4 _Color;
 
         void vert(inout appdata v) {
             v.vertex.xyz += v.normal * _Amount;
@@ -33,6 +35,7 @@ Shader "Alexander/VertexExtrusion"
         void surf (Input IN, inout SurfaceOutput o)
         {
             o.Albedo = tex2D(_MainTex, IN.uv_MainTex).rgb;
+            o.Emission = _Color;
         }
         ENDCG
     }
