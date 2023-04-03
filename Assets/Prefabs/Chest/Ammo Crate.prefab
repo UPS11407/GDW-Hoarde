@@ -63,6 +63,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   spawnLocation: {fileID: 0}
+  standard: {fileID: 2100000, guid: 27ca15d7f0a0c9748bef79f00b78c06a, type: 2}
+  incindiary: {fileID: 2100000, guid: 94b4e25c74a8b0e43ab005aaf5e92c89, type: 2}
+  slow: {fileID: 2100000, guid: 8a076d9e51e59b248967b1d10a607348, type: 2}
+  explosive: {fileID: 2100000, guid: 70c17e5969e55fb4abdb95be02b23392, type: 2}
 --- !u!208 &-644801934523926142
 NavMeshObstacle:
   m_ObjectHideFlags: 0
