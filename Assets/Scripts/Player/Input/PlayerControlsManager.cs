@@ -49,7 +49,7 @@ public class PlayerControlsManager : MonoBehaviour
 
 
     public bool enableLook = true;
-    bool onStairs = false;
+    public bool onStairs = false;
 
     public AudioClip[] walkSounds;
     public AudioClip sprintSound;
@@ -232,7 +232,7 @@ public class PlayerControlsManager : MonoBehaviour
 
         if (enableLook) DoLook(mouseSensitivity);
 
-        if (speed >= 5.5 && IsGrounded() && !sprinting)
+        if (speed >= 5.5 && (IsGrounded() || onStairs) && !sprinting)
         {
             if (!audioSource.isPlaying)
             {
@@ -247,7 +247,7 @@ public class PlayerControlsManager : MonoBehaviour
             StartCoroutine(WaitForJump());
         }
 
-        if (sprinting && speed > 7 && IsGrounded())
+        if (sprinting && speed > 7 && (IsGrounded() || onStairs))
         {
             player.TakeStamina(staminaToRun * Time.smoothDeltaTime);
             ResetSprintVariables(false);
@@ -261,7 +261,7 @@ public class PlayerControlsManager : MonoBehaviour
                 UpdateAnimation(true);
             }
         }
-        if (sprinting && speed > 7 && !IsGrounded())
+        if (sprinting && speed > 7 && !(IsGrounded() || onStairs))
         {
             player.TakeStamina(staminaToRun / 1.5f * Time.smoothDeltaTime);
             ResetSprintVariables(true);
@@ -284,7 +284,7 @@ public class PlayerControlsManager : MonoBehaviour
             UpdateAnimation(false);
         }
 
-        if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress && IsGrounded())
+        if (!sprinting && canSprint && playerInput.actions["Sprint"].inProgress && (IsGrounded() || onStairs))
         {
             sprinting = true;
             ResetSprintVariables(false);
@@ -623,10 +623,6 @@ public class PlayerControlsManager : MonoBehaviour
         {
             onStairs = true;
         }
-        else if (collision.gameObject.layer == 6)
-        {
-            onStairs = false;
-        }
         else 
         {
             onStairs = false;
@@ -639,7 +635,7 @@ public class PlayerControlsManager : MonoBehaviour
         resetWHileSprinting = true;
         if (keyPress)
         {
-            if (IsGrounded())
+            if (IsGrounded() || onStairs)
             {
                 sprinting = true;
             }

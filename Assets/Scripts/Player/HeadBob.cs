@@ -65,7 +65,7 @@ public class HeadBob : MonoBehaviour
             return;
         }
         if (playerControlsManager.speed < toggleSpeed) return;
-        if (!playerControlsManager.IsGrounded()) return;
+        if (!(playerControlsManager.IsGrounded() || playerControlsManager.onStairs)) return;
 
         PlayMotion(FootStepMotion());
     }
