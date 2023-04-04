@@ -50,6 +50,7 @@ public class Player : MonoBehaviour
         stamina = maxStamina;
         currentHP = maxHP;
         UpdateHealthDisplay();
+        UpdateChargeDisplay();
         hurtIndicator = GetComponent<HurtIndicator>();
         playerControlsManager = GetComponent<PlayerControlsManager>();
         bindings = new string[4];
@@ -189,7 +190,7 @@ public class Player : MonoBehaviour
 
     void UpdateChargeDisplay()
     {
-        GetComponent<HealthChargeUI>().SetCharge((int)healCharge);
+        GetComponent<HealthUI>().SetCharge(healCharge);
     }
 
     /// <summary>

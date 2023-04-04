@@ -17,7 +17,7 @@ public class Generator : MonoBehaviour, IInteractible
 
     private void Awake()
     {
-        animator = gameObject.transform.parent.parent.GetComponent<Animator>();
+        animator = gameObject.GetComponent<Animator>();
         spawner.SetActive(false);
         generatorSound = GetComponent<AudioSource>();
         powerDoors = GameObject.FindGameObjectsWithTag("Power Door");
