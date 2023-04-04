@@ -11,6 +11,7 @@ public class PauseMenu : MonoBehaviour
     public GameObject HUD;
     public ControlsMenu controlsMenu;
     public PlayerControlsManager playerControlsManager;
+    public GameObject mainCamera;
 
     PlayerInput playerContr;
 
@@ -19,6 +20,12 @@ public class PauseMenu : MonoBehaviour
         if (dialogueMenu.activeSelf)
         {
             playerControlsManager.talkingTo.EndDialogue();
+            return;
+        }
+
+        if (mainCamera.transform.parent.name != "Camera Parent")
+        {
+            mainCamera.transform.parent.GetComponent<Computer>().ExitMenu();
             return;
         }
 

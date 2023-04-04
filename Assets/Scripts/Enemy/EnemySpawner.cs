@@ -6,7 +6,8 @@ public class EnemySpawner : MonoBehaviour
 {
     public List<GameObject> enemyPrefabs;
     public int maxEnemies = 10;
-    public float spawnDelay;
+    public float spawnDelayMin;
+    public float spawnDelayMax;
     public float enemySpeed = 2.0f;
 
     public GameObject enemyCollection;
@@ -16,7 +17,6 @@ public class EnemySpawner : MonoBehaviour
 
     bool canSpawn = true;
     int enemyIndex = 0;
-    int locationIndex = 0;
 
     void SpawnEnemy(Transform spawnLocation)
     {
@@ -29,16 +29,19 @@ public class EnemySpawner : MonoBehaviour
 
     IEnumerator Spawn()
     {
-        locationIndex = Random.Range(0, 4);
         canSpawn = false;
-        yield return new WaitForSeconds(spawnDelay);
-        if(player.transform.transform.position.y > 5f)
+        yield return new WaitForSeconds(Random.Range(spawnDelayMin, spawnDelayMax));
+
+        for (int i = 0; i < Random.Range(2,5); i++)
         {
-            SpawnEnemy(spawnLocationsSecond[locationIndex]);
-        }
-        else
-        {
-            SpawnEnemy(spawnLocationsFirst[locationIndex]);
+            if (player.transform.transform.position.y > 5f)
+            {
+                SpawnEnemy(spawnLocationsSecond[i]);
+            }
+            else
+            {
+                SpawnEnemy(spawnLocationsFirst[i]);
+            }
         }
             
         canSpawn = true;

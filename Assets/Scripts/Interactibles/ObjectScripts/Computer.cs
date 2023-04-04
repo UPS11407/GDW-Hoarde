@@ -18,7 +18,7 @@ public class Computer : MonoBehaviour, IInteractible
     GameObject temp;
     bool moving = false;
     bool exit = false;
-    bool looking = false;
+    public bool looking = false;
     Transform startTransform;
     float ratio;
     List<GameObject> UIStuffs = new List<GameObject>();
@@ -38,12 +38,6 @@ public class Computer : MonoBehaviour, IInteractible
         UIStuffs.Add(GameObject.Find("Inventory UI"));
         UIStuffs.Add(GameObject.Find("HUD"));
 
-        //obtuse moment
-        //GameObject.Find("Player").GetComponent<WeaponManager>().guns[GameObject.Find("Player").GetComponent<WeaponManager>().GetActiveGun()].canSwap = false;
-
-        //still pretty cumbersome
-        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().GetActiveGun()].enabled = false;
-
         foreach (GameObject obj in UIStuffs)
         {
             obj.SetActive(false);
@@ -54,8 +48,7 @@ public class Computer : MonoBehaviour, IInteractible
         startTransform = cameraObj.transform;
 
         cameraObj.GetComponent<CameraRecoil>().enabled = false;
-        player.GetComponent<PlayerControlsManager>().movementLock = true;
-        player.GetComponent<PlayerControlsManager>().enableLook = false;
+        player.GetComponent<PlayerControlsManager>().playerInput.SwitchCurrentActionMap("Menu");
 
         ratio = 0f;
         Cursor.lockState = CursorLockMode.None;
@@ -80,9 +73,7 @@ public class Computer : MonoBehaviour, IInteractible
         startTransform = cameraObj.transform;
 
         cameraObj.GetComponent<CameraRecoil>().enabled = true;
-        player.GetComponent<PlayerControlsManager>().movementLock = false;
-        player.GetComponent<PlayerControlsManager>().enableLook = true;
-        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().GetActiveGun()].enabled = true;
+        player.GetComponent<PlayerControlsManager>().playerInput.SwitchCurrentActionMap("Player");
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
@@ -125,6 +116,8 @@ public class Computer : MonoBehaviour, IInteractible
             }
         }
     }
+
+    
 
     void LateUpdate()
     {
