@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3cbdb15eb26b9594b86daf3aa356bcdd, type: 3}
   m_Name: SpeedCharge3000
   m_EditorClassIdentifier: 
-  fireMode: 2
+  fireMode: 1
   spreadModifier: 0.75
   fireDelayModifier: 0
   additionalBulletsPerShot: 0

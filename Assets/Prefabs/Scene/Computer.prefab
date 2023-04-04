@@ -365,10 +365,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: You Are Among Us
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 1eb9366a3adb1ae41815064608e0e03b, type: 2}
+  m_sharedMaterial: {fileID: 1848400972728687179, guid: 1eb9366a3adb1ae41815064608e0e03b, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -392,12 +392,12 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 0.05
-  m_fontSizeBase: 0.05
+  m_fontSize: 0.02
+  m_fontSizeBase: 0.02
   m_fontWeight: 400
-  m_enableAutoSizing: 0
-  m_fontSizeMin: 18
-  m_fontSizeMax: 72
+  m_enableAutoSizing: 1
+  m_fontSizeMin: 0.02
+  m_fontSizeMax: 1
   m_fontStyle: 0
   m_HorizontalAlignment: 1
   m_VerticalAlignment: 512
@@ -602,19 +602,10 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus
-    mauris vitae leo mollis, et tristique mauris vestibulum. Donec id volutpat quam.
-    Curabitur egestas ornare varius. Aenean sollicitudin eget sapien non pharetra.
-    Fusce ultrices massa quis massa tincidunt, at mollis metus eleifend. Nunc vestibulum
-    ipsum nec volutpat porttitor. Aenean semper consectetur lacus mattis ultricies.
-    Cras a placerat ex. Fusce auctor enim ligula, id molestie nisl rutrum sed. Vivamus
-    ac dapibus purus. Phasellus venenatis, nisi ac imperdiet vehicula, massa tortor
-    gravida quam, vel vulputate orci elit nec nibh. Ut quam erat, pretium interdum
-    aliquet ac, vehicula at nibh. Vestibulum vehicula ultricies nulla quis facilisis.
-    Proin vestibulum massa sed blandit viverra.
+  m_text: 
   m_isRightToLeft: 0
-  m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
-  m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
+  m_fontAsset: {fileID: 11400000, guid: 920a08e663e71674ebf100bd83c7c2ab, type: 2}
+  m_sharedMaterial: {fileID: -9007149184544441649, guid: 920a08e663e71674ebf100bd83c7c2ab, type: 2}
   m_fontSharedMaterials: []
   m_fontMaterial: {fileID: 0}
   m_fontMaterials: []
@@ -1193,7 +1184,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: f399a6c5f88f24548b7aed45a971c34f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 7094f29b3ae0e9f4298515cc5630a304, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -1475,7 +1466,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d947db2249b9a84c9c61402ac189b46, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  interactText: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus
+  titleText: You Are Among Us
+  msgText: Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec finibus
     mauris vitae leo mollis, et tristique mauris vestibulum. Donec id volutpat quam.
     Curabitur egestas ornare varius. Aenean sollicitudin eget sapien non pharetra.
     Fusce ultrices massa quis massa tincidunt, at mollis metus eleifend. Nunc vestibulum
@@ -1483,8 +1475,9 @@ MonoBehaviour:
     Cras a placerat ex. Fusce auctor enim ligula, id molestie nisl rutrum sed. Vivamus
     ac dapibus purus. Phasellus venenatis, nisi ac imperdiet vehicula, massa tortor
     gravida quam, vel vulputate orci elit nec nibh. Ut quam erat, pretium interdum
-    aliquet ac, vehicula at nibh. Vestibulum vehicula ultricies nulla quis facilisis.
-    Proin vestibulum massa sed blandit viverra.
+    aliquet ac, vehicula at nibh.
+  title: {fileID: 6142971854822115863}
+  msg: {fileID: 2179832089237182207}
   lookAtTransform: {fileID: 7267313398975451470}
 --- !u!1 &7599852133050354088
 GameObject:

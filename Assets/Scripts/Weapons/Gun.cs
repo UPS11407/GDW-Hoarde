@@ -121,7 +121,16 @@ public class Gun : MonoBehaviour
                 if (currentAmmo > 0)
                 {
                     chargeTime += railGunMod.chargeUpTimeRate * Time.deltaTime;
-                    if(!charging) audioSource.PlayOneShot(railgunCharge);
+
+                    if (!charging)
+                    {
+                        if (railGunMod.name == "SpeedCharge3000")
+                        {
+                            audioSource.pitch = 1.5f;
+                        }
+                        audioSource.PlayOneShot(railgunCharge);
+                    }
+                    
                     charging = true;
                 }
                 else if (chargeTime > 100 && (railGunMod.fireMode == RailgunModScriptableObject.FireMode.single || initialChargeDone == true))
@@ -290,6 +299,7 @@ public class Gun : MonoBehaviour
 
         charging = false;
         audioSource.Stop();
+        audioSource.pitch = 0.94f;
 
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {

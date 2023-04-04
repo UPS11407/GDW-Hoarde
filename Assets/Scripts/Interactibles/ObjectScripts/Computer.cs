@@ -1,11 +1,17 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
 
 public class Computer : MonoBehaviour, IInteractible
 {
-    [TextArea(13, 13)]
-    public string interactText;
+    public string titleText;
+
+    [Tooltip("Watch out for text too long to properly display!")]
+    [TextArea(12, 12)]
+    public string msgText;
+    public TextMeshProUGUI title;
+    public TextMeshProUGUI msg;
     public Transform lookAtTransform;
     bool interactable = true;
     GameObject cameraObj;
@@ -16,11 +22,15 @@ public class Computer : MonoBehaviour, IInteractible
     Transform startTransform;
     float ratio;
     List<GameObject> UIStuffs = new List<GameObject>();
+    GameObject player;
 
     private void Start()
     {
         cameraObj = GameObject.Find("Main Camera");
+        player = GameObject.Find("Player");
         GetComponentInChildren<Canvas>().worldCamera = cameraObj.GetComponent<Camera>();
+        title.text = titleText;
+        msg.text = msgText;
     }
 
     public void Interact()
@@ -28,7 +38,13 @@ public class Computer : MonoBehaviour, IInteractible
         UIStuffs.Add(GameObject.Find("Inventory UI"));
         UIStuffs.Add(GameObject.Find("HUD"));
 
-        foreach(GameObject obj in UIStuffs)
+        //obtuse moment
+        //GameObject.Find("Player").GetComponent<WeaponManager>().guns[GameObject.Find("Player").GetComponent<WeaponManager>().GetActiveGun()].canSwap = false;
+
+        //still pretty cumbersome
+        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().GetActiveGun()].enabled = false;
+
+        foreach (GameObject obj in UIStuffs)
         {
             obj.SetActive(false);
         }
@@ -38,8 +54,8 @@ public class Computer : MonoBehaviour, IInteractible
         startTransform = cameraObj.transform;
 
         cameraObj.GetComponent<CameraRecoil>().enabled = false;
-        GameObject.Find("Player").GetComponent<PlayerControlsManager>().movementLock = true;
-        GameObject.Find("Player").GetComponent<PlayerControlsManager>().enableLook = false;
+        player.GetComponent<PlayerControlsManager>().movementLock = true;
+        player.GetComponent<PlayerControlsManager>().enableLook = false;
 
         ratio = 0f;
         Cursor.lockState = CursorLockMode.None;
@@ -64,8 +80,9 @@ public class Computer : MonoBehaviour, IInteractible
         startTransform = cameraObj.transform;
 
         cameraObj.GetComponent<CameraRecoil>().enabled = true;
-        GameObject.Find("Player").GetComponent<PlayerControlsManager>().movementLock = false;
-        GameObject.Find("Player").GetComponent<PlayerControlsManager>().enableLook = true;
+        player.GetComponent<PlayerControlsManager>().movementLock = false;
+        player.GetComponent<PlayerControlsManager>().enableLook = true;
+        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().GetActiveGun()].enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;
