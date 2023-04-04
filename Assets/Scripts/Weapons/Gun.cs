@@ -282,14 +282,14 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
-        audioSource.Stop();
-        charging = false;
         if (isUnarmed)
         {
             GameObject.Find("Player").GetComponent<Player>().QuickMelee();
             return;
         }
 
+        charging = false;
+        audioSource.Stop();
 
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
