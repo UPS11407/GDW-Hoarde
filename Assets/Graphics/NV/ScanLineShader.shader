@@ -77,9 +77,8 @@ Shader "Unlit/ScanLineShader"
                 fixed4 col = tex2D(_MainTex, uv);
                 
                 
-                float4 scanLine = tex2D(_ScanLineTex, i.uv * _ScreenParams.y / _ScanLineZoom);
+                float4 scanLine = tex2D(_ScanLineTex, i.uv * _ScanLineZoom);
                 float luminosity = lerp(0.0125,Luminance(col.rgb), _LuminaStrength);
-                //scanLine += i.diff * (1-_ScanLineStr)
                 col.rgb = _NVColor.rgb * luminosity * _NVStrength;
 
                 return lerp(col, col * scanLine, _ScanLineStr);
