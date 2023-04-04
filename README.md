@@ -18,12 +18,12 @@ Ethan Zafra: Enemy Decals, Night Vision, Scan Lines, Lens Distorion, Color Gradi
 
 Group Assignment explanation and demonstration videos:\
 Decals:
-Night Vision/Scan Lines/Lens Distortion:
-Color Grading:
-Texture:
-Particle Effects:
-Rim Lighting:
-Outline:
+Night Vision/Scan Lines/Lens Distortion:\
+Color Grading:\
+Texture:\
+Particle Effects:\
+Rim Lighting:\
+Outline:\
 Vertex:
 
 
