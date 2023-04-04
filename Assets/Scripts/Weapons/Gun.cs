@@ -66,6 +66,7 @@ public class Gun : MonoBehaviour
     float explosionSize;
 
     bool isCharged = false;
+    bool charging = false;
     float chargeTime;
     bool initialChargeDone = false;
 
@@ -80,6 +81,8 @@ public class Gun : MonoBehaviour
     [SerializeField] float trailDuration = 1.0f;
 
     bool isRunning;
+
+    public AudioClip railgunCharge;
 
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
@@ -118,6 +121,8 @@ public class Gun : MonoBehaviour
                 if (currentAmmo > 0)
                 {
                     chargeTime += railGunMod.chargeUpTimeRate * Time.deltaTime;
+                    if(!charging) audioSource.PlayOneShot(railgunCharge);
+                    charging = true;
                 }
                 else if (chargeTime > 100 && (railGunMod.fireMode == RailgunModScriptableObject.FireMode.single || initialChargeDone == true))
                 {
@@ -277,6 +282,8 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
+        audioSource.Stop();
+        charging = false;
         if (isUnarmed)
         {
             GameObject.Find("Player").GetComponent<Player>().QuickMelee();

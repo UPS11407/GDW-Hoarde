@@ -21,5 +21,6 @@ MonoBehaviour:
   enablesExplosionImpact: 0
   explosionSizeIncrease: 0
   recoilModifier: 0
-  chargeUpTimeRate: 50
+  chargeUpTimeRate: 100
+  initialMaxCharge: 500
   chargeUpModifier: 2
