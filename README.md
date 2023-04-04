@@ -17,7 +17,7 @@ Alexander Phillips: Character Rim Lighting, Vertex Extrusion, Outlines, Particle
 Ethan Zafra: Enemy Decals, Night Vision, Scan Lines, Lens Distorion, Color Grading and Specular Illumination.
 
 Group Assignment explanation and demonstration videos:\
-Decals:
+Decals:\
 Night Vision/Scan Lines/Lens Distortion:\
 Color Grading:\
 Texture:\
