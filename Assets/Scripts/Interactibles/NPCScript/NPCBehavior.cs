@@ -9,6 +9,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
     public int state = 0;
     public int dialogueState = 0;
+    public int hintState = 0;
 
     [SerializeField] TMP_Text text;
     [SerializeField] TMP_Text NPCName;
@@ -105,7 +106,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     {
         hudText.gameObject.SetActive(true);
         hudText.transform.parent.gameObject.SetActive(true);
-        hudText.text = hudHints[state + 1];
+        hudText.text = hudHints[hintState];
     }
 
     public void EndDialogue()

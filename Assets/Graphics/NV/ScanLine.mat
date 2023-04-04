@@ -65,7 +65,7 @@ Material:
     - _BumpScale: 1
     - _Cutoff: 0.5
     - _DetailNormalMapScale: 1
-    - _Distortion: -0.61
+    - _Distortion: -0.42
     - _DstBlend: 0
     - _GlossMapScale: 1
     - _Glossiness: 0.5
@@ -80,8 +80,8 @@ Material:
     - _OffsetR: 0.001
     - _Parallax: 0.02
     - _Scale: 1
-    - _ScanLineStr: -0.7
-    - _ScanLineZoom: -224.8
+    - _ScanLineStr: 0.07
+    - _ScanLineZoom: -4.1
     - _SmoothnessTextureChannel: 0
     - _SpecularHighlights: 1
     - _SrcBlend: 1
