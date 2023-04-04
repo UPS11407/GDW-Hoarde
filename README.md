@@ -22,10 +22,10 @@ Decals: https://youtu.be/OuQ2bWoiG3g \
 Night Vision/Scan Lines/Lens Distortion: https://youtu.be/mkQkHSnkXpM \
 Color Grading: https://youtu.be/yImqOXJFIzw \
 Texture: https://youtu.be/Fz8WZgXMnNQ \
-Particle Effects:\
-Rim Lighting:\
-Outline:\
-Vertex:
+Particle Effects: https://youtu.be/wHIj-V2igCk \
+Rim Lighting: https://youtu.be/ngTE9wMvTBs \
+Outline: https://youtu.be/3dnzPcB1t78 \
+Vertex Extrusion: https://youtu.be/UVt_fpQ3IQw
 
 
 
