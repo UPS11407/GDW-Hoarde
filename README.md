@@ -16,7 +16,20 @@ Contribution for group assignment:\
 Alexander Phillips: Character Rim Lighting, Vertex Extrusion, Outlines, Particles and Texture Normal Maps\
 Ethan Zafra: Enemy Decals, Night Vision, Scan Lines, Lens Distorion, Color Grading and Specular Illumination.
 
-Group Assignment explanation:\
+Group Assignment explanation and demonstration videos:\
+Decals:
+Night Vision/Scan Lines/Lens Distortion:
+Color Grading:
+Texture:
+Particle Effects:
+Rim Lighting:
+Outline:
+Vertex:
+
+
+
+
+
 Decals: Decals were added on top of the main enemy texture when a bool is true. A seperate script that is used for the enemy behavior turns on the bool when the enemy is damaged.\
 Texture filtering: Used a 2x2 box filter that takes the average value of the nearest 2x2 pixels to determine the value for a pixel.\
 Character Outlines: Outlines with a main texture image were added as a replacement for the standard shader. The amount of extrusion for the outline is larger due to the models.\
