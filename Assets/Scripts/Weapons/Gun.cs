@@ -4,6 +4,7 @@ using UnityEngine;
 using UnityEngine.InputSystem;
 using TMPro;
 
+using static InventoryAttachment;
 public class Gun : MonoBehaviour
 {
     bool fireButtonPressed = false;
@@ -39,7 +40,9 @@ public class Gun : MonoBehaviour
     public TextMeshProUGUI currentAmmoDisplay;
     public TextMeshProUGUI maxAmmoDisplay;
 
-    [SerializeField] Inventory inventory; 
+    [SerializeField] Inventory inventory;
+
+    [SerializeField] GameObject RAILGUN_AmmoCount;
 
     bool bursting = false;
 
@@ -66,7 +69,7 @@ public class Gun : MonoBehaviour
     float explosionSize;
 
     bool isCharged = false;
-    bool charging = false;
+    public bool charging = false;
     float chargeTime;
     bool initialChargeDone = false;
 
@@ -85,6 +88,8 @@ public class Gun : MonoBehaviour
 
     public AudioClip railgunCharge;
 
+    AmmoType prevAmmoType;
+
     //[SerializeField] WeaponModScriptableObject singleFire;
     //[SerializeField] WeaponModScriptableObject fullAutoFire;
     // Start is called before the first frame update
@@ -102,6 +107,8 @@ public class Gun : MonoBehaviour
 
         currentAmmo = maxAmmo;
         UpdateDisplay();
+
+        if (isUnarmed) return;
     }
 
     private void Update()
@@ -314,7 +321,10 @@ public class Gun : MonoBehaviour
         if (currentAmmo > 0 && Time.time > shootDelay + shootTime && canShoot == true)
         {
             shootTime = Time.time;
-            currentAmmo--;
+
+            if (GameObject.Find("Player").GetComponent<WeaponManager>().activeGun == 3) inventory.ShootRailgunAmmo();
+
+            else currentAmmo--;
             
             
             for (int i = 0; i < bulletsPerShot; i++)
@@ -516,6 +526,26 @@ public class Gun : MonoBehaviour
         }
         
         bursting = false;
+    }
+
+    public void ToggleRailgun(bool toggle)
+    {
+        if (toggle)
+        {
+            prevAmmoType = inventory.selectedAmmo;
+            inventory.selectedAmmo = AmmoType.RAILGUN;
+
+            RAILGUN_AmmoCount.SetActive(false);
+            inventory.railgunBar.transform.parent.gameObject.SetActive(true);
+        }
+
+        else
+        {
+            inventory.selectedAmmo = prevAmmoType;
+
+            RAILGUN_AmmoCount.SetActive(true);
+            inventory.railgunBar.transform.parent.gameObject.SetActive(false);
+        }
     }
 
     public void changeBarrel(WeaponModScriptableObject mod)

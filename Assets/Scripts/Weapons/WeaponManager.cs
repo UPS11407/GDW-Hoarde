@@ -36,14 +36,25 @@ public class WeaponManager : MonoBehaviour
 
     public void SwapWeapon(InputAction.CallbackContext ctx)
     {
+        if (GameObject.Find("Inventory").transform.GetChild(5).gameObject.activeSelf)
+        {
+            return;
+        }
+
         if (guns[activeGun].canReload && guns[activeGun].canSwap)
         {
             var scrollFloat = ctx.action.ReadValue<float>();
 
             int prevGun = activeGun;
 
+            if (activeGun == 3)
+            {
+                guns[3].ToggleRailgun(false);
+            }
+
             if (scrollFloat > 0)
             {
+                if (activeGun + 1 == 3) guns[3].ToggleRailgun(true);
                 activeGun++;
             }
             else
@@ -54,6 +65,7 @@ public class WeaponManager : MonoBehaviour
             if (activeGun < 0)
             {
                 activeGun = gunInventory.Count - 1;
+                guns[3].ToggleRailgun(true);
             }
             else if (activeGun > gunInventory.Count - 1)
             {
@@ -64,6 +76,8 @@ public class WeaponManager : MonoBehaviour
             {
                 DoWeaponSwap(gunInventory[prevGun], gunInventory[activeGun]);
             }
+
+
         }
     }
 

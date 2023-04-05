@@ -29,7 +29,7 @@ public class PauseMenu : MonoBehaviour
             return;
         }
 
-        if (!playerControlsManager.inventory.weaponModCanvas.transform.GetChild(0).gameObject.activeSelf)
+        if (!playerControlsManager.inventory.weaponModCanvas.transform.GetChild(5).gameObject.activeSelf)
         {
             if (playerContr != null)
             {

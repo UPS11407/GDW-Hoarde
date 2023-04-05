@@ -3,6 +3,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using UnityEngine.UI;
 using static InventoryAttachment;
 
 public class Inventory : MonoBehaviour
@@ -38,7 +39,9 @@ public class Inventory : MonoBehaviour
     public int fireAmmo;
     public int slowAmmo;
     public int explosiveAmmo;
-    public int railgunCharge;
+    public float railgunCharge;
+
+    public float railgunChargeRate;
 
     public GameObject weaponModCanvas;
 
@@ -46,6 +49,8 @@ public class Inventory : MonoBehaviour
 
     public AmmoType selectedAmmo;
     public RailgunModScriptableObject standardRailgunAttachment;
+
+    public Image railgunBar;
 
     private void Awake()
     {
@@ -56,6 +61,20 @@ public class Inventory : MonoBehaviour
         }
 
         ToggleWeaponModCanvas(false);
+
+        railgunCharge = 15;
+    }
+
+    private void Update()
+    {
+        if (railgunCharge < 15 && !weaponManager.guns[weaponManager.activeGun].charging)
+        {
+            railgunCharge += Time.deltaTime * railgunChargeRate;
+        }
+
+        railgunBar.fillAmount = railgunCharge / 15;
+
+        weaponManager.guns[3].currentAmmo = (int)Mathf.Floor(railgunCharge);
     }
 
     public int GetKeycardLevel()
@@ -97,7 +116,7 @@ public class Inventory : MonoBehaviour
 
     public void ToggleWeaponModCanvas(bool toggle)
     {
-        for(int i = 0; i < gameObject.transform.childCount; i++)
+        for (int i = weaponManager.activeGun == 3 ? 4 : 0; i < gameObject.transform.childCount; i++)
         {
             weaponModCanvas.transform.GetChild(i).gameObject.SetActive(toggle);
         }
@@ -137,7 +156,6 @@ public class Inventory : MonoBehaviour
             case AmmoType.EXPLOSIVE: return explosiveAmmo;
             case AmmoType.SLOW: return slowAmmo;
             case AmmoType.INCINDIARY: return fireAmmo;
-            case AmmoType.RAILGUN: return railgunCharge;
         }
 
         return 0;
@@ -151,7 +169,6 @@ public class Inventory : MonoBehaviour
             case AmmoType.EXPLOSIVE: return explosiveAmmo;
             case AmmoType.SLOW: return slowAmmo;
             case AmmoType.INCINDIARY: return fireAmmo;
-            case AmmoType.RAILGUN: return railgunCharge;
         }
 
         return 0;
@@ -172,9 +189,6 @@ public class Inventory : MonoBehaviour
                 break;
             case AmmoType.INCINDIARY:
                 fireAmmo += ammo;
-                break;
-            case AmmoType.RAILGUN:
-                railgunCharge += ammo;
                 break;
         }
     }
@@ -354,6 +368,11 @@ public class Inventory : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].changeBarrel(standardRailgunAttachment);
         }
+    }
+
+    public void ShootRailgunAmmo()
+    {
+        railgunCharge -= 1;
     }
 }
 [System.Serializable]

@@ -167,7 +167,7 @@ public class PlayerControlsManager : MonoBehaviour
     {
         if (!weaponManager.guns[weaponManager.activeGun].isUnarmed)
         {
-            if (inventory.weaponModCanvas.transform.GetChild(0).gameObject.activeSelf) CloseMenu();
+            if (inventory.weaponModCanvas.transform.GetChild(5).gameObject.activeSelf) CloseMenu();
             else OpenMenu();
         }
     }
@@ -175,7 +175,8 @@ public class PlayerControlsManager : MonoBehaviour
     public void OpenMenu()
     {
         enableLook = false;
-        weaponManager.guns[weaponManager.activeGun].GetComponent<Gun>().enabled = false;
+        weaponManager.guns[weaponManager.activeGun].canSwap = false;
+        weaponManager.guns[weaponManager.activeGun].enabled = false;
         Cursor.visible = true;
         Cursor.lockState = CursorLockMode.Confined;
         inventory.ToggleWeaponModCanvas(true);
