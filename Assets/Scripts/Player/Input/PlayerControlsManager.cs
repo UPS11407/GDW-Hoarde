@@ -718,7 +718,7 @@ public class PlayerControlsManager : MonoBehaviour
                 crosshair.SetActive(false);
                 prevSpread = weaponManager.guns[weaponManager.activeGun].spread;
                 weaponManager.guns[weaponManager.activeGun].spread = 0;
-                moveSpeed = 4f;
+                moveSpeed = 3f;
                 waitingToAim = true;
                 canSprint = false;
             }
