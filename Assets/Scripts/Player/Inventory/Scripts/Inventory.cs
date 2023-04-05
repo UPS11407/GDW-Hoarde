@@ -1,11 +1,16 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static InventoryAttachment;
 
 public class Inventory : MonoBehaviour
 {
+    public List<GameObject> keycards;
+    public TMP_Text inventoryText;
+    int keycardLevel;
+
     public WeaponManager weaponManager;
 
     public const int MaxInventorySlotsCount = 4;
@@ -51,6 +56,27 @@ public class Inventory : MonoBehaviour
         }
 
         ToggleWeaponModCanvas(false);
+    }
+
+    public int GetKeycardLevel()
+    {
+        return keycardLevel;
+    }
+
+    public void SetKeycardLevel(int level)
+    {
+        keycardLevel = level;
+        UpdateKeycard(level - 1);
+    }
+
+    void UpdateKeycard(int level)
+    {
+        foreach (GameObject keycard in keycards)
+        {
+            keycard.SetActive(false);
+        }
+
+        keycards[level].SetActive(true);
     }
 
     public void ToggleWeaponModCanvas(bool toggle)
