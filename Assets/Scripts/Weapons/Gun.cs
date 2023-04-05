@@ -11,7 +11,7 @@ public class Gun : MonoBehaviour
     public bool canReload = true;
     public bool canSwap = true;
     public bool isReloading = false;
-
+    
     //public GunStatScriptableObjects pistolStats;
     //public GunStatScriptableObjects rifleStats;
 
@@ -70,6 +70,7 @@ public class Gun : MonoBehaviour
     float chargeTime;
     bool initialChargeDone = false;
 
+    Animator _animator;
     public bool modReloadRequired;
 
     [SerializeField] LineRenderer railLine;
@@ -91,6 +92,7 @@ public class Gun : MonoBehaviour
     {
         Cursor.visible = false;
         Cursor.lockState = CursorLockMode.Locked;
+        _animator = GetComponentInChildren<Animator>();
 
         audioSource = GetComponent<AudioSource>();
         if (!isUnarmed)
@@ -109,7 +111,12 @@ public class Gun : MonoBehaviour
         {
             if (fireButtonPressed == true)
             {
+                _animator.SetBool("isPunching", true);
                 Fire();
+            }
+            else
+            {
+                _animator.SetBool("isPunching", false);
             }
             return;
         }
@@ -293,7 +300,7 @@ public class Gun : MonoBehaviour
     {
         if (isUnarmed)
         {
-            GameObject.Find("Player").GetComponent<Player>().QuickMelee();
+            GameObject.Find("Player").GetComponent<Player>().QuickMelee();;
             return;
         }
 
