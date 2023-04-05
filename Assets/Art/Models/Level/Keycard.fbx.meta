@@ -1,14 +1,19 @@
 fileFormatVersion: 2
-guid: 13eb2ebc66ca886499583cbc94d2d238
+guid: 158ab2aa8ad8e5a40b8edfa6543faece
 ModelImporter:
   serializedVersion: 21300
   internalIDToNameTable: []
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: KeycardMat
+    second: {fileID: 2100000, guid: 9624c0276e9c60c419011a7921b16f76, type: 2}
   materials:
-    materialImportMode: 1
+    materialImportMode: 2
     materialName: 0
     materialSearch: 1
-    materialLocation: 0
+    materialLocation: 1
   animations:
     legacyGenerateAnimations: 4
     bakeSimulation: 0
