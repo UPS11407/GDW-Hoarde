@@ -24,17 +24,36 @@ public class NPCBehavior : MonoBehaviour, IInteractible
     public float dialogueRange;
     public bool lookToPlayer;
 
+    public Vector3 initialDir;
+    public float stareDistance;
+
+    private void Awake()
+    {
+        initialDir = transform.localRotation.eulerAngles;
+    }
+
     protected void Startup()
     {
         player = GameObject.Find("Player");
         UpdateHUD();
+        
     }
 
     private void Update()
     {
+        Vector3 dir2P = (new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(gameObject.transform.position.x, 0, gameObject.transform.position.z)).normalized;
+      
+        Quaternion target = Quaternion.LookRotation(dir2P);
+
         if (lookToPlayer)
         {
-            transform.forward = new Vector3(player.transform.position.x, 0, player.transform.position.z) - new Vector3(transform.position.x, 0, transform.position.z);
+            if (Vector3.Distance(player.transform.position, gameObject.transform.position) <= stareDistance)
+            {
+                transform.rotation = Quaternion.Lerp(transform.rotation, target, 0.05f);
+            }
+            //transform.rotation = Quaternion.Euler(Vector3.Lerp(new Vector3(0, transform.rotation.y, 0), dir2P, 0.1f));
+            else transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(initialDir), 0.025f);
+
         }
     }
     public void Interact()

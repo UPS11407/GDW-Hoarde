@@ -37,7 +37,7 @@ public class EnemyBase : MonoBehaviour
   
     [SerializeField] float slowDurationModifier;
     [SerializeField] float slowSpeedModifier;
-    bool slowed;
+    public bool slowed;
     IEnumerator slowCoroutine;
     Rigidbody rigid;
     protected NavMeshAgent agent;
@@ -129,7 +129,7 @@ public class EnemyBase : MonoBehaviour
     /// <summary>
     /// Returns the total length of the navmesh path.
     /// </summary>
-    float NavMeshRemainingDistance(Vector3[] points)
+    public float NavMeshRemainingDistance(Vector3[] points)
     {
         if (points.Length < 2) return 0;
         float distance = 0;

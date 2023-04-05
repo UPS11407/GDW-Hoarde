@@ -74,7 +74,7 @@ public class Bloated : EnemyBase
 
     public override void ChasePlayer()
     {
-        if (GetPlayerDistance() <= _attackRange)
+        if (GetPlayerDistance() <= _attackRange || NavMeshRemainingDistance(agent.path.corners) >= chaseRange)
         {
             animator.SetBool("isWalking", false);
             agent.isStopped = true;

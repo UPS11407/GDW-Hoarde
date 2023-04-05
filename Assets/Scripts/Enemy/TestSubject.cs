@@ -70,7 +70,7 @@ public class TestSubject : EnemyBase
 
     void Damaged()
     {
-        if(_maxHP > currentHP && isDecalOff)
+        if(_maxHP > currentHP && isDecalOff && !slowed)
         {
             _speed *= 1.5f;
             UpdateSpeed();
