@@ -359,7 +359,7 @@ public class Gun : MonoBehaviour
                                 hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage + damage * (chargeTime / 100) * railGunMod.chargeUpModifier);
                             }
                             
-                            LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity, gameObject.transform);
+                            LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity);
                             line.startWidth = (float)(damage * 0.05);
                             StartCoroutine(SpawnLine(line, hit));
 
@@ -421,6 +421,7 @@ public class Gun : MonoBehaviour
         line.SetPosition(1, hit.point);
 
         Color laserColor = line.material.GetColor("_EmissionColor");
+        Destroy(line.gameObject, laserDuration);
         while (time <= laserDuration)
         {
             line.material.color = Color.Lerp(new Color(line.material.color.r, line.material.color.g, line.material.color.b, 1), new Color(line.material.color.r, line.material.color.g, line.material.color.b, 0), time / laserDuration);
@@ -431,7 +432,7 @@ public class Gun : MonoBehaviour
         }
 
 
-        Destroy(line.gameObject);
+        
     }
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
