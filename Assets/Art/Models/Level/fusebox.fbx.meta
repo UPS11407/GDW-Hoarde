@@ -9,7 +9,72 @@ ModelImporter:
   - first:
       74: 7849580489806762969
     second: Door|HandleAction.001
-  externalObjects: {}
+  externalObjects:
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Back
+    second: {fileID: 2100000, guid: 3a4006a0a0c168e40a60ee155c3cabd1, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BackSide
+    second: {fileID: 2100000, guid: 1765a4db000990648b75ad674b307dbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: BottomSide
+    second: {fileID: 2100000, guid: 1765a4db000990648b75ad674b307dbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Cable
+    second: {fileID: 2100000, guid: 6385176bcbc63b548ba85293898bc53d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Connector
+    second: {fileID: 2100000, guid: 5f514d0c128732a46b6a18745c4ee10b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Front
+    second: {fileID: 2100000, guid: d183b3685f70c4c4683c28333cccb58d, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Handle
+    second: {fileID: 2100000, guid: fb662be65a75d3946b3843e40c4173e4, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: Inside
+    second: {fileID: 2100000, guid: 16b4c6081f859c94f8155113c9e7ed79, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: LeftSide
+    second: {fileID: 2100000, guid: c99769e9f38fe7e48ae010f0188bac8e, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: RightSide
+    second: {fileID: 2100000, guid: 1765a4db000990648b75ad674b307dbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: TopSide
+    second: {fileID: 2100000, guid: 1765a4db000990648b75ad674b307dbc, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: fusecap
+    second: {fileID: 2100000, guid: c19fe884b23244e479989241d54ea80b, type: 2}
+  - first:
+      type: UnityEngine:Material
+      assembly: UnityEngine.CoreModule
+      name: glass
+    second: {fileID: 2100000, guid: 13cdbde85b5c22a4e8f8c7d16ca9772e, type: 2}
   materials:
     materialImportMode: 2
     materialName: 0
@@ -94,7 +159,7 @@ ModelImporter:
     armStretch: 0.05
     legStretch: 0.05
     feetSpacing: 0
-    globalScale: 0.005
+    globalScale: 0.5
     rootMotionBoneName: 
     hasTranslationDoF: 0
     hasExtraRoot: 0
