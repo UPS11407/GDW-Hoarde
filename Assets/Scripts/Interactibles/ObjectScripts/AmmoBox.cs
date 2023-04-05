@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 using static InventoryAttachment;
 
@@ -13,7 +14,12 @@ public class AmmoBox : MonoBehaviour, IInteractible
     public Material incindiary;
     public Material slow;
     public Material explosive;
-    
+    GameObject inventoryText;
+
+    private void Awake()
+    {
+        inventoryText = GameObject.Find("InventoryText");
+    }
 
     void Start()
     {
@@ -68,12 +74,48 @@ public class AmmoBox : MonoBehaviour, IInteractible
         {
             var inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
 
-            inventory.AddAmmo(Random.Range(20, 40), ammo);
+            int r_roll = Random.Range(20, 40);
+
+            inventory.AddAmmo(r_roll, ammo);
             inventory.weaponManager.guns[inventory.weaponManager.activeGun].UpdateDisplay();
+
+            switch (ammo)
+            {
+                case AmmoType.EXPLOSIVE:
+                    StartCoroutine(InventoryText($"{r_roll} explosive ammo added", Color.white));
+                    break;
+
+                case AmmoType.STANDARD:
+                    StartCoroutine(InventoryText($"{r_roll} standard ammo added", Color.white));
+                    break;
+
+                case AmmoType.INCINDIARY:
+                    StartCoroutine(InventoryText($"{r_roll} incidiary ammo added", Color.white));
+                    break;
+
+                case AmmoType.SLOW:
+                    StartCoroutine(InventoryText($"{r_roll} slow ammo added", Color.white));
+                    break;
+            }
 
             interactible = false;
             Destroy(gameObject, 1.5f);
             
         }
+    }
+
+    IEnumerator InventoryText(string text, Color color)
+    {
+        inventoryText.transform.GetChild(0).gameObject.SetActive(true);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(true);
+
+        inventoryText.SetActive(true);
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
+
+        yield return new WaitForSeconds(5.9f);
+
+        inventoryText.transform.GetChild(0).gameObject.SetActive(false);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(false);
     }
 }

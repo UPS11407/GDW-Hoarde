@@ -8,7 +8,7 @@ using static InventoryAttachment;
 public class Inventory : MonoBehaviour
 {
     public List<GameObject> keycards;
-    public TMP_Text inventoryText;
+    public GameObject inventoryText;
     int keycardLevel;
 
     public WeaponManager weaponManager;
@@ -66,6 +66,7 @@ public class Inventory : MonoBehaviour
     public void SetKeycardLevel(int level)
     {
         keycardLevel = level;
+        StartCoroutine(InventoryText($"You obtained a level {level} keycard!", Color.white));
         UpdateKeycard(level - 1);
     }
 
@@ -77,6 +78,21 @@ public class Inventory : MonoBehaviour
         }
 
         keycards[level].SetActive(true);
+    }
+
+    IEnumerator InventoryText(string text, Color color)
+    {
+        inventoryText.transform.GetChild(0).gameObject.SetActive(true);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(true);
+
+        inventoryText.SetActive(true);
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
+
+        yield return new WaitForSeconds(5.9f);
+
+        inventoryText.transform.GetChild(0).gameObject.SetActive(false);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     public void ToggleWeaponModCanvas(bool toggle)

@@ -37,7 +37,7 @@ public class Chest : MonoBehaviour, IInteractible
     GameObject player;
     bool canInteract = true;
     Animator animator;
-    GameObject menuText;
+    GameObject inventoryText;
     Inventory inventory;
 
     public bool tutorialChest;
@@ -111,7 +111,7 @@ public class Chest : MonoBehaviour, IInteractible
             {
                 if (!inventory.CheckForEmptySlot())
                 {
-                    StartCoroutine(ModMenuText("! Inventory Full !", Color.red));
+                    StartCoroutine(InventoryText("! Inventory Full !", Color.red));
                     return;
                 }
 
@@ -124,7 +124,7 @@ public class Chest : MonoBehaviour, IInteractible
 
                 inventory.AddRandomItem(randRoll);
                 inventory.availableAttachments.Remove(inventory.availableAttachments[randRoll]);
-                StartCoroutine(ModMenuText("New Item Added! (Press B)", Color.white));
+                StartCoroutine(InventoryText("New Item Added! (Press B)", Color.white));
             }
             Debug.Log("YOU GOT LIGMA");
 
@@ -135,20 +135,26 @@ public class Chest : MonoBehaviour, IInteractible
         }
     }
 
-    IEnumerator ModMenuText(string text, Color color)
+    IEnumerator InventoryText(string text, Color color)
     {
-        menuText.SetActive(true);
-        menuText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
-        menuText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
+        inventoryText.transform.GetChild(0).gameObject.SetActive(true);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(true);
+
+        inventoryText.SetActive(true);
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
+
         yield return new WaitForSeconds(5.9f);
-        menuText.SetActive(false);
+
+        inventoryText.transform.GetChild(0).gameObject.SetActive(false);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(false);
     }
 
     private void Awake()
     {
         player = GameObject.Find("Player");
         animator = GetComponent<Animator>();
-        menuText = GameObject.Find("TExt");
+        inventoryText = GameObject.Find("InventoryText");
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
     }
 
