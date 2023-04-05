@@ -54,7 +54,7 @@ public class WeaponManager : MonoBehaviour
 
             if (scrollFloat > 0)
             {
-                if (activeGun + 1 == 3) guns[3].ToggleRailgun(true);
+                if (activeGun + 1 == 3 && gunInventory.Count == 4) guns[3].ToggleRailgun(true);
                 activeGun++;
             }
             else
@@ -65,7 +65,8 @@ public class WeaponManager : MonoBehaviour
             if (activeGun < 0)
             {
                 activeGun = gunInventory.Count - 1;
-                guns[3].ToggleRailgun(true);
+
+                if (gunInventory.Count == 4) guns[3].ToggleRailgun(true);
             }
             else if (activeGun > gunInventory.Count - 1)
             {

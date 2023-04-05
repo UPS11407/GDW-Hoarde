@@ -107,8 +107,6 @@ public class Gun : MonoBehaviour
 
         currentAmmo = maxAmmo;
         UpdateDisplay();
-
-        if (isUnarmed) return;
     }
 
     private void Update()
