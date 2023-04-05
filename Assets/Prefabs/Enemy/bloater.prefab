@@ -1581,6 +1581,7 @@ MonoBehaviour:
   dotRate: 0
   slowDurationModifier: 1
   slowSpeedModifier: 0.5
+  slowed: 0
   knockBackStrength: 50
   canAttack: 1
   groans:
@@ -3915,7 +3916,7 @@ SkinnedMeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 0eb1c0d243864924ba333c8baddab791, type: 2}
+  - {fileID: 2100000, guid: 4deb9b98c31351d48a9b9eb7e15a8fec, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0

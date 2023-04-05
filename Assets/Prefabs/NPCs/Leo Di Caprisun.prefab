@@ -16292,9 +16292,8 @@ GameObject:
   - component: {fileID: 7215122270511577396}
   - component: {fileID: 7215122270511577393}
   - component: {fileID: 7215122270511577394}
-  - component: {fileID: 7215122270511577395}
   m_Layer: 8
-  m_Name: Mikael Angeloskovitch
+  m_Name: Leo Di Caprisun
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -16351,42 +16350,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &7215122270511577395
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 8028391836603802510}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d997b647fbc825f45bffcf03e177bf66, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  state: 0
-  text: {fileID: 0}
-  dialogue:
-  - "Many thanks, name\u2019s Mikael Angeloskovitch, serial traditional lockpicker,
-    a lawyer of 10 years, and proud englishman."
-  - "You\u2019re expecting a reward aren\u2019t you. Well, have you seen the locked
-    room at [Place]. That place houses one of the new experimental weapons the nerds
-    were working on, though its locked with a traditional lock."
-  - I should be able to make you a skeleton key with the appropriate tools. Find
-    me some basic tools. There should be one at one of the workshops downstairs.
-  - Great, you got me the tools. Give me a second to make you the key.
-  - "Here\u2019s the key, good luck out there, I\u2019ll be trying to find my own
-    way out."
-  passable: 0101000100
-  hudText: {fileID: 0}
-  hudHints:
-  - 
-  - 
-  - Find tools in 1st floor workshop
-  - 
-  - Explore the facility
-  dialogueRange: 12
-  doorColliders: []
-  enemies: []
 --- !u!1 &8098645669269162879
 GameObject:
   m_ObjectHideFlags: 0
