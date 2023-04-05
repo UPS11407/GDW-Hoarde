@@ -20,6 +20,7 @@ public class Player : MonoBehaviour
     HurtIndicator hurtIndicator;
 
     public AudioSource audioPlayer;
+    public AudioClip[] painSounds;
     float healCharge;
     float currentHP;
 
@@ -122,7 +123,8 @@ public class Player : MonoBehaviour
         //audioClip;
         //audioPlayer.Stop();
         currentHP -= dmg;
-        audioPlayer.Play();
+        int sound = Random.Range(0, painSounds.Length);
+        audioPlayer.PlayOneShot(painSounds[sound]);
         UpdateHealthDisplay();
         hurtIndicator.Hurt();
         lastDamageCreature = source;
