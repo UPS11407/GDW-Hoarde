@@ -104,6 +104,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
             if (dialogueState + 1 != dialogueText.Count)
             {
                 dialogueState++;
+                UpdateHUD();
             }
         }
 
