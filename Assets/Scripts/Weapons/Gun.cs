@@ -76,7 +76,7 @@ public class Gun : MonoBehaviour
     public Animator _animator;
     public bool modReloadRequired;
 
-    [SerializeField] LineRenderer railLine;
+    [SerializeField] GameObject railLine;
     [SerializeField] TrailRenderer bulletTracer;
     [SerializeField] GameObject tracerStart;
     [SerializeField] MuzzleFlash muzzleFlash;
@@ -357,9 +357,11 @@ public class Gun : MonoBehaviour
                                 hit.transform.gameObject.GetComponent<EnemyBase>().TakeDamage(damage + damage * (chargeTime / 100) * railGunMod.chargeUpModifier);
                             }
                             
-                            LineRenderer line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity);
-                            line.startWidth = (float)(damage * 0.05);
-                            StartCoroutine(SpawnLine(line, hit));
+                            GameObject line = Instantiate(railLine, tracerStart.transform.position, Quaternion.identity);
+                            line.gameObject.GetComponent<LineRenderer>().startWidth = (float)(damage * 0.05);
+                            line.gameObject.GetComponent<Laser>().hitPoint = hit.point;
+                            line.gameObject.GetComponent<Laser>().laserDuration = laserDuration;
+                            //StartCoroutine(SpawnLine(line, hit));
 
                         } else
                         {
