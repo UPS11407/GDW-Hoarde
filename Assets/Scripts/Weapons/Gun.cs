@@ -70,7 +70,7 @@ public class Gun : MonoBehaviour
     float chargeTime;
     bool initialChargeDone = false;
 
-    Animator _animator;
+    public Animator _animator;
     public bool modReloadRequired;
 
     [SerializeField] LineRenderer railLine;
@@ -109,16 +109,19 @@ public class Gun : MonoBehaviour
         isRunning = GameObject.Find("Player").GetComponent<PlayerControlsManager>().sprintingAnim;
         if (isUnarmed)
         {
+
+            GameObject.Find("Player").GetComponent<HeadBob>().enabled = false;
+
             if (fireButtonPressed == true)
             {
-                _animator.SetBool("isPunching", true);
                 Fire();
             }
-            else
-            {
-                _animator.SetBool("isPunching", false);
-            }
+
             return;
+        }
+        else
+        {
+            GameObject.Find("Player").GetComponent<HeadBob>().enabled = true;
         }
 
         if (isCharged && !isRunning)
@@ -300,7 +303,7 @@ public class Gun : MonoBehaviour
     {
         if (isUnarmed)
         {
-            GameObject.Find("Player").GetComponent<Player>().QuickMelee();;
+            GameObject.Find("Player").GetComponent<Player>().QuickMelee();
             return;
         }
 

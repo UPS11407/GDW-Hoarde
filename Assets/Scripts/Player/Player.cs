@@ -230,6 +230,8 @@ public class Player : MonoBehaviour
         RaycastHit hit;
         if (Time.time > meleeTime + meleeDelay && stamina >= staminaToMelee)
         {
+            GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetTrigger("isPunching");
+
             meleeTime = Time.time;
 
             TakeStamina(staminaToMelee);
@@ -245,6 +247,7 @@ public class Player : MonoBehaviour
                     hit.transform.gameObject.GetComponent<EnemyBase>().Knockback(gameObject);
                 }
             }
+
         }
     }
     

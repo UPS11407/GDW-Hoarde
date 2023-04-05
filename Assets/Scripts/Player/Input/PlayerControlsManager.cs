@@ -351,6 +351,7 @@ public class PlayerControlsManager : MonoBehaviour
             timeToReadyWeapon = timeToReadyPistol;
             timeToUnreadyWeapon = timeToReadyPistol;
         }
+
         #endregion
 
         if (waitingToAim && !sprintingAnim)
