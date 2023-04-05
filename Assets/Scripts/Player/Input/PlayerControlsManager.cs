@@ -413,13 +413,13 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoRunAnimation(bool sprinting)
     {
-        if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && speed > 7)
+        if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && speed > 6.01)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTimeRun());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTimeRun()));
             sprintingAnim = true;
         }
-        else if (weaponManager.activeGun == 1 && sprinting && speed > 7)
+        else if (weaponManager.activeGun == 1 && sprinting && speed > 6.01)
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTimeRun());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTimeRun()));

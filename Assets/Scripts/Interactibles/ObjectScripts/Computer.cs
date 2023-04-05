@@ -49,6 +49,9 @@ public class Computer : MonoBehaviour, IInteractible
 
         cameraObj.GetComponent<CameraRecoil>().enabled = false;
         player.GetComponent<PlayerControlsManager>().playerInput.SwitchCurrentActionMap("Menu");
+        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().activeGun].gameObject.SetActive(false);
+
+        player.GetComponent<HeadBob>().enabled = false;
 
         ratio = 0f;
         Cursor.lockState = CursorLockMode.None;
@@ -74,6 +77,9 @@ public class Computer : MonoBehaviour, IInteractible
 
         cameraObj.GetComponent<CameraRecoil>().enabled = true;
         player.GetComponent<PlayerControlsManager>().playerInput.SwitchCurrentActionMap("Player");
+        player.GetComponent<WeaponManager>().guns[player.GetComponent<WeaponManager>().activeGun].gameObject.SetActive(true);
+        GameObject.Find("WeaponCam").transform.localRotation = Quaternion.Euler(Vector3.zero);
+        player.GetComponent<HeadBob>().enabled = true;
 
         Cursor.lockState = CursorLockMode.Locked;
         Cursor.visible = false;

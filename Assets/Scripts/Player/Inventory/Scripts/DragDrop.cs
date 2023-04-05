@@ -57,12 +57,12 @@ public class DragDrop : MonoBehaviour, IPointerDownHandler, IBeginDragHandler, I
 
         previousSlot = trans.parent.GetComponent<RectTransform>();
 
-        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
+        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun - 1].slots)
         {
             if (slot.transform.childCount > 0) slot.transform.GetChild(0).GetComponent<Image>().color = emptyColor;
         }
 
-        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun].slots)
+        foreach (InventorySlot slot in inventory.weaponSlots[inventory.weaponManager.activeGun - 1].slots)
         {
             if (slot.slotGunType == GunType.NULL || slot.slotGunType == itemSlot.item.attachmentWeapon)
             {
