@@ -190,7 +190,7 @@ public class Player : MonoBehaviour
 
     void UpdateChargeDisplay()
     {
-        GetComponent<HealthUI>().SetCharge(healCharge);
+        GetComponent<HealthUI>().SetCharge(healCharge / maxHealCharge);
     }
 
     /// <summary>
