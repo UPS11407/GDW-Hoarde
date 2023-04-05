@@ -9,7 +9,6 @@ public class Battery : MonoBehaviour, IInteractible
 
     public void Interact()
     {
-        NPC.hintState = 4;
         NPC.UpdateHUD();
         gen.fuse = true;
 

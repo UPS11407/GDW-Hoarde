@@ -31,7 +31,6 @@ public class Johnatelo : NPCBehavior
 
         if (state == 0 && dialogueState == 3)
         {
-            hintState = 1;
             if (!weaponManager.gunInventory.Contains(1)) weaponManager.gunInventory.Add(1);
             player.GetComponent<WeaponManager>().DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 1);
             foreach (DoorController door in doorColliders)

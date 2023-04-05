@@ -78,7 +78,6 @@ public class Chest : MonoBehaviour, IInteractible
                 weaponManager.DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 2);
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 1;
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().dialogueState = 0;
-                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().hintState = 2;
                 GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().UpdateHUD();
 
                 foreach(Transform location in locations)
