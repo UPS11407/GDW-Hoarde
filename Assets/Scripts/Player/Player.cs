@@ -35,6 +35,7 @@ public class Player : MonoBehaviour
     public float regenStamina = 1;
 
     public float staminaToMelee = 20;
+    public float staminaToMeleeUnarmed = 20;
 
     public float timeSinceUsedStamina = 0;
     string lastDamageCreature;
@@ -228,13 +229,14 @@ public class Player : MonoBehaviour
     public void QuickMelee()
     {
         RaycastHit hit;
-        if (Time.time > meleeTime + meleeDelay && stamina >= staminaToMelee)
+        if (Time.time > meleeTime + meleeDelay && (stamina >= staminaToMelee || (stamina >= staminaToMeleeUnarmed && GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun].isUnarmed)))
         {
             GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetTrigger("isPunching");
 
             meleeTime = Time.time;
 
-            TakeStamina(staminaToMelee);
+            if (GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun].isUnarmed) TakeStamina(staminaToMeleeUnarmed);
+            else TakeStamina(staminaToMelee);
             timeSinceUsedStamina = 0;
 
             if (Physics.Raycast(Camera.main.transform.position, Camera.main.transform.forward, out hit, 4.0f))
