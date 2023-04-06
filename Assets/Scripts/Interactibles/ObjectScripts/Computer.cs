@@ -154,9 +154,15 @@ public class Computer : MonoBehaviour, IInteractible
         rt.SetActive(true);
         vp.SetActive(true);
 
-        yield return new WaitForSecondsRealtime(Random.Range(5, 11));
+        yield return new WaitForSecondsRealtime(8);
 
         vp.GetComponent<VideoPlayer>().Pause();
 
+        yield return new WaitForSecondsRealtime(1.5f);
+
+        rt.SetActive(false);
+        vp.SetActive(false);
+
+        
     }
 }
