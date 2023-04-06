@@ -417,7 +417,7 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoRunAnimation(bool sprinting)
     {
-        Debug.Log(speed);
+        //Debug.Log(speed);
 
         if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && (speed > 6.01 || onStairs))
         {

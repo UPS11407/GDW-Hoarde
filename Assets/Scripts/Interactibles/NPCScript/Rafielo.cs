@@ -7,11 +7,13 @@ public class Rafielo : NPCBehavior
     //public GameObject nukeDoor;
     public GameObject keyCard;
     public GameObject keyCard2;
+    public GameObject rifleCrate;
 
     // Start is called before the first frame update
     void Start()
     {
         Startup();
+        rifleCrate.layer = 0;
     }
 
     // Update is called once per frame
@@ -27,7 +29,7 @@ public class Rafielo : NPCBehavior
 
             //nukeDoor.GetComponent<DoorController>().Unlock();
             keyCard2.SetActive(true);
-
+            rifleCrate.layer = 8;
 
         }
         base.UpdateHUD();
