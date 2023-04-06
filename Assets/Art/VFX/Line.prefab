@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 5823917055515418004}
   - component: {fileID: -6828216985687236538}
   - component: {fileID: 4998291678943221077}
-  m_Layer: 0
+  m_Layer: 10
   m_Name: Line
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -144,3 +144,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8d1590e9d6976bf4f9ef1af15244ce44, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  hitPoint: {x: 0, y: 0, z: 0}
+  laserDuration: 0
