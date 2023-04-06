@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using TMPro;
+using UnityEngine.Video;
 
 public class Computer : MonoBehaviour, IInteractible
 {
@@ -23,6 +24,9 @@ public class Computer : MonoBehaviour, IInteractible
     float ratio;
     List<GameObject> UIStuffs = new List<GameObject>();
     GameObject player;
+
+    public GameObject rt;
+    public GameObject vp;
 
     private void Start()
     {
@@ -138,5 +142,21 @@ public class Computer : MonoBehaviour, IInteractible
             Cursor.lockState = CursorLockMode.None;
             Cursor.visible = true;
         }
+    }
+
+    public void ButtonPress()
+    {
+        StartCoroutine(Ronk());
+    }
+
+    IEnumerator Ronk()
+    {
+        rt.SetActive(true);
+        vp.SetActive(true);
+
+        yield return new WaitForSecondsRealtime(Random.Range(5, 11));
+
+        vp.GetComponent<VideoPlayer>().Pause();
+
     }
 }
