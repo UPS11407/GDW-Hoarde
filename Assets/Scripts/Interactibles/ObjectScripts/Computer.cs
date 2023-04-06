@@ -14,7 +14,6 @@ public class Computer : MonoBehaviour, IInteractible
     public TextMeshProUGUI title;
     public TextMeshProUGUI msg;
     public Transform lookAtTransform;
-    bool interactable = true;
     GameObject cameraObj;
     GameObject temp;
     bool moving = false;
@@ -25,8 +24,13 @@ public class Computer : MonoBehaviour, IInteractible
     List<GameObject> UIStuffs = new List<GameObject>();
     GameObject player;
 
+    public bool isLaunch;
+    public GameObject button;
     public GameObject rt;
     public GameObject vp;
+    Inventory inv;
+
+    public GameObject nuke;
 
     private void Start()
     {
@@ -35,6 +39,8 @@ public class Computer : MonoBehaviour, IInteractible
         GetComponentInChildren<Canvas>().worldCamera = cameraObj.GetComponent<Camera>();
         title.text = titleText;
         msg.text = msgText;
+        inv = GameObject.Find("Inventory").GetComponent<Inventory>();
+        if (isLaunch) button.SetActive(true);
     }
 
     public void Interact()
@@ -146,13 +152,17 @@ public class Computer : MonoBehaviour, IInteractible
 
     public void ButtonPress()
     {
-        StartCoroutine(Ronk());
+        if(inv.GetKeycardLevel() == 5)
+        {
+            StartCoroutine(Ronk());
+        }
     }
 
     IEnumerator Ronk()
     {
         rt.SetActive(true);
         vp.SetActive(true);
+        nuke.GetComponent<NUKE>().LaunchNuke();
 
         yield return new WaitForSecondsRealtime(8);
 
@@ -161,8 +171,7 @@ public class Computer : MonoBehaviour, IInteractible
         yield return new WaitForSecondsRealtime(1.5f);
 
         rt.SetActive(false);
-        vp.SetActive(false);
-
         
+        vp.SetActive(false);
     }
 }
