@@ -47,14 +47,8 @@ public class WeaponManager : MonoBehaviour
 
             int prevGun = activeGun;
 
-            if (activeGun == 3)
-            {
-                guns[3].ToggleRailgun(false);
-            }
-
             if (scrollFloat > 0)
             {
-                if (activeGun + 1 == 3 && gunInventory.Count == 4) guns[3].ToggleRailgun(true);
                 activeGun++;
             }
             else
@@ -65,8 +59,6 @@ public class WeaponManager : MonoBehaviour
             if (activeGun < 0)
             {
                 activeGun = gunInventory.Count - 1;
-
-                if (gunInventory.Count == 4) guns[3].ToggleRailgun(true);
             }
             else if (activeGun > gunInventory.Count - 1)
             {
@@ -84,6 +76,9 @@ public class WeaponManager : MonoBehaviour
 
     public void DoWeaponSwap(int weaponFrom, int weaponTo)
     {
+        if (weaponTo == 3) guns[3].ToggleRailgun(true);
+        else if (weaponFrom == 3) guns[3].ToggleRailgun(false);
+
         activeGun = weaponTo;
         guns[weaponFrom].ToggleSelf(false);
 
