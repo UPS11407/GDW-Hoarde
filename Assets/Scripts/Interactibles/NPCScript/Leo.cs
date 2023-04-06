@@ -27,6 +27,7 @@ public class Leo : NPCBehavior
         if (state == 1 && dialogueState == 6)
         {
             upperFloorDoor.GetComponent<DoorController>().Unlock();
+            player.GetComponent<Player>().hasNV = true;
         }
         base.UpdateHUD();
     }

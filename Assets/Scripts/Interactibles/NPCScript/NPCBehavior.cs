@@ -45,7 +45,7 @@ public class NPCBehavior : MonoBehaviour, IInteractible
 
         if (lookToPlayer)
         {
-            Debug.Log(gameObject.transform.name);
+            //Debug.Log(gameObject.transform.name);
             if (Vector3.Distance(player.transform.position, gameObject.transform.position) <= stareDistance)
             {
                 transform.rotation = Quaternion.Lerp(transform.rotation, target, 0.05f);
