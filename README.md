@@ -41,6 +41,3 @@ Graphics Controls:\
 Numpad 0: Toggle Wall Texture\
 Numpad 1: Toggle Color Grading\
 Numpad 2: Switch Color Grading
-
-Outside References:
-Blood decal 2D texture: https://opengameart.org/content/filth-texture-set-trakrustdecal1tga. Used this as a placeholder texture for the decal for when the enemy is damaged, since I'm horrible at drawing. It will be replaced once our 2D artist makes a blood splatter texture.
