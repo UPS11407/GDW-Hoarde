@@ -6321,7 +6321,7 @@ GameObject:
   - component: {fileID: 2605446223286044299}
   - component: {fileID: 2605446223286044302}
   - component: {fileID: 2605446223286044301}
-  - component: {fileID: 1345018944544302332}
+  - component: {fileID: 6198525345755249402}
   m_Layer: 8
   m_Name: "Rafielo O\u2019Mally\u2019O\u2019Connel\u2019Sullivan"
   m_TagString: Untagged
@@ -6380,7 +6380,7 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &1345018944544302332
+--- !u!114 &6198525345755249402
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -6389,7 +6389,7 @@ MonoBehaviour:
   m_GameObject: {fileID: 3414774315087387697}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d997b647fbc825f45bffcf03e177bf66, type: 3}
+  m_Script: {fileID: 11500000, guid: 42c9bc82c8637f0429f494a1c82244f0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
   playerControlsManager: {fileID: 0}
@@ -6400,68 +6400,80 @@ MonoBehaviour:
   DialogueBox: {fileID: 0}
   dialogue:
   - dialogues:
-    - name: Suspiciously British yet Agitated Researcher
-      text: Tally ho! *throws fists*
+    - name: Player the Confused
+      text: "So, you\u2019re not going to throw something at me?  "
       hint: 
-    - name: Player the Quick
-      text: "*Dodges* Calm down, I\u2019m here to help. Saw you through the one way
-        mirror and it seems you\u2019re one of the uninfected."
+    - name: 'Confused Staff  '
+      text: 'Why would I? It is very unlikely for a mutant to open a keycard locked
+        door.  '
       hint: 
-    - name: 'Thankful Researcher  '
-      text: 'Thank the king, rescue is here. Are there more of you? How many did
-        the government send? Did you kill all of them yet?  '
+    - name: 'Staff  '
+      text: 'So, what do you want?  '
       hint: 
-    - name: 'Not Dead Yet Researcher  '
-      text: 'I see, I am pretty miffed, however, it seems like I have a better chance
-        of not croaking with you around.  '
+    - name: Questing Player
+      text: I was told there was a prototype weapon here?
       hint: 
-    - name: Researcher
-      text: "My apologies, I haven\u2019t introduced myself yet.   "
+    - name: Rafielo O'Mally'O'Connel'Sullivan
+      text: "And you expect, I, Rafielo O'Mally'O'Connel\u2019Sullivan, veteran of
+        the 3rd Great War, Weapon Keeper of the facility, and part-time pizza reviewer,
+        to give it to you?"
       hint: 
-    - name: 'Mikael Angeloskovich  '
-      text: "I\u2019m Mikael Angeloskovich, A former lawyer, convicted serial lockpicker,
-        proud englishman, and head weapon\u2019s tester for this facility.   "
+    - name: Player the Main Character
+      text: I have permission from Dr. Angeloskovich to obtain and use it.
       hint: 
-    - name: 'Mikael the Knower of Ammo  '
-      text: "While I can\u2019t be much of use, I do know of a room where we store
-        a bunch of ammo crates and gun mods in, however, it\u2019s locked with a
-        3rd level keycard.  "
+    - name: Rafielo the Concerned
+      text: "The guy who used up half the facility\u2019s supply of experimental
+        ammo on 4 guns taped to one?  "
       hint: 
-    - name: 'Mikael the Bullet Hose  '
-      text: 'I would normally have it but I got demoted to 2nd level after playing
-        with the experimental weapons too much, though I think there should be someone
-        on the large room to the left with one.  '
+    - name: Rafielo the Concerned
+      text: "Hmm\u2026 I dislike the man, however, if he commands it\u2026  "
       hint: 
-    - name: 'Mikael Angeloskovich  '
-      text: 'You should be able to open it with my keycard.  '
+    - name: Rafielo the Bargainer
+      text: "I\u2019ll give it you you under one condition, find me a Lvl 4 keycard,
+        and I\u2019ll give you the \u201CLas Gun\u201D.  "
       hint: 
-    - name: 'Mikael the Smart Guy  '
-      text: "The 3rd level keycard\u2019s in the room to the left. Don\u2019t tell
-        me you don\u2019t know what left or right is.  "
-      hint: Obtain lvl 3 keycard
+    - name: Rafielo O'Mally'O'Connel'Sullivan
+      text: 'Find me the Lvl 4 Keycard. It should be one of the head scientists.
+        I saw one on the 2nd floor cafeteria before things went to hell.  '
+      hint: Find the Lvl 4 Keycard
   - dialogues:
-    - name: 'Player the Exhausted  '
-      text: "Got ambushed by two amalgamations but I\u2019ve got the keycard.  "
-      hint: Return to Mikael
-    - name: Mikael the Glad
-      text: 'Jolly good, the storage room should be in the room just beside this
-        and the room before.  '
+    - name: Rafielo O'Mally'O'Connel'Sullivan
+      text: 'Ah, good you can get the gun now.  '
+      hint: Return to Rafielo
+    - name: Player the Questioning
+      text: 'Why did you want me to get the keycard?  '
       hint: 
-    - name: Mikael the Forgetful
-      text: 'Ah! Almost forgot, that keycard also has access to the weapon development
-        lab downstairs. There should be a prototype weapon there.  '
+    - name: Rafielo the Exposition
+      text: "There\u2019s a nuke in this facility as a failsafe, however, it needs
+        a keycard of all Lvls. "
       hint: 
-    - name: Mikael Angeloskovich
-      text: "Now begone with you. Can\u2019t be faffing around here while there\u2019s
-        mutants to kill. Cheerio and good luck.   "
+    - name: Rafielo the Exposition
+      text: "The body over there, that\u2019s the guy in charge of the facility.  "
+      hint: 
+    - name: Rafielo the Exposition
+      text: "He told me that there\u2019s no getting out since the government\u2019s
+        not risking an outbreak of the mutation to the public. So, understandably,
+        anyone trying to get out will be shot.  "
+      hint: 
+    - name: Rafielo the Exposition
+      text: "He wanted me to activate the nuke before he died. It\u2019s not an escape
+        but it\u2019ll prevent this from happening again.  "
+      hint: 
+    - name: Rafielo the Old
+      text: 'I would do it but considering you have all the keys and are more capable.
+        I think you should do it.  '
+      hint: 
+    - name: Rafielo O'Mally'O'Connel'Sullivan
+      text: 'Do it or not, your choice. The door to the nuke room is next to the
+        door to your right.  '
       hint: 
   hudText: {fileID: 0}
   dialogueRange: 0
   lookToPlayer: 1
   initialDir: {x: 0, y: 0, z: 0}
   stareDistance: 10
-  armoryDoor: {fileID: 0}
   keyCard: {fileID: 0}
+  keyCard2: {fileID: 0}
 --- !u!1 &3489462468332778688
 GameObject:
   m_ObjectHideFlags: 0

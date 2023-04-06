@@ -6,6 +6,7 @@ public class Leo : NPCBehavior
 {
     public GameObject upperFloorDoor;
     public GameObject toolBox;
+    public GameObject keyCard;
 
     // Start is called before the first frame update
     void Start()
@@ -26,9 +27,11 @@ public class Leo : NPCBehavior
         }
         if (state == 1 && dialogueState == 6)
         {
-            upperFloorDoor.GetComponent<DoorController>().Unlock();
             player.GetComponent<Player>().hasNV = true;
+            keyCard.SetActive(true);
+
         }
+
         base.UpdateHUD();
     }
 }
