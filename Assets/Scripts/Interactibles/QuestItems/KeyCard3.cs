@@ -8,8 +8,12 @@ public class KeyCard3 : MonoBehaviour, IInteractible
     public GameObject[] enemies;
     GameObject mikael;
     public GameObject ammoRoom;
+    Inventory inventory;
+    public int level;
+
     private void Start()
     {
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         mikael = GameObject.Find("Mikael Angeloskovich");
     }
     public void Interact()
@@ -21,6 +25,7 @@ public class KeyCard3 : MonoBehaviour, IInteractible
         mikael.GetComponent<Mikael>().UpdateHUD();
 
         ammoRoom.GetComponent<DoorController>().locked = false;
+        inventory.SetKeycardLevel(level);
         foreach (GameObject enemy in enemies)
         {
 

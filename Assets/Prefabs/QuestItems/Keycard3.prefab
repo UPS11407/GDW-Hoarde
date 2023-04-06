@@ -112,3 +112,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   enemies: []
   ammoRoom: {fileID: 0}
+  level: 3

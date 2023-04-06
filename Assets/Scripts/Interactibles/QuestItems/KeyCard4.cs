@@ -7,8 +7,12 @@ public class KeyCard4 : MonoBehaviour, IInteractible
 
     public GameObject[] enemies;
     GameObject rafielo;
+    Inventory inventory;
+    public int level;
+
     private void Start()
     {
+        inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
         rafielo = GameObject.Find("Rafielo O’Mally’O’Connel’Sullivan");
     }
     public void Interact()
@@ -18,7 +22,7 @@ public class KeyCard4 : MonoBehaviour, IInteractible
 
         rafielo.GetComponent<Rafielo>().dialogueState = 0;
         rafielo.GetComponent<Rafielo>().UpdateHUD();
-
+        inventory.SetKeycardLevel(level);
         foreach (GameObject enemy in enemies)
         {
 
