@@ -29,8 +29,102 @@ Transform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 6641092449567950890}
+  m_RootOrder: 5
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &4307699228699647356
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 221041075489916167}
+  - component: {fileID: 1929292752576258448}
+  m_Layer: 10
+  m_Name: Rail Light
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &221041075489916167
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307699228699647356}
+  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 0.40000013, y: 0.4, z: 0.40000013}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6641092449567950890}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!108 &1929292752576258448
+Light:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4307699228699647356}
+  m_Enabled: 1
+  serializedVersion: 10
+  m_Type: 0
+  m_Shape: 0
+  m_Color: {r: 1, g: 0.025896944, b: 0, a: 1}
+  m_Intensity: 4
+  m_Range: 12
+  m_SpotAngle: 90
+  m_InnerSpotAngle: 1
+  m_CookieSize: 10
+  m_Shadows:
+    m_Type: 1
+    m_Resolution: -1
+    m_CustomResolution: -1
+    m_Strength: 1
+    m_Bias: 0.05
+    m_NormalBias: 0.4
+    m_NearPlane: 0.2
+    m_CullingMatrixOverride:
+      e00: 1
+      e01: 0
+      e02: 0
+      e03: 0
+      e10: 0
+      e11: 1
+      e12: 0
+      e13: 0
+      e20: 0
+      e21: 0
+      e22: 1
+      e23: 0
+      e30: 0
+      e31: 0
+      e32: 0
+      e33: 1
+    m_UseCullingMatrixOverride: 0
+  m_Cookie: {fileID: 0}
+  m_DrawHalo: 0
+  m_Flare: {fileID: 0}
+  m_RenderMode: 1
+  m_CullingMask:
+    serializedVersion: 2
+    m_Bits: 7167
+  m_RenderingLayerMask: 1
+  m_Lightmapping: 4
+  m_LightShadowCasterMode: 0
+  m_AreaSize: {x: 1, y: 1}
+  m_BounceIntensity: 1
+  m_ColorTemperature: 6570
+  m_UseColorTemperature: 0
+  m_BoundingSphereOverride: {x: 0, y: 0, z: 0, w: 0}
+  m_UseBoundingSphereOverride: 0
+  m_UseViewFrustumForShadowCasterCull: 1
+  m_ShadowRadius: 0
+  m_ShadowAngle: 0
 --- !u!1 &5735958819976469990
 GameObject:
   m_ObjectHideFlags: 0
@@ -484,9 +578,10 @@ Transform:
   m_Children:
   - {fileID: 6641092450667384800}
   - {fileID: 6641092449447615610}
-  - {fileID: 2445633037641577744}
+  - {fileID: 221041075489916167}
   - {fileID: 6641092451256517539}
   - {fileID: 6641092450009130089}
+  - {fileID: 2445633037641577744}
   - {fileID: 6641092449804866467}
   m_Father: {fileID: 6641092451098311872}
   m_RootOrder: 1
@@ -765,7 +860,7 @@ Transform:
   - {fileID: 6603226038307655972}
   - {fileID: 6641092450192025211}
   m_Father: {fileID: 6641092449567950890}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!82 &6641092449804866466
 AudioSource:
@@ -896,10 +991,13 @@ MonoBehaviour:
   currentAmmoDisplay: {fileID: 0}
   maxAmmoDisplay: {fileID: 0}
   inventory: {fileID: 0}
+  RAILGUN_AmmoCount: {fileID: 0}
   currentAmmo: 0
   maxAmmo: 0
   isUnarmed: 0
   spread: 0
+  charging: 0
+  _animator: {fileID: 0}
   modReloadRequired: 0
   railLine: {fileID: -6828216985687236538, guid: 879b169739deae547b6fab2e6297a04a, type: 3}
   bulletTracer: {fileID: 0}
@@ -907,6 +1005,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6641092449831243028}
   laserDuration: 0.75
   trailDuration: 1
+  railgunCharge: {fileID: 0}
 --- !u!1 &6641092449831243029
 GameObject:
   m_ObjectHideFlags: 0
@@ -917,7 +1016,6 @@ GameObject:
   m_Component:
   - component: {fileID: 6641092449831243027}
   - component: {fileID: 6641092449831243025}
-  - component: {fileID: 6641092449831243026}
   - component: {fileID: 6641092449831243028}
   m_Layer: 5
   m_Name: Flash
@@ -954,36 +1052,6 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6641092449831243029}
   m_CullTransparentMesh: 1
---- !u!114 &6641092449831243026
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6641092449831243029}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
-  m_RaycastTarget: 1
-  m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
-  m_Maskable: 1
-  m_OnCullStateChanged:
-    m_PersistentCalls:
-      m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: 84fd3515b3ee42a4eae2c35ed5a86b2e, type: 3}
-  m_Type: 0
-  m_PreserveAspect: 0
-  m_FillCenter: 1
-  m_FillMethod: 4
-  m_FillAmount: 1
-  m_FillClockwise: 1
-  m_FillOrigin: 0
-  m_UseSpriteMesh: 0
-  m_PixelsPerUnitMultiplier: 1
 --- !u!114 &6641092449831243028
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -997,8 +1065,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   muzzleLight: {fileID: 6641092449447615611}
-  flashList:
-  - {fileID: 21300000, guid: 84fd3515b3ee42a4eae2c35ed5a86b2e, type: 3}
+  flashList: []
 --- !u!1 &6641092450009130090
 GameObject:
   m_ObjectHideFlags: 0
@@ -1068,10 +1135,13 @@ MonoBehaviour:
   currentAmmoDisplay: {fileID: 0}
   maxAmmoDisplay: {fileID: 0}
   inventory: {fileID: 0}
+  RAILGUN_AmmoCount: {fileID: 0}
   currentAmmo: 0
   maxAmmo: 0
   isUnarmed: 0
   spread: 0
+  charging: 0
+  _animator: {fileID: 0}
   modReloadRequired: 0
   railLine: {fileID: 0}
   bulletTracer: {fileID: 8016567771343347392, guid: 5bee1a0a9d2750e49bc3c4a94999a508, type: 3}
@@ -1079,6 +1149,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6641092450431109683}
   laserDuration: 0.75
   trailDuration: 1
+  railgunCharge: {fileID: 0}
 --- !u!82 &6641092450009130088
 AudioSource:
   m_ObjectHideFlags: 0
@@ -1680,10 +1751,12 @@ MonoBehaviour:
   interactRange: 5
   healText: {fileID: 0}
   audioPlayer: {fileID: 0}
+  painSounds: []
   maxStamina: 100
   stamina: 0
   regenStamina: 10
   staminaToMelee: 20
+  staminaToMeleeUnarmed: 20
   timeSinceUsedStamina: 0
   hasNV: 0
   ringingSource: {fileID: 0}
@@ -1834,6 +1907,7 @@ MonoBehaviour:
   cameraParent: {fileID: 6641092451098311872}
   mainCameraNV: {fileID: 0}
   enableLook: 1
+  onStairs: 0
   walkSounds:
   - {fileID: 8300000, guid: 1b7c736b6efddcd4aa5bb50327349a5d, type: 3}
   - {fileID: 8300000, guid: 8a59004e4e0669d45b5343cafc16889d, type: 3}
@@ -1861,14 +1935,14 @@ MonoBehaviour:
   aiming: 0
   waitingToAim: 0
   timeToADSPistol: 0.2
-  timeToADSRifle: 0.35
+  timeToADSRifle: 0.3
   pistol: {fileID: 6641092451256517539}
   rifle: {fileID: 6641092450009130089}
   railgun: {fileID: 6641092449804866467}
   weaponCam: {fileID: 6641092450667384800}
   crosshair: {fileID: 0}
-  pistolADSPos: {x: 0.259, y: -0.072, z: 0}
-  rifleADSPos: {x: 0.155, y: -0.085, z: 0}
+  pistolADSPos: {x: 0.244, y: -0.11, z: 0}
+  rifleADSPos: {x: 0.15, y: -0.051, z: 0}
   railgunADSPos: {x: 0.392, y: -0.13, z: 0.25}
 --- !u!114 &6641092450832458882
 MonoBehaviour:
@@ -1918,6 +1992,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   healthbar: {fileID: 0}
+  healCharge: {fileID: 0}
 --- !u!114 &6641092450832458885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2247,10 +2322,13 @@ MonoBehaviour:
   currentAmmoDisplay: {fileID: 0}
   maxAmmoDisplay: {fileID: 0}
   inventory: {fileID: 0}
+  RAILGUN_AmmoCount: {fileID: 0}
   currentAmmo: 0
   maxAmmo: 0
   isUnarmed: 0
   spread: 0
+  charging: 0
+  _animator: {fileID: 0}
   modReloadRequired: 0
   railLine: {fileID: 0}
   bulletTracer: {fileID: 8016567771343347392, guid: 5bee1a0a9d2750e49bc3c4a94999a508, type: 3}
@@ -2258,6 +2336,7 @@ MonoBehaviour:
   muzzleFlash: {fileID: 6641092449371289339}
   laserDuration: 0.75
   trailDuration: 1
+  railgunCharge: {fileID: 0}
 --- !u!82 &6641092451256517538
 AudioSource:
   m_ObjectHideFlags: 0
@@ -2484,126 +2563,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: -8679921383154817045, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
   m_PrefabInstance: {fileID: 525360909197266250}
   m_PrefabAsset: {fileID: 0}
---- !u!1 &245980597191449475 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8925128432356403511, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3178758792829070757
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 245980597191449475}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 0
-  attachment: {fileID: 11400000, guid: be41accf98712a64cbcb57fef05afe19, type: 2}
-  gun: {fileID: 6641092450009130090}
---- !u!1 &1505641156864732515 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1418467104909500457, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &323946913902119906
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1505641156864732515}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 0
-  attachment: {fileID: 11400000, guid: 0fe75045cfd033648973c53c8288db9a, type: 2}
-  gun: {fileID: 6641092450009130090}
---- !u!1 &1726042628373944479 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -8016875357141641771, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &4333196777126108518
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1726042628373944479}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 0
-  attachment: {fileID: 11400000, guid: 04ea1a05f062b28459a5339d71ebc875, type: 2}
-  gun: {fileID: 6641092450009130090}
---- !u!1 &2329819022617294022 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 2819071912982444428, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &8862280808912836984
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2329819022617294022}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 1
-  attachment: {fileID: 11400000, guid: f6df89c3fde10c34eb642ada77f1057e, type: 2}
-  gun: {fileID: 6641092450009130090}
---- !u!1 &4271210211376532554 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4326859696209838336, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3593480600831937641
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 4271210211376532554}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 1
-  attachment: {fileID: 11400000, guid: a487d80c116e077469633a9176807c49, type: 2}
-  gun: {fileID: 6641092450009130090}
---- !u!1 &6089307864886556808 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 6038172386352330178, guid: 1c12602811fee4e4781b3c40af1806cc, type: 3}
-  m_PrefabInstance: {fileID: 525360909197266250}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &3192167315336862090
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6089307864886556808}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 000ee5ca6ecfdee4da1def849a71289d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  attachmentType: 1
-  attachment: {fileID: 11400000, guid: f7447f09e8ebeca47af1fb7f356076eb, type: 2}
-  gun: {fileID: 6641092450009130090}
 --- !u!1001 &6641092449719035832
 PrefabInstance:
   m_ObjectHideFlags: 0

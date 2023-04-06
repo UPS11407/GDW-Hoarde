@@ -305,10 +305,12 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
+            GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", true);
         }
         else
         {
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
+            GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", false);
         }
 
         if (sprinting && weaponManager.guns[weaponManager.activeGun].isReloading)
@@ -415,13 +417,15 @@ public class PlayerControlsManager : MonoBehaviour
 
     void DoRunAnimation(bool sprinting)
     {
-        if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && speed > 6.01)
+        Debug.Log(speed);
+
+        if ((weaponManager.activeGun == 2 || weaponManager.activeGun == 3) && sprinting && (speed > 6.01 || onStairs))
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, runPosition, GetLerpTimeRun());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, runRotation, GetLerpTimeRun()));
             sprintingAnim = true;
         }
-        else if (weaponManager.activeGun == 1 && sprinting && speed > 6.01)
+        else if (weaponManager.activeGun == 1 && sprinting && (speed > 6.01 || onStairs))
         {
             weaponManager.guns[weaponManager.activeGun].transform.localPosition = Vector3.Lerp(startPos, pistolRunPosition, GetLerpTimeRun());
             weaponManager.guns[weaponManager.activeGun].transform.localRotation = Quaternion.Euler(Vector3.Lerp(startRot, pistolRunRotation, GetLerpTimeRun()));

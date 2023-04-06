@@ -15,16 +15,21 @@ public class MuzzleFlash : MonoBehaviour
 
     IEnumerator muzzleFlash(float damage, int bulletsPerShot, float duration)
     {
-        var image = gameObject.GetComponent<Image>();
-
         muzzleLight.enabled = true;
-        image.sprite = flashList[RandomSprite()];
-        image.enabled = true;
+
+        if (GameObject.Find("Player").GetComponent<WeaponManager>().activeGun != 3)
+        {
+            var image = gameObject.GetComponent<Image>();
+
+            image.sprite = flashList[RandomSprite()];
+            image.enabled = true;
+        }
 
         yield return new WaitForSeconds(duration);
 
         muzzleLight.enabled = false;
-        gameObject.GetComponent<Image>().enabled = false;
+
+        if (GameObject.Find("Player").GetComponent<WeaponManager>().activeGun != 3) gameObject.GetComponent<Image>().enabled = false;
     }
 
     int RandomSprite()
