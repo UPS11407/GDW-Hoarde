@@ -95,15 +95,11 @@ public class Chest : MonoBehaviour, IInteractible
 
                 WeaponManager weaponManager = player.GetComponent<WeaponManager>();
 
-                GameObject pistol = GameObject.Find("Pistol");
-                if(pistol != null)
-                {
-                    weaponManager.guns[weaponManager.activeGun].canReload = true;
-                    weaponManager.guns[weaponManager.activeGun].canShoot = true;
-                    weaponManager.guns[weaponManager.activeGun].canSwap = true;
-                    weaponManager.guns[weaponManager.activeGun].isReloading = false;
-                    pistol.SetActive(false);
-                }
+                weaponManager.guns[weaponManager.activeGun].canReload = true;
+                weaponManager.guns[weaponManager.activeGun].canShoot = true;
+                weaponManager.guns[weaponManager.activeGun].canSwap = true;
+                weaponManager.guns[weaponManager.activeGun].isReloading = false;
+
                 weaponManager.gunInventory.Add(3);
                 weaponManager.DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 3);
             }
