@@ -6403,7 +6403,7 @@ MonoBehaviour:
     - name: Paranoid Engineer
       text: Stop right there mutant! I have a laptop and I'm not afraid to smack
         you with it.
-      hint: Thinkfast chucklenuts
+      hint: 
     - name: Player the Mildly Injured
       text: Ow!
       hint: Non-existant quicktime event failed
@@ -6436,7 +6436,7 @@ MonoBehaviour:
   - dialogues:
     - name: "Player \u201CThe Brave One\u201D  "
       text: 'There were a few mutants there but not a problem for me.  '
-      hint: I AM THE GREATEST
+      hint: Return to Leo
     - name: Leo Di Thankful
       text: "Infinite thanks. Give me a few seconds to put the uranium energy component,
         attach the circuits, add the luminosity sensor, and\u2026  "
@@ -6462,7 +6462,9 @@ MonoBehaviour:
   dialogueRange: 12
   lookToPlayer: 1
   initialDir: {x: 0, y: 0, z: 0}
-  stareDistance: 5
+  stareDistance: 10
+  upperFloorDoor: {fileID: 0}
+  toolBox: {fileID: 0}
 --- !u!1 &3489462468332778688
 GameObject:
   m_ObjectHideFlags: 0

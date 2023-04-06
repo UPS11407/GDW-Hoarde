@@ -11294,7 +11294,7 @@ MonoBehaviour:
   _damage: 1
   _attackRange: 2
   liveRange: 200
-  chaseRange: 15
+  chaseRange: 30
   healPickupPrefab: {fileID: 6316280865839230, guid: a9839ea6a54f3ac4f91336d54c3da3b9, type: 3}
   rig: {fileID: 6207971079519348128}
   healDropChance: 20
@@ -11306,6 +11306,7 @@ MonoBehaviour:
   dotRate: 1
   slowDurationModifier: 1
   slowSpeedModifier: 0.5
+  slowed: 0
   knockBackStrength: 50
   canAttack: 1
   groans:
