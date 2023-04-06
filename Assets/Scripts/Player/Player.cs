@@ -302,6 +302,7 @@ public class Player : MonoBehaviour
 
         healText.text = $"Press {bindings[1]} to Heal";
     }
+
     void Knockback(GameObject knockbacker, float knockbackStrength)
     {
         gameObject.GetComponent<Rigidbody>().velocity = (transform.position - knockbacker.transform.position).normalized * knockbackStrength;
@@ -313,5 +314,16 @@ public class Player : MonoBehaviour
         Knockback(knockbacker, knockBackStrength);
         yield return new WaitForSeconds(duration);
         gameObject.GetComponent<PlayerControlsManager>().movementLock = false;
+
+        GetBindingReadable(1);
+    }
+
+    //
+    // Summary:
+    //     0: Interact Key    1: Heal Key    2: Flashlight Key    3: Toggle NV Key
+
+    public string GetBindingReadable(int index)
+    {
+        return bindings[index];
     }
 }
