@@ -8,7 +8,6 @@ public class KeyCardDoor : MonoBehaviour, IInteractible
     public GameObject[] doors;
     public int level;
     Inventory inventory;
-    public bool isKeycard1 = false;
 
     private void Start()
     {
@@ -16,10 +15,6 @@ public class KeyCardDoor : MonoBehaviour, IInteractible
     }
     public void Interact()
     {
-        if (isKeycard1)
-        {
-            Destroy(doors[0].transform.parent.gameObject);
-        }
 
         inventory.SetKeycardLevel(level);
         foreach (GameObject door in doors)
