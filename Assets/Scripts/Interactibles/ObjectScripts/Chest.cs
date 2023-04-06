@@ -76,14 +76,15 @@ public class Chest : MonoBehaviour, IInteractible
 
                 weaponManager.gunInventory.Add(2);
                 weaponManager.DoWeaponSwap(player.GetComponent<WeaponManager>().activeGun, 2);
-                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().state = 1;
-                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().dialogueState = 0;
-                GameObject.Find("Johnatelo").GetComponent<NPCBehavior>().UpdateHUD();
+                GameObject.Find("Johnatello").GetComponent<NPCBehavior>().state = 1;
+                GameObject.Find("Johnatello").GetComponent<NPCBehavior>().dialogueState = 0;
 
                 foreach(Transform location in locations)
                 {
                     Instantiate(enemyPrefab, location.position, Quaternion.Euler(0, 0, 0), enemyCollection.transform);
                 }
+
+                GameObject.Find("HintText").GetComponent<TMP_Text>().text = "Talk to Johnatello";
                 
             }
             else if (railChest)

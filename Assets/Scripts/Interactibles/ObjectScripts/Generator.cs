@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Generator : MonoBehaviour, IInteractible
@@ -41,6 +42,7 @@ public class Generator : MonoBehaviour, IInteractible
             TurnOnPower();
             animator.Play("TurnOn");
             fuse = false;
+            GameObject.Find("HintText").GetComponent<TMP_Text>().text = "Explore the rest of the facility";
         }
     }
 

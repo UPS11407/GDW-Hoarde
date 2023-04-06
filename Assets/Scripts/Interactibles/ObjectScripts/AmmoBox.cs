@@ -99,7 +99,7 @@ public class AmmoBox : MonoBehaviour, IInteractible
             }
 
             interactible = false;
-            Destroy(gameObject, 1.5f);
+            Destroy(gameObject, 5f);
             
         }
     }
@@ -113,7 +113,7 @@ public class AmmoBox : MonoBehaviour, IInteractible
         inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
         inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
 
-        yield return new WaitForSeconds(5.9f);
+        yield return new WaitForSeconds(4.9f);
 
         inventoryText.transform.GetChild(0).gameObject.SetActive(false);
         inventoryText.transform.GetChild(1).gameObject.SetActive(false);

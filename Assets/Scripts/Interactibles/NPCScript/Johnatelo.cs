@@ -1,5 +1,6 @@
 using System.Collections;
 using System.Collections.Generic;
+using TMPro;
 using UnityEngine;
 
 public class Johnatelo : NPCBehavior
@@ -8,6 +9,7 @@ public class Johnatelo : NPCBehavior
     public DoorController[] doorColliders;
     public GameObject[] enemies;
     public WeaponManager weaponManager;
+    GameObject inventoryText;
 
     void Start()
     {
@@ -23,6 +25,8 @@ public class Johnatelo : NPCBehavior
         {
             enemy.SetActive(false);
         }
+
+        inventoryText = GameObject.Find("InventoryText");
     }
 
     public override void UpdateHUD()
@@ -36,6 +40,7 @@ public class Johnatelo : NPCBehavior
             foreach (DoorController door in doorColliders)
             {
                 door.Unlock();
+                StartCoroutine(InventoryText($"Press {GameObject.Find("Player").GetComponent<Player>().GetBindingReadable(2)} for Flashlight", Color.yellow));
             }
 
 
@@ -52,5 +57,20 @@ public class Johnatelo : NPCBehavior
 
         base.UpdateHUD();
 
+    }
+
+    IEnumerator InventoryText(string text, Color color)
+    {
+        inventoryText.transform.GetChild(0).gameObject.SetActive(true);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(true);
+
+        inventoryText.SetActive(true);
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().text = text;
+        inventoryText.transform.GetChild(1).GetComponent<TMP_Text>().color = color;
+
+        yield return new WaitForSeconds(4.9f);
+
+        inventoryText.transform.GetChild(0).gameObject.SetActive(false);
+        inventoryText.transform.GetChild(1).gameObject.SetActive(false);
     }
 }
