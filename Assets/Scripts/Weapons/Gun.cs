@@ -48,7 +48,7 @@ public class Gun : MonoBehaviour
 
     float shootTime;
     float shootDelay;
-    float reloadDelay;
+    public float reloadDelay;
     float modDelay;// = 4.0f;
 
     public int currentAmmo;
@@ -306,6 +306,11 @@ public class Gun : MonoBehaviour
 
     public void Fire()
     {
+        if (GameObject.Find("Player").GetComponent<WeaponManager>().activeGun == 1)
+        {
+            _animator.SetTrigger("isShooting");
+        }
+
         if (isUnarmed)
         {
             GameObject.Find("Player").GetComponent<Player>().QuickMelee();
@@ -430,9 +435,6 @@ public class Gun : MonoBehaviour
 
             yield return null;
         }
-
-
-        
     }
 
     IEnumerator SpawnTrail(TrailRenderer trail, RaycastHit hit)
@@ -489,6 +491,12 @@ public class Gun : MonoBehaviour
         canReload = false;
         isReloading = true;
 
+        if (reloadDelay != 3) _animator.speed *= 2;
+
+        _animator.SetBool("isReloading", true);
+
+
+
         int amountToReload = maxAmmo - currentAmmo;
 
         if (inventory.GetAmmoCount() - amountToReload < 0)
@@ -499,7 +507,9 @@ public class Gun : MonoBehaviour
         audioSource.PlayOneShot(reloadSound);
         audioSource.pitch = 0.94f;
         yield return new WaitForSeconds(reloadDelay);
-        
+
+        if (reloadDelay != 3) _animator.speed /= 2;
+        _animator.SetBool("isReloading", false);
         canShoot = true;
         canReload = true;
         isReloading = false;

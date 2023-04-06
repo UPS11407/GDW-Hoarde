@@ -305,12 +305,12 @@ public class PlayerControlsManager : MonoBehaviour
         {
             weaponManager.guns[weaponManager.activeGun].canShoot = false;
             weaponManager.guns[weaponManager.activeGun].canSwap = false;
-            GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", true);
+            if (GetComponent<WeaponManager>().activeGun == 0) GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", true);
         }
         else
         {
             weaponManager.guns[weaponManager.activeGun].canSwap = true;
-            GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", false);
+            if (GetComponent<WeaponManager>().activeGun == 0) GetComponent<WeaponManager>().guns[GetComponent<WeaponManager>().activeGun]._animator.SetBool("isRunning", false);
         }
 
         if (sprinting && weaponManager.guns[weaponManager.activeGun].isReloading)
