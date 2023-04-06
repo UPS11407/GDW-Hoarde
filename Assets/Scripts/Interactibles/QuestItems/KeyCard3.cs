@@ -7,7 +7,7 @@ public class KeyCard3 : MonoBehaviour, IInteractible
 
     public GameObject[] enemies;
     GameObject mikael;
-    public GameObject ammoRoom;
+    public GameObject[] doors;
     Inventory inventory;
     public int level;
 
@@ -23,8 +23,11 @@ public class KeyCard3 : MonoBehaviour, IInteractible
 
         mikael.GetComponent<Mikael>().dialogueState = 0;
         mikael.GetComponent<Mikael>().UpdateHUD();
+        foreach(GameObject door in doors)
+        {
+            door.GetComponent<DoorController>().locked = false;
 
-        ammoRoom.GetComponent<DoorController>().locked = false;
+        }
         inventory.SetKeycardLevel(level);
         foreach (GameObject enemy in enemies)
         {

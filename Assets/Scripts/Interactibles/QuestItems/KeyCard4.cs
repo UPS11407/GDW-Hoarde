@@ -13,7 +13,7 @@ public class KeyCard4 : MonoBehaviour, IInteractible
     private void Start()
     {
         inventory = GameObject.Find("Inventory").GetComponent<Inventory>();
-        rafielo = GameObject.Find("Rafielo O’Mally’O’Connel’Sullivan");
+        rafielo = GameObject.Find("Rafielo OMallyOConnelSullivan");
     }
     public void Interact()
     {
